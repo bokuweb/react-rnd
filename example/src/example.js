@@ -8,7 +8,16 @@ export default class Example extends Component{
 
   render() {
     return (
-      <Label />
+      <Label
+         x={100}
+         y={100} >
+        <textarea style={{
+                    width: '100%',
+                    height: '100%',
+                    resize: 'none',
+                    cursor: 'move'
+                  }}/>
+      </Label>
     );
   }
 }
