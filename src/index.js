@@ -54,7 +54,8 @@ export default class ResizableAndMovable extends Component {
              minHeight={minHeight}
              maxWidth={maxWidth}
              maxHeight={maxHeight}
-             customStyle={customStyle} >
+             customStyle={customStyle}
+             customClass={customClass} >
             {this.props.children}
           </Resizable>
         </div>
@@ -66,8 +67,11 @@ export default class ResizableAndMovable extends Component {
 ResizableAndMovable.propTypes = {
   //onClick: PropTypes.func,
   //onDoubleClick: PropTypes.func
-  //width: PropTypes.number.isRequired,
-  //height: PropTypes.number.isRequired
+  x: PropTypes.number,
+  y: PropTypes.number,
+  zIndex: PropTypes.number,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 };
 
 ResizableAndMovable.defaultProps = {
