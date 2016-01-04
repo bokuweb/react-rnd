@@ -14,7 +14,8 @@ export default class Example extends Component{
          minHeight={100}
          maxWidth={300}
          maxHeight={300}
-         onResizeStart={()=> console.log('resize start')}>
+         onResizeStart={()=> console.log('resize start')}
+         onResizeStop={()=> console.log('resize stop')}>
           Example
       </ResizableAndMovable>
     );
