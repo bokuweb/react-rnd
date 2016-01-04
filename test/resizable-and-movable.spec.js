@@ -7,29 +7,27 @@ import Resizer from '../node_modules/react-resizable-box/lib/resizer';
 import * as Utils from './test-utils';
 import ResizeAndMovable from '../src';
 
-describe('', () => {
-  describe('props', () => {
-    it('should have default properties', () => {
-      const resizeAndMovable = TestUtils.renderIntoDocument(
-        <ResizeAndMovable><div/></ResizeAndMovable>
-      );
-      assert.equal(resizeAndMovable.props.x, 0);
-      assert.equal(resizeAndMovable.props.y, 0);
-      assert.equal(resizeAndMovable.props.width, 100);
-      assert.equal(resizeAndMovable.props.height, 100);
-      assert.equal(resizeAndMovable.props.minWidth, undefined);
-      assert.equal(resizeAndMovable.props.minHeight, undefined);
-      assert.equal(resizeAndMovable.props.maxWidth, undefined);
-      assert.equal(resizeAndMovable.props.maxHeight, undefined);
-      assert.equal(resizeAndMovable.props.zIndex, 100);
-      assert.equal(resizeAndMovable.props.customClass, '');
-      assert.equal(typeof resizeAndMovable.props.onDragStart, 'function');
-      assert.equal(typeof resizeAndMovable.props.onDrag, 'function');
-      assert.equal(typeof resizeAndMovable.props.onDragStop, 'function');
-      assert.equal(typeof resizeAndMovable.props.onResizeStart, 'function');
-      assert.equal(typeof resizeAndMovable.props.onResize, 'function');
-      assert.equal(typeof resizeAndMovable.props.onResizeStop, 'function');
-    });
+describe('react-resizable-and-mpvable', () => {
+  it('should have default properties', () => {
+    const resizeAndMovable = TestUtils.renderIntoDocument(
+      <ResizeAndMovable><div/></ResizeAndMovable>
+    );
+    assert.equal(resizeAndMovable.props.x, 0);
+    assert.equal(resizeAndMovable.props.y, 0);
+    assert.equal(resizeAndMovable.props.width, 100);
+    assert.equal(resizeAndMovable.props.height, 100);
+    assert.equal(resizeAndMovable.props.minWidth, undefined);
+    assert.equal(resizeAndMovable.props.minHeight, undefined);
+    assert.equal(resizeAndMovable.props.maxWidth, undefined);
+    assert.equal(resizeAndMovable.props.maxHeight, undefined);
+    assert.equal(resizeAndMovable.props.zIndex, 100);
+    assert.equal(resizeAndMovable.props.customClass, '');
+    assert.equal(typeof resizeAndMovable.props.onDragStart, 'function');
+    assert.equal(typeof resizeAndMovable.props.onDrag, 'function');
+    assert.equal(typeof resizeAndMovable.props.onDragStop, 'function');
+    assert.equal(typeof resizeAndMovable.props.onResizeStart, 'function');
+    assert.equal(typeof resizeAndMovable.props.onResize, 'function');
+    assert.equal(typeof resizeAndMovable.props.onResizeStop, 'function');
   });
 
   it('should honor props', () => {
@@ -46,7 +44,7 @@ describe('', () => {
          height={50}
          minWidth={100}
          minHeight={120}
-         maxWidth={300}
+         maxWidth={300}asad
          maxHeight={320}
          zIndex={1000}
          onDragStart={onDragStart}
@@ -71,12 +69,43 @@ describe('', () => {
   });
 
   it('should call onDragStart when dragging begins', () => {
-    let called = false;
+    const onDragStart = sinon.spy();
     const resizeAndMovable = TestUtils.renderIntoDocument(
-      <ResizeAndMovable onDragStart={() => called = true}><div/></ResizeAndMovable>
+      <ResizeAndMovable onDragStart={onDragStart}><div/></ResizeAndMovable>
     );
     TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(resizeAndMovable));
-    assert.equal(called, true);
+    assert.equal(onDragStart.callCount, 1);
+  });
+
+  it('should call onDrag when dragging', () => {
+    const onDrag = sinon.spy();
+    const resizeAndMovable = TestUtils.renderIntoDocument(
+      <ResizeAndMovable onDrag={onDrag}><div/></ResizeAndMovable>
+    );
+    const node = ReactDOM.findDOMNode(resizeAndMovable);
+    TestUtils.Simulate.mouseDown(node, {clientX: 0, clientY: 0});
+    const event = document.createEvent('MouseEvents');
+    event.initMouseEvent('mousemove', true, true, window,
+                       0, 0, 0, 100, 120, false, false, false, false, 0, null);
+    document.dispatchEvent(event);
+    TestUtils.Simulate.mouseUp(node);
+    const style = node.getAttribute('style');
+    assert.equal(onDrag.getCall(0).args[1].position.left, 100);
+    assert.equal(onDrag.getCall(0).args[1].position.top, 120);
+    assert.equal(onDrag.callCount, 1);
+    assert.notEqual(style.indexOf('transform: translate(100px, 120px);'), -1);
+  });
+
+
+  it('should call onDragStop when dragging ends', () => {
+    const onDragStop = sinon.spy();
+    const resizeAndMovable = TestUtils.renderIntoDocument(
+      <ResizeAndMovable onDragStop={onDragStop}><div/></ResizeAndMovable>
+    );
+
+    TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(resizeAndMovable));
+    TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(resizeAndMovable));
+    assert.equal(onDragStop.callCount, 1);
   });
 
   it('should call onResizeStart when resizing begins', () => {
