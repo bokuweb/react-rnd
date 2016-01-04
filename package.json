@@ -10,7 +10,11 @@
     "build": "npm run build:lib & npm run build:example",
     "build:lib": "browserify --extension=js -o lib/index.js src/index.js",
     "build:example": "browserify --extension=js -o example/dist/bundle.js example/src/index.js",
-    "test": "karma start"
+    "test": "karma start",
+    "compile": "babel --presets react -d lib/ src/",
+    "build:example": "browserify --extension=js -o example/dist/bundle.js example/src/index.js",
+    "test": "karma start",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -32,7 +36,11 @@
     "react": ">=0.14.3",
     "react-dom": ">=0.14.3"
   },
-  "devDependencies": {
+    "devDependencies": {
+    "babel": "^6.1.18",
+    "babel-cli": "^6.2.0",
+    "babel-plugin-espower": "1.0.0",
+    "babel-preset-react": "^6.1.18",
     "babel-plugin-espower": "1.0.0",
     "babelify": "6.4.0",
     "browserify": "^12.0.1",
