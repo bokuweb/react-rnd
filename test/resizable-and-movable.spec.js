@@ -84,10 +84,7 @@ describe('react-resizable-and-mpvable', () => {
     );
     const node = ReactDOM.findDOMNode(resizeAndMovable);
     TestUtils.Simulate.mouseDown(node, {clientX: 0, clientY: 0});
-    const event = document.createEvent('MouseEvents');
-    event.initMouseEvent('mousemove', true, true, window,
-                       0, 0, 0, 100, 120, false, false, false, false, 0, null);
-    document.dispatchEvent(event);
+    Utils.mouseMove(node, 100, 120);
     TestUtils.Simulate.mouseUp(node);
     const style = node.getAttribute('style');
     assert.equal(onDrag.getCall(0).args[1].position.left, 100);
