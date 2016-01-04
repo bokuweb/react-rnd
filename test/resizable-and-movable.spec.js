@@ -2,6 +2,9 @@ import assert from 'power-assert';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
+
+import Resizer from '../node_modules/react-resizable-box/lib/resizer';
+
 import * as Utils from './test-utils';
 import ResizeAndMovable from '../src';
 
@@ -77,6 +80,15 @@ describe('', () => {
     assert.equal(called, true);
   });
 
+  it('should call onResizeStart when resizing begins', () => {
+    let calledCount = 0;
+    const resizeAndMovable = TestUtils.renderIntoDocument(
+      <ResizeAndMovable onResizeStart={() => calledCount++}><div/></ResizeAndMovable>
+    );
+    const resizer = TestUtils.scryRenderedComponentsWithType(resizeAndMovable, Resizer);
+    resizer.map(r => TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(r)));
+    assert.equal(calledCount, 3);
+  });
 
   afterEach(done => {
     ReactDOM.unmountComponentAtNode(document.body);

@@ -1,5 +1,5 @@
 {
-  "name": "react-resazable-and-draggable",
+  "name": "react-resizable-and-movable",
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bokuweb/react-resizable-and-draggable.git"
+    "url": "https://github.com/bokuweb/react-resazable-and-movable.git"
   },
   "keywords": [
     "react",
@@ -25,9 +25,9 @@
   "author": "bokuweb",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bokuweb/react-resazable-and-draggable/issues"
+    "url": "https://github.com/bokuweb/react-resazable-and-movable/issues"
   },
-  "homepage": "https://github.com/bokuweb/react-resazable-and-draggable",
+  "homepage": "https://github.com/bokuweb/react-resazable-and-movable/",
   "peerDependencies": {
     "react": ">=0.14.3",
     "react-dom": ">=0.14.3"
