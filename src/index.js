@@ -37,15 +37,11 @@ export default class Label extends Component {
 
   render() {
     const {customClass, customStyle, onClick, x, y} = this.props;
-    const style = {
-      width: '100px',
-      height: '100px',
-      position: 'absolute'
-    };
     return (
       <Draggable
          axis="both"
          zIndex={100}
+         start={{x, y}}
          disabled={!this.state.isDraggable}
          onStart={this.handleStart.bind(this)}
          onDrag={this.handleDrag.bind(this)}
@@ -55,8 +51,7 @@ export default class Label extends Component {
              onResizeStart={this.onResizeStart.bind(this)}
              onResizeStop={this.onResizeStop.bind(this)}
              width={100}
-             height={100}
-             customStyle={style} >
+             height={100} >
             {this.props.children}
           </Resizable>
         </div>
