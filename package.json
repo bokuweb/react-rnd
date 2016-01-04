@@ -50,6 +50,7 @@
     "phantomjs-polyfill": "0.0.1",
     "power-assert": "1.1.0",
     "react-addons-test-utils": "0.14.3",
+    "sinon": "^1.17.2",
     "watchify": "3.5.0"
   },
   "browserify": {
@@ -60,7 +61,7 @@
   "files": [
     "lib"
   ],
-    "dependencies": {
+  "dependencies": {
     "react-draggable": "git://github.com/bokuweb/react-draggable.git",
     "react-resizable-box": "^0.1.4"
   }
