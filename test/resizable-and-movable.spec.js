@@ -115,6 +115,41 @@ describe('react-resizable-and-mpvable', () => {
     assert.equal(onResizeStart.callCount, 3);
   });
 
+  it('should call onResize when resizing', () => {
+    const onResize = sinon.spy();
+    const onResizeStop = sinon.spy();
+    const resizeAndMovable = TestUtils.renderIntoDocument(
+      <ResizeAndMovable onResize={onResize} onResizeStop={onResizeStop}>
+        <div/>
+      </ResizeAndMovable>
+    );
+    const resizer = TestUtils.scryRenderedComponentsWithType(resizeAndMovable, Resizer);
+    const node = ReactDOM.findDOMNode(resizer[2]);
+    TestUtils.Simulate.mouseDown(node, {clientX: 0, clientY: 0});
+    Utils.mouseMove(node, 200, 220);
+    TestUtils.Simulate.mouseUp(node);
+    const style = node.getAttribute('style');
+    assert.equal(onResize.getCall(0).args[0].width, 200);
+    assert.equal(onResize.getCall(0).args[0].height, 220);
+    assert.equal(onResize.callCount, 1);
+    //assert.equal(onResizeStop.callCount, 1);
+    //assert.notEqual(style.indexOf('transform: translate(100px, 120px);'), -1);
+  });
+
+  it('should call onResizeStop when resizing ends', () => {
+    //TODO:
+    /*
+    const onResizeStop = sinon.spy();
+    const resizeAndMovable = TestUtils.renderIntoDocument(
+      <ResizeAndMovable onResizeStop={onResizeStop}><div/></ResizeAndMovable>
+    );
+    const resizer = TestUtils.scryRenderedComponentsWithType(resizeAndMovable, Resizer);
+    TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(resizer[0]));
+    TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(resizer[0]));
+    assert.equal(onResizeStop.callCount, 1);
+     */
+  });
+
   afterEach(done => {
     ReactDOM.unmountComponentAtNode(document.body);
     document.body.innerHTML = "";
