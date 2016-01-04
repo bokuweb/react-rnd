@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Label from '../../src';
+import ResizableAndMovable from '../../src';
 
 export default class Example extends Component{
   constructor() {
@@ -8,16 +8,15 @@ export default class Example extends Component{
 
   render() {
     return (
-      <Label
-         x={0}
-         y={0} >
-        <textarea style={{
-                    width: '100%',
-                    height: '100%',
-                    resize: 'none',
-                    cursor: 'move'
-                  }}/>
-      </Label>
+      <ResizableAndMovable
+         customStyle={{background:"#333", textAlign:"center"}}
+         minWidth={100}
+         minHeight={100}
+         maxWidth={300}
+         maxHeight={300}
+         onResizeStart={()=> console.log('resize start')}>
+          Example
+      </ResizableAndMovable>
     );
   }
 }
