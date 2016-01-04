@@ -132,22 +132,18 @@ describe('react-resizable-and-mpvable', () => {
     assert.equal(onResize.getCall(0).args[0].width, 200);
     assert.equal(onResize.getCall(0).args[0].height, 220);
     assert.equal(onResize.callCount, 1);
-    //assert.equal(onResizeStop.callCount, 1);
-    //assert.notEqual(style.indexOf('transform: translate(100px, 120px);'), -1);
   });
 
   it('should call onResizeStop when resizing ends', () => {
-    //TODO:
-    /*
     const onResizeStop = sinon.spy();
     const resizeAndMovable = TestUtils.renderIntoDocument(
-      <ResizeAndMovable onResizeStop={onResizeStop}><div/></ResizeAndMovable>
+      <ResizeAndMovable onResizeStop={()=> console.log('resize stop')}><div/></ResizeAndMovable>
     );
     const resizer = TestUtils.scryRenderedComponentsWithType(resizeAndMovable, Resizer);
-    TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(resizer[0]));
-    TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(resizer[0]));
-    assert.equal(onResizeStop.callCount, 1);
-     */
+    TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(resizer[2]), {clientX: 0, clientY: 0});
+    TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(resizer[2]));
+    //FIXME: not call oResizeStop
+    //assert.equal(onResizeStop.callCount, 1);
   });
 
   afterEach(done => {
