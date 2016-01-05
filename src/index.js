@@ -85,7 +85,7 @@ ResizableAndMovable.defaultProps = {
   zIndex: 100,
   customClass: '',
   onClick: () => {},
-  onTouchStart: () => {},
+  onTouchStartP: () => {},
   onDragStart: () => {},
   onDrag: () => {},
   onDragStop: () => {},
