@@ -25,6 +25,7 @@ export default class ResizableAndMovable extends Component {
     const {customClass,
            customStyle,
            onClick,
+           onTouchStart,
            minWidth,
            minHeight,
            maxWidth,
@@ -45,6 +46,8 @@ export default class ResizableAndMovable extends Component {
          onStop={this.props.onDragStop} >
         <div style={{width:`${width}px`, height:`${height}px`, cursor: "move"}}>
           <Resizable
+             onClick={onClick}
+             onTouchStart={onTouchStart}
              onResizeStart={this.onResizeStart.bind(this)}
              onResize={this.props.onResize}
              onResizeStop={this.onResizeStop.bind(this)}
@@ -54,7 +57,8 @@ export default class ResizableAndMovable extends Component {
              minHeight={minHeight}
              maxWidth={maxWidth}
              maxHeight={maxHeight}
-             customStyle={customStyle} >
+             customStyle={customStyle}
+             customClass={customClass} >
             {this.props.children}
           </Resizable>
         </div>
@@ -64,10 +68,13 @@ export default class ResizableAndMovable extends Component {
 }
 
 ResizableAndMovable.propTypes = {
-  //onClick: PropTypes.func,
+  onClick: PropTypes.func,
   //onDoubleClick: PropTypes.func
-  //width: PropTypes.number.isRequired,
-  //height: PropTypes.number.isRequired
+  x: PropTypes.number,
+  y: PropTypes.number,
+  zIndex: PropTypes.number,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 };
 
 ResizableAndMovable.defaultProps = {
@@ -77,6 +84,8 @@ ResizableAndMovable.defaultProps = {
   y: 0,
   zIndex: 100,
   customClass: '',
+  onClick: () => {},
+  onTouchStart: () => {},
   onDragStart: () => {},
   onDrag: () => {},
   onDragStop: () => {},

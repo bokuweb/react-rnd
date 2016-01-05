@@ -24,6 +24,8 @@
     "react",
     "resize",
     "resizable",
+    "movable",
+    "draggable",
     "component"
   ],
   "author": "bokuweb",
