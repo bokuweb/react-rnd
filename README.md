@@ -2,7 +2,7 @@
 
 Resizable and movable component for React.
 
-[![Build Status](https://travis-ci.org/bokuweb/react-resazable-and-movable.svg?branch=master)](https://travis-ci.org/bokuweb/react-resizable-and-movable)
+[![Build Status](https://travis-ci.org/bokuweb/react-resizable-and-movable.svg?branch=master)](https://travis-ci.org/bokuweb/react-resizable-and-movable)
 [![License](http://img.shields.io/npm/l/object.assign.svg)](https://github.com/bokuweb/react-resizable-box#license)
 
 ## Demo
