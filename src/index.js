@@ -44,7 +44,7 @@ export default class ResizableAndMovable extends Component {
          onStart={this.props.onDragStart}
          onDrag={this.props.onDrag}
          onStop={this.props.onDragStop} >
-        <div style={{width:`${width}px`, height:`${height}px`, cursor: "move"}}>
+        <div style={{width:`${width}px`, height:`${height}px`, cursor: "move", position:'absolute'}}>
           <Resizable
              onClick={onClick}
              onTouchStart={onTouchStart}
