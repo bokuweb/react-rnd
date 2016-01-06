@@ -36,7 +36,6 @@ npm i react-resizable-and-movable
 
 ``` javascript
       <ResizableAndMovable
-         customStyle={{background:"#333", textAlign:"center", paddingTop: '20px'}}
          width={200}
          height={200}
          minWidth={200}
@@ -126,15 +125,13 @@ Callback called on resizing.
 (
  event: Event,
  ui:{
+      deltaX: number, deltaY: number,
       node: Node
       position:
-        {
-            // lastX + deltaX === clientX
-          deltaX: number, deltaY: number,
-          lastX: number, lastY: number,
-          clientX: number, clientY: number
-        }
-    }
+      {
+        left: number, top: number
+      }
+   }
 )
 ```
 
