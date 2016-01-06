@@ -69,7 +69,7 @@ export default class ResizableAndMovable extends Component {
 
 ResizableAndMovable.propTypes = {
   onClick: PropTypes.func,
-  //onDoubleClick: PropTypes.func
+  onTouchStart: PropTypes.func,
   x: PropTypes.number,
   y: PropTypes.number,
   zIndex: PropTypes.number,
