@@ -30,7 +30,8 @@ export default class ResizableAndMovable extends Component {
            maxHeight,
            width,
            height,
-           isDragDisabled,
+           passPosition,
+           start,
            x,
            y,
            zIndex} = this.props;
@@ -38,12 +39,20 @@ export default class ResizableAndMovable extends Component {
       <Draggable
          axis="both"
          zIndex={zIndex}
-         start={{x, y}}
-         disabled={!this.state.isDraggable || isDragDisabled}
+         x={x}
+         y={y}
+         start={start}
+         passPosition={passPosition}
+         disabled={!this.state.isDraggable}
          onStart={this.props.onDragStart}
          onDrag={this.props.onDrag}
          onStop={this.props.onDragStop} >
-        <div style={{width:`${width}px`, height:`${height}px`, cursor: "move", position:'absolute'}}>
+        <div style={{
+               width:`${width}px`,
+               height:`${height}px`,
+               cursor: "move",
+               position:'absolute'
+             }}>
           <Resizable
              onClick={onClick}
              onTouchStart={onTouchStart}
@@ -81,6 +90,7 @@ ResizableAndMovable.defaultProps = {
   height: 100,
   x: 0,
   y: 0,
+  start: {x:0, y:0},
   zIndex: 100,
   customClass: '',
   isDragDisabled: false,

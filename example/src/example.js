@@ -4,11 +4,20 @@ import ResizableAndMovable from '../../src';
 export default class Example extends Component{
   constructor() {
     super();
+    this.state = {
+      x:0
+    };
   }
 
+  componentDidMount() {
+    setInterval(()=>{
+      this.setState({x:this.state.x+1});
+    }, 100);
+  }
   render() {
     return (
       <ResizableAndMovable
+         start={{x:20, y: 20}}
          customStyle={{background:"#333", textAlign:"center", paddingTop: '20px'}}
          width={200}
          height={200}
