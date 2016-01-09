@@ -30,6 +30,7 @@ export default class ResizableAndMovable extends Component {
            maxHeight,
            width,
            height,
+           isDragDisabled,
            x,
            y,
            zIndex} = this.props;
@@ -38,7 +39,7 @@ export default class ResizableAndMovable extends Component {
          axis="both"
          zIndex={zIndex}
          start={{x, y}}
-         disabled={!this.state.isDraggable}
+         disabled={!this.state.isDraggable || isDragDisabled}
          onStart={this.props.onDragStart}
          onDrag={this.props.onDrag}
          onStop={this.props.onDragStop} >
@@ -82,6 +83,7 @@ ResizableAndMovable.defaultProps = {
   y: 0,
   zIndex: 100,
   customClass: '',
+  isDragDisabled: false,
   onClick: () => {},
   onTouchStartP: () => {},
   onDragStart: () => {},
