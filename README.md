@@ -26,8 +26,7 @@ npm i react-resizable-and-movable
 
 ``` javascript
       <ResizableAndMovable
-         width={200}
-         height={200}
+         start={{x:20, y:20, width:200, height:200}}
         <p>Example</p>
       </ResizableAndMovable>
 ```
@@ -36,8 +35,7 @@ npm i react-resizable-and-movable
 
 ``` javascript
       <ResizableAndMovable
-         width={200}
-         height={200}
+         start={{x:20, y:20, width:200, height:200}}
          minWidth={200}
          minHeight={200}
          maxWidth={300}
@@ -59,45 +57,48 @@ npm i react-resizable-and-movable
 ```
 ## Properties
 
-#### width {number}
+#### start {x: number, y:number, width:number, height:number}
 
-The default width of the element.   
+Specifies the `x` ,`y`, `width` and `height` that the component should start at.
 
-#### height {number}
-
-The default height of the element.   
 
 #### minWidth {number}
 
-The minimum width of the element.
+Specifies the minimum width of the component.
+This is generally not necessary to use.
 
 #### minHeight {number}
 
-The minimum height of the element.
+Specifies the minimum height of the component.
+This is generally not necessary to use.
 
 #### maxWidth {number}
 
-The maximum width of the element.
+Specifies the maximum width of the component.
+This is generally not necessary to use.
 
 #### maxHeight {number}
 
-The maximum height of the element.
+Specifies the maximum height of the component.
+This is generally not necessary to use.
 
 #### customClass {string}
 
-The css class set on the element.
+The css class set on the component.
+This is generally not necessary to use.
 
 #### customStyle {object}
 
-The css style set on the element.
+The css style set on the component.
+This is generally not necessary to use.
 
 #### onClick {func}
 
-Callback called on element clicked.
+Callback called on component clicked.
 
 #### onTouchStart {func}
 
-Callback called on element touched.
+Callback called on component touched.
 
 #### onResizeStart {func}
 
@@ -121,6 +122,8 @@ Callback called on dragging start.
 Callback called on resizing.   
 `onDrag` called with the following parameters:
 
+
+
 ``` javascript
 (
  event: Event,
@@ -138,6 +141,24 @@ Callback called on resizing.
 #### onDrageStop {func}
 
 Callback called on dragging stop.
+
+#### passPosition {Boolean}
+
+If set to `true` , you can specifies the `x` and `y` from parent componet by `x` and `y` props.
+This is generally not necessary to use.
+This props is set to `false` by default.
+
+#### x {number}
+
+If `passPosition` set to `true`, you can specifies the `x` from parent componet by `x` props.
+This is generally not necessary to use.
+If `passPosition` set to `false`, this value is ignore.
+
+#### y {number}
+
+If `passPosition` set to `true`, you can specifies the `y` from parent componet by `y` props.
+This is generally not necessary to use.
+If `passPosition` set to `false`, this value is ignore.
 
 ## Test
 
