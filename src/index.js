@@ -28,8 +28,6 @@ export default class ResizableAndMovable extends Component {
            minHeight,
            maxWidth,
            maxHeight,
-           width,
-           height,
            passPosition,
            start,
            x,
@@ -41,15 +39,15 @@ export default class ResizableAndMovable extends Component {
          zIndex={zIndex}
          x={x}
          y={y}
-         start={start}
+         start={{x:start.x, y:start.y}}
          passPosition={passPosition}
          disabled={!this.state.isDraggable}
          onStart={this.props.onDragStart}
          onDrag={this.props.onDrag}
          onStop={this.props.onDragStop} >
         <div style={{
-               width:`${width}px`,
-               height:`${height}px`,
+               width:`${start.width}px`,
+               height:`${start.height}px`,
                cursor: "move",
                position:'absolute'
              }}>
@@ -59,8 +57,8 @@ export default class ResizableAndMovable extends Component {
              onResizeStart={this.onResizeStart.bind(this)}
              onResize={this.props.onResize}
              onResizeStop={this.onResizeStop.bind(this)}
-             width={width}
-             height={height}
+             width={start.width}
+             height={start.height}
              minWidth={minWidth}
              minHeight={minHeight}
              maxWidth={maxWidth}
