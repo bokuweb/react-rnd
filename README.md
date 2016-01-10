@@ -142,24 +142,6 @@ Callback called on resizing.
 
 Callback called on dragging stop.
 
-#### passPosition {Boolean}
-
-If set to `true` , you can specifies the `x` and `y` from parent componet by `x` and `y` props.
-This is generally not necessary to use.
-This props is set to `false` by default.
-
-#### x {number}
-
-If `passPosition` set to `true`, you can specifies the `x` from parent componet by `x` props.
-This is generally not necessary to use.
-If `passPosition` set to `false`, this value is ignore.
-
-#### y {number}
-
-If `passPosition` set to `true`, you can specifies the `y` from parent componet by `y` props.
-This is generally not necessary to use.
-If `passPosition` set to `false`, this value is ignore.
-
 ## Test
 
 ``` sh

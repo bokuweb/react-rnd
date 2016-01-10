@@ -32,12 +32,10 @@ export default class ResizableAndMovable extends Component {
     this.props.onDrag(e, ui);
   }
 
-
   onDragStop(e, ui) {
     if (this.isResizing) return;
     this.props.onDragStop(e, ui);
   }
-
 
   render() {
     const {customClass,
@@ -48,19 +46,13 @@ export default class ResizableAndMovable extends Component {
            minHeight,
            maxWidth,
            maxHeight,
-           passPosition,
            start,
-           x,
-           y,
            zIndex} = this.props;
     return (
       <Draggable
          axis="both"
          zIndex={zIndex}
-         x={x}
-         y={y}
          start={{x:start.x, y:start.y}}
-         passPosition={passPosition}
          disabled={!this.state.isDraggable}
          onStart={this.onDragStart.bind(this)}
          onDrag={this.onDrag.bind(this)}
