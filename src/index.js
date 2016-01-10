@@ -7,17 +7,37 @@ export default class ResizableAndMovable extends Component {
   constructor(props) {
     super(props);
     this.state = {isDraggable: true};
+    this.isResizing = false;
   }
 
-  onResizeStart() {
+  onResizeStart(e) {
     this.setState({isDraggable: false});
+    this.isResizing = true;
     this.props.onResizeStart();
   }
 
   onResizeStop() {
     this.setState({isDraggable: true});
+    this.isResizing = false;
     this.props.onResizeStop();
   }
+
+  onDragStart(e, ui) {
+    if (this.isResizing) return;
+    this.props.onDragStart(e, ui);
+  }
+
+  onDrag(e, ui) {
+    if (this.isResizing) return;
+    this.props.onDrag(e, ui);
+  }
+
+
+  onDragStop(e, ui) {
+    if (this.isResizing) return;
+    this.props.onDragStop(e, ui);
+  }
+
 
   render() {
     const {customClass,
@@ -42,9 +62,9 @@ export default class ResizableAndMovable extends Component {
          start={{x:start.x, y:start.y}}
          passPosition={passPosition}
          disabled={!this.state.isDraggable}
-         onStart={this.props.onDragStart}
-         onDrag={this.props.onDrag}
-         onStop={this.props.onDragStop} >
+         onStart={this.onDragStart.bind(this)}
+         onDrag={this.onDrag.bind(this)}
+         onStop={this.onDragStop.bind(this)} >
         <div style={{
                width:`${start.width}px`,
                height:`${start.height}px`,

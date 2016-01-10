@@ -8,7 +8,7 @@ Resizable and movable component for React.
 ## Demo
 
 ![screenshot](https://raw.githubusercontent.com/bokuweb/react-resazable-and-movable/master/screenshot.gif)
-See demo: [http://bokuweb.github.io/react-resazable-and-movable](http://bokuweb.github.io/react-resazable-and-movable)
+See demo: [http://bokuweb.github.io/react-resizable-and-movable](http://bokuweb.github.io/react-resizable-and-movable)
 
 ## Important Note
 
