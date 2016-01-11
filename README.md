@@ -42,13 +42,13 @@ npm i react-resizable-and-movable
          maxHeight={300}
          onResizeStart={() => console.log('resize start')}
          onResize={size => console.log(size)}
-         onResizeStop={() => console.log('resize stop')}
+         onResizeStop={size => console.log('resize stop')}
          onDragStart={() => console.log('drag start')}
          onDrag={(e, ui) => {
            console.dir(ui);
            console.log(e);
          }}
-         onDragStop={() => console.log('drag stop')} >
+         onDragStop={(e, ui) => console.log('drag stop')} >
         <p>Example</p>
         <p>start 200px x 200px</p>
         <p>min 200px x 200px</p>
@@ -112,6 +112,7 @@ Receives the box size `{width: number, height: number}` as argument.
 #### onResizeStop {func}
 
 Callback called on resize stop.
+Receives the box size `{width: number, height: number}` as argument.
 
 #### onDrageStart {func}
 
@@ -141,6 +142,23 @@ Callback called on resizing.
 #### onDrageStop {func}
 
 Callback called on dragging stop.
+`onDragStop` called with the following parameters:
+
+
+
+``` javascript
+(
+ event: Event,
+ ui:{
+      deltaX: number, deltaY: number,
+      node: Node
+      position:
+      {
+        left: number, top: number
+      }
+   }
+)
+```
 
 ## Test
 
