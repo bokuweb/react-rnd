@@ -14,7 +14,7 @@ export default class Example extends Component{
          maxHeight={300}
          onResizeStart={() => console.log('resize start')}
          onResize={size => console.log(size)}
-         onResizeStop={() => console.log('resize stop')}
+         onResizeStop={size => console.log(`resize stop width=${size.width}, height=${size.height}`)}
          onDragStart={() => console.log('drag start')}
          onDrag={(e, ui) => {
            console.dir(ui);
