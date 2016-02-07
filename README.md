@@ -48,7 +48,8 @@ npm i react-resizable-and-movable
            console.dir(ui);
            console.log(e);
          }}
-         onDragStop={(e, ui) => console.log('drag stop')} >
+         onDragStop={(e, ui) => console.log('drag stop')}
+         isResizable={{x:true, y:true, xy: true}}>
         <p>Example</p>
         <p>start 200px x 200px</p>
         <p>min 200px x 200px</p>
@@ -91,6 +92,13 @@ This is generally not necessary to use.
 
 The css style set on the component.
 This is generally not necessary to use.
+
+#### isResizable {object}
+
+The permission of x, y, xy direction resizing.   
+If omitted, x, y, xy direction resizing is enabled.    
+Forexample, If you want to permit only x direction resizing, set `{x:true, y:false, xy:false}`. 
+Default value is `{x:true, y:true, xy:true}`. 
 
 #### onClick {func}
 
