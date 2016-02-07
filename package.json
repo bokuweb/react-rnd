@@ -1,7 +1,7 @@
 {
   "name": "react-resizable-and-movable",
   "version": "0.2.4",
-  "description": "",
+  "description": "Resizable and movable component for React.",
   "main": "lib/index.js",
   "scripts": {
     "watch": "npm run watch:lib & npm run watch:example",
