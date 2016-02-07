@@ -71,6 +71,6 @@
   ],
   "dependencies": {
     "react-draggable": "git://github.com/bokuweb/react-draggable.git",
-    "react-resizable-box": "^0.1.6"
+    "react-resizable-box": "^0.1.7"
   }
 }

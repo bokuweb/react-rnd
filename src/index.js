@@ -10,10 +10,12 @@ export default class ResizableAndMovable extends Component {
     this.isResizing = false;
   }
 
-  onResizeStart(e) {
+  onResizeStart(dir, e) {
+    console.dir(e)
     this.setState({isDraggable: false});
     this.isResizing = true;
     this.props.onResizeStart();
+    e.stopPropagation();
   }
 
   onResizeStop(size) {
@@ -76,7 +78,8 @@ export default class ResizableAndMovable extends Component {
              maxWidth={maxWidth}
              maxHeight={maxHeight}
              customStyle={customStyle}
-             customClass={customClass} >
+             customClass={customClass}
+             isResizable={this.props.isResizable}>
             {this.props.children}
           </Resizable>
         </div>
@@ -88,22 +91,19 @@ export default class ResizableAndMovable extends Component {
 ResizableAndMovable.propTypes = {
   onClick: PropTypes.func,
   onTouchStart: PropTypes.func,
-  x: PropTypes.number,
-  y: PropTypes.number,
   zIndex: PropTypes.number,
   width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired
+  height: PropTypes.number.isRequired,
+  isResizable: PropTypes.object
 };
 
 ResizableAndMovable.defaultProps = {
   width: 100,
   height: 100,
-  x: 0,
-  y: 0,
   start: {x:0, y:0},
   zIndex: 100,
   customClass: '',
-  isDragDisabled: false,
+  isResizable: {x:true, y:true, xy: true},
   onClick: () => {},
   onTouchStartP: () => {},
   onDragStart: () => {},
