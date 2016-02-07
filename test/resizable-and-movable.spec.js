@@ -12,8 +12,6 @@ describe('react-resizable-and-mpvable', () => {
     const resizeAndMovable = TestUtils.renderIntoDocument(
       <ResizeAndMovable><div/></ResizeAndMovable>
     );
-    assert.equal(resizeAndMovable.props.x, 0);
-    assert.equal(resizeAndMovable.props.y, 0);
     assert.equal(resizeAndMovable.props.width, 100);
     assert.equal(resizeAndMovable.props.height, 100);
     assert.equal(resizeAndMovable.props.minWidth, undefined);

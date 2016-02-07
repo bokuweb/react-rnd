@@ -1,7 +1,7 @@
 {
   "name": "react-resizable-and-movable",
-  "version": "0.2.3",
-  "description": "",
+  "version": "0.2.4",
+  "description": "Resizable and movable component for React.",
   "main": "lib/index.js",
   "scripts": {
     "watch": "npm run watch:lib & npm run watch:example",
@@ -71,6 +71,6 @@
   ],
   "dependencies": {
     "react-draggable": "git://github.com/bokuweb/react-draggable.git",
-    "react-resizable-box": "^0.1.6"
+    "react-resizable-box": "^0.1.7"
   }
 }
