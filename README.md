@@ -98,7 +98,11 @@ This is generally not necessary to use.
 The permission of x, y, xy direction resizing.   
 If omitted, x, y, xy direction resizing is enabled.    
 Forexample, If you want to permit only x direction resizing, set `{x:true, y:false, xy:false}`. 
-Default value is `{x:true, y:true, xy:true}`. 
+Default value is `{x:true, y:true, xy:true}`.
+
+#### moveAxis {string}
+
+The direction of allowed movement (dragging) allowed ('x','y','both').
 
 #### onClick {func}
 

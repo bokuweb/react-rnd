@@ -52,7 +52,7 @@ export default class ResizableAndMovable extends Component {
            zIndex} = this.props;
     return (
       <Draggable
-         axis="both"
+         axis={this.props.moveAxis}
          zIndex={zIndex}
          start={{x:start.x, y:start.y}}
          disabled={!this.state.isDraggable}
@@ -104,6 +104,7 @@ ResizableAndMovable.defaultProps = {
   zIndex: 100,
   customClass: '',
   isResizable: {x:true, y:true, xy: true},
+  moveAxis:'both',
   onClick: () => {},
   onTouchStartP: () => {},
   onDragStart: () => {},
