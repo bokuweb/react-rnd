@@ -48,7 +48,8 @@ export default class ResizableAndMovable extends Component {
            maxWidth,
            maxHeight,
            start,
-           zIndex} = this.props;
+           zIndex,
+           bounds} = this.props;
     return (
       <Draggable
          axis={this.props.moveAxis}
@@ -57,7 +58,8 @@ export default class ResizableAndMovable extends Component {
          disabled={!this.state.isDraggable}
          onStart={this.onDragStart.bind(this)}
          onDrag={this.onDrag.bind(this)}
-         onStop={this.onDragStop.bind(this)} >
+         onStop={this.onDragStop.bind(this)}
+         bounds={bounds} >
         <div style={{
                width:`${start.width}px`,
                height:`${start.height}px`,
@@ -93,7 +95,11 @@ ResizableAndMovable.propTypes = {
   zIndex: PropTypes.number,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  isResizable: PropTypes.object
+  isResizable: PropTypes.object,
+  bounds: PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object
+  ]),
 };
 
 ResizableAndMovable.defaultProps = {

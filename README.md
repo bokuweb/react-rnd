@@ -172,6 +172,15 @@ Callback called on dragging stop.
 )
 ```
 
+#### bounds {object|string}
+
+Specifies movement boundaries. Accepted values:
+ - `parent` restricts movement within the node's offsetParent
+    (nearest node with position relative or absolute), or
+ - An object with `left, top, right, and bottom` properties.
+   These indicate how far in each direction the draggable
+   can be moved.
+
 ## Test
 
 ``` sh
