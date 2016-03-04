@@ -102,7 +102,7 @@ Default value is `{x:true, y:true, xy:true}`.
 
 #### moveAxis {string}
 
-The direction of allowed movement (dragging) allowed ('x','y','both').
+The direction of allowed movement (dragging) allowed ('x','y','both','none').
 
 #### onClick {func}
 

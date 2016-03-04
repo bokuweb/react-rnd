@@ -55,7 +55,7 @@ export default class ResizableAndMovable extends Component {
          axis={this.props.moveAxis}
          zIndex={zIndex}
          start={{x:start.x, y:start.y}}
-         disabled={!this.state.isDraggable}
+         disabled={!this.state.isDraggable || this.props.moveAxis==='none'}
          onStart={this.onDragStart.bind(this)}
          onDrag={this.onDrag.bind(this)}
          onStop={this.onDragStop.bind(this)}
