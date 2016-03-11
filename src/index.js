@@ -10,6 +10,12 @@ export default class ResizableAndMovable extends Component {
     this.isResizing = false;
   }
 
+  componentDidMount(){
+    if(this.props.initAsResizing.enable) {
+      this.refs.resizable.onResizeStart(this.props.initAsResizing.direction, this.props.initAsResizing.event);
+    }
+  }
+
   onResizeStart(dir, e) {
     this.setState({isDraggable: false});
     this.isResizing = true;
@@ -67,6 +73,7 @@ export default class ResizableAndMovable extends Component {
                position:'absolute'
              }}>
           <Resizable
+             ref='resizable'
              onClick={onClick}
              onTouchStart={onTouchStart}
              onResizeStart={this.onResizeStart.bind(this)}
@@ -108,6 +115,7 @@ ResizableAndMovable.defaultProps = {
   start: {x:0, y:0},
   zIndex: 100,
   customClass: '',
+  initAsResizing: {enable: false, direction: 'xy'},
   isResizable: {x:true, y:true, xy: true},
   moveAxis:'both',
   onClick: () => {},
