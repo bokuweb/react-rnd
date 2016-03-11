@@ -172,6 +172,26 @@ Callback called on dragging stop.
 )
 ```
 
+#### initAsResizing {object}
+
+The component begins as if a resize event occurred. 
+This is useful if you would like to click and drag to create a box (e.g. click and drag out a selection window). 
+If omitted, component does not call resize when created. 
+
+Accepted Value: `{enable:true, direction: 'both', event:event}` where direction can be 'x', 'y' or 'xy' and event is the current mouse event
+
+Forexample, If you wanted to create a box with a click and a drag on a parent, then in that parents onMouseDown event you would do something like this:
+```javascript
+    parentClickEvent(event){
+    event.persist()
+     <ResizableAndMovable
+        start={{x:20, y:20, width:200, height:200}} 
+        initAsResizing={{enable:true, direction:'both',event:event}}
+     />
+    }
+```
+Note that `event.persist()` must be called so the mouse event can be passed to ResizableAndMovable
+
 #### bounds {object|string}
 
 Specifies movement boundaries. Accepted values:
