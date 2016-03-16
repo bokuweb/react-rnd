@@ -65,7 +65,8 @@ export default class ResizableAndMovable extends Component {
          onStart={this.onDragStart.bind(this)}
          onDrag={this.onDrag.bind(this)}
          onStop={this.onDragStop.bind(this)}
-         bounds={bounds} >
+         bounds={bounds}
+         grid={this.props.grid} >
         <div style={{
                width:`${start.width}px`,
                height:`${start.height}px`,
@@ -107,6 +108,7 @@ ResizableAndMovable.propTypes = {
     React.PropTypes.string,
     React.PropTypes.object
   ]),
+  grid: PropTypes.arrayOf(PropTypes.number)
 };
 
 ResizableAndMovable.defaultProps = {
@@ -118,6 +120,7 @@ ResizableAndMovable.defaultProps = {
   initAsResizing: {enable: false, direction: 'xy'},
   isResizable: {x:true, y:true, xy: true},
   moveAxis:'both',
+  grid: null,
   onClick: () => {},
   onTouchStartP: () => {},
   onDragStart: () => {},
