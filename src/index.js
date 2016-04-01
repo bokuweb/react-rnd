@@ -71,7 +71,8 @@ export default class ResizableAndMovable extends Component {
                width:`${start.width}px`,
                height:`${start.height}px`,
                cursor: "move",
-               position:'absolute'
+               position:'absolute',
+               zIndex: `${zIndex}`
              }}>
           <Resizable
              ref='resizable'
