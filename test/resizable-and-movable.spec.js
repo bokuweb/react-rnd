@@ -127,8 +127,8 @@ describe('react-resizable-and-mpvable', () => {
     Utils.mouseMove(node, 200, 220);
     TestUtils.Simulate.mouseUp(node);
     const style = node.getAttribute('style');
-    assert.equal(onResize.getCall(0).args[0].width, 200);
-    assert.equal(onResize.getCall(0).args[0].height, 220);
+    assert.equal(onResize.getCall(0).args[1].width, 200);
+    assert.equal(onResize.getCall(0).args[1].height, 220);
     assert.equal(onResize.callCount, 1);
   });
 

@@ -25,36 +25,38 @@ npm i react-resizable-and-movable
 ### Basic
 
 ``` javascript
-      <ResizableAndMovable
-         start={{x:20, y:20, width:200, height:200}}
-        <p>Example</p>
-      </ResizableAndMovable>
+<ResizableAndMovable
+  start={{x:20, y:20, width:200, height:200}}
+>  
+  <p>Example</p>
+</ResizableAndMovable>
 ```
 
 ### With min/max width/height and callbacks
 
 ``` javascript
-      <ResizableAndMovable
-         start={{x:20, y:20, width:200, height:200}}
-         minWidth={200}
-         minHeight={200}
-         maxWidth={300}
-         maxHeight={300}
-         onResizeStart={() => console.log('resize start')}
-         onResize={size => console.log(size)}
-         onResizeStop={size => console.log('resize stop')}
-         onDragStart={() => console.log('drag start')}
-         onDrag={(e, ui) => {
-           console.dir(ui);
-           console.log(e);
-         }}
-         onDragStop={(e, ui) => console.log('drag stop')}
-         isResizable={{x:true, y:true, xy: true}}>
-        <p>Example</p>
-        <p>start 200px x 200px</p>
-        <p>min 200px x 200px</p>
-        <p>max 300px x 300px</p>
-      </ResizableAndMovable>
+<ResizableAndMovable
+  start={{x:20, y: 20, width: 200, height: 200}}
+  customStyle={{background:"#333", textAlign:"center", paddingTop: '20px'}}
+  minWidth={200}
+  minHeight={200}
+  maxWidth={300}
+  maxHeight={300}
+  onResizeStart={(dir, e) => console.log('resize start')}
+  onResize={(dir, size, rect) => console.log(size)}
+  onResizeStop={(dir, size, rect) => console.log(`resize stop width=${size.width}, height=${size.height}`)}
+  onDragStart={() => console.log('drag start')}
+  onDrag={(e, ui) => {
+    console.dir(ui);
+    console.log(e);
+  }}
+  onDragStop={() => console.log('drag stop')}
+>
+ <p>Example</p>
+ <p>start 200px x 200px</p>
+ <p>min 200px x 200px</p>
+ <p>max 300px x 300px</p>
+</ResizableAndMovable>
 ```
 ## Properties
 
@@ -112,19 +114,38 @@ Callback called on component clicked.
 
 Callback called on component touched.
 
-#### onResizeStart {func}
+#### `onResizeStart`: PropTypes.func
 
-Callback called on resize start.   
+Calls when resizable component resize starts.
+Calls back with (`direction: string`, `event: object`)
 
-#### onResize {func}
+- direction: `x` or `y` or `xy`
+- event: `mouse down event`
 
-Callback called on resizing.   
-Receives the box size `{width: number, height: number}` as argument.
+#### `onResize`: PropTypes.func
 
-#### onResizeStop {func}
+Calls when resizable component resize.
+Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`)
 
-Callback called on resize stop.
-Receives the box size `{width: number, height: number}` as argument.
+- direction: `x` or `y` or `xy`
+- getComputedStyleSize: `{ width, height }`
+  - this argument is {width, height} of getComputedStyle.
+- clientSize: `{ width`, height }`
+  - this argument is `clientWidth` and `clientHeight`.
+  
+For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'x', this callback is called with `('x', { width: 100, height: 200 }, { width: 140, height: 240 })`
+
+#### `onResizeStop`: PropTypes.func
+
+Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`)
+
+- direction: `x` or `y` or `xy`
+- getComputedStyleSize: `{ width, height }`
+  - this argument is {width, height} of getComputedStyle.
+- clientSize: `{ width`, height }`
+  - this argument is `clientWidth` and `clientHeight`.
+  
+For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'x', this callback is called with `('x', { width: 100, height: 200 }, { width: 140, height: 240 })`
 
 #### onDrageStart {func}
 
@@ -180,16 +201,6 @@ If omitted, component does not call resize when created.
 
 Accepted Value: `{enable:true, direction: 'both', event:event}` where direction can be 'x', 'y' or 'xy' and event is the current mouse event
 
-Forexample, If you wanted to create a box with a click and a drag on a parent, then in that parents onMouseDown event you would do something like this:
-```javascript
-    parentClickEvent(event){
-    event.persist()
-     <ResizableAndMovable
-        start={{x:20, y:20, width:200, height:200}} 
-        initAsResizing={{enable:true, direction:'both',event:event}}
-     />
-    }
-```
 Note that `event.persist()` must be called so the mouse event can be passed to ResizableAndMovable
 
 #### bounds {object|string}

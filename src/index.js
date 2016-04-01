@@ -19,14 +19,14 @@ export default class ResizableAndMovable extends Component {
   onResizeStart(dir, e) {
     this.setState({isDraggable: false});
     this.isResizing = true;
-    this.props.onResizeStart();
+    this.props.onResizeStart(dir, e);
     e.stopPropagation();
   }
 
-  onResizeStop(size) {
+  onResizeStop(dir, styleSize, clientSize) {
     this.setState({isDraggable: true});
     this.isResizing = false;
-    this.props.onResizeStop(size);
+    this.props.onResizeStop(dir, styleSize, clientSize);
   }
 
   onDragStart(e, ui) {
