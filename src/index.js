@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import Draggable from 'react-draggable';
+import Draggable from '@bokuweb/react-draggable';
 import Resizable from 'react-resizable-box';
 import assign from 'react/lib/Object.assign';
 
