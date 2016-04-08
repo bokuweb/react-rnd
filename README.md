@@ -212,11 +212,22 @@ Specifies movement boundaries. Accepted values:
    These indicate how far in each direction the draggable
    can be moved.
 
+#### handle {string}
+
+Specifies a selector to be used as the handle that initiates drag.
+Example: '.handle'.
+
 ## Test
 
 ``` sh
 npm t
 ```
+
+## Changelog
+
+#### v0.5.3
+
+- Add handle selector
 
 ## License
 

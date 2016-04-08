@@ -11,8 +11,9 @@ export default class ResizableAndMovable extends Component {
   }
 
   componentDidMount(){
-    if(this.props.initAsResizing.enable) {
-      this.refs.resizable.onResizeStart(this.props.initAsResizing.direction, this.props.initAsResizing.event);
+    const { initAsResizing: { enable, direction, event } } = this.props;
+    if(enable) {
+      this.refs.resizable.onResizeStart(direction, event);
     }
   }
 
@@ -63,6 +64,7 @@ export default class ResizableAndMovable extends Component {
          start={{x:start.x, y:start.y}}
          disabled={!this.state.isDraggable || this.props.moveAxis==='none'}
          onStart={this.onDragStart.bind(this)}
+         handle={this.props.handle}
          onDrag={this.onDrag.bind(this)}
          onStop={this.onDragStop.bind(this)}
          bounds={bounds}
