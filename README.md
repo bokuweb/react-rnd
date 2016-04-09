@@ -2,12 +2,15 @@
 
 Resizable and movable component for React.
 
-[![Build Status](https://travis-ci.org/bokuweb/react-resizable-and-movable.svg?branch=master)](https://travis-ci.org/bokuweb/react-resizable-and-movable)
-[![License](http://img.shields.io/npm/l/object.assign.svg)](https://github.com/bokuweb/react-resizable-box#license)
+[![Build Status](https://img.shields.io/travis/bokuweb/react-resizable-and-movable.svg?style=flat-square)](https://travis-ci.org/bokuweb/react-resizable-and-movable)
+[![Version](https://img.shields.io/npm/v/react-resizable-and-movable.svg?style=flat-square)](https://www.npmjs.com/package/react-resizable-and-movable)
+[![Code Climate](https://img.shields.io/codeclimate/github/bokuweb/react-resizable-and-movable/badges/gpa.svg?style=flat-square)](https://codeclimate.com/github/bokuweb/react-resizable-and-movable)
+[![License](https://img.shields.io/npm/l/react-resizable-and-movable.svg?style=flat-square)](https://github.com/bokuweb/react-resizable-and-movable#license)
 
 ## Demo
 
 ![screenshot](https://raw.githubusercontent.com/bokuweb/react-resazable-and-movable/master/screenshot.gif)
+   
 See demo: [http://bokuweb.github.io/react-resizable-and-movable](http://bokuweb.github.io/react-resizable-and-movable)
 
 ## Important Note
