@@ -38,7 +38,6 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: PropTypes.bool,
       topLeft: PropTypes.bool,
     }),
-    customClass: PropTypes.string,
     width: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
@@ -63,10 +62,12 @@ export default class ResizableAndMovable extends Component {
   };
 
   static defaultProps = {
+    x: 0,
+    y: 0,
     width: 100,
     height: 100,
     zIndex: 100,
-    customClass: '',
+    className: '',
     initAsResizing: { enable: false, direction: 'bottomRight' },
     isResizable: {
       top: true,
@@ -112,6 +113,11 @@ export default class ResizableAndMovable extends Component {
     if (enable) this.refs.resizable.onResizeStart(direction, event);
   }
 
+  componentWillReceiveProps({ x, y }) {
+    if (x !== this.state.x) this.setState({ x });
+    if (y !== this.state.y) this.setState({ y });
+  }
+
   onResizeStart(dir, styleSize, clientSize, e) {
     this.setState({
       isDraggable: false,
@@ -144,6 +150,7 @@ export default class ResizableAndMovable extends Component {
   }
 
   onDrag(e, ui) {
+    console.dir(ui)
     if (this.isResizing) return;
     this.setState({ x: ui.position.left, y: ui.position.top });
     this.props.onDrag(e, ui);
