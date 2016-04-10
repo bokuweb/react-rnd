@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Draggable from '@bokuweb/react-draggable';
+import Draggable from '@bokuweb/react-draggable-custom';
 import Resizable from 'react-resizable-box';
 
 export default class ResizableAndMovable extends Component {
@@ -89,7 +89,7 @@ export default class ResizableAndMovable extends Component {
     this.onDrag = this.onDrag.bind(this);
     this.onDragStop = this.onDragStop.bind(this);
     this.onResizeStart = this.onResizeStart.bind(this);
-    this.onResizeStopd = this.onResizeStop.bind(this);
+    this.onResizeStop = this.onResizeStop.bind(this);
   }
 
   componentDidMount() {
