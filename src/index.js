@@ -150,7 +150,6 @@ export default class ResizableAndMovable extends Component {
   }
 
   onDrag(e, ui) {
-    console.dir(ui)
     if (this.isResizing) return;
     this.setState({ x: ui.position.left, y: ui.position.top });
     this.props.onDrag(e, ui);
@@ -185,11 +184,11 @@ export default class ResizableAndMovable extends Component {
       >
         <div
           style={{
-            width: `${width}px`,
-            height: `${height}px`,
+            width,
+            height,
             cursor: 'move',
             position: 'absolute',
-            zIndex: `${zIndex}`,
+            zIndex,
           }}
         >
           <Resizable
@@ -200,8 +199,8 @@ export default class ResizableAndMovable extends Component {
             onResizeStart={this.onResizeStart}
             onResize={this.onResize}
             onResizeStop={this.onResizeStop}
-            width={width}
-            height={height}
+            width="100%"
+            height="100%"
             minWidth={minWidth}
             minHeight={minHeight}
             maxWidth={maxWidth}

@@ -17,12 +17,12 @@ export default class Example extends Component {
       <ResizableAndMovable
         x={this.state.x}
         y={this.state.y}
-        width={200}
-        height={200}
+        width={'50%'}
+        height={'50%'}
         style={style}
         minWidth={200}
         minHeight={200}
-        maxWidth={300}
+        maxWidth={1000}
         maxHeight={300}
         onResizeStart={(dir, e) => console.log('resize start')}
         onResize={(dir, size, rect) => console.log(size)}
