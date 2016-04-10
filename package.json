@@ -72,6 +72,6 @@
   ],
   "dependencies": {
     "@bokuweb/react-draggable-custom": "^1.3.10",
-    "react-resizable-box": "^0.4.1"
+    "react-resizable-box": "^1.1.3"
   }
 }

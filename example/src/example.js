@@ -17,7 +17,7 @@ export default class Example extends Component{
          y={20}
          width={200}
          height={200}
-         style={{background:"#333", textAlign:"center", paddingTop: '20px'}}
+         style={{background:"#333", textAlign:"center", padding: '20px'}}
          minWidth={200}
          minHeight={200}
          maxWidth={300}

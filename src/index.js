@@ -65,11 +65,19 @@ export default class ResizableAndMovable extends Component {
   static defaultProps = {
     width: 100,
     height: 100,
-    start: { x: 0, y: 0 },
     zIndex: 100,
     customClass: '',
     initAsResizing: { enable: false, direction: 'bottomRight' },
-    isResizable: { x: true, y: true, xy: true },
+    isResizable: {
+      top: true,
+      right: true,
+      bottom: true,
+      left: true,
+      topRight: true,
+      bottomRight: true,
+      bottomLeft: true,
+      topLeft: true,
+    },
     moveAxis: 'both',
     grid: null,
     onClick: () => {},
@@ -84,12 +92,18 @@ export default class ResizableAndMovable extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isDraggable: true, x: props.x, y: props.y };
+    this.state = {
+      isDraggable: true,
+      x: props.x,
+      y: props.y,
+      original: { x: props.x, y: props.y },
+    };
     this.isResizing = false;
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onDragStop = this.onDragStop.bind(this);
     this.onResizeStart = this.onResizeStart.bind(this);
+    this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
   }
 
@@ -98,17 +112,30 @@ export default class ResizableAndMovable extends Component {
     if (enable) this.refs.resizable.onResizeStart(direction, event);
   }
 
-  onResizeStart(dir, e) {
-    this.setState({ isDraggable: false });
+  onResizeStart(dir, styleSize, clientSize, e) {
+    this.setState({
+      isDraggable: false,
+      original: { x: this.state.x, y: this.state.y },
+    });
     this.isResizing = true;
-    this.props.onResizeStart(dir, e);
+    this.props.onResizeStart(dir, styleSize, clientSize, e);
     e.stopPropagation();
   }
 
-  onResizeStop(dir, styleSize, clientSize) {
+  onResize(dir, styleSize, clientSize, delta) {
+    if (/left/i.test(dir)) {
+      this.setState({ x: this.state.original.x - delta.width });
+    }
+    if (/top/i.test(dir)) {
+      this.setState({ y: this.state.original.y - delta.height });
+    }
+    this.props.onResize(dir, styleSize, clientSize, delta);
+  }
+
+  onResizeStop(dir, styleSize, clientSize, delta) {
     this.setState({ isDraggable: true });
     this.isResizing = false;
-    this.props.onResizeStop(dir, styleSize, clientSize);
+    this.props.onResizeStop(dir, styleSize, clientSize, delta);
   }
 
   onDragStart(e, ui) {
@@ -164,7 +191,7 @@ export default class ResizableAndMovable extends Component {
             onDoubleClick={onDoubleClick}
             onTouchStart={onTouchStart}
             onResizeStart={this.onResizeStart}
-            onResize={this.props.onResize}
+            onResize={this.onResize}
             onResizeStop={this.onResizeStop}
             width={width}
             height={height}
