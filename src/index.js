@@ -5,7 +5,6 @@ import Resizable from 'react-resizable-box';
 export default class ResizableAndMovable extends Component {
   static propTypes = {
     initAsResizing: PropTypes.object,
-    start: PropTypes.object, // FIXME
     onResizeStart: PropTypes.func,
     onResize: PropTypes.func,
     onResizeStop: PropTypes.func,
@@ -58,6 +57,8 @@ export default class ResizableAndMovable extends Component {
       PropTypes.string,
       PropTypes.object,
     ]),
+    x: PropTypes.number,
+    y: PropTypes.number,
     zIndex: PropTypes.number,
   };
 
@@ -83,7 +84,7 @@ export default class ResizableAndMovable extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isDraggable: true };
+    this.state = { isDraggable: true, x: props.x, y: props.y };
     this.isResizing = false;
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
@@ -117,6 +118,7 @@ export default class ResizableAndMovable extends Component {
 
   onDrag(e, ui) {
     if (this.isResizing) return;
+    this.setState({ x: ui.position.left, y: ui.position.top });
     this.props.onDrag(e, ui);
   }
 
@@ -127,14 +129,15 @@ export default class ResizableAndMovable extends Component {
 
   render() {
     const { className, style, onClick, onTouchStart,
-            minWidth, minHeight, maxWidth, maxHeight,
-            start, zIndex, bounds, moveAxis, dragHandlerClassName,
+            width, height, minWidth, minHeight, maxWidth, maxHeight,
+            zIndex, bounds, moveAxis, dragHandlerClassName,
             grid, onDoubleClick } = this.props;
+    const { x, y } = this.state;
     return (
       <Draggable
         axis={moveAxis}
         zIndex={zIndex}
-        start={{ x: start.x, y: start.y }}
+        start={{ x, y }}
         disabled={!this.state.isDraggable || this.props.moveAxis === 'none'}
         onStart={this.onDragStart}
         handle={dragHandlerClassName}
@@ -142,11 +145,14 @@ export default class ResizableAndMovable extends Component {
         onStop={this.onDragStop}
         bounds={bounds}
         grid={grid}
+        passCoordinate
+        x={x}
+        y={y}
       >
         <div
           style={{
-            width: `${start.width}px`,
-            height: `${start.height}px`,
+            width: `${width}px`,
+            height: `${height}px`,
             cursor: 'move',
             position: 'absolute',
             zIndex: `${zIndex}`,
@@ -160,8 +166,8 @@ export default class ResizableAndMovable extends Component {
             onResizeStart={this.onResizeStart}
             onResize={this.props.onResize}
             onResizeStop={this.onResizeStop}
-            width={start.width}
-            height={start.height}
+            width={width}
+            height={height}
             minWidth={minWidth}
             minHeight={minHeight}
             maxWidth={maxWidth}
