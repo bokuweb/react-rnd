@@ -264,7 +264,7 @@ Example: '.handle'.
 
 #### `zIndex`: PropTypes.number
 
-The `zIndex` property is used to set the zIndex of a component.
+The `zIndex` property is used to set the zindex of a component.
 
 
 ## Test

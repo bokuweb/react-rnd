@@ -8,7 +8,8 @@
     "test": "karma start",
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile",
-    "lint": "eslint react"
+    "lint": "eslint react",
+    "prepush": "npm run lint && npm t"
   },
   "repository": {
     "type": "git",

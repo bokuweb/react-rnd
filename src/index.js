@@ -68,6 +68,7 @@ export default class ResizableAndMovable extends Component {
     height: 100,
     zIndex: 100,
     className: '',
+    dragHandlerClassName: '',
     initAsResizing: { enable: false, direction: 'bottomRight' },
     isResizable: {
       top: true,
@@ -79,6 +80,7 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: true,
       topLeft: true,
     },
+    style: {},
     moveAxis: 'both',
     grid: null,
     onClick: () => {},

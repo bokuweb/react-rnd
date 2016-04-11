@@ -37,14 +37,31 @@ describe('react-resizable-and-mpvable', () => {
     const resizeAndMovable = TestUtils.renderIntoDocument(
       <ResizeAndMovable />
     );
+    assert.equal(resizeAndMovable.props.x, 0);
+    assert.equal(resizeAndMovable.props.y, 0);
     assert.equal(resizeAndMovable.props.width, 100);
     assert.equal(resizeAndMovable.props.height, 100);
     assert.equal(resizeAndMovable.props.minWidth, undefined);
     assert.equal(resizeAndMovable.props.minHeight, undefined);
     assert.equal(resizeAndMovable.props.maxWidth, undefined);
     assert.equal(resizeAndMovable.props.maxHeight, undefined);
+    assert.equal(resizeAndMovable.props.bounds, undefined);
     assert.equal(resizeAndMovable.props.zIndex, 100);
     assert.equal(resizeAndMovable.props.className, '');
+    assert.deepEqual(resizeAndMovable.props.style, {});
+    assert.equal(resizeAndMovable.props.dragHandlerClassName, '');
+    assert.deepEqual(resizeAndMovable.props.isResizable, {
+      top: true,
+      right: true,
+      bottom: true,
+      left: true,
+      topRight: true,
+      bottomRight: true,
+      bottomLeft: true,
+      topLeft: true,
+    });
+    assert.equal(resizeAndMovable.props.moveAxis, 'both');
+    assert.equal(resizeAndMovable.props.grid, null);
     assert.equal(typeof resizeAndMovable.props.onDragStart, 'function');
     assert.equal(typeof resizeAndMovable.props.onDrag, 'function');
     assert.equal(typeof resizeAndMovable.props.onDragStop, 'function');
@@ -64,6 +81,8 @@ describe('react-resizable-and-mpvable', () => {
     const resizeAndMovable = TestUtils.renderIntoDocument(
       <ResizeAndMovable
         style={{ background: '#333', textAlign: 'center' }}
+        x={10}
+        y={20}
         width={50}
         height={50}
         minWidth={100}
@@ -77,8 +96,21 @@ describe('react-resizable-and-mpvable', () => {
         onResizeStart={onResizeStart}
         onResize={onResize}
         onResizeStop={onResizeStop}
+        className="testClassName"
+        isResizable={{
+          top: false,
+          right: false,
+          bottom: false,
+          left: false,
+          topRight: false,
+          bottomRight: false,
+          bottomLeft: false,
+          topLeft: false,
+        }}
       />
     );
+    assert.equal(resizeAndMovable.props.x, 10);
+    assert.equal(resizeAndMovable.props.y, 20);
     assert.equal(resizeAndMovable.props.width, 50);
     assert.equal(resizeAndMovable.props.height, 50);
     assert.equal(resizeAndMovable.props.minWidth, 100);
@@ -89,6 +121,17 @@ describe('react-resizable-and-mpvable', () => {
     assert.equal(resizeAndMovable.props.onDragStart, onDragStart);
     assert.equal(resizeAndMovable.props.onDrag, onDrag);
     assert.equal(resizeAndMovable.props.onDragStop, onDragStop);
+    assert.equal(resizeAndMovable.props.className, 'testClassName');
+    assert.deepEqual(resizeAndMovable.props.isResizable, {
+      top: false,
+      right: false,
+      bottom: false,
+      left: false,
+      topRight: false,
+      bottomRight: false,
+      bottomLeft: false,
+      topLeft: false,
+    });
   });
 
 
