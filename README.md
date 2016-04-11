@@ -253,6 +253,7 @@ npm t
 
 - Support react v15.x
 - Support left, top resizer
+- Remove start props, use width, height, x, and y.
 
 #### v0.5.3
 
