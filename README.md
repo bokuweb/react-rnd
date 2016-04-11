@@ -279,6 +279,11 @@ npm t
 
 ## Changelog
 
+#### v1.0.0
+
+- Support react v15.x
+- Support left, top resizer
+
 #### v0.5.3
 
 - Add handle selector
