@@ -18,7 +18,7 @@ export default class ResizableAndMovable extends Component {
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,
     dragHandlerClassName: PropTypes.string,
-    resizerhandleStyle: PropTypes.shape({
+    resizerHandleStyle: PropTypes.shape({
       top: PropTypes.object,
       right: PropTypes.object,
       bottom: PropTypes.object,
@@ -208,6 +208,7 @@ export default class ResizableAndMovable extends Component {
             customStyle={style}
             customClass={className}
             isResizable={this.props.isResizable}
+            handleStyle={this.props.resizerHandleStyle}
           >
             {this.props.children}
           </Resizable>
