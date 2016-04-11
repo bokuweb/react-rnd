@@ -1,33 +1,149 @@
-import React, {Component, PropTypes} from 'react';
-import Draggable from '@bokuweb/react-draggable';
+import React, { Component, PropTypes } from 'react';
+import Draggable from '@bokuweb/react-draggable-custom';
 import Resizable from 'react-resizable-box';
-import assign from 'react/lib/Object.assign';
 
 export default class ResizableAndMovable extends Component {
+  static propTypes = {
+    initAsResizing: PropTypes.object,
+    onResizeStart: PropTypes.func,
+    onResize: PropTypes.func,
+    onResizeStop: PropTypes.func,
+    onDragStart: PropTypes.func,
+    onDrag: PropTypes.func,
+    onDragStop: PropTypes.func,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    children: PropTypes.any,
+    onTouchStart: PropTypes.func,
+    onClick: PropTypes.func,
+    onDoubleClick: PropTypes.func,
+    dragHandlerClassName: PropTypes.string,
+    resizerHandleStyle: PropTypes.shape({
+      top: PropTypes.object,
+      right: PropTypes.object,
+      bottom: PropTypes.object,
+      left: PropTypes.object,
+      topRight: PropTypes.object,
+      bottomRight: PropTypes.object,
+      bottomLeft: PropTypes.object,
+      topLeft: PropTypes.object,
+    }),
+    isResizable: PropTypes.shape({
+      top: PropTypes.bool,
+      right: PropTypes.bool,
+      bottom: PropTypes.bool,
+      left: PropTypes.bool,
+      topRight: PropTypes.bool,
+      bottomRight: PropTypes.bool,
+      bottomLeft: PropTypes.bool,
+      topLeft: PropTypes.bool,
+    }),
+    width: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    height: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    minWidth: PropTypes.number,
+    minHeight: PropTypes.number,
+    maxWidth: PropTypes.number,
+    maxHeight: PropTypes.number,
+    moveAxis: PropTypes.oneOf(['x', 'y', 'both', 'none']),
+    grid: PropTypes.arrayOf(PropTypes.number),
+    bounds: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    x: PropTypes.number,
+    y: PropTypes.number,
+    zIndex: PropTypes.number,
+  };
+
+  static defaultProps = {
+    x: 0,
+    y: 0,
+    width: 100,
+    height: 100,
+    zIndex: 100,
+    className: '',
+    dragHandlerClassName: '',
+    initAsResizing: { enable: false, direction: 'bottomRight' },
+    isResizable: {
+      top: true,
+      right: true,
+      bottom: true,
+      left: true,
+      topRight: true,
+      bottomRight: true,
+      bottomLeft: true,
+      topLeft: true,
+    },
+    style: {},
+    moveAxis: 'both',
+    grid: null,
+    onClick: () => {},
+    onTouchStart: () => {},
+    onDragStart: () => {},
+    onDrag: () => {},
+    onDragStop: () => {},
+    onResizeStart: () => {},
+    onResize: () => {},
+    onResizeStop: () => {},
+  }
+
   constructor(props) {
     super(props);
-    this.state = {isDraggable: true};
+    this.state = {
+      isDraggable: true,
+      x: props.x,
+      y: props.y,
+      original: { x: props.x, y: props.y },
+    };
     this.isResizing = false;
+    this.onDragStart = this.onDragStart.bind(this);
+    this.onDrag = this.onDrag.bind(this);
+    this.onDragStop = this.onDragStop.bind(this);
+    this.onResizeStart = this.onResizeStart.bind(this);
+    this.onResize = this.onResize.bind(this);
+    this.onResizeStop = this.onResizeStop.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { initAsResizing: { enable, direction, event } } = this.props;
-    if(enable) {
-      this.refs.resizable.onResizeStart(direction, event);
-    }
+    if (enable) this.refs.resizable.onResizeStart(direction, event);
   }
 
-  onResizeStart(dir, e) {
-    this.setState({isDraggable: false});
+  componentWillReceiveProps({ x, y }) {
+    if (x !== this.state.x) this.setState({ x });
+    if (y !== this.state.y) this.setState({ y });
+  }
+
+  onResizeStart(dir, styleSize, clientSize, e) {
+    this.setState({
+      isDraggable: false,
+      original: { x: this.state.x, y: this.state.y },
+    });
     this.isResizing = true;
-    this.props.onResizeStart(dir, e);
+    this.props.onResizeStart(dir, styleSize, clientSize, e);
     e.stopPropagation();
   }
 
-  onResizeStop(dir, styleSize, clientSize) {
-    this.setState({isDraggable: true});
+  onResize(dir, styleSize, clientSize, delta) {
+    if (/left/i.test(dir)) {
+      this.setState({ x: this.state.original.x - delta.width });
+    }
+    if (/top/i.test(dir)) {
+      this.setState({ y: this.state.original.y - delta.height });
+    }
+    this.props.onResize(dir, styleSize, clientSize, delta);
+  }
+
+  onResizeStop(dir, styleSize, clientSize, delta) {
+    this.setState({ isDraggable: true });
     this.isResizing = false;
-    this.props.onResizeStop(dir, styleSize, clientSize);
+    this.props.onResizeStop(dir, styleSize, clientSize, delta);
   }
 
   onDragStart(e, ui) {
@@ -37,6 +153,7 @@ export default class ResizableAndMovable extends Component {
 
   onDrag(e, ui) {
     if (this.isResizing) return;
+    this.setState({ x: ui.position.left, y: ui.position.top });
     this.props.onDrag(e, ui);
   }
 
@@ -46,52 +163,55 @@ export default class ResizableAndMovable extends Component {
   }
 
   render() {
-    const {customClass,
-           customStyle,
-           onClick,
-           onTouchStart,
-           minWidth,
-           minHeight,
-           maxWidth,
-           maxHeight,
-           start,
-           zIndex,
-           bounds} = this.props;
+    const { className, style, onClick, onTouchStart,
+            width, height, minWidth, minHeight, maxWidth, maxHeight,
+            zIndex, bounds, moveAxis, dragHandlerClassName,
+            grid, onDoubleClick } = this.props;
+    const { x, y } = this.state;
     return (
       <Draggable
-         axis={this.props.moveAxis}
-         zIndex={zIndex}
-         start={{x:start.x, y:start.y}}
-         disabled={!this.state.isDraggable || this.props.moveAxis==='none'}
-         onStart={this.onDragStart.bind(this)}
-         handle={this.props.handle}
-         onDrag={this.onDrag.bind(this)}
-         onStop={this.onDragStop.bind(this)}
-         bounds={bounds}
-         grid={this.props.grid} >
-        <div style={{
-               width:`${start.width}px`,
-               height:`${start.height}px`,
-               cursor: "move",
-               position:'absolute',
-               zIndex: `${zIndex}`
-             }}>
+        axis={moveAxis}
+        zIndex={zIndex}
+        start={{ x, y }}
+        disabled={!this.state.isDraggable || this.props.moveAxis === 'none'}
+        onStart={this.onDragStart}
+        handle={dragHandlerClassName}
+        onDrag={this.onDrag}
+        onStop={this.onDragStop}
+        bounds={bounds}
+        grid={grid}
+        passCoordinate
+        x={x}
+        y={y}
+      >
+        <div
+          style={{
+            width,
+            height,
+            cursor: 'move',
+            position: 'absolute',
+            zIndex,
+          }}
+        >
           <Resizable
-             ref='resizable'
-             onClick={onClick}
-             onTouchStart={onTouchStart}
-             onResizeStart={this.onResizeStart.bind(this)}
-             onResize={this.props.onResize}
-             onResizeStop={this.onResizeStop.bind(this)}
-             width={start.width}
-             height={start.height}
-             minWidth={minWidth}
-             minHeight={minHeight}
-             maxWidth={maxWidth}
-             maxHeight={maxHeight}
-             customStyle={customStyle}
-             customClass={customClass}
-             isResizable={this.props.isResizable}>
+            ref="resizable"
+            onClick={onClick}
+            onDoubleClick={onDoubleClick}
+            onTouchStart={onTouchStart}
+            onResizeStart={this.onResizeStart}
+            onResize={this.onResize}
+            onResizeStop={this.onResizeStop}
+            width="100%"
+            height="100%"
+            minWidth={minWidth}
+            minHeight={minHeight}
+            maxWidth={maxWidth}
+            maxHeight={maxHeight}
+            customStyle={style}
+            customClass={className}
+            isResizable={this.props.isResizable}
+            handleStyle={this.props.resizerHandleStyle}
+          >
             {this.props.children}
           </Resizable>
         </div>
@@ -99,37 +219,3 @@ export default class ResizableAndMovable extends Component {
     );
   }
 }
-
-ResizableAndMovable.propTypes = {
-  onClick: PropTypes.func,
-  onTouchStart: PropTypes.func,
-  zIndex: PropTypes.number,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  isResizable: PropTypes.object,
-  bounds: PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object
-  ]),
-  grid: PropTypes.arrayOf(PropTypes.number)
-};
-
-ResizableAndMovable.defaultProps = {
-  width: 100,
-  height: 100,
-  start: {x:0, y:0},
-  zIndex: 100,
-  customClass: '',
-  initAsResizing: {enable: false, direction: 'xy'},
-  isResizable: {x:true, y:true, xy: true},
-  moveAxis:'both',
-  grid: null,
-  onClick: () => {},
-  onTouchStartP: () => {},
-  onDragStart: () => {},
-  onDrag: () => {},
-  onDragStop: () => {},
-  onResizeStart: () => {},
-  onResize: () => {},
-  onResizeStop: () => {}
-};
