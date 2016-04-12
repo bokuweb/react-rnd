@@ -116,8 +116,8 @@ export default class ResizableAndMovable extends Component {
   }
 
   componentWillReceiveProps({ x, y }) {
-    if (x !== this.state.x) this.setState({ x });
-    if (y !== this.state.y) this.setState({ y });
+    if (x !== this.props.x) this.setState({ x });
+    if (y !== this.props.y) this.setState({ y });
   }
 
   onResizeStart(dir, styleSize, clientSize, e) {
