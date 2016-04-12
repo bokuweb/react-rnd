@@ -1,6 +1,6 @@
 {
   "name": "react-resizable-and-movable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Resizable and movable component for React.",
   "main": "lib/index.js",
   "scripts": {
