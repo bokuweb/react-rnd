@@ -249,6 +249,10 @@ npm t
 
 ## Changelog
 
+#### v1.1.0
+
+- Add add module exports plugin for `require`
+
 #### v1.0.1
 
 - Bug fix
