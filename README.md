@@ -132,7 +132,7 @@ Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`,
 - direction: `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, and `topLeft`.
 - styleSize: `{ width, height }`
   - this argument is {width, height} of getComputedStyle.
-- clientSize: `{ width`, height }`
+- clientSize: `{ width, height }`
   - this argument is `clientWidth` and `clientHeight`.
 - event: `mouse down event`
 
@@ -146,9 +146,9 @@ Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`,
 - direction: `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, and `topLeft`.
 - styleSize: `{ width, height }`
   - this argument is {width, height} of getComputedStyle.
-- clientSize: `{ width`, height }`
+- clientSize: `{ width, height }`
   - this argument is `clientWidth` and `clientHeight`.
-- delta: `{ width`, height }`
+- delta: `{ width, height }`
   - this delta width and height by resize. 
   
 For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'right' 20px, this callback is called with `('right', { width: 120, height: 200 }, { width: 160, height: 240 }, {width: 20, height: 0})`
@@ -162,9 +162,9 @@ Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`,
 - direction: `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, and `topLeft`.
 - styleSize: `{ width, height }`
   - this argument is {width, height} of getComputedStyle.
-- clientSize: `{ width`, height }`
+- clientSize: `{ width, height }`
   - this argument is `clientWidth` and `clientHeight`.
-- delta: `{ width`, height }`
+- delta: `{ width, height }`
   - this delta width and height by resize. 
   
 For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'right' 20px, this callback is called with `('right', { width: 120, height: 200 }, { width: 160, height: 240 }, {width: 20, height: 0})`
