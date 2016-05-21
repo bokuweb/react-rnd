@@ -88,10 +88,7 @@ var Example = function (_Component) {
 }(_react.Component);
 
 exports.default = Example;
-<<<<<<< HEAD
 module.exports = exports['default'];
-=======
->>>>>>> 022460d2f38e6bce8768493a81f3d62d36820130
 
 },{"../../src":171,"react":170}],2:[function(require,module,exports){
 'use strict';
@@ -1598,11 +1595,8 @@ module.exports = require('react/lib/ReactDOM');
 },{"react/lib/ReactDOM":41}],6:[function(require,module,exports){
 'use strict';
 
-<<<<<<< HEAD
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-=======
->>>>>>> 022460d2f38e6bce8768493a81f3d62d36820130
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 Object.defineProperty(exports, "__esModule", {
@@ -1875,11 +1869,7 @@ var Risizable = function (_Component) {
 
       return _react2.default.createElement('div', {
         ref: 'resizable',
-<<<<<<< HEAD
         style: _extends({ position: 'relative' }, customStyle, style),
-=======
-        style: Object.assign({ position: 'relative' }, customStyle, style),
->>>>>>> 022460d2f38e6bce8768493a81f3d62d36820130
         className: customClass,
         onClick: onClick,
         onMouseDown: onMouseDown,
@@ -1948,10 +1938,7 @@ Risizable.defaultProps = {
   handleStyle: {}
 };
 exports.default = Risizable;
-<<<<<<< HEAD
 module.exports = exports['default'];
-=======
->>>>>>> 022460d2f38e6bce8768493a81f3d62d36820130
 
 },{"./resizer":7,"react":170}],7:[function(require,module,exports){
 'use strict';
@@ -2115,10 +2102,7 @@ Resizer.propTypes = {
   replaceStyles: _react.PropTypes.object
 };
 exports.default = Resizer;
-<<<<<<< HEAD
 module.exports = exports['default'];
-=======
->>>>>>> 022460d2f38e6bce8768493a81f3d62d36820130
 
 },{"react":170}],8:[function(require,module,exports){
 /**
@@ -21454,13 +21438,8 @@ var ResizableAndMovable = function (_Component) {
       var x = _ref.x;
       var y = _ref.y;
 
-<<<<<<< HEAD
       if (x !== this.props.x) this.setState({ x: x });
       if (y !== this.props.y) this.setState({ y: y });
-=======
-      if (x !== this.state.x) this.setState({ x: x });
-      if (y !== this.state.y) this.setState({ y: y });
->>>>>>> 022460d2f38e6bce8768493a81f3d62d36820130
     }
   }, {
     key: 'onResizeStart',
@@ -21673,9 +21652,6 @@ ResizableAndMovable.defaultProps = {
   onResizeStop: function onResizeStop() {}
 };
 exports.default = ResizableAndMovable;
-<<<<<<< HEAD
 module.exports = exports['default'];
-=======
->>>>>>> 022460d2f38e6bce8768493a81f3d62d36820130
 
 },{"@bokuweb/react-draggable-custom":3,"react":170,"react-resizable-box":6}]},{},[2]);
