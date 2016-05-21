@@ -249,6 +249,10 @@ npm t
 
 ## Changelog
 
+#### v1.1.2
+
+- Add object.assign transform
+
 #### v1.1.0
 
 - Add add module exports plugin for `require`
