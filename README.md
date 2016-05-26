@@ -52,12 +52,13 @@ For example, you can set `300`, `'300px'`, `50%`.
 If ommited, set `'auto'`.    
 
 
-#### `isUndoable`: PropTypes.bool
+#### `canUpdateSizeByParent`: PropTypes.bool
 
 
-The `isUndoable` property is used for resizing the resizable component   
+The `canUpdateSizeByParent` property is used for resizing the resizable component   
 via props, for instance this is usable in app that supports Undo and Redo     
-If ommited, set to  `false`.   
+If ommited, set to  `false`.    
+
 
 #### `minWidth`: PropTypes.number
 

@@ -38,7 +38,7 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: PropTypes.bool,
       topLeft: PropTypes.bool,
     }),
-    isUndoable: PropTypes.bool,
+    canUpdateSizeByParent: PropTypes.bool,
     width: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
@@ -81,7 +81,7 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: true,
       topLeft: true,
     },
-    isUndoable: false,
+    canUpdateSizeByParent: false,
     style: {},
     moveAxis: 'both',
     grid: null,
@@ -168,7 +168,7 @@ export default class ResizableAndMovable extends Component {
     const { className, style, onClick, onTouchStart,
             width, height, minWidth, minHeight, maxWidth, maxHeight,
             zIndex, bounds, moveAxis, dragHandlerClassName,
-            grid, onDoubleClick, isUndoable } = this.props;
+            grid, onDoubleClick, canUpdateSizeByParent } = this.props;
     const { x, y } = this.state;
     return (
       <Draggable
@@ -203,8 +203,8 @@ export default class ResizableAndMovable extends Component {
             onResizeStart={this.onResizeStart}
             onResize={this.onResize}
             onResizeStop={this.onResizeStop}
-            width={isUndoable ? width : '100%'}
-            height={isUndoable ? height : '100%'}
+            width={canUpdateSizeByParent ? width : '100%'}
+            height={canUpdateSizeByParent ? height : '100%'}
             minWidth={minWidth}
             minHeight={minHeight}
             maxWidth={maxWidth}
