@@ -51,6 +51,15 @@ The `height` property is used to set the width of a component.
 For example, you can set `300`, `'300px'`, `50%`.    
 If ommited, set `'auto'`.    
 
+
+#### `canUpdateSizeByParent`: PropTypes.bool
+
+
+The `canUpdateSizeByParent` property is used for resizing the resizable component   
+via props, for instance this is usable in app that supports Undo and Redo     
+If ommited, set to  `false`.    
+
+
 #### `minWidth`: PropTypes.number
 
 
