@@ -252,11 +252,12 @@ The `zIndex` property is used to set the zindex of a component.
 npm t
 ```
 
-## TODO
-
-- [x] support react v15.x
-
 ## Changelog
+
+#### v1.1.3
+
+- Fix situations when on dragStop you wanted to revert to 0,0 position #39
+- Add `canUpdateSizeByParent` props #38
 
 #### v1.1.2
 
