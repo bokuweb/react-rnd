@@ -207,7 +207,7 @@ Callback called on resizing.
 )
 ```
 
-#### `onDrageStop`: PropTypes.func
+#### `onDragStop`: PropTypes.func
 
 Callback called on dragging stop.
 `onDragStop` called with the following parameters:
