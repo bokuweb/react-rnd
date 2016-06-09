@@ -183,11 +183,11 @@ For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}
 
 The direction of allowed movement (dragging) allowed ('x','y','both','none').
 
-#### `onDrageStart`: PropTypes.func
+#### `onDragStart`: PropTypes.func
 
 Callback called on dragging start.   
 
-#### `onDrage`: PropTypes.func
+#### `onDrag`: PropTypes.func
 
 Callback called on resizing.   
 `onDrag` called with the following parameters:
