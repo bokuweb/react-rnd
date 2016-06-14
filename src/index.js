@@ -155,7 +155,13 @@ export default class ResizableAndMovable extends Component {
 
   onDrag(e, ui) {
     if (this.isResizing) return;
-    this.setState({ x: ui.position.left, y: ui.position.top });
+    const allowX = this.props.moveAxis === 'x';
+    const allowY = this.props.moveAxis === 'y';
+    const allowBoth = this.props.moveAxis === 'both';
+    this.setState({
+      x: allowX || allowBoth ? ui.position.left : this.state.x,
+      y: allowY || allowBoth ? ui.position.top : this.state.y,
+    });
     this.props.onDrag(e, ui);
   }
 
