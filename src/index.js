@@ -52,7 +52,8 @@ export default class ResizableAndMovable extends Component {
     maxWidth: PropTypes.number,
     maxHeight: PropTypes.number,
     moveAxis: PropTypes.oneOf(['x', 'y', 'both', 'none']),
-    grid: PropTypes.arrayOf(PropTypes.number),
+    moveGrid: PropTypes.arrayOf(PropTypes.number),
+    resizeGrid: PropTypes.arrayOf(PropTypes.number),
     bounds: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,
@@ -84,7 +85,7 @@ export default class ResizableAndMovable extends Component {
     canUpdateSizeByParent: false,
     style: {},
     moveAxis: 'both',
-    grid: null,
+    moveGrid: [1, 1],
     onClick: () => {},
     onTouchStart: () => {},
     onDragStart: () => {},
@@ -93,6 +94,7 @@ export default class ResizableAndMovable extends Component {
     onResizeStart: () => {},
     onResize: () => {},
     onResizeStop: () => {},
+    resizeGrid: [1, 1],
   }
 
   constructor(props) {
@@ -174,7 +176,7 @@ export default class ResizableAndMovable extends Component {
     const { className, style, onClick, onTouchStart,
             width, height, minWidth, minHeight, maxWidth, maxHeight,
             zIndex, bounds, moveAxis, dragHandlerClassName,
-            grid, onDoubleClick, canUpdateSizeByParent } = this.props;
+            moveGrid, resizeGrid, onDoubleClick, canUpdateSizeByParent } = this.props;
     const { x, y } = this.state;
     return (
       <Draggable
@@ -187,7 +189,7 @@ export default class ResizableAndMovable extends Component {
         onDrag={this.onDrag}
         onStop={this.onDragStop}
         bounds={bounds}
-        grid={grid}
+        grid={moveGrid}
         passCoordinate
         x={x}
         y={y}
@@ -219,7 +221,7 @@ export default class ResizableAndMovable extends Component {
             customClass={className}
             isResizable={this.props.isResizable}
             handleStyle={this.props.resizerHandleStyle}
-            grid={grid}
+            grid={resizeGrid}
           >
             {this.props.children}
           </Resizable>

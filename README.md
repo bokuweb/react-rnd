@@ -245,9 +245,13 @@ Example: '.handle'.
 
 The `zIndex` property is used to set the zindex of a component.
 
-#### `grid`: PropTypes.arrayOf(PropTypes.number)
+#### `resizeGrid`: PropTypes.arrayOf(PropTypes.number)
 
-The `grid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
+The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
+
+#### `moveGrid`: PropTypes.arrayOf(PropTypes.number)
+
+The `moveGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
 
 ## Test
 
@@ -256,6 +260,10 @@ npm t
 ```
 
 ## Changelog
+
+#### v2.0.0
+
+- Fix bug, resize and grid not work properly.
 
 #### v1.2.0
 

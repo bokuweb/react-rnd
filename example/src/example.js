@@ -27,6 +27,8 @@ export default class Example extends Component {
         maxWidth={800}
         maxHeight={300}
         bounds={'parent'}
+        moveGrid={[20, 20]}
+        resizeGrid={[20, 20]}
       >
         <p>react-resizable-and-movable Example</p>
         <p>start 200px x 200px</p>

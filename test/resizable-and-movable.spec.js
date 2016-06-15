@@ -61,7 +61,8 @@ describe('react-resizable-and-mpvable', () => {
       topLeft: true,
     });
     assert.equal(resizeAndMovable.props.moveAxis, 'both');
-    assert.equal(resizeAndMovable.props.grid, null);
+    assert.deepEqual(resizeAndMovable.props.moveGrid, [1, 1]);
+    assert.deepEqual(resizeAndMovable.props.resizeGrid, [1, 1]);
     assert.equal(typeof resizeAndMovable.props.onDragStart, 'function');
     assert.equal(typeof resizeAndMovable.props.onDrag, 'function');
     assert.equal(typeof resizeAndMovable.props.onDragStop, 'function');
