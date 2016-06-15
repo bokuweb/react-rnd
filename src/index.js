@@ -213,6 +213,7 @@ export default class ResizableAndMovable extends Component {
             customClass={className}
             isResizable={this.props.isResizable}
             handleStyle={this.props.resizerHandleStyle}
+            grid={grid}
           >
             {this.props.children}
           </Resizable>
