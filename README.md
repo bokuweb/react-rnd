@@ -36,6 +36,20 @@ npm i react-resizable-and-movable
 
 ## Properties
 
+#### `x`: PropTypes.number
+
+
+The `x` property is used to set the position X of the component.   
+If ommited, set `0`.    
+If `canUpdatePositionByParent` set true, you can update component position by this property.
+
+#### `y`: PropTypes.number
+
+
+The `y` property is used to set the position Y of the component.   
+If ommited, set `0`.    
+If `canUpdatePositionByParent` set true, you can update component position by this property.
+
 #### `width`: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 
 
@@ -57,6 +71,12 @@ If ommited, set `'auto'`.
 
 The `canUpdateSizeByParent` property is used for resizing the resizable component   
 via props, for instance this is usable in app that supports Undo and Redo     
+If ommited, set to  `false`.    
+
+#### `canUpdatePositionByParent`: PropTypes.bool
+
+
+The `canUpdatepositionByParent` property is used to update the component position   
 If ommited, set to  `false`.    
 
 
@@ -260,6 +280,10 @@ npm t
 ```
 
 ## Changelog
+
+#### v3.0.0
+
+- Add `canUpdatePositionByParent` property.
 
 #### v2.0.0
 

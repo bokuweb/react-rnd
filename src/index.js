@@ -39,6 +39,7 @@ export default class ResizableAndMovable extends Component {
       topLeft: PropTypes.bool,
     }),
     canUpdateSizeByParent: PropTypes.bool,
+    canUpdatePositionByParent: PropTypes.bool,
     width: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
@@ -82,6 +83,7 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: true,
       topLeft: true,
     },
+    canUpdatePositionByParent: false,
     canUpdateSizeByParent: false,
     style: {},
     moveAxis: 'both',
@@ -120,8 +122,9 @@ export default class ResizableAndMovable extends Component {
   }
 
   componentWillReceiveProps({ x, y }) {
-    if (x !== this.state.x) this.setState({ x });
-    if (y !== this.state.y) this.setState({ y });
+    const { canUpdatePositionByParent } = this.props;
+    if (canUpdatePositionByParent && x !== this.state.x) this.setState({ x });
+    if (canUpdatePositionByParent && y !== this.state.y) this.setState({ y });
   }
 
   onResizeStart(dir, styleSize, clientSize, e) {
