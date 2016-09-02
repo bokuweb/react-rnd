@@ -85,7 +85,7 @@ export default class ResizableAndMovable extends Component {
       topLeft: true,
     },
     canUpdatePositionByParent: false,
-    canUpdateSizeByParent: false,
+    // canUpdateSizeByParent: false,
     style: {},
     moveAxis: 'both',
     moveGrid: [1, 1],
@@ -105,6 +105,7 @@ export default class ResizableAndMovable extends Component {
     super(props);
     this.state = {
       isDraggable: true,
+      isMounted: false,
       x: props.x,
       y: props.y,
       original: { x: props.x, y: props.y },
@@ -124,9 +125,9 @@ export default class ResizableAndMovable extends Component {
   }
 
   componentWillReceiveProps({ x, y }) {
-    const { canUpdatePositionByParent } = this.props;
-    if (canUpdatePositionByParent && x !== this.state.x) this.setState({ x });
-    if (canUpdatePositionByParent && y !== this.state.y) this.setState({ y });
+    // const { canUpdatePositionByParent } = this.props;
+    // if (canUpdatePositionByParent && x !== this.state.x) this.setState({ x });
+    // if (canUpdatePositionByParent && y !== this.state.y) this.setState({ y });
   }
 
   onResizeStart(dir, styleSize, clientSize, e) {
@@ -181,7 +182,7 @@ export default class ResizableAndMovable extends Component {
     const { className, style, onClick, onTouchStart,
             width, height, minWidth, minHeight, maxWidth, maxHeight,
             zIndex, bounds, moveAxis, dragHandlerClassName, lockAspectRatio,
-            moveGrid, resizeGrid, onDoubleClick, canUpdateSizeByParent } = this.props;
+            moveGrid, resizeGrid, onDoubleClick } = this.props;
     const { x, y } = this.state;
     return (
       <Draggable
@@ -201,8 +202,8 @@ export default class ResizableAndMovable extends Component {
       >
         <div
           style={{
-            width,
-            height,
+            width: 'auto',
+            height: 'auto',
             cursor: 'move',
             position: 'absolute',
             zIndex,
@@ -216,13 +217,13 @@ export default class ResizableAndMovable extends Component {
             onResizeStart={this.onResizeStart}
             onResize={this.onResize}
             onResizeStop={this.onResizeStop}
-            width={canUpdateSizeByParent ? width : '100%'}
-            height={canUpdateSizeByParent ? height : '100%'}
+            width={width}
+            height={height}
             minWidth={minWidth}
             minHeight={minHeight}
             maxWidth={maxWidth}
             maxHeight={maxHeight}
-            customStyle={style}
+            customStyle={{ ...style, boxSizing: 'border-box' }}
             customClass={className}
             isResizable={this.props.isResizable}
             handleStyle={this.props.resizerHandleStyle}
