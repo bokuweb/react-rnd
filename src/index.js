@@ -173,7 +173,7 @@ export default class ResizableAndMovable extends Component {
   }
 
   updateSize(size) {
-    this.resizable.uploadSize(size);
+    this.resizable.updateSize(size);
   }
 
   updatePosition({ x, y }) {
