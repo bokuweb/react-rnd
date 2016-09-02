@@ -62,6 +62,7 @@ export default class ResizableAndMovable extends Component {
     x: PropTypes.number,
     y: PropTypes.number,
     zIndex: PropTypes.number,
+    lockAspectRatio: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -97,6 +98,7 @@ export default class ResizableAndMovable extends Component {
     onResize: () => {},
     onResizeStop: () => {},
     resizeGrid: [1, 1],
+    lockAspectRatio: false,
   }
 
   constructor(props) {
@@ -178,7 +180,7 @@ export default class ResizableAndMovable extends Component {
   render() {
     const { className, style, onClick, onTouchStart,
             width, height, minWidth, minHeight, maxWidth, maxHeight,
-            zIndex, bounds, moveAxis, dragHandlerClassName,
+            zIndex, bounds, moveAxis, dragHandlerClassName, lockAspectRatio,
             moveGrid, resizeGrid, onDoubleClick, canUpdateSizeByParent } = this.props;
     const { x, y } = this.state;
     return (
@@ -225,6 +227,7 @@ export default class ResizableAndMovable extends Component {
             isResizable={this.props.isResizable}
             handleStyle={this.props.resizerHandleStyle}
             grid={resizeGrid}
+            lockAspectRatio={lockAspectRatio}
           >
             {this.props.children}
           </Resizable>
