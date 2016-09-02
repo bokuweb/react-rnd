@@ -1,6 +1,6 @@
 {
   "name": "react-rnd",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Resizable and draggable component for React.",
   "main": "lib/index.js",
   "scripts": {
