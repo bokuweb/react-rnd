@@ -4,7 +4,7 @@ import Resizable from 'react-resizable-box';
 
 export default class ResizableAndMovable extends Component {
   static propTypes = {
-    initAsResizing: PropTypes.object,
+    // initAsResizing: PropTypes.object,
     onResizeStart: PropTypes.func,
     onResize: PropTypes.func,
     onResizeStop: PropTypes.func,
@@ -38,8 +38,8 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: PropTypes.bool,
       topLeft: PropTypes.bool,
     }),
-    canUpdateSizeByParent: PropTypes.bool,
-    canUpdatePositionByParent: PropTypes.bool,
+    // canUpdateSizeByParent: PropTypes.bool,
+    // canUpdatePositionByParent: PropTypes.bool,
     width: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
@@ -73,7 +73,7 @@ export default class ResizableAndMovable extends Component {
     zIndex: 100,
     className: '',
     dragHandlerClassName: '',
-    initAsResizing: { enable: false, direction: 'bottomRight' },
+    // initAsResizing: { enable: false, direction: 'bottomRight' },
     isResizable: {
       top: true,
       right: true,
@@ -84,7 +84,7 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: true,
       topLeft: true,
     },
-    canUpdatePositionByParent: false,
+    // canUpdatePositionByParent: false,
     // canUpdateSizeByParent: false,
     style: {},
     moveAxis: 'both',
@@ -120,8 +120,8 @@ export default class ResizableAndMovable extends Component {
   }
 
   componentDidMount() {
-    const { initAsResizing: { enable, direction, event } } = this.props;
-    if (enable) this.refs.resizable.onResizeStart(direction, event);
+    // const { initAsResizing: { enable, direction, event } } = this.props;
+    // if (enable) this.refs.resizable.onResizeStart(direction, event);
   }
 
   componentWillReceiveProps({ x, y }) {
