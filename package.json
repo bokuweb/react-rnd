@@ -1,7 +1,7 @@
 {
-  "name": "react-resizable-and-movable",
+  "name": "react-rnd",
   "version": "3.0.0",
-  "description": "Resizable and movable component for React.",
+  "description": "Resizable and draggable component for React.",
   "main": "lib/index.js",
   "scripts": {
     "watch": "watchify --extension=js -o docs/dist/bundle.js docs/src/index.js",
@@ -21,6 +21,7 @@
     "resizable",
     "movable",
     "draggable",
+    "window",
     "component"
   ],
   "author": "bokuweb",
