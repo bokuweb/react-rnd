@@ -44,14 +44,18 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: PropTypes.bool,
       topLeft: PropTypes.bool,
     }),
-    width: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-    height: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
+    initial: PropTypes.shape({
+      width: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      height: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
     minWidth: PropTypes.number,
     minHeight: PropTypes.number,
     maxWidth: PropTypes.number,
@@ -63,17 +67,17 @@ export default class ResizableAndMovable extends Component {
       PropTypes.string,
       PropTypes.object,
     ]),
-    x: PropTypes.number,
-    y: PropTypes.number,
     zIndex: PropTypes.number,
     lockAspectRatio: PropTypes.bool,
   };
 
   static defaultProps = {
-    x: 0,
-    y: 0,
-    width: 100,
-    height: 100,
+    initial: {
+      x: 0,
+      y: 0,
+      width: 100,
+      height: 100,
+    },
     zIndex: 100,
     className: '',
     dragHandlerClassName: '',
@@ -107,9 +111,9 @@ export default class ResizableAndMovable extends Component {
     this.state = {
       isDraggable: true,
       isMounted: false,
-      x: props.x,
-      y: props.y,
-      original: { x: props.x, y: props.y },
+      x: props.initial.x,
+      y: props.initial.y,
+      original: { x: props.initial.x, y: props.initial.y },
     };
     this.isResizing = false;
     this.onDragStart = this.onDragStart.bind(this);
@@ -178,7 +182,7 @@ export default class ResizableAndMovable extends Component {
 
   render() {
     const { className, style, onClick, onTouchStart,
-            width, height, minWidth, minHeight, maxWidth, maxHeight,
+            initial, minWidth, minHeight, maxWidth, maxHeight,
             zIndex, bounds, moveAxis, dragHandlerClassName, lockAspectRatio,
             moveGrid, resizeGrid, onDoubleClick } = this.props;
     const { x, y } = this.state;
@@ -186,7 +190,7 @@ export default class ResizableAndMovable extends Component {
       <Draggable
         axis={moveAxis}
         zIndex={zIndex}
-        start={{ x, y }}
+        start={{ x: initial.x, y: initial.y }}
         disabled={!this.state.isDraggable || this.props.moveAxis === 'none'}
         onStart={this.onDragStart}
         handle={dragHandlerClassName}
@@ -207,8 +211,8 @@ export default class ResizableAndMovable extends Component {
             onResizeStart={this.onResizeStart}
             onResize={this.onResize}
             onResizeStop={this.onResizeStop}
-            width={width}
-            height={height}
+            width={initial.width}
+            height={initial.height}
             minWidth={minWidth}
             minHeight={minHeight}
             maxWidth={maxWidth}
