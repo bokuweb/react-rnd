@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>React-resizable-and-movable example</title>
+  <title>react-rnd example</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
    html, body, #content{
@@ -10,9 +11,21 @@
        height: 100%;
    }
    body {
-       background: url('bg-1.jpg');
-       background-size:cover;
-       background-repeat: no-repeat;
+        width:100%;
+        height:100%;
+        min-height: 100%;
+        margin:0;
+        padding:0;
+        background: url('bg.png') rgba(0,0,0,0.3);
+        background-size: cover;
+        overflow: hidden;
+   }
+   span.box{
+       text-align: center;
+       display: inline-block;
+       width: 100%;
+       font-family: 'Pacifico', cursive;
+       font-size: 32px;
    }
   </style>
 </head>

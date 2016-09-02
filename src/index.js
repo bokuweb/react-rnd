@@ -9,7 +9,7 @@ const boxStyle = {
   position: 'absolute',
 };
 
-export default class ResizableAndMovable extends Component {
+export default class ReactRnd extends Component {
   static propTypes = {
     onResizeStart: PropTypes.func,
     onResize: PropTypes.func,

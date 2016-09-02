@@ -4,7 +4,7 @@
   "description": "Resizable and movable component for React.",
   "main": "lib/index.js",
   "scripts": {
-    "watch": "watchify --extension=js -o example/dist/bundle.js example/src/index.js",
+    "watch": "watchify --extension=js -o docs/dist/bundle.js docs/src/index.js",
     "test": "karma start",
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile",
