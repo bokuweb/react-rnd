@@ -209,7 +209,7 @@ export default class ResizableAndMovable extends Component {
       >
         <div style={Object.assign(boxStyle, { zIndex })}>
           <Resizable
-            ref="resizable"
+            ref={c => { this.Resizable = c; }}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             onTouchStart={onTouchStart}
@@ -222,7 +222,7 @@ export default class ResizableAndMovable extends Component {
             minHeight={minHeight}
             maxWidth={maxWidth}
             maxHeight={maxHeight}
-            customStyle={{ ...style, boxSizing: 'border-box' }}
+            customStyle={Object.assign(style, { boxSizing: 'border-box' })}
             customClass={className}
             isResizable={this.props.isResizable}
             handleStyle={this.props.resizerHandleStyle}
