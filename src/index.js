@@ -11,7 +11,6 @@ const boxStyle = {
 
 export default class ResizableAndMovable extends Component {
   static propTypes = {
-    // initAsResizing: PropTypes.object,
     onResizeStart: PropTypes.func,
     onResize: PropTypes.func,
     onResizeStop: PropTypes.func,
@@ -45,8 +44,6 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: PropTypes.bool,
       topLeft: PropTypes.bool,
     }),
-    // canUpdateSizeByParent: PropTypes.bool,
-    // canUpdatePositionByParent: PropTypes.bool,
     width: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
@@ -80,7 +77,6 @@ export default class ResizableAndMovable extends Component {
     zIndex: 100,
     className: '',
     dragHandlerClassName: '',
-    // initAsResizing: { enable: false, direction: 'bottomRight' },
     isResizable: {
       top: true,
       right: true,
@@ -91,8 +87,6 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: true,
       topLeft: true,
     },
-    // canUpdatePositionByParent: false,
-    // canUpdateSizeByParent: false,
     style: {},
     moveAxis: 'both',
     moveGrid: [1, 1],
@@ -124,17 +118,6 @@ export default class ResizableAndMovable extends Component {
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
-  }
-
-  componentDidMount() {
-    // const { initAsResizing: { enable, direction, event } } = this.props;
-    // if (enable) this.refs.resizable.onResizeStart(direction, event);
-  }
-
-  componentWillReceiveProps({ x, y }) {
-    // const { canUpdatePositionByParent } = this.props;
-    // if (canUpdatePositionByParent && x !== this.state.x) this.setState({ x });
-    // if (canUpdatePositionByParent && y !== this.state.y) this.setState({ y });
   }
 
   onResizeStart(dir, styleSize, clientSize, e) {
@@ -185,6 +168,14 @@ export default class ResizableAndMovable extends Component {
     this.props.onDragStop(e, ui);
   }
 
+  updateSize(size) {
+    this.resizable.uploadSize(size);
+  }
+
+  updatePosition({ x, y }) {
+    this.setState({ x, y });
+  }
+
   render() {
     const { className, style, onClick, onTouchStart,
             width, height, minWidth, minHeight, maxWidth, maxHeight,
@@ -209,7 +200,7 @@ export default class ResizableAndMovable extends Component {
       >
         <div style={Object.assign(boxStyle, { zIndex })}>
           <Resizable
-            ref={c => { this.Resizable = c; }}
+            ref={c => { this.resizable = c; }}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             onTouchStart={onTouchStart}
