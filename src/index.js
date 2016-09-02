@@ -2,9 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import Draggable from '@bokuweb/react-draggable-custom';
 import Resizable from 'react-resizable-box';
 
-export default class ResizableAndMovable extends Component {
+const boxStyle = {
+  width: 'auto',
+  height: 'auto',
+  cursor: 'move',
+  position: 'absolute',
+};
+
+export default class ReactRnd extends Component {
   static propTypes = {
-    initAsResizing: PropTypes.object,
     onResizeStart: PropTypes.func,
     onResize: PropTypes.func,
     onResizeStop: PropTypes.func,
@@ -38,16 +44,18 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: PropTypes.bool,
       topLeft: PropTypes.bool,
     }),
-    canUpdateSizeByParent: PropTypes.bool,
-    canUpdatePositionByParent: PropTypes.bool,
-    width: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-    height: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
+    initial: PropTypes.shape({
+      width: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      height: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
     minWidth: PropTypes.number,
     minHeight: PropTypes.number,
     maxWidth: PropTypes.number,
@@ -59,20 +67,20 @@ export default class ResizableAndMovable extends Component {
       PropTypes.string,
       PropTypes.object,
     ]),
-    x: PropTypes.number,
-    y: PropTypes.number,
     zIndex: PropTypes.number,
+    lockAspectRatio: PropTypes.bool,
   };
 
   static defaultProps = {
-    x: 0,
-    y: 0,
-    width: 100,
-    height: 100,
+    initial: {
+      x: 0,
+      y: 0,
+      width: 100,
+      height: 100,
+    },
     zIndex: 100,
     className: '',
     dragHandlerClassName: '',
-    initAsResizing: { enable: false, direction: 'bottomRight' },
     isResizable: {
       top: true,
       right: true,
@@ -83,8 +91,6 @@ export default class ResizableAndMovable extends Component {
       bottomLeft: true,
       topLeft: true,
     },
-    canUpdatePositionByParent: false,
-    canUpdateSizeByParent: false,
     style: {},
     moveAxis: 'both',
     moveGrid: [1, 1],
@@ -97,15 +103,17 @@ export default class ResizableAndMovable extends Component {
     onResize: () => {},
     onResizeStop: () => {},
     resizeGrid: [1, 1],
+    lockAspectRatio: false,
   }
 
   constructor(props) {
     super(props);
     this.state = {
       isDraggable: true,
-      x: props.x,
-      y: props.y,
-      original: { x: props.x, y: props.y },
+      isMounted: false,
+      x: props.initial.x,
+      y: props.initial.y,
+      original: { x: props.initial.x, y: props.initial.y },
     };
     this.isResizing = false;
     this.onDragStart = this.onDragStart.bind(this);
@@ -114,17 +122,6 @@ export default class ResizableAndMovable extends Component {
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
-  }
-
-  componentDidMount() {
-    const { initAsResizing: { enable, direction, event } } = this.props;
-    if (enable) this.refs.resizable.onResizeStart(direction, event);
-  }
-
-  componentWillReceiveProps({ x, y }) {
-    const { canUpdatePositionByParent } = this.props;
-    if (canUpdatePositionByParent && x !== this.state.x) this.setState({ x });
-    if (canUpdatePositionByParent && y !== this.state.y) this.setState({ y });
   }
 
   onResizeStart(dir, styleSize, clientSize, e) {
@@ -175,17 +172,25 @@ export default class ResizableAndMovable extends Component {
     this.props.onDragStop(e, ui);
   }
 
+  updateSize(size) {
+    this.resizable.updateSize(size);
+  }
+
+  updatePosition({ x, y }) {
+    this.setState({ x, y });
+  }
+
   render() {
     const { className, style, onClick, onTouchStart,
-            width, height, minWidth, minHeight, maxWidth, maxHeight,
-            zIndex, bounds, moveAxis, dragHandlerClassName,
-            moveGrid, resizeGrid, onDoubleClick, canUpdateSizeByParent } = this.props;
+            initial, minWidth, minHeight, maxWidth, maxHeight,
+            zIndex, bounds, moveAxis, dragHandlerClassName, lockAspectRatio,
+            moveGrid, resizeGrid, onDoubleClick } = this.props;
     const { x, y } = this.state;
     return (
       <Draggable
         axis={moveAxis}
         zIndex={zIndex}
-        start={{ x, y }}
+        start={{ x: initial.x, y: initial.y }}
         disabled={!this.state.isDraggable || this.props.moveAxis === 'none'}
         onStart={this.onDragStart}
         handle={dragHandlerClassName}
@@ -197,34 +202,27 @@ export default class ResizableAndMovable extends Component {
         x={x}
         y={y}
       >
-        <div
-          style={{
-            width,
-            height,
-            cursor: 'move',
-            position: 'absolute',
-            zIndex,
-          }}
-        >
+        <div style={Object.assign(boxStyle, { zIndex })}>
           <Resizable
-            ref="resizable"
+            ref={c => { this.resizable = c; }}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             onTouchStart={onTouchStart}
             onResizeStart={this.onResizeStart}
             onResize={this.onResize}
             onResizeStop={this.onResizeStop}
-            width={canUpdateSizeByParent ? width : '100%'}
-            height={canUpdateSizeByParent ? height : '100%'}
+            width={initial.width}
+            height={initial.height}
             minWidth={minWidth}
             minHeight={minHeight}
             maxWidth={maxWidth}
             maxHeight={maxHeight}
-            customStyle={style}
+            customStyle={Object.assign(style, { boxSizing: 'border-box' })}
             customClass={className}
             isResizable={this.props.isResizable}
             handleStyle={this.props.resizerHandleStyle}
             grid={resizeGrid}
+            lockAspectRatio={lockAspectRatio}
           >
             {this.props.children}
           </Resizable>

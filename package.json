@@ -1,10 +1,10 @@
 {
-  "name": "react-resizable-and-movable",
-  "version": "3.0.0",
-  "description": "Resizable and movable component for React.",
+  "name": "react-rnd",
+  "version": "4.0.0",
+  "description": "Resizable and draggable component for React.",
   "main": "lib/index.js",
   "scripts": {
-    "watch": "watchify --extension=js -o example/dist/bundle.js example/src/index.js",
+    "watch": "watchify --extension=js -o docs/dist/bundle.js docs/src/index.js",
     "test": "karma start",
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile",
@@ -21,6 +21,7 @@
     "resizable",
     "movable",
     "draggable",
+    "window",
     "component"
   ],
   "author": "bokuweb",
@@ -75,6 +76,6 @@
   ],
   "dependencies": {
     "@bokuweb/react-draggable-custom": "^1.3.10",
-    "react-resizable-box": "^1.4.0"
+    "react-resizable-box": "^1.7.0"
   }
 }
