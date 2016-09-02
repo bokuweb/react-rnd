@@ -47,12 +47,7 @@ npm i react-rnd
 
 ## Properties
 
-#### `initial: PropTypes.shape({
-  width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
-  height: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
-  x: PropTypes.number,
-  y: PropTypes.number,
-}),`
+#### `initial: PropTypes.shape({width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]), height: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]), x: PropTypes.number, y: PropTypes.number }),`
   
 The `width` and `height` property is used to set the size of a component.   
 The `x` and `y` property is used to set the initial position of the component.   
