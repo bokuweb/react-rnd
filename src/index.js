@@ -2,6 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import Draggable from '@bokuweb/react-draggable-custom';
 import Resizable from 'react-resizable-box';
 
+const boxStyle = {
+  width: 'auto',
+  height: 'auto',
+  cursor: 'move',
+  position: 'absolute',
+};
+
 export default class ResizableAndMovable extends Component {
   static propTypes = {
     // initAsResizing: PropTypes.object,
@@ -200,15 +207,7 @@ export default class ResizableAndMovable extends Component {
         x={x}
         y={y}
       >
-        <div
-          style={{
-            width: 'auto',
-            height: 'auto',
-            cursor: 'move',
-            position: 'absolute',
-            zIndex,
-          }}
-        >
+        <div style={Object.assign(boxStyle, { zIndex })}>
           <Resizable
             ref="resizable"
             onClick={onClick}
