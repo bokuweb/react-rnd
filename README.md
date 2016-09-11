@@ -339,6 +339,10 @@ npm t
 
 ## Changelog
 
+#### v4.0.1
+
+- Fix style props to applt zIndex chaned.
+
 #### v4.0.0
 
 - Rename `react-rnd`.

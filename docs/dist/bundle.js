@@ -23292,7 +23292,7 @@ var ReactRnd = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          { style: _extends(boxStyle, { zIndex: zIndex }) },
+          { style: _extends({}, boxStyle, { zIndex: zIndex }) },
           _react2.default.createElement(
             _reactResizableBox2.default,
             {
