@@ -155,7 +155,7 @@ Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`,
   - this argument is `clientWidth` and `clientHeight`.
 - delta: `{ width, height }`
   - this delta width and height by resize. 
-- newPos: `{ width, height }`
+- newPos: `{ x, y }`
   - new position of the element.
   
 For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'right' 20px, this callback is called with `('right', { width: 120, height: 200 }, { width: 160, height: 240 }, {width: 20, height: 0})`
