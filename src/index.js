@@ -202,7 +202,7 @@ export default class ReactRnd extends Component {
         x={x}
         y={y}
       >
-        <div style={{ ...boxStyle, zIndex }}>
+        <div style={Object.assign(boxStyle, { zIndex })}>
           <Resizable
             ref={c => { this.resizable = c; }}
             onClick={onClick}
