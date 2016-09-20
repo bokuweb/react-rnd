@@ -37,10 +37,16 @@ var style = {
 var Example = function (_Component) {
   _inherits(Example, _Component);
 
-  function Example() {
+  function Example(props) {
     _classCallCheck(this, Example);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Example).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Example).call(this, props));
+
+    _this.state = { zIndex: 99 };
+    setTimeout(function () {
+      return _this.setState({ zIndex: 1000 });
+    }, 5000);
+    return _this;
   }
 
   _createClass(Example, [{
@@ -65,7 +71,8 @@ var Example = function (_Component) {
           minHeight: 160,
           maxWidth: 800,
           maxHeight: 300,
-          bounds: 'parent'
+          bounds: 'parent',
+          zIndex: this.state.zIndex
         },
         _react2.default.createElement(
           'span',
@@ -23292,7 +23299,7 @@ var ReactRnd = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          { style: _extends({}, boxStyle, { zIndex: zIndex }) },
+          { style: _extends(boxStyle, { zIndex: zIndex }) },
           _react2.default.createElement(
             _reactResizableBox2.default,
             {

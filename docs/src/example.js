@@ -13,6 +13,11 @@ const style = {
 };
 
 export default class Example extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { zIndex: 99 };
+    setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
+  }
   render() {
     return (
       <Rnd
@@ -29,6 +34,7 @@ export default class Example extends Component {
         maxWidth={800}
         maxHeight={300}
         bounds={'parent'}
+        zIndex={this.state.zIndex}
       >
         <span className="box">
           resize and drag me!!
