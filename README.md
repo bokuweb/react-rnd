@@ -341,6 +341,12 @@ npm t
 
 ## Changelog
 
+
+#### v4.1.0
+
+- Pass the new position along in the resize callback #55
+
+
 #### v4.0.1
 
 - Fix style props to applt zIndex chaned.
