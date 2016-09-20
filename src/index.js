@@ -141,7 +141,10 @@ export default class ReactRnd extends Component {
     if (/top/i.test(dir)) {
       this.setState({ y: this.state.original.y - delta.height });
     }
-    this.props.onResize(dir, styleSize, clientSize, delta);
+    this.props.onResize(dir, styleSize, clientSize, delta, {
+        x: this.state.x,
+        y: this.state.y
+    });
   }
 
   onResizeStop(dir, styleSize, clientSize, delta) {
