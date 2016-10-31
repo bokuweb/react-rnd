@@ -10,9 +10,9 @@ Resizable and draggable component for React.
 ## Demo
 
 ![screenshot](https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif)
-   
-See demo: [http://bokuweb.github.io/react-rnd/](http://bokuweb.github.io/react-rnd/)  
-demo Code: [https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js](https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js)  
+
+See demo: [http://bokuweb.github.io/react-rnd/](http://bokuweb.github.io/react-rnd/)
+demo Code: [https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js](https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js)
 
 
 ## Installation
@@ -50,85 +50,85 @@ npm i react-rnd
 ## Properties
 
 #### `initial: PropTypes.shape({width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]), height: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]), x: PropTypes.number, y: PropTypes.number }),`
-  
-The `width` and `height` property is used to set the size of a component.   
-The `x` and `y` property is used to set the initial position of the component.   
-  
-  
-    
+
+The `width` and `height` property is used to set the size of a component.
+The `x` and `y` property is used to set the initial position of the component.
+
+
+
 #### `minWidth: PropTypes.number`
 
 The `minWidth` property is used to set the minimum width of a component.
-  
-  
-  
+
+
+
 #### `minHeight: PropTypes.number`
 
 The `minHeight` property is used to set the minimum height of a component.
-  
-  
-  
+
+
+
 #### `maxWidth: PropTypes.number`
 
 The `maxWidth` property is used to set the maximum width of a component.
-  
-  
-  
+
+
+
 #### `maxHeight: PropTypes.number`
 
 The `maxheight` property is used to set the maximum height of a component.
-  
-  
-  
+
+
+
 #### `className: PropTypes.string`
 
 The `className` property is used to set the custom `className` of a component.
-  
-  
-  
+
+
+
 #### `style: Proptypes.object`
 
 The `style` property is used to set the custom `style` of a component.
-  
-  
-  
+
+
+
 #### `resizerHandleStyle: PropTypes.shape({ top: PropTypes.object, right: PropTypes.object, bottom: PropTypes.object, left: PropTypes.object, topRight: PropTypes.object, bottomRight: PropTypes.object, bottomLeft: PropTypes.object, topLeft: PropTypes.object })`
 
 The `resizerHandleStyle` property is used to override the style of one or more resize handles.
 Only the axis you specify will have its handle style replaced.
 If you specify a value for `right` it will completely replace the styles for the `right` resize handle,
 but other handle will still use the default styles.
-  
-  
-  
+
+
+
 #### `isResizable: PropTypes.shape({ top: PropTypes.bool, right: PropTypes.bool, bottom: PropTypes.bool, left: PropTypes.bool, topRight: PropTypes.bool, bottomRight: PropTypes.bool, bottomLeft: PropTypes.bool, topLeft: PropTypes.bool })`
 
 The `isResizable` property is used to set the resizable permission of a resizable component.
 
 The permission of `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, `topLeft` direction resizing.
 If omitted, all resizer are enabled.
-If you want to permit only right direction resizing, set `{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }`. 
-  
-  
-  
+If you want to permit only right direction resizing, set `{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }`.
+
+
+
 #### `onClick: PropTypes.func`
 
 Calls when resizable component clicked.
-  
-  
-  
+
+
+
 #### `onTouchStart: PropTypes.func`
 
 Calls when resizable component touched.
-  
-  
-  
+
+
+
 #### `onDoubleClick: PropTypes.func`
 
 Calls when resizable component double clicked.
-  
-  
-  
+
+
+
 #### `onResizeStart: PropTypes.func`
 
 Calls when resizable component resize starts.
@@ -140,9 +140,9 @@ Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`,
 - clientSize: `{ width, height }`
   - this argument is `clientWidth` and `clientHeight`.
 - event: `mouse down event`
-  
-  
-  
+
+
+
 #### `onResize: PropTypes.func`
 
 Calls when resizable component resize.
@@ -154,17 +154,17 @@ Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`,
 - clientSize: `{ width, height }`
   - this argument is `clientWidth` and `clientHeight`.
 - delta: `{ width, height }`
-  - this delta width and height by resize. 
+  - this delta width and height by resize.
 - newPos: `{ x, y }`
   - new position of the element.
-  
+
 For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'right' 20px, this callback is called with `('right', { width: 120, height: 200 }, { width: 160, height: 240 }, {width: 20, height: 0})`
-  
-  
-  
+
+
+
 #### `onResizeStop: PropTypes.func`
 
-Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`, `delta: object`)
+Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`, `delta: object`, `newPos: object`)
 
 - direction: `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, and `topLeft`.
 - styleSize: `{ width, height }`
@@ -172,34 +172,36 @@ Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`,
 - clientSize: `{ width, height }`
   - this argument is `clientWidth` and `clientHeight`.
 - delta: `{ width, height }`
-  - this delta width and height by resize. 
-  
+  - this delta width and height by resize.
+- newPos: `{ x, y }`
+  - new position of the element.
+
 For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'right' 20px, this callback is called with `('right', { width: 120, height: 200 }, { width: 160, height: 240 }, {width: 20, height: 0})`
-  
-  
-  
+
+
+
 #### `moveAxis: PropTypes.string`
 
 The direction of allowed movement (dragging) allowed ('x','y','both','none').
-  
-  
-  
+
+
+
 #### `lockAspectRatio: PropTypes.bool`
 
 The `lockAspectRatio` property is used to lock aspect ratio.
 If ommited, set `false`.
-  
-  
-  
+
+
+
 #### `onDragStart: PropTypes.func`
 
-Callback called on dragging start.   
-  
-  
-  
+Callback called on dragging start.
+
+
+
 #### `onDrag: PropTypes.func`
 
-Callback called on resizing.   
+Callback called on resizing.
 `onDrag` called with the following parameters:
 
 ``` javascript
@@ -215,9 +217,9 @@ Callback called on resizing.
    }
 )
 ```
-  
-  
-  
+
+
+
 #### `onDragStop: PropTypes.func`
 
 Callback called on dragging stop.
@@ -236,9 +238,9 @@ Callback called on dragging stop.
    }
 )
 ```
-  
-  
-  
+
+
+
 #### `bounds: PropTypes.oneOfType([PropTypes.object, PropTypes.string])`
 
 Specifies movement boundaries. Accepted values:
@@ -247,33 +249,33 @@ Specifies movement boundaries. Accepted values:
  - An object with `left, top, right, and bottom` properties.
    These indicate how far in each direction the draggable
    can be moved.
-  
-  
-  
+
+
+
 #### `dragHandlerClassName: PropTypes.string`
 
 Specifies a selector to be used as the handle that initiates drag.
 Example: '.handle'.
-  
-  
-  
+
+
+
 #### `zIndex: PropTypes.number`
 
 The `zIndex` property is used to set the zindex of a component.
-  
-  
-  
+
+
+
 #### `resizeGrid: PropTypes.arrayOf(PropTypes.number)`
 
 The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
-  
-  
-  
+
+
+
 #### `moveGrid: PropTypes.arrayOf(PropTypes.number)`
 
 The `moveGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
-  
-  
+
+
 ## Methods
 
 #### `updateSize({ width: number, height: number })`
@@ -287,11 +289,11 @@ Update component size.
 class YourComponent extends Component {
 
   ...
-  
+
   update() {
     this.rnd.updateSize({ width: 200, height: 300 });
   }
-  
+
   render() {
     return (
       <Rnd ref={c => { this.rnd = c; }}>
@@ -303,7 +305,7 @@ class YourComponent extends Component {
   ...
 }
 ```
-  
+
 #### `updatePosition({ x: number, x: number })`
 
 Update component size.
@@ -315,11 +317,11 @@ Update component size.
 class YourComponent extends Component {
 
   ...
-  
+
   update() {
     this.rnd.updatePosition({ x: 200, y: 300 });
   }
-  
+
   render() {
     return (
       <Rnd ref={c => { this.rnd = c; }}>
@@ -330,9 +332,9 @@ class YourComponent extends Component {
 
   ...
 }
-```  
-  
-  
+```
+
+
 ## Test
 
 ``` sh

@@ -150,7 +150,10 @@ export default class ReactRnd extends Component {
   onResizeStop(dir, styleSize, clientSize, delta) {
     this.setState({ isDraggable: true });
     this.isResizing = false;
-    this.props.onResizeStop(dir, styleSize, clientSize, delta);
+    this.props.onResizeStop(dir, styleSize, clientSize, delta, {
+        x: this.state.x,
+        y: this.state.y
+    });
   }
 
   onDragStart(e, ui) {
