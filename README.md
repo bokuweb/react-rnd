@@ -4,6 +4,7 @@ Resizable and draggable component for React.
 
 [![Build Status](https://img.shields.io/travis/bokuweb/react-rnd.svg?style=flat-square)](https://travis-ci.org/bokuweb/react-rnd)
 [![Version](https://img.shields.io/npm/v/react-rnd.svg?style=flat-square)](https://www.npmjs.com/package/react-rnd)
+[![npm](https://img.shields.io/npm/dm/react-rnd?style=flat-square)]()
 [![Code Climate](https://img.shields.io/codeclimate/github/bokuweb/react-rnd/badges/gpa.svg?style=flat-square)](https://codeclimate.com/github/bokuweb/react-rnd)
 [![License](https://img.shields.io/npm/l/react-rnd.svg?style=flat-square)](https://github.com/bokuweb/react-rnd#license)
 
