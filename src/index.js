@@ -114,6 +114,7 @@ export default class ReactRnd extends Component {
       x: props.initial.x,
       y: props.initial.y,
       original: { x: props.initial.x, y: props.initial.y },
+      zIndex: props.zIndex
     };
     this.isResizing = false;
     this.onDragStart = this.onDragStart.bind(this);
@@ -186,12 +187,16 @@ export default class ReactRnd extends Component {
     this.setState({ x, y });
   }
 
+  updateZIndex(zIndex) {
+    this.setState(zIndex);
+  }
+
   render() {
     const { className, style, onClick, onTouchStart,
             initial, minWidth, minHeight, maxWidth, maxHeight,
-            zIndex, bounds, moveAxis, dragHandlerClassName, lockAspectRatio,
+            bounds, moveAxis, dragHandlerClassName, lockAspectRatio,
             moveGrid, resizeGrid, onDoubleClick } = this.props;
-    const { x, y } = this.state;
+    const { x, y, zIndex } = this.state;
     return (
       <Draggable
         axis={moveAxis}
