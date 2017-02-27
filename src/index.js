@@ -188,7 +188,7 @@ export default class ReactRnd extends Component {
   }
 
   updateZIndex(zIndex) {
-    this.setState(zIndex);
+    this.setState({ zIndex });
   }
 
   render() {

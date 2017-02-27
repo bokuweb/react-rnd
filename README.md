@@ -332,6 +332,33 @@ class YourComponent extends Component {
   ...
 }
 ```  
+
+#### `updateZIndex(zIndex: number)`
+
+Update component z-index.
+
+- for example
+
+``` js
+class YourComponent extends Component {
+
+  ...
+  
+  update() {
+    this.rnd.updateZIndex(200);
+  }
+  
+  render() {
+    return (
+      <Rnd ref={c => { this.rnd = c; }}>
+        example
+      </Rnd>
+    );
+  }
+
+  ...
+}
+```
   
   
 ## Test
@@ -342,6 +369,9 @@ npm t
 
 ## Changelog
 
+#### v4.2.1
+
+- Added `updateZIndex`, method to updated component `zIndex` state.
 
 #### v4.2.0
 
