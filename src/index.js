@@ -192,7 +192,7 @@ export default class ReactRnd extends Component {
   }
 
   render() {
-    const { className, style, onClick, onTouchStart,
+    const { componentProps, className, style, onClick, onTouchStart,
             initial, minWidth, minHeight, maxWidth, maxHeight,
             bounds, moveAxis, dragHandlerClassName, lockAspectRatio,
             moveGrid, resizeGrid, onDoubleClick } = this.props;
@@ -213,7 +213,7 @@ export default class ReactRnd extends Component {
         x={x}
         y={y}
       >
-        <div style={Object.assign(boxStyle, { zIndex })}>
+        <div {...wrapperProps} style={Object.assign(wrapperProps || wrapperProps.style || {}, boxStyle, { zIndex })}>
           <Resizable
             ref={c => { this.resizable = c; }}
             onClick={onClick}
