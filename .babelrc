@@ -1,7 +1,41 @@
 {
-  "presets": ["react", "es2015", "stage-0"],
+  "presets": [
+    "react",
+    ["env", { "targets": {
+      "Chrome": 56
+    }}]
+  ],
   "plugins": [
-    "add-module-exports",
-    "transform-object-assign"
-  ]
+    "react-hot-loader/babel",
+    "dynamic-import-webpack",
+    "transform-decorators-legacy",
+    "transform-object-rest-spread",
+    ["transform-runtime", {
+      "polyfill": true,
+      "regenerator": true
+    }]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "react",
+        ["env", { "targets": {
+          "node": 6
+        }}]
+      ],
+      "plugins": [
+        ["flow-runtime", {"assert": true}],
+        "transform-async-to-generator"
+      ],
+    },
+    "production": {
+      "presets": [
+        "react",
+        "flow",
+        ["env", { "targets": {
+          "browsers": ["last 2 versions", "IE 11"]
+        }}]
+      ]
+    }
+  }
 }
