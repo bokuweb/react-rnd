@@ -3,6 +3,9 @@
   "parser": "babel-eslint",
   "plugins": ["flowtype"],
   "rules": {
+    "react/no-unused-prop-types": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/sort-comp": 0,
     "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
     "flowtype/define-flow-type": 1,

@@ -13,15 +13,27 @@ import ReactDOM from 'react-dom';
 const root = document.querySelector('.main');
 
 const render = async () => {
-  const { default: Hello } = (await import('./components/Hello'));
+  const { default: Rnd } = (await import('./components/rnd'));
   ReactDOM.render(
     <AppContainer>
-      <Hello>
-        <div style={{ background: '#333' }}>Draggable</div>
-      </Hello>
+      <Rnd
+        style={{ background: '#ccc' }}
+        default={{
+          x: 100,
+          y: 100,
+          width: 320,
+          height: 200,
+        }}
+        minWidth={200}
+        minHeight={100}
+        maxWidth={800}
+        maxHeight={600}
+      >
+        Draggable
+      </Rnd>
     </AppContainer>,
     root,
   );
 };
 render();
-if (module.hot) module.hot.accept('./components/Hello', render);
+if (module.hot) module.hot.accept('./components/rnd', render);

@@ -9,6 +9,7 @@
     "react-hot-loader/babel",
     "dynamic-import-webpack",
     "transform-decorators-legacy",
+    "transform-class-properties",
     "transform-object-rest-spread",
     ["transform-runtime", {
       "polyfill": true,
