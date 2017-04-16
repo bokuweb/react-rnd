@@ -11,5 +11,6 @@
 
 [options]
 munge_underscores=true
+module.ignore_non_literal_requires=true
 esproposal.decorators=ignore
 esproposal.class_static_fields=enable

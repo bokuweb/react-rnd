@@ -4,7 +4,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "build:production": "NODE_ENV=production webpack",
+    "build:production": "NODE_ENV=production babel -d lib/ src/ --copy-files",
     "flow": "flow",
     "lint": "eslint src",
     "test": "NODE_ENV=test ava",
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "ava": "^0.19.1",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.2",
     "babel-loader": "^6.4.1",
@@ -40,7 +41,7 @@
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
-    "react-styleguidist": "^5.0.6",
+    "react-styleguidist": "^4.6.3",
     "webpack": "2.3.1",
     "webpack-async-await": "^1.1.0",
     "webpack-dev-server": "^2.4.2"
@@ -54,6 +55,6 @@
   },
   "dependencies": {
     "react-draggable": "^2.2.3",
-    "react-resizable-box": "^2.0.0"
+    "react-resizable-box": "^2.0.2"
   }
 }

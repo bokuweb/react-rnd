@@ -16,21 +16,24 @@ const render = async () => {
   const { default: Rnd } = (await import('./components/rnd'));
   ReactDOM.render(
     <AppContainer>
+      <div className="test" style={{width: '1000px', height: '600px', background: 'blue',margin: '100px'}}>
+      <div className="stest" style={{width: '800px', height: '600px', background: 'red',margin: '200px'}}>
       <Rnd
         style={{ background: '#ccc' }}
         default={{
-          x: 100,
-          y: 100,
+          x: 0,
+          y: 0,
           width: 320,
           height: 200,
         }}
         minWidth={200}
         minHeight={100}
-        maxWidth={800}
-        maxHeight={600}
+        bounds=".test"
       >
         Draggable
       </Rnd>
+      </div>
+      </div>
     </AppContainer>,
     root,
   );

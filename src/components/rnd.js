@@ -23,7 +23,13 @@ type State = {
   original: {
     x: number;
     y: number;
-  }
+  };
+  bounds: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
 }
 
 type Props = {
@@ -54,7 +60,7 @@ const boxStyle = {
   width: 'auto',
   height: 'auto',
   cursor: 'move',
-  // position: 'absolute',
+  display: 'inline-block',
 };
 
 export default class Rnd extends Component {
@@ -69,6 +75,7 @@ export default class Rnd extends Component {
   onDragStart: DraggableEventHandler;
   onDrag: DraggableEventHandler;
   onDragStop: DraggableEventHandler;
+  wrapper: HTMLElement;
 
   constructor(props: Props) {
     super(props);
@@ -78,6 +85,12 @@ export default class Rnd extends Component {
       original: {
         x: props.default.x || 0,
         y: props.default.y || 0,
+      },
+      bounds: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
       },
     };
     this.onResizeStart = this.onResizeStart.bind(this);
@@ -92,6 +105,36 @@ export default class Rnd extends Component {
     if (this.props.onDragStart) {
       this.props.onDragStart(e, data);
     }
+    const parent = this.wrapper && this.wrapper.parentNode;
+    const target = this.props.bounds === 'parent'
+      ? parent
+      : document.querySelector(this.props.bounds);
+    if (!(target instanceof HTMLElement) || !(parent instanceof HTMLElement)) return;
+    const targetRect = target.getBoundingClientRect();
+    const targetLeft = targetRect.left;
+    const targetTop = targetRect.top;
+    const parentRect = parent.getBoundingClientRect();
+    const parentLeft = parentRect.left;
+    const parentTop = parentRect.top;
+    const left = targetLeft - parentLeft;
+    const top = targetTop - parentTop;
+    this.setState({
+      bounds: {
+        top,
+        right: left + (target.offsetWidth - (this.resizable: any).size.width),
+        bottom: top + (target.offsetHeight - (this.resizable: any).size.height),
+        left,
+      },
+    });
+  }
+
+  getResizableBounds() {
+    if (this.props.bounds === 'parent') {
+      if (!this.wrapper) return undefined;
+      if (!(this.wrapper.parentNode instanceof HTMLElement)) return undefined;
+      return this.wrapper.parentNode;
+    }
+    return document.querySelector(this.props.bounds);
   }
 
   onDrag(e: Event, data: DraggableData) {
@@ -180,9 +223,12 @@ export default class Rnd extends Component {
         axis={this.props.dragAxis}
         zIndex={this.state.z}
         grid={this.props.dragGrid}
-        bounds={this.props.bounds}
+        bounds={this.state.bounds}
       >
-        <div style={boxStyle}>
+        <div
+          style={boxStyle}
+          ref={(c: HTMLElement) => { this.wrapper = c; }}
+        >
           <Resizable
             ref={(c: Resizable) => { this.resizable = c; }}
             className={this.props.resizeClassName}
@@ -198,7 +244,7 @@ export default class Rnd extends Component {
             maxWidth={this.props.maxWidth}
             maxHeight={this.props.maxHeight}
             grid={this.props.resizeGrid}
-            bounds={this.props.bounds}
+            bounds={this.getResizableBounds()}
             lockAspectRatio={this.props.lockAspectRatio}
             handlerStyles={this.props.resizeHandlerStyles}
             handlerClasses={this.props.resizeHandlerClasses}
