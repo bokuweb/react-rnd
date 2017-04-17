@@ -15,7 +15,9 @@ export type DraggableData = {
   lastX: number, lastY: number
 };
 
-export type DraggableEventHandler = (e: Event, data: DraggableData) => void | false;
+export type DraggableEventHandler = (
+  e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData,
+) => void | false;
 
 type State = {
   disableDragging: boolean;
@@ -101,7 +103,7 @@ export default class Rnd extends Component {
     this.onDragStop = this.onDragStop.bind(this);
   }
 
-  onDragStart(e: Event, data: DraggableData) {
+  onDragStart(e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData) {
     if (this.props.onDragStart) {
       this.props.onDragStart(e, data);
     }
@@ -122,137 +124,137 @@ export default class Rnd extends Component {
       bounds: {
         top,
         right: left + (target.offsetWidth - (this.resizable: any).size.width),
-        bottom: top + (target.offsetHeight - (this.resizable: any).size.height),
-        left,
+    bottom: top + (target.offsetHeight - (this.resizable: any).size.height),
+    left,
       },
+});
+  }
+
+getResizableBounds() {
+  if (this.props.bounds === 'parent') {
+    if (!this.wrapper) return undefined;
+    if (!(this.wrapper.parentNode instanceof HTMLElement)) return undefined;
+    return this.wrapper.parentNode;
+  }
+  return document.querySelector(this.props.bounds);
+}
+
+onDrag(e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData) {
+  if (this.props.onDrag) {
+    this.props.onDrag(e, data);
+  }
+}
+
+onDragStop(e: Event, data: DraggableData) {
+  if (this.props.onDragStop) {
+    this.props.onDragStop(e, data);
+  }
+}
+
+onResizeStart(
+  e: SyntheticMouseEvent | SyntheticTouchEvent,
+  dir: Direction,
+  refToResizableElement: HTMLElement,
+) {
+  this.setState({
+    disableDragging: true,
+    original: { x: this.draggable.state.x, y: this.draggable.state.y },
+  });
+  if (this.props.onResizeStart) {
+    this.props.onResizeStart(e, dir, refToResizableElement);
+  }
+  e.stopPropagation();
+}
+
+onResize(
+  e: MouseEvent | TouchEvent,
+  direction: Direction,
+  refToResizableElement: HTMLElement,
+  delta: { height: number, width: number },
+) {
+  if (/left/i.test(direction)) {
+    this.draggable.setState({ x: this.state.original.x - delta.width });
+  }
+  if (/top/i.test(direction)) {
+    this.draggable.setState({ y: this.state.original.y - delta.height });
+  }
+  if (this.props.onResize) {
+    this.props.onResize(event, direction, refToResizableElement, delta, {
+      x: this.draggable.state.x,
+      y: this.draggable.state.y,
     });
   }
+}
 
-  getResizableBounds() {
-    if (this.props.bounds === 'parent') {
-      if (!this.wrapper) return undefined;
-      if (!(this.wrapper.parentNode instanceof HTMLElement)) return undefined;
-      return this.wrapper.parentNode;
-    }
-    return document.querySelector(this.props.bounds);
-  }
-
-  onDrag(e: Event, data: DraggableData) {
-    if (this.props.onDrag) {
-      this.props.onDrag(e, data);
-    }
-  }
-
-  onDragStop(e: Event, data: DraggableData) {
-    if (this.props.onDragStop) {
-      this.props.onDragStop(e, data);
-    }
-  }
-
-  onResizeStart(
-    e: SyntheticMouseEvent | SyntheticTouchEvent,
-    dir: Direction,
-    refToResizableElement: HTMLElement,
-  ) {
-    this.setState({
-      disableDragging: true,
-      original: { x: this.draggable.state.x, y: this.draggable.state.y },
+onResizeStop(
+  e: MouseEvent | TouchEvent,
+  direction: Direction,
+  refToResizableElement: HTMLElement,
+  delta: { height: number, width: number },
+) {
+  this.setState({ disableDragging: false });
+  if (this.props.onResizeStop) {
+    this.props.onResizeStop(event, direction, refToResizableElement, delta, {
+      x: this.draggable.state.x,
+      y: this.draggable.state.y,
     });
-    if (this.props.onResizeStart) {
-      this.props.onResizeStart(e, dir, refToResizableElement);
-    }
-    e.stopPropagation();
   }
+}
 
-  onResize(
-    e: MouseEvent | TouchEvent,
-    direction: Direction,
-    refToResizableElement: HTMLElement,
-    delta: { height: number, width: number },
-  ) {
-    if (/left/i.test(direction)) {
-      this.draggable.setState({ x: this.state.original.x - delta.width });
-    }
-    if (/top/i.test(direction)) {
-      this.draggable.setState({ y: this.state.original.y - delta.height });
-    }
-    if (this.props.onResize) {
-      this.props.onResize(event, direction, refToResizableElement, delta, {
-        x: this.draggable.state.x,
-        y: this.draggable.state.y,
-      });
-    }
-  }
+updateSize(size: { x: string | number, y: string | number }) {
+  this.resizable.updateSize(size);
+}
 
-  onResizeStop(
-    e: MouseEvent | TouchEvent,
-    direction: Direction,
-    refToResizableElement: HTMLElement,
-    delta: { height: number, width: number },
-  ) {
-    this.setState({ disableDragging: false });
-    if (this.props.onResizeStop) {
-      this.props.onResizeStop(event, direction, refToResizableElement, delta, {
-        x: this.draggable.state.x,
-        y: this.draggable.state.y,
-      });
-    }
-  }
+updatePosition(position: Position) {
+  this.draggable.setState(position);
+}
 
-  updateSize(size: { x: string | number, y: string | number }) {
-    this.resizable.updateSize(size);
-  }
+updateZIndex(z: number) {
+  this.setState({ z });
+}
 
-  updatePosition(position: Position) {
-    this.draggable.setState(position);
-  }
-
-  updateZIndex(z: number) {
-    this.setState({ z });
-  }
-
-  render() {
-    return (
-      <Draggable
-        ref={(c: Draggable) => { this.draggable = c; }}
-        handle={this.props.dragHandlerClassName}
-        defaultPosition={{ x: this.props.default.x, y: this.props.default.y }}
-        onStart={this.onDragStart}
-        onDrag={this.onDrag}
-        onStop={this.onDragStop}
-        axis={this.props.dragAxis}
-        zIndex={this.state.z}
-        grid={this.props.dragGrid}
-        bounds={this.state.bounds}
+render() {
+  return (
+    <Draggable
+      ref={(c: Draggable) => { this.draggable = c; }}
+      handle={this.props.dragHandlerClassName}
+      defaultPosition={{ x: this.props.default.x, y: this.props.default.y }}
+      onStart={this.onDragStart}
+      onDrag={this.onDrag}
+      onStop={this.onDragStop}
+      axis={this.props.dragAxis}
+      zIndex={this.state.z}
+      grid={this.props.dragGrid}
+      bounds={this.state.bounds}
+    >
+      <div
+        style={boxStyle}
+        ref={(c: HTMLElement) => { this.wrapper = c; }}
       >
-        <div
-          style={boxStyle}
-          ref={(c: HTMLElement) => { this.wrapper = c; }}
+        <Resizable
+          ref={(c: Resizable) => { this.resizable = c; }}
+          className={this.props.resizeClassName}
+          style={this.props.style}
+          enable={this.props.enableResize}
+          onResizeStart={this.onResizeStart}
+          onResize={this.onResize}
+          onResizeStop={this.onResizeStop}
+          width={this.props.default.width}
+          height={this.props.default.height}
+          minWidth={this.props.minWidth}
+          minHeight={this.props.minHeight}
+          maxWidth={this.props.maxWidth}
+          maxHeight={this.props.maxHeight}
+          grid={this.props.resizeGrid}
+          bounds={this.getResizableBounds()}
+          lockAspectRatio={this.props.lockAspectRatio}
+          handlerStyles={this.props.resizeHandlerStyles}
+          handlerClasses={this.props.resizeHandlerClasses}
         >
-          <Resizable
-            ref={(c: Resizable) => { this.resizable = c; }}
-            className={this.props.resizeClassName}
-            style={this.props.style}
-            enable={this.props.enableResize}
-            onResizeStart={this.onResizeStart}
-            onResize={this.onResize}
-            onResizeStop={this.onResizeStop}
-            width={this.props.default.width}
-            height={this.props.default.height}
-            minWidth={this.props.minWidth}
-            minHeight={this.props.minHeight}
-            maxWidth={this.props.maxWidth}
-            maxHeight={this.props.maxHeight}
-            grid={this.props.resizeGrid}
-            bounds={this.getResizableBounds()}
-            lockAspectRatio={this.props.lockAspectRatio}
-            handlerStyles={this.props.resizeHandlerStyles}
-            handlerClasses={this.props.resizeHandlerClasses}
-          >
-            {this.props.children}
-          </Resizable>
-        </div>
-      </Draggable>
-    );
-  }
+          {this.props.children}
+        </Resizable>
+      </div>
+    </Draggable>
+  );
+}
 }

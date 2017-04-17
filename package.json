@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "browser-env": "^2.0.30",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
@@ -42,6 +43,7 @@
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
     "react-styleguidist": "^4.6.3",
+    "sinon": "^2.1.0",
     "webpack": "2.3.1",
     "webpack-async-await": "^1.1.0",
     "webpack-dev-server": "^2.4.2"
@@ -50,7 +52,8 @@
     "babel": "inherit",
     "files": "src/**/*.test.js",
     "require": [
-      "babel-register"
+      "babel-register",
+      "./setup-browser-env.js"
     ]
   },
   "dependencies": {
