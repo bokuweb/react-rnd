@@ -1,5 +1,5 @@
 {
-  "name": "reg-reporter",
+  "name": "raect-rnd",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
@@ -8,7 +8,8 @@
     "lint": "eslint src",
     "test": "NODE_ENV=test ava",
     "guide:server": "styleguidist server",
-    "guide:build": "styleguidist build"
+    "guide:build": "styleguidist build",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "ava": "^0.19.1",

@@ -34,6 +34,39 @@ type State = {
   };
 }
 
+export type Enable = {
+  bottom?: boolean,
+  bottomLeft?: boolean,
+  bottomRight?: boolean,
+  left?: boolean,
+  right?: boolean,
+  top?: boolean,
+  topLeft?: boolean,
+  topRight?: boolean
+}
+
+export type HandlerClasses = {
+  bottom?: string,
+  bottomLeft?: string,
+  bottomRight?: string,
+  left?: string,
+  right?: string,
+  top?: string,
+  topLeft?: string,
+  topRight?: string
+}
+
+export type HandlerStyles = {
+  bottom?: any,
+  bottomLeft?: any,
+  bottomRight?: any,
+  left?: any,
+  right?: any,
+  top?: any,
+  topLeft?: any,
+  topRight?: any
+}
+
 type Props = {
   z?: number;
   dragGrid?: Grid;
@@ -51,6 +84,19 @@ type Props = {
   onDragStart?: DraggableEventHandler;
   onDrag?: DraggableEventHandler;
   onDragStop?: DraggableEventHandler;
+  className?: string;
+  style?: any;
+  children?: any,
+  enableResizing?: Enable,
+  extendsProps?: any,
+  resizeHandlerClasses?: HandlerClasses,
+  resizeHandlerStyles?: HandlerStyles,
+  lockAspectRatio?: boolean,
+  maxHeight?: number,
+  maxWidth?: number,
+  minHeight?: number,
+  minWidth?: number,
+  dragAxis?: 'x' | 'y' | 'both' | 'none',
 }
 
 export type Position = {
@@ -123,7 +169,10 @@ export default class Rnd extends Component {
     const top = targetTop - parentTop;
     this.setState({
       bounds: {
-        top, right: left + (target.offsetWidth - (this.resizable: any).size.width), bottom: top + (target.offsetHeight - (this.resizable: any).size.height),  left,
+        top,
+        right: left + (target.offsetWidth - (this.resizable: any).size.width),
+        bottom: top + (target.offsetHeight - (this.resizable: any).size.height),
+        left,
       },
     });
   }
@@ -198,19 +247,19 @@ export default class Rnd extends Component {
       });
     }
   }
-  
+
   updateSize(size: { x: string | number, y: string | number }) {
     this.resizable.updateSize(size);
   }
-  
+
   updatePosition(position: Position) {
     this.draggable.setState(position);
   }
-  
+
   updateZIndex(z: number) {
     this.setState({ z });
   }
-  
+
   render() {
     return (
       <Draggable
@@ -226,14 +275,13 @@ export default class Rnd extends Component {
         bounds={this.props.bounds ? this.state.bounds : undefined}
       >
         <div
-          style={boxStyle}
+          className={this.props.className}
+          style={{ ...boxStyle, ...this.props.style }}
           ref={(c: HTMLElement) => { this.wrapper = c; }}
         >
           <Resizable
             ref={(c: Resizable) => { this.resizable = c; }}
-            className={this.props.resizeClassName}
-            style={this.props.style}
-            enable={this.props.enableResize}
+            enable={this.props.enableResizing}
             onResizeStart={this.onResizeStart}
             onResize={this.onResize}
             onResizeStop={this.onResizeStop}
