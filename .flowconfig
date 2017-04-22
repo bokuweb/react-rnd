@@ -1,0 +1,16 @@
+[ignore]
+.*/node_modules/babel-plugin-flow.*
+.*/node_modules/jss.*
+.*/node_modules/findup.*
+
+[include]
+
+[libs]
+./decls
+./node_modules/react-resizable-box/lib/index.js.flow
+
+[options]
+munge_underscores=true
+module.ignore_non_literal_requires=true
+esproposal.decorators=ignore
+esproposal.class_static_fields=enable

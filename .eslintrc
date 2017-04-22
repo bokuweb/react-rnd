@@ -1,8 +1,34 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
+  "plugins": ["flowtype"],
+  "rules": {
+    "react/no-unused-prop-types": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/sort-comp": 0,
+    "react/jsx-filename-extension": 0,
+    "react/prop-types": 0,
+    "flowtype/define-flow-type": 1,
+    "flowtype/require-parameter-type": 1,
+    "no-duplicate-imports": 0,
+    "flowtype/require-return-type": 0,
+    "flowtype/space-after-type-colon": [
+      1,
+      "always"
+    ],
+    "flowtype/space-before-type-colon": [
+      1,
+      "never"
+    ],
+    "flowtype/use-flow-type": 1
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
+  },
   "env": {
     "browser": true,
-    "mocha": true,
+    "mocha": true
   }
 }

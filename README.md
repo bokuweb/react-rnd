@@ -5,7 +5,6 @@ Resizable and draggable component for React.
 [![Build Status](https://img.shields.io/travis/bokuweb/react-rnd.svg?style=flat-square)](https://travis-ci.org/bokuweb/react-rnd)
 [![Version](https://img.shields.io/npm/v/react-rnd.svg?style=flat-square)](https://www.npmjs.com/package/react-rnd)
 [![npm](https://img.shields.io/npm/dm/react-rnd.svg?style=flat-square)]()
-[![Code Climate](https://img.shields.io/codeclimate/github/bokuweb/react-rnd/badges/gpa.svg?style=flat-square)](https://codeclimate.com/github/bokuweb/react-rnd)
 [![License](https://img.shields.io/npm/l/react-rnd.svg?style=flat-square)](https://github.com/bokuweb/react-rnd#license)
 
 ## Demo
@@ -28,256 +27,271 @@ npm i react-rnd
 
 ``` javascript
 <Rnd
-  ref={c => { this.rnd = c; }}
-  initial={{
-    x: window.innerWidth / 2 - 200,
-    y: window.innerHeight / 2 - 80,
-    width: 400,
-    height: 160,
+  default={{
+    x: 0,
+    y: 0,
+    width: 320,
+    height: 200,
   }}
-  style={style}
-  minWidth={300}
-  minHeight={160}
-  maxWidth={800}
-  maxHeight={300}
-  bounds={'parent'}
 >
-  <span className="box">
-    resize and drag me!!
-  </span>
+  Rnd
 </Rnd>
 ```
 
 ## Properties
 
-#### `initial: PropTypes.shape({width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]), height: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]), x: PropTypes.number, y: PropTypes.number }),`
+#### `default: { x: number; y: number;  width: number | string;  height: number | string; };`
   
-The `width` and `height` property is used to set the size of a component.   
-The `x` and `y` property is used to set the initial position of the component.   
-  
-  
+The `width` and `height` property is used to set the default size of a component.   
+The `x` and `y` property is used to set the default position of the component.   
     
-#### `minWidth: PropTypes.number`
+#### `className?: string;`
 
-The `minWidth` property is used to set the minimum width of a component.
-  
-  
-  
-#### `minHeight: PropTypes.number`
+The `className` property is used to set the custom `className` of a resizable component.
 
-The `minHeight` property is used to set the minimum height of a component.
-  
-  
-  
-#### `maxWidth: PropTypes.number`
+#### `style?: any;`
 
-The `maxWidth` property is used to set the maximum width of a component.
-  
-  
-  
-#### `maxHeight: PropTypes.number`
+The `style` property is used to set the custom `style` of a resizable component.
 
-The `maxheight` property is used to set the maximum height of a component.
-  
-  
-  
-#### `className: PropTypes.string`
+#### `width?: (number | string);`
 
-The `className` property is used to set the custom `className` of a component.
-  
-  
-  
-#### `style: Proptypes.object`
+The `width` property is used to set the initial width of a resizable component.   
+For example, you can set `300`, `'300px'`, `50%`.     
+If omitted, set `'auto'`.    
 
-The `style` property is used to set the custom `style` of a component.
-  
-  
-  
-#### `resizerHandleStyle: PropTypes.shape({ top: PropTypes.object, right: PropTypes.object, bottom: PropTypes.object, left: PropTypes.object, topRight: PropTypes.object, bottomRight: PropTypes.object, bottomLeft: PropTypes.object, topLeft: PropTypes.object })`
+#### `height?: (number | string);`
 
-The `resizerHandleStyle` property is used to override the style of one or more resize handles.
-Only the axis you specify will have its handle style replaced.
-If you specify a value for `right` it will completely replace the styles for the `right` resize handle,
-but other handle will still use the default styles.
-  
-  
-  
-#### `isResizable: PropTypes.shape({ top: PropTypes.bool, right: PropTypes.bool, bottom: PropTypes.bool, left: PropTypes.bool, topRight: PropTypes.bool, bottomRight: PropTypes.bool, bottomLeft: PropTypes.bool, topLeft: PropTypes.bool })`
+The `height` property is used to set the initial height of a resizable component.    
+For example, you can set `300`, `'300px'`, `50%`.    
+If omitted, set `'auto'`.    
 
-The `isResizable` property is used to set the resizable permission of a resizable component.
+#### `minWidth?: number;`
+
+The `minWidth` property is used to set the minimum width of a resizable component.
+
+#### `minHeight?: number;`
+
+The `minHeight` property is used to set the minimum height of a resizable component.
+
+#### `maxWidth?: number;`
+
+The `maxWidth` property is used to set the maximum width of a resizable component.
+
+#### `maxHeight?: number`;
+
+The `maxHeight` property is used to set the maximum height of a resizable component.
+
+#### `z?: number;`
+
+The `z` property is used to set the zIndex of a component. 
+
+#### `resizeGrid?: [number, number];`
+
+The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
+  
+#### `dragGrid?: [number, number];`
+
+The `dragGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
+
+#### `lockAspectRatio?: boolean;`
+
+The `lockAspectRatio` property is used to lock aspect ratio.
+If omitted, set `false`.
+
+#### `dragHandlerClassName?: string;`
+
+Specifies a selector to be used as the handle that initiates drag.
+Example: '.handle'. 
+
+#### `resizeHandlerStyles?: HandlersStyles;`
+
+The `resizeHandleStyles` property is used to override the style of one or more resize handlers.
+Only the axis you specify will have its handler style replaced.
+If you specify a value for `right` it will completely replace the styles for the `right` resize handler,
+but other handler will still use the default styles.
+
+```
+export type HandlerStyles = {
+  bottom?: any,
+  bottomLeft?: any,
+  bottomRight?: any,
+  left?: any,
+  right?: any,
+  top?: any,
+  topLeft?: any,
+  topRight?: any
+}
+```
+
+#### `resizeHandlerClasses?: HandlersClassName;`
+
+The `resizeHandlerClasses` property is used to set the className of one or more resize handlers.
+
+```
+type HandlerClasses = {
+  bottom?: string;
+  bottomLeft?: string;
+  bottomRight?: string;
+  left?: string;
+  right?: string;
+  top?: string;
+  topLeft?: string;
+  topRight?: string;
+}
+```
+
+#### `enableResizing?: ?Enable;`
+
+The `enableResizing` property is used to set the resizable permission of a resizable component.
 
 The permission of `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, `topLeft` direction resizing.
 If omitted, all resizer are enabled.
 If you want to permit only right direction resizing, set `{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }`. 
-  
-  
-  
-#### `onClick: PropTypes.func`
 
-Calls when resizable component clicked.
-  
-  
-  
-#### `onTouchStart: PropTypes.func`
+```
+export type Enable = {
+  bottom?: boolean;
+  bottomLeft?: boolean;
+  bottomRight?: boolean;
+  left?: boolean;
+  right?: boolean;
+  top?: boolean;
+  topLeft?: boolea;
+  topRight?: boolean;
+}
+```
 
-Calls when resizable component touched.
-  
-  
-  
-#### `onDoubleClick: PropTypes.func`
+#### `extendsProps?: any;`
 
-Calls when resizable component double clicked.
-  
-  
-  
-#### `onResizeStart: PropTypes.func`
+This property is used to pass the other props to the component.
 
-Calls when resizable component resize starts.
-Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`, `event: object`)
+e.g.
 
-- direction: `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, and `topLeft`.
-- styleSize: `{ width, height }`
-  - this argument is {width, height} of getComputedStyle.
-- clientSize: `{ width, height }`
-  - this argument is `clientWidth` and `clientHeight`.
-- event: `mouse down event`
-  
-  
-  
-#### `onResize: PropTypes.func`
+``` javascript
+const extendsProps = {
+  data-foo: 'foo',
+  onMouseOver: () => {},
+};
 
-Calls when resizable component resize.
-Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`, `delta: object`, `newPos: object`)
+<Rnd extendsProps={extendsProps} />
+```
 
-- direction: `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, and `topLeft`.
-- styleSize: `{ width, height }`
-  - this argument is {width, height} of getComputedStyle.
-- clientSize: `{ width, height }`
-  - this argument is `clientWidth` and `clientHeight`.
-- delta: `{ width, height }`
-  - this delta width and height by resize. 
-- newPos: `{ x, y }`
-  - new position of the element.
-  
-For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'right' 20px, this callback is called with `('right', { width: 120, height: 200 }, { width: 160, height: 240 }, {width: 20, height: 0})`
-  
-  
-  
-#### `onResizeStop: PropTypes.func`
-
-Calls back with (`direction: string`, `styleSize: object`, `clientSize: object`, `delta: object`)
-
-- direction: `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, and `topLeft`.
-- styleSize: `{ width, height }`
-  - this argument is {width, height} of getComputedStyle.
-- clientSize: `{ width, height }`
-  - this argument is `clientWidth` and `clientHeight`.
-- delta: `{ width, height }`
-  - this delta width and height by resize. 
-  
-For example, when `<Resizable width={100} height={200} style={{ padding: '20px'}} onResize={...} />` mounted and resize 'right' 20px, this callback is called with `('right', { width: 120, height: 200 }, { width: 160, height: 240 }, {width: 20, height: 0}, {x: 20, y: 0})`
-  
-  
-  
-#### `moveAxis: PropTypes.string`
+#### `dragAxis?: 'x' | 'y' | 'both' | 'none'`
 
 The direction of allowed movement (dragging) allowed ('x','y','both','none').
   
-  
-  
-#### `lockAspectRatio: PropTypes.bool`
-
-The `lockAspectRatio` property is used to lock aspect ratio.
-If ommited, set `false`.
-  
-  
-  
-#### `onDragStart: PropTypes.func`
-
-Callback called on dragging start.   
-  
-  
-  
-#### `onDrag: PropTypes.func`
-
-Callback called on resizing.   
-`onDrag` called with the following parameters:
-
-``` javascript
-(
- event: Event,
- ui:{
-      deltaX: number, deltaY: number,
-      node: Node
-      position:
-      {
-        left: number, top: number
-      }
-   }
-)
-```
-  
-  
-  
-#### `onDragStop: PropTypes.func`
-
-Callback called on dragging stop.
-`onDragStop` called with the following parameters:
-
-``` javascript
-(
- event: Event,
- ui:{
-      deltaX: number, deltaY: number,
-      node: Node
-      position:
-      {
-        left: number, top: number
-      }
-   }
-)
-```
-  
-  
-  
-#### `bounds: PropTypes.oneOfType([PropTypes.object, PropTypes.string])`
+#### `bounds?: string;`
 
 Specifies movement boundaries. Accepted values:
  - `parent` restricts movement within the node's offsetParent
     (nearest node with position relative or absolute), or
- - An object with `left, top, right, and bottom` properties.
-   These indicate how far in each direction the draggable
-   can be moved.
-  
-  
-  
-#### `dragHandlerClassName: PropTypes.string`
+ - Selector, like `.fooClassName`.
 
-Specifies a selector to be used as the handle that initiates drag.
-Example: '.handle'.
-  
-  
-  
-#### `zIndex: PropTypes.number`
+## Callback
 
-The `zIndex` property is used to set the zindex of a component.
-  
-  
-  
-#### `resizeGrid: PropTypes.arrayOf(PropTypes.number)`
+#### `onResizeStart?: ResizeStartCallBack;`
 
-The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
-  
-  
-  
-#### `moveGrid: PropTypes.arrayOf(PropTypes.number)`
+`ResizeStartCallBack` type is below.
 
-The `moveGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
+```
+type ResizeStartCallBack = (
+  e: SyntheticMouseEvent | SyntheticTouchEvent,
+  dir: Direction,
+  refToElement: HTMLElement,
+) => void;
+```
+
+Calls when resizable component resize start.
+
+#### `onResize?: Callback;`
+
+`Callback` type is below.
+
+```
+type Callback = (
+  event: MouseEvent | TouchEvent,
+  direction: Direction,
+  refToElement: HTMLElement,
+  delta: NumberSize,
+) => void;
+```
+
+Calls when resizable component resizing.
+
+#### `onResizeStop?: Callback;`
+
+`Callback` type is below.
+
+```
+type Callback = (
+  event: MouseEvent | TouchEvent,
+  direction: Direction,
+  refToElement: HTMLElement,
+  delta: NumberSize,
+) => void;
+```
+
+Calls when resizable component resize startStop.
+
+#### `onDragStart: DraggableEventHandler;`
+
+Callback called on dragging start.
+
+```
+type DraggableData = {
+  node: HTMLElement,
+  x: number,
+  y: number,
+  deltaX: number, deltaY: number,
+  lastX: number, lastY: number
+};
+
+type DraggableEventHandler = (
+  e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData,
+) => void | false;
+```
   
-  
+#### `onDrag: DraggableEventHandler;`
+
+`onDrag` called with the following parameters:
+
+```
+type DraggableData = {
+  node: HTMLElement,
+  x: number,
+  y: number,
+  deltaX: number, deltaY: number,
+  lastX: number, lastY: number
+};
+
+type DraggableEventHandler = (
+  e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData,
+) => void | false;
+```
+
+#### `onDragStop: DraggableEventHandler;`
+
+`onDragStop` called on dragging stop.
+
+```
+type DraggableData = {
+  node: HTMLElement,
+  x: number,
+  y: number,
+  deltaX: number, deltaY: number,
+  lastX: number, lastY: number
+};
+
+type DraggableEventHandler = (
+  e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData,
+) => void | false;
+```
+
+
 ## Methods
 
-#### `updateSize({ width: number, height: number })`
+
+#### `updateSize(size: { x: string | number, y: string | number })`
 
 Update component size.
 `grid` ,`max/minWidth`, `max/minHeight` props is ignored, when this method called.
@@ -333,7 +347,7 @@ class YourComponent extends Component {
 }
 ```  
 
-#### `updateZIndex(zIndex: number)`
+#### `updateZIndex(z: number)`
 
 Update component z-index.
 
@@ -368,6 +382,14 @@ npm t
 ```
 
 ## Changelog
+
+
+#### v5.0
+
+- Fix resize bounds.
+- Modify API.
+- Use original `react-draggable`.
+
 
 #### v4.2.1
 
@@ -442,7 +464,7 @@ npm t
 
 The MIT License (MIT)
 
-Copyright (c) 2016 @Bokuweb
+Copyright (c) 2017 bokuweb
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
