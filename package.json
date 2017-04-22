@@ -3,8 +3,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
-    "build:production": "NODE_ENV=production babel -d lib/ src/ --copy-files",
+    "build": "NODE_ENV=production babel -d lib/ src/components/ --copy-files",
     "flow": "flow",
     "lint": "eslint src",
     "test": "NODE_ENV=test ava",
@@ -59,5 +58,8 @@
   "dependencies": {
     "react-draggable": "^2.2.3",
     "react-resizable-box": "^2.0.2"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }
