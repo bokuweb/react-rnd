@@ -59,7 +59,7 @@ yarn add react-rnd
 </Rnd>
 ```
 
-## Properties
+## Props
 
 #### `default: { x: number; y: number;  width: number | string;  height: number | string; };`
   
@@ -131,7 +131,7 @@ Only the axis you specify will have its handler style replaced.
 If you specify a value for `right` it will completely replace the styles for the `right` resize handler,
 but other handler will still use the default styles.
 
-```
+``` javascript
 export type HandlerStyles = {
   bottom?: any,
   bottomLeft?: any,
@@ -148,7 +148,8 @@ export type HandlerStyles = {
 
 The `resizeHandlerClasses` property is used to set the className of one or more resize handlers.
 
-```
+
+``` javascript
 type HandlerClasses = {
   bottom?: string;
   bottomLeft?: string;
@@ -169,7 +170,7 @@ The permission of `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `
 If omitted, all resizer are enabled.
 If you want to permit only right direction resizing, set `{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }`. 
 
-```
+``` javascript
 export type Enable = {
   bottom?: boolean;
   bottomLeft?: boolean;
@@ -214,7 +215,8 @@ Specifies movement boundaries. Accepted values:
 
 `ResizeStartCallBack` type is below.
 
-```
+
+``` javascript
 type ResizeStartCallBack = (
   e: SyntheticMouseEvent | SyntheticTouchEvent,
   dir: Direction,
@@ -228,7 +230,8 @@ Calls when resizable component resize start.
 
 `Callback` type is below.
 
-```
+
+``` javascript
 type Callback = (
   event: MouseEvent | TouchEvent,
   direction: Direction,
@@ -243,7 +246,8 @@ Calls when resizable component resizing.
 
 `Callback` type is below.
 
-```
+
+``` javascript
 type Callback = (
   event: MouseEvent | TouchEvent,
   direction: Direction,
@@ -258,7 +262,8 @@ Calls when resizable component resize startStop.
 
 Callback called on dragging start.
 
-```
+
+``` javascript
 type DraggableData = {
   node: HTMLElement,
   x: number,
@@ -276,7 +281,7 @@ type DraggableEventHandler = (
 
 `onDrag` called with the following parameters:
 
-```
+``` javascript
 type DraggableData = {
   node: HTMLElement,
   x: number,
@@ -294,7 +299,8 @@ type DraggableEventHandler = (
 
 `onDragStop` called on dragging stop.
 
-```
+
+``` javascript
 type DraggableData = {
   node: HTMLElement,
   x: number,
@@ -309,7 +315,7 @@ type DraggableEventHandler = (
 ```
 
 
-## Methods
+## Method
 
 
 #### `updateSize(size: { x: string | number, y: string | number })`
