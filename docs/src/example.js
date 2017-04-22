@@ -1,45 +1,64 @@
-import React, { Component } from 'react';
-import Rnd from '../../src';
+import React from 'react';
+import Rnd from '../../src/components';
 
-const style = {
-  textAlign: 'center',
-  padding: '40px',
-  border: 'solid 3px #fff',
-  borderRadius: '5px',
-  color: '#fff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
+const Box = () => (
+  <div
+    className="box"
+    style={{ margin: 0, height: '100%', paddingBottom: '40px' }}
+  >
+    <article className="media">
+      <div className="media-left">
+        <figure className="image is-64x64">
+          <img src="https://avatars1.githubusercontent.com/u/10220449?v=3&s=460" alt="Image" />
+        </figure>
+      </div>
+      <div className="media-content">
+        <div className="content">
+          <p>
+            <strong>bokuweb</strong> <small>@bokuweb17</small> <small>31m</small>
+            <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+        </p>
+        </div>
+        <nav className="level is-mobile">
+          <div className="level-left">
+            <a className="level-item">
+              <span className="icon is-small"><i className="fa fa-reply"></i></span>
+            </a>
+            <a className="level-item">
+              <span className="icon is-small"><i className="fa fa-retweet"></i></span>
+            </a>
+            <a className="level-item">
+              <span className="icon is-small"><i className="fa fa-heart"></i></span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </article>
+  </div>
+);
 
-export default class Example extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { zIndex: 99 };
-    setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
-  }
-  render() {
-    return (
-      <Rnd
-        ref={c => { this.rnd = c; }}
-        initial={{
-          x: window.innerWidth / 2 - 200,
-          y: window.innerHeight / 2 - 80,
-          width: 400,
-          height: 160,
-        }}
-        style={style}
-        minWidth={300}
-        minHeight={160}
-        maxWidth={800}
-        maxHeight={300}
-        bounds={'parent'}
-        zIndex={this.state.zIndex}
-      >
-        <span className="box">
-          resize and drag me!!
-        </span>
-      </Rnd>
-    );
-  }
-}
+
+export default () => (
+  <div
+    style={{
+      width: '800px',
+      height: '600px',
+    }}
+  >
+    <Rnd
+      ref={c => { this.rnd = c; }}
+      default={{
+        x: 150,
+        y: 205,
+        width: 500,
+        height: 190,
+      }}
+      minWidth={500}
+      minHeight={190}
+      bounds="parent"
+    >
+      <Box />
+    </Rnd>
+  </div>
+);
