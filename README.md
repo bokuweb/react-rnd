@@ -7,6 +7,18 @@ Resizable and draggable component for React.
 [![npm](https://img.shields.io/npm/dm/react-rnd.svg?style=flat-square)]()
 [![License](https://img.shields.io/npm/l/react-rnd.svg?style=flat-square)](https://github.com/bokuweb/react-rnd#license)
 
+## Table of Contents
+
+- [Demo](#Demo)
+- [Install](#install)
+- [Usage](#usage)
+- [Props](#props)
+- [Callback](#callback)
+- [Method](#method)
+- [Test](#test)
+- [Changelog](#changelog)
+- [License](#license)
+
 ## Demo
 
 ![screenshot](https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif)
@@ -14,16 +26,25 @@ Resizable and draggable component for React.
 See demo: [http://bokuweb.github.io/react-rnd/](http://bokuweb.github.io/react-rnd/)  
 demo Code: [https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js](https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js)  
 
+background image : <a href="http://www.freepik.com/free-photos-vectors/background">Background vector created by Starline - Freepik.com</a>
 
-## Installation
+## Install
+
+- use npm
 
 ```sh
-npm i react-rnd
+npm i -S react-rnd
 ```
 
-## Overview
+- use yarn
 
-### Basic
+```sh
+yarn add react-rnd
+```
+
+## Usage
+
+### Minimum example
 
 ``` javascript
 <Rnd
