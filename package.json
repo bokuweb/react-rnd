@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "NODE_ENV=production babel -d lib/ src/components/ --copy-files",
+    "build:example": "NODE_ENV=example webpack",
     "flow": "flow",
     "lint": "eslint src",
     "test": "NODE_ENV=test ava",

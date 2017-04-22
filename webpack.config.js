@@ -16,13 +16,16 @@ const rules = [
   {
     test: /\.js$/,
     use: 'babel-loader',
-    include: path.resolve(__dirname, 'src'),
+    // include: path.resolve(__dirname, 'src'),
     exclude: /node_modules/,
   }
 ];
 
-module.exports = () => ({
-  entry: process.env.NODE_ENV === 'production'
+const createEntry = () => {
+  if (process.env.NODE_ENV === 'example') {
+    return './docs/src/index.js';
+  }
+  return process.env.NODE_ENV === 'production'
     ? [
       './src/main.js',
     ]
@@ -31,19 +34,33 @@ module.exports = () => ({
       'webpack-dev-server/client?http://localhost:3333',
       'webpack/hot/only-dev-server',
       './src/main.js',
-    ],
-  output: {
+    ];
+};
+
+const createOutput = () => {
+  if (process.env.NODE_ENV === 'example') {
+    return {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'docs/dist'),
+    };
+  }
+  return {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
-  },
+  };
+};
+
+module.exports = () => ({
+  entry: createEntry(),
+  output: createOutput(),
   devServer: {
     contentBase: 'public/',
     historyApiFallback: true,
     port: 3333,
     hot: true,
   },
-  plugins: process.env.NODE_ENV === 'production'
+  plugins: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'example'
     ? BASE_PLUGINS.concat([
       new webpack.optimize.UglifyJsPlugin({
         minimize: true,

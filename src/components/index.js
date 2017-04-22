@@ -276,7 +276,7 @@ export default class Rnd extends Component {
       >
         <div
           className={this.props.className}
-          style={{ ...boxStyle, ...this.props.style }}
+          style={boxStyle}
           ref={(c: HTMLElement) => { this.wrapper = c; }}
         >
           <Resizable
@@ -285,6 +285,7 @@ export default class Rnd extends Component {
             onResizeStart={this.onResizeStart}
             onResize={this.onResize}
             onResizeStop={this.onResizeStop}
+            style={this.props.style}
             width={this.props.default.width}
             height={this.props.default.height}
             minWidth={this.props.minWidth}
