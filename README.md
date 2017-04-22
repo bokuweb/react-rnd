@@ -5,7 +5,6 @@ Resizable and draggable component for React.
 [![Build Status](https://img.shields.io/travis/bokuweb/react-rnd.svg?style=flat-square)](https://travis-ci.org/bokuweb/react-rnd)
 [![Version](https://img.shields.io/npm/v/react-rnd.svg?style=flat-square)](https://www.npmjs.com/package/react-rnd)
 [![npm](https://img.shields.io/npm/dm/react-rnd.svg?style=flat-square)]()
-(https://codeclimate.com/github/bokuweb/react-rnd)
 [![License](https://img.shields.io/npm/l/react-rnd.svg?style=flat-square)](https://github.com/bokuweb/react-rnd#license)
 
 ## Demo
@@ -27,16 +26,16 @@ npm i react-rnd
 ### Basic
 
 ``` javascript
-  <Rnd
-    default={{
-      x: 0,
-      y: 0,
-      width: 320,
-      height: 200,
-    }}
-  >
-    Rnd
-  </Rnd>
+<Rnd
+  default={{
+    x: 0,
+    y: 0,
+    width: 320,
+    height: 200,
+  }}
+>
+  Rnd
+</Rnd>
 ```
 
 ## Properties
@@ -90,7 +89,7 @@ The `z` property is used to set the zIndex of a component.
 
 The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
   
-#### `dragGrid?: PropTypes.arrayOf(PropTypes.number)`
+#### `dragGrid?: [number, number];`
 
 The `dragGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
 
@@ -111,9 +110,35 @@ Only the axis you specify will have its handler style replaced.
 If you specify a value for `right` it will completely replace the styles for the `right` resize handler,
 but other handler will still use the default styles.
 
+```
+export type HandlerStyles = {
+  bottom?: any,
+  bottomLeft?: any,
+  bottomRight?: any,
+  left?: any,
+  right?: any,
+  top?: any,
+  topLeft?: any,
+  topRight?: any
+}
+```
+
 #### `resizeHandlerClasses?: HandlersClassName;`
 
 The `resizeHandlerClasses` property is used to set the className of one or more resize handlers.
+
+```
+type HandlerClasses = {
+  bottom?: string;
+  bottomLeft?: string;
+  bottomRight?: string;
+  left?: string;
+  right?: string;
+  top?: string;
+  topLeft?: string;
+  topRight?: string;
+}
+```
 
 #### `enableResizing?: ?Enable;`
 
@@ -122,6 +147,19 @@ The `enableResizing` property is used to set the resizable permission of a resiz
 The permission of `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, `topLeft` direction resizing.
 If omitted, all resizer are enabled.
 If you want to permit only right direction resizing, set `{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }`. 
+
+```
+export type Enable = {
+  bottom?: boolean;
+  bottomLeft?: boolean;
+  bottomRight?: boolean;
+  left?: boolean;
+  right?: boolean;
+  top?: boolean;
+  topLeft?: boolea;
+  topRight?: boolean;
+}
+```
 
 #### `extendsProps?: any;`
 
@@ -147,7 +185,7 @@ The direction of allowed movement (dragging) allowed ('x','y','both','none').
 Specifies movement boundaries. Accepted values:
  - `parent` restricts movement within the node's offsetParent
     (nearest node with position relative or absolute), or
- - Selector like `.fooClassName`.
+ - Selector, like `.fooClassName`.
 
 ## Callback
 

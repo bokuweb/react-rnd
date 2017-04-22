@@ -1,6 +1,7 @@
 {
-  "name": "raect-rnd",
+  "name": "react-rnd",
   "license": "MIT",
+  "version": "5.0.0-rc.1",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "NODE_ENV=production babel -d lib/ src/components/ --copy-files",
@@ -11,6 +12,13 @@
     "guide:build": "styleguidist build",
     "prepublish": "npm run build"
   },
+  "keywords": [
+    "react",
+    "resize",
+    "resizable",
+    "component",
+    "draggable"
+  ],
   "devDependencies": {
     "ava": "^0.19.1",
     "babel-cli": "^6.24.1",

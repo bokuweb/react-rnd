@@ -4,7 +4,7 @@ import test from 'ava';
 import React from 'react';
 import { spy } from 'sinon';
 import { mount } from 'enzyme';
-import Rnd from './rnd';
+import Rnd from './';
 
 const mouseMove = (x, y) => {
   const event = document.createEvent('MouseEvents');
