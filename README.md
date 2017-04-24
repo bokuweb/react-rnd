@@ -1,5 +1,7 @@
 # react-rnd
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bokuweb/react-rnd.svg)](https://greenkeeper.io/)
+
 Resizable and draggable component for React.
 
 [![Build Status](https://img.shields.io/travis/bokuweb/react-rnd.svg?style=flat-square)](https://travis-ci.org/bokuweb/react-rnd)
