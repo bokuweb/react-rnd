@@ -1,7 +1,8 @@
 {
   "name": "react-rnd",
   "license": "MIT",
-  "version": "5.0.0",
+  "version": "5.0.1",
+  "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "NODE_ENV=production babel -d lib/ src/components/ --copy-files",
