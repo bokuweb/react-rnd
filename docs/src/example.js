@@ -9,7 +9,7 @@ const Box = () => (
     <article className="media">
       <div className="media-left">
         <figure className="image is-64x64">
-          <img src="https://avatars1.githubusercontent.com/u/10220449?v=3&s=460" alt="Image" />
+          <img src="https://avatars1.githubusercontent.com/u/10220449?v=3&s=460" draggable="false" alt="Image" />
         </figure>
       </div>
       <div className="media-content">
@@ -47,7 +47,6 @@ export default () => (
     }}
   >
     <Rnd
-      ref={c => { this.rnd = c; }}
       default={{
         x: 150,
         y: 205,
