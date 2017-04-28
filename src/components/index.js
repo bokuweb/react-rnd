@@ -226,7 +226,7 @@ export default class Rnd extends Component {
       this.draggable.setState({ y: this.state.original.y - delta.height });
     }
     if (this.props.onResize) {
-      this.props.onResize(event, direction, refToResizableElement, delta, {
+      this.props.onResize(e, direction, refToResizableElement, delta, {
         x: this.draggable.state.x,
         y: this.draggable.state.y,
       });
@@ -241,7 +241,7 @@ export default class Rnd extends Component {
   ) {
     this.setState({ disableDragging: false });
     if (this.props.onResizeStop) {
-      this.props.onResizeStop(event, direction, refToResizableElement, delta, {
+      this.props.onResizeStop(e, direction, refToResizableElement, delta, {
         x: this.draggable.state.x,
         y: this.draggable.state.y,
       });
