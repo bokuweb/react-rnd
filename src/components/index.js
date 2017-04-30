@@ -32,6 +32,8 @@ type State = {
     bottom: number;
     left: number;
   };
+  maxWidth?: number;
+  maxHeight?: number;
 }
 
 export type Enable = {
@@ -140,6 +142,8 @@ export default class Rnd extends Component {
         bottom: 0,
         left: 0,
       },
+      maxWidth: props.maxWidth,
+      maxHeight: props.maxHeight,
     };
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
@@ -153,11 +157,11 @@ export default class Rnd extends Component {
     if (this.props.onDragStart) {
       this.props.onDragStart(e, data);
     }
+    if (!this.props.bounds) return;
     const parent = this.wrapper && this.wrapper.parentNode;
     const target = this.props.bounds === 'parent'
       ? parent
       : document.querySelector(this.props.bounds);
-    if (!this.props.bounds) return;
     if (!(target instanceof HTMLElement) || !(parent instanceof HTMLElement)) return;
     const targetRect = target.getBoundingClientRect();
     const targetLeft = targetRect.left;
@@ -170,20 +174,11 @@ export default class Rnd extends Component {
     this.setState({
       bounds: {
         top,
-        right: left + (target.offsetWidth - (this.resizable: any).size.width),
-        bottom: top + (target.offsetHeight - (this.resizable: any).size.height),
+        right: left + (target.offsetWidth - this.resizable.size.width),
+        bottom: top + (target.offsetHeight - this.resizable.size.height),
         left,
       },
     });
-  }
-
-  getResizableBounds() {
-    if (this.props.bounds === 'parent') {
-      if (!this.wrapper) return undefined;
-      if (!(this.wrapper.parentNode instanceof HTMLElement)) return undefined;
-      return this.wrapper.parentNode;
-    }
-    return document.querySelector(this.props.bounds);
   }
 
   onDrag(e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData) {
@@ -203,14 +198,43 @@ export default class Rnd extends Component {
     dir: Direction,
     refToResizableElement: HTMLElement,
   ) {
+    e.stopPropagation();
     this.setState({
       disableDragging: true,
       original: { x: this.draggable.state.x, y: this.draggable.state.y },
     });
+    if (this.props.bounds) {
+      const parent = this.wrapper && this.wrapper.parentNode;
+      const target = this.props.bounds === 'parent'
+        ? parent
+        : document.querySelector(this.props.bounds);
+      const self = this.wrapper;
+      if (target instanceof HTMLElement && parent instanceof HTMLElement) {
+        const selfRect = self.getBoundingClientRect();
+        const selfLeft = selfRect.left;
+        const selfTop = selfRect.top;
+        const targetRect = target.getBoundingClientRect();
+        const targetLeft = targetRect.left;
+        const targetTop = targetRect.top;
+        if (/left/i.test(dir)) {
+          const max = (selfLeft - targetLeft) + this.resizable.size.width;
+          this.setState({ maxWidth: max > this.props.maxWidth ? this.props.maxWidth : max });
+        }
+        if (/right/i.test(dir)) {
+          const max = target.offsetWidth + (targetLeft - selfLeft);
+          this.setState({ maxWidth: max > this.props.maxWidth ? this.props.maxWidth : max });
+        }
+        if (/bottom/i.test(dir)) {
+          const max = target.offsetHeight + (targetTop - selfTop);
+          this.setState({ maxHeight: max > this.props.maxHeight ? this.props.maxHeight : max });
+        }
+      }
+    } else {
+      this.setState({ maxWidth: this.props.maxWidth, maxHeight: this.props.maxHeight });
+    }
     if (this.props.onResizeStart) {
       this.props.onResizeStart(e, dir, refToResizableElement);
     }
-    e.stopPropagation();
   }
 
   onResize(
@@ -219,14 +243,38 @@ export default class Rnd extends Component {
     refToResizableElement: HTMLElement,
     delta: { height: number, width: number },
   ) {
+    let left = 0;
+    let top = 0;
+    let parentLeft, selfLeft;
+    if (this.props.bounds) {
+      const parent = this.wrapper && this.wrapper.parentNode;
+      const target = this.props.bounds === 'parent'
+        ? parent
+        : document.querySelector(this.props.bounds);
+      const self = this.wrapper;
+      if (target instanceof HTMLElement && parent instanceof HTMLElement) {
+        const selfRect = self.getBoundingClientRect();
+        selfLeft = selfRect.left;
+        const selfTop = selfRect.top;
+        const parentRect = parent.getBoundingClientRect();
+        parentLeft = parentRect.left;
+        const parentTop = parentRect.top;
+        left = selfLeft - parentLeft;
+        top = selfTop - parentTop;
+      }
+    }
     if (/left/i.test(direction)) {
-      this.draggable.setState({ x: this.state.original.x - delta.width });
+      let x = this.state.original.x - delta.width;
+      x = selfLeft >= parentLeft ? x : (parentLeft - selfLeft);
+      this.draggable.setState({ x });
     }
     if (/top/i.test(direction)) {
-      this.draggable.setState({ y: this.state.original.y - delta.height });
+      let y = this.state.original.y - delta.height;
+      if (top) y = y > top ? top : y;
+      this.draggable.setState({ y });
     }
     if (this.props.onResize) {
-      this.props.onResize(event, direction, refToResizableElement, delta, {
+      this.props.onResize(e, direction, refToResizableElement, delta, {
         x: this.draggable.state.x,
         y: this.draggable.state.y,
       });
@@ -241,7 +289,7 @@ export default class Rnd extends Component {
   ) {
     this.setState({ disableDragging: false });
     if (this.props.onResizeStop) {
-      this.props.onResizeStop(event, direction, refToResizableElement, delta, {
+      this.props.onResizeStop(e, direction, refToResizableElement, delta, {
         x: this.draggable.state.x,
         y: this.draggable.state.y,
       });
@@ -290,10 +338,9 @@ export default class Rnd extends Component {
             height={this.props.default.height}
             minWidth={this.props.minWidth}
             minHeight={this.props.minHeight}
-            maxWidth={this.props.maxWidth}
-            maxHeight={this.props.maxHeight}
+            maxWidth={this.state.maxWidth}
+            maxHeight={this.state.maxHeight}
             grid={this.props.resizeGrid}
-            bounds={this.getResizableBounds()}
             lockAspectRatio={this.props.lockAspectRatio}
             handlerStyles={this.props.resizeHandlerStyles}
             handlerClasses={this.props.resizeHandlerClasses}
