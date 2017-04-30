@@ -28,7 +28,7 @@
     "babel-eslint": "^7.2.2",
     "babel-loader": "^7.0.0",
     "babel-plugin-dynamic-import-webpack": "^1.0.1",
-    "babel-plugin-flow-runtime": "^0.10.0",
+    "babel-plugin-flow-runtime": "^0.11.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
