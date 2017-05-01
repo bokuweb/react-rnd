@@ -412,7 +412,16 @@ npm t
 ## Changelog
 
 
-#### v5.0
+#### v5.0.2
+
+- Fix argument events #100
+
+#### v5.0.1
+
+- Fix example
+- Update README
+
+#### v5.0.0
 
 - Fix resize bounds.
 - Modify API.
