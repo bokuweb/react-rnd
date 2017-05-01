@@ -21,65 +21,54 @@ const mouseUp = (x, y) => {
 };
 
 describe('', () => {
-  it('should throw error without props', () => {
-    try {
-      mount(<Rnd />);
-    } catch (e) {
-      console.log(e);
-      console.log('asdasdasdsa')
-    }
+
+  it('should mount', () => {
+    const rnd = mount(
+      <Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />,
+    );
+    assert(!!rnd);
+  });
+
+  it('should call onDragStart when start dragging', () => {
+    const onDragStart = spy();
+    const rnd = mount(
+      <Rnd
+        default={{ x: 100, y: 100, width: 100, height: 100 }}
+        onDragStart={onDragStart}
+      />,
+    );
+    rnd.find('div').at(0).simulate('mousedown');
+    assert.equal(onDragStart.callCount, 1);
+    assert.equal(onDragStart.firstCall.args[0].type, 'mousedown');
+    assert.equal(onDragStart.firstCall.args[1].x, 100);
+    assert.equal(onDragStart.firstCall.args[1].y, 100);
+  });
+
+  it('should call onDrag when dragging', () => {
+    const onDrag = spy();
+    const rnd = mount(
+      <Rnd
+        default={{ x: 100, y: 100, width: 100, height: 100 }}
+        onDrag={onDrag}
+      />,
+    );
+    rnd.find('div').at(0).simulate('mousedown');
+    mouseMove(200, 220);
+    mouseUp(100, 120);
+    assert.equal(onDrag.callCount, 1);
+  });
+
+  it('should call onDragStop when drag stop', () => {
+    const onDragStop = spy();
+    const rnd = mount(
+      <Rnd
+        default={{ x: 100, y: 100, width: 100, height: 100 }}
+        onDragStop={onDragStop}
+      />,
+    );
+    rnd.find('div').at(0).simulate('mousedown');
+    mouseMove(200, 220);
+    mouseUp(100, 120);
+    assert.equal(onDragStop.callCount, 1);
   });
 });
-
-/*
-test('should mount', async (t) => {
-  const rnd = mount(
-    <Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />,
-  );
-  t.true(!!rnd);
-});
-
-test('should call onDragStart when start dragging', async (t) => {
-  const onDragStart = spy();
-  const rnd = mount(
-    <Rnd
-      default={{ x: 100, y: 100, width: 100, height: 100 }}
-      onDragStart={onDragStart}
-    />,
-  );
-  rnd.find('div').at(0).simulate('mousedown');
-  t.is(onDragStart.callCount, 1);
-  t.is(onDragStart.firstCall.args[0].type, 'mousedown');
-  t.is(onDragStart.firstCall.args[1].x, 100);
-  t.is(onDragStart.firstCall.args[1].y, 100);
-});
-
-test('should call onDrag when dragging', async (t) => {
-  const onDrag = spy();
-  const rnd = mount(
-    <Rnd
-      default={{ x: 100, y: 100, width: 100, height: 100 }}
-      onDrag={onDrag}
-    />,
-  );
-  rnd.find('div').at(0).simulate('mousedown');
-  mouseMove(200, 220);
-  mouseUp(100, 120);
-  t.is(onDrag.callCount, 1);
-});
-
-test('should call onDragStop when drag stop', async (t) => {
-  const onDragStop = spy();
-  const rnd = mount(
-    <Rnd
-      default={{ x: 100, y: 100, width: 100, height: 100 }}
-      onDragStop={onDragStop}
-    />,
-  );
-  rnd.find('div').at(0).simulate('mousedown');
-  mouseMove(200, 220);
-  mouseUp(100, 120);
-  t.is(onDragStop.callCount, 1);
-});
-
-*/
