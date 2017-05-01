@@ -411,6 +411,11 @@ npm t
 
 ## Changelog
 
+#### v5.0.3
+
+- Fix `updateZIndex`.
+- Fix `updateSize`.
+- Fix left and top bounds.
 
 #### v5.0.2
 
