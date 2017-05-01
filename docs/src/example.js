@@ -1,6 +1,8 @@
 import React from 'react';
 import Rnd from '../../src/components';
 
+let rnd;
+
 const Box = () => (
   <div
     className="box"
@@ -45,8 +47,9 @@ export default () => (
       width: '800px',
       height: '600px',
     }}
-  >
+  > 
     <Rnd
+      ref={c => { rnd = c; }}
       default={{
         x: 150,
         y: 205,

@@ -21,8 +21,7 @@ const mouseUp = (x, y) => {
 };
 
 describe('', () => {
-
-  it('should mount', () => {
+  it('should mount without error', () => {
     const rnd = mount(
       <Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />,
     );
@@ -56,6 +55,8 @@ describe('', () => {
     mouseMove(200, 220);
     mouseUp(100, 120);
     assert.equal(onDrag.callCount, 1);
+    assert.equal(rnd.getDOMNode().getAttribute('style'), -1);
+    // assert.notEqual(rnd.getDOMNode().getAttribute('style').indexOf('transform: translate(100px, 120px)'), -1);
   });
 
   it('should call onDragStop when drag stop', () => {

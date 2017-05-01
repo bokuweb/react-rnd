@@ -301,8 +301,8 @@ export default class Rnd extends Component {
     }
   }
 
-  updateSize(size: { x: string | number, y: string | number }) {
-    this.resizable.updateSize(size);
+  updateSize(size: { width: number, height: number }) {
+    this.resizable.updateSize({ width: size.width, height: size.height });
   }
 
   updatePosition(position: Position) {

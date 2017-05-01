@@ -15,7 +15,7 @@ module.exports = (config) => {
     webpack: {
       devtool: 'inline-source-map',
       externals: {
-        'react/addons': true, // important!!
+        'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,
       },
