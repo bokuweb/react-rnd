@@ -224,6 +224,10 @@ export default class Rnd extends Component {
           const max = target.offsetWidth + (targetLeft - selfLeft);
           this.setState({ maxWidth: max > this.props.maxWidth ? this.props.maxWidth : max });
         }
+        if (/top/i.test(dir)) {
+          const max = (selfTop - targetTop) + this.resizable.size.height;
+          this.setState({ maxHeight: max > this.props.maxHeight ? this.props.maxHeight : max });
+        }
         if (/bottom/i.test(dir)) {
           const max = target.offsetHeight + (targetTop - selfTop);
           this.setState({ maxHeight: max > this.props.maxHeight ? this.props.maxHeight : max });
@@ -243,9 +247,10 @@ export default class Rnd extends Component {
     refToResizableElement: HTMLElement,
     delta: { height: number, width: number },
   ) {
-    let left = 0;
-    let top = 0;
-    let parentLeft, selfLeft;
+    let parentLeft = 0;
+    let selfLeft = 0;
+    let parentTop = 0;
+    let selfTop = 0;
     if (this.props.bounds) {
       const parent = this.wrapper && this.wrapper.parentNode;
       const target = this.props.bounds === 'parent'
@@ -254,23 +259,23 @@ export default class Rnd extends Component {
       const self = this.wrapper;
       if (target instanceof HTMLElement && parent instanceof HTMLElement) {
         const selfRect = self.getBoundingClientRect();
-        selfLeft = selfRect.left;
-        const selfTop = selfRect.top;
         const parentRect = parent.getBoundingClientRect();
+        selfLeft = selfRect.left;
+        selfTop = selfRect.top;
         parentLeft = parentRect.left;
-        const parentTop = parentRect.top;
-        left = selfLeft - parentLeft;
-        top = selfTop - parentTop;
+        parentTop = parentRect.top;
       }
     }
     if (/left/i.test(direction)) {
-      let x = this.state.original.x - delta.width;
-      x = selfLeft >= parentLeft ? x : (parentLeft - selfLeft);
+      const x = selfLeft >= parentLeft
+        ? (this.state.original.x - delta.width)
+        : (parentLeft - selfLeft);
       this.draggable.setState({ x });
     }
     if (/top/i.test(direction)) {
-      let y = this.state.original.y - delta.height;
-      if (top) y = y > top ? top : y;
+      const y = selfTop >= parentTop
+        ? (this.state.original.y - delta.height)
+        : (parentTop - selfTop);
       this.draggable.setState({ y });
     }
     if (this.props.onResize) {
