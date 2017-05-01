@@ -49,6 +49,8 @@
     "flow-bin": "^0.44.0",
     "flow-runtime": "^0.10.0",
     "http-server": "^0.9.0",
+    "karma": "^1.6.0",
+    "karma-nightmare": "^0.4.6",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
