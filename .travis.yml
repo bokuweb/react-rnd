@@ -3,8 +3,5 @@ language: node_js
 node_js:
   - '6.4.0'
 
-install:
-  - npm i
-
 script:
-  - 'npm test'
+  - 'yarn test'
