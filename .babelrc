@@ -9,7 +9,6 @@
     "transform-class-properties",
     "react-hot-loader/babel",
     "dynamic-import-webpack",
-    "transform-decorators-legacy",
     "transform-object-rest-spread",
     ["transform-runtime", {
       "polyfill": true,
@@ -25,7 +24,6 @@
         }}]
       ],
       "plugins": [
-        ["flow-runtime", {"assert": true}],
         "transform-async-to-generator"
       ],
     },
@@ -41,12 +39,7 @@
         "transform-class-properties",
         "react-hot-loader/babel",
         "dynamic-import-webpack",
-        "transform-decorators-legacy",
-        "transform-object-rest-spread",
-        ["transform-runtime", {
-          "polyfill": true,
-          "regenerator": true
-        }]
+        "transform-object-rest-spread"
       ],      
     }
   }

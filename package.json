@@ -11,6 +11,7 @@
     "flow": "flow",
     "lint": "eslint src",
     "test": "NODE_ENV=test karma start",
+    "test:watch": "NODE_ENV=test karma start --single-run false",
     "guide:server": "styleguidist server",
     "guide:build": "styleguidist build",
     "prepublish": "npm run build"

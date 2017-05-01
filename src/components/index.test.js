@@ -6,7 +6,7 @@ import Rnd from './';
 
 const mouseMove = (x, y) => {
   const event = document.createEvent('MouseEvents');
-  (event: any).initMouseEvent('mousemove', true, true, window,
+  event.initMouseEvent('mousemove', true, true, window,
     0, 0, 0, x, y, false, false, false, false, 0, null);
   document.dispatchEvent(event);
   return event;
@@ -14,7 +14,7 @@ const mouseMove = (x, y) => {
 
 const mouseUp = (x, y) => {
   const event = document.createEvent('MouseEvents');
-  (event: any).initMouseEvent('mouseup', true, true, window,
+  event.initMouseEvent('mouseup', true, true, window,
     0, 0, 0, x, y, false, false, false, false, 0, null);
   document.dispatchEvent(event);
   return event;
@@ -50,13 +50,14 @@ describe('', () => {
         default={{ x: 100, y: 100, width: 100, height: 100 }}
         onDrag={onDrag}
       />,
+      { attachTo: document.body },
     );
-    rnd.find('div').at(0).simulate('mousedown');
+    rnd.find('div').at(0).simulate('mousedown', { clientX: 0, clientY: 0 });
     mouseMove(200, 220);
-    mouseUp(100, 120);
     assert.equal(onDrag.callCount, 1);
-    assert.equal(rnd.getDOMNode().getAttribute('style'), -1);
-    // assert.notEqual(rnd.getDOMNode().getAttribute('style').indexOf('transform: translate(100px, 120px)'), -1);
+    assert.equal(onDrag.firstCall.args[1].x, 300);
+    assert.equal(onDrag.firstCall.args[1].y, 320);
+    assert.notEqual(rnd.getDOMNode().getAttribute('style').indexOf('transform: translate(300px, 320px)'), -1);
   });
 
   it('should call onDragStop when drag stop', () => {
