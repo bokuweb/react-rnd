@@ -411,8 +411,22 @@ npm t
 
 ## Changelog
 
+#### v5.0.3
 
-#### v5.0
+- Fix `updateZIndex`.
+- Fix `updateSize`.
+- Fix left and top bounds.
+
+#### v5.0.2
+
+- Fix argument events #100
+
+#### v5.0.1
+
+- Fix example
+- Update README
+
+#### v5.0.0
 
 - Fix resize bounds.
 - Modify API.
