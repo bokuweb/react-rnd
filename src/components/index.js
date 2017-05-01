@@ -323,13 +323,12 @@ export default class Rnd extends Component {
         onDrag={this.onDrag}
         onStop={this.onDragStop}
         axis={this.props.dragAxis}
-        zIndex={this.state.z}
         grid={this.props.dragGrid}
         bounds={this.props.bounds ? this.state.bounds : undefined}
       >
         <div
           className={this.props.className}
-          style={boxStyle}
+          style={{ ...boxStyle, zIndex: this.state.z }}
           ref={(c: HTMLElement) => { this.wrapper = c; }}
         >
           <Resizable
