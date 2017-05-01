@@ -7,6 +7,7 @@
     "start": "webpack-dev-server",
     "build": "NODE_ENV=production babel -d lib/ src/components/ --copy-files",
     "build:example": "NODE_ENV=example webpack",
+    "build:example-watch": "NODE_ENV=example webpack  --watch",
     "flow": "flow",
     "lint": "eslint src",
     "test": "NODE_ENV=test ava",
@@ -49,7 +50,6 @@
     "flow-runtime": "^0.10.0",
     "http-server": "^0.9.0",
     "karma": "^1.6.0",
-    "karma-ava": "^0.0.1",
     "karma-nightmare": "^0.4.6",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.5.1",
@@ -71,7 +71,7 @@
   },
   "dependencies": {
     "react-draggable": "^2.2.3",
-    "react-resizable-box": "^2.0.2"
+    "react-resizable-box": "^2.0.3"
   },
   "files": [
     "lib"
