@@ -111,6 +111,7 @@ const boxStyle = {
   height: 'auto',
   cursor: 'move',
   display: 'inline-block',
+  position: 'absolute',
 };
 
 export default class Rnd extends Component {
