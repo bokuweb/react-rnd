@@ -411,6 +411,10 @@ npm t
 
 ## Changelog
 
+#### v5.0.4
+
+- Fix Issue #117.
+
 #### v5.0.3
 
 - Fix `updateZIndex`.
