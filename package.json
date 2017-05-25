@@ -14,7 +14,7 @@
     "test:watch": "NODE_ENV=test karma start --single-run false",
     "guide:server": "styleguidist server",
     "guide:build": "styleguidist build",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build && flow-copy-source -v src/components lib"
   },
   "keywords": [
     "react",
@@ -47,6 +47,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.0",
     "eslint-plugin-react": "^7.0.0",
     "flow-bin": "^0.46.0",
+    "flow-copy-source": "^1.1.0",
     "flow-runtime": "^0.12.0",
     "http-server": "^0.10.0",
     "karma": "^1.6.0",
