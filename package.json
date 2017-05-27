@@ -1,7 +1,7 @@
 {
   "name": "react-rnd",
   "license": "MIT",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server",
