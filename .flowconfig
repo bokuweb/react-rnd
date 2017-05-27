@@ -7,7 +7,6 @@
 
 [libs]
 ./decls
-./node_modules/react-resizable-box/lib/index.js.flow
 
 [options]
 munge_underscores=true

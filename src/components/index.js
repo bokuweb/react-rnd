@@ -16,7 +16,7 @@ export type DraggableData = {
 };
 
 export type DraggableEventHandler = (
-  e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData,
+  e: Event, data: DraggableData,
 ) => void | false;
 
 type State = {
@@ -88,17 +88,18 @@ type Props = {
   onDragStop?: DraggableEventHandler;
   className?: string;
   style?: any;
-  children?: any,
-  enableResizing?: Enable,
-  extendsProps?: any,
-  resizeHandlerClasses?: HandlerClasses,
-  resizeHandlerStyles?: HandlerStyles,
-  lockAspectRatio?: boolean,
-  maxHeight?: number,
-  maxWidth?: number,
-  minHeight?: number,
-  minWidth?: number,
-  dragAxis?: 'x' | 'y' | 'both' | 'none',
+  children?: any;
+  enableResizing?: Enable;
+  extendsProps?: any;
+  resizeHandlerClasses?: HandlerClasses;
+  resizeHandlerStyles?: HandlerStyles;
+  lockAspectRatio?: boolean;
+  maxHeight?: number;
+  maxWidth?: number;
+  minHeight?: number;
+  minWidth?: number;
+  dragAxis?: 'x' | 'y' | 'both' | 'none';
+  dragHandlerClassName?: string;
 }
 
 export type Position = {
@@ -154,7 +155,7 @@ export default class Rnd extends Component {
     this.onDragStop = this.onDragStop.bind(this);
   }
 
-  onDragStart(e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData) {
+  onDragStart(e: Event, data: DraggableData) {
     if (this.props.onDragStart) {
       this.props.onDragStart(e, data);
     }
@@ -182,7 +183,7 @@ export default class Rnd extends Component {
     });
   }
 
-  onDrag(e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData) {
+  onDrag(e: Event, data: DraggableData) {
     if (this.props.onDrag) {
       this.props.onDrag(e, data);
     }
@@ -195,7 +196,7 @@ export default class Rnd extends Component {
   }
 
   onResizeStart(
-    e: SyntheticMouseEvent | SyntheticTouchEvent,
+    e: Event,
     dir: Direction,
     refToResizableElement: HTMLElement,
   ) {
@@ -223,7 +224,11 @@ export default class Rnd extends Component {
         }
         if (/right/i.test(dir)) {
           const max = target.offsetWidth + (targetLeft - selfLeft);
-          this.setState({ maxWidth: max > this.props.maxWidth ? this.props.maxWidth : max });
+          this.setState({
+            maxWidth: max > (this.props.maxWidth || Infinity)
+              ? this.props.maxWidth
+              : max,
+          });
         }
         if (/top/i.test(dir)) {
           const max = (selfTop - targetTop) + this.resizable.size.height;
@@ -231,7 +236,11 @@ export default class Rnd extends Component {
         }
         if (/bottom/i.test(dir)) {
           const max = target.offsetHeight + (targetTop - selfTop);
-          this.setState({ maxHeight: max > this.props.maxHeight ? this.props.maxHeight : max });
+          this.setState({
+            maxHeight: max > (this.props.maxHeight || Infinity)
+              ? this.props.maxHeight
+              : max,
+          });
         }
       }
     } else {
