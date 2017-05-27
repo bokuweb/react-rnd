@@ -411,6 +411,14 @@ npm t
 
 ## Changelog
 
+#### v5.0.6
+
+- Fix flow error.
+
+#### v5.0.5
+
+- Add index.js.flow
+
 #### v5.0.4
 
 - Fix Issue #117.
