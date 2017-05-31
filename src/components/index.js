@@ -333,6 +333,7 @@ export default class Rnd extends Component {
         onDrag={this.onDrag}
         onStop={this.onDragStop}
         axis={this.props.dragAxis}
+        disabled={this.props.disableDragging}
         grid={this.props.dragGrid}
         bounds={this.props.bounds ? this.state.bounds : undefined}
       >
