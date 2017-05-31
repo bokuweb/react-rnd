@@ -179,7 +179,7 @@ export type Enable = {
   left?: boolean;
   right?: boolean;
   top?: boolean;
-  topLeft?: boolea;
+  topLeft?: boolean;
   topRight?: boolean;
 }
 ```
