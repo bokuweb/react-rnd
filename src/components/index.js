@@ -324,6 +324,12 @@ export default class Rnd extends Component {
   }
 
   render() {
+    const innerStyle = {
+      ...boxStyle,
+      zIndex: this.state.z,
+      ...this.props.disableDragging && { cursor: 'normal' },
+    };
+
     return (
       <Draggable
         ref={(c: Draggable) => { this.draggable = c; }}
@@ -339,7 +345,7 @@ export default class Rnd extends Component {
       >
         <div
           className={this.props.className}
-          style={{ ...boxStyle, zIndex: this.state.z }}
+          style={innerStyle}
           ref={(c: HTMLElement) => { this.wrapper = c; }}
         >
           <Resizable
