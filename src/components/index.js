@@ -100,6 +100,7 @@ type Props = {
   minWidth?: number;
   dragAxis?: 'x' | 'y' | 'both' | 'none';
   dragHandlerClassName?: string;
+  disableDragging?: boolean;
 }
 
 export type Position = {
