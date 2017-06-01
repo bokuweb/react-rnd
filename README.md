@@ -23,7 +23,7 @@ Resizable and draggable component for React.
 ## Demo
 
 ![screenshot](https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif)
-   
+
 See demo: [http://bokuweb.github.io/react-rnd/](http://bokuweb.github.io/react-rnd/)  
 demo Code: [https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js](https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js)  
 
@@ -63,10 +63,10 @@ yarn add react-rnd
 ## Props
 
 #### `default: { x: number; y: number;  width: number | string;  height: number | string; };`
-  
+
 The `width` and `height` property is used to set the default size of a component.   
 The `x` and `y` property is used to set the default position of the component.   
-    
+
 #### `className?: string;`
 
 The `className` property is used to set the custom `className` of a resizable component.
@@ -105,12 +105,12 @@ The `maxHeight` property is used to set the maximum height of a resizable compon
 
 #### `z?: number;`
 
-The `z` property is used to set the zIndex of a component. 
+The `z` property is used to set the zIndex of a component.
 
 #### `resizeGrid?: [number, number];`
 
 The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
-  
+
 #### `dragGrid?: [number, number];`
 
 The `dragGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
@@ -123,7 +123,7 @@ If omitted, set `false`.
 #### `dragHandlerClassName?: string;`
 
 Specifies a selector to be used as the handle that initiates drag.
-Example: '.handle'. 
+Example: '.handle'.
 
 #### `resizeHandlerStyles?: HandlersStyles;`
 
@@ -169,7 +169,7 @@ The `enableResizing` property is used to set the resizable permission of a resiz
 
 The permission of `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, `topLeft` direction resizing.
 If omitted, all resizer are enabled.
-If you want to permit only right direction resizing, set `{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }`. 
+If you want to permit only right direction resizing, set `{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }`.
 
 ``` javascript
 export type Enable = {
@@ -179,10 +179,14 @@ export type Enable = {
   left?: boolean;
   right?: boolean;
   top?: boolean;
-  topLeft?: boolea;
+  topLeft?: boolean;
   topRight?: boolean;
 }
 ```
+
+#### `disableDragging?: boolean;`
+
+The `disableDragging` property disables dragging completely.
 
 #### `extendsProps?: any;`
 
@@ -202,7 +206,7 @@ const extendsProps = {
 #### `dragAxis?: 'x' | 'y' | 'both' | 'none'`
 
 The direction of allowed movement (dragging) allowed ('x','y','both','none').
-  
+
 #### `bounds?: string;`
 
 Specifies movement boundaries. Accepted values:
@@ -277,7 +281,7 @@ type DraggableEventHandler = (
   e: SyntheticMouseEvent | SyntheticTouchEvent, data: DraggableData,
 ) => void | false;
 ```
-  
+
 #### `onDrag: DraggableEventHandler;`
 
 `onDrag` called with the following parameters:
@@ -330,11 +334,11 @@ Update component size.
 class YourComponent extends Component {
 
   ...
-  
+
   update() {
     this.rnd.updateSize({ width: 200, height: 300 });
   }
-  
+
   render() {
     return (
       <Rnd ref={c => { this.rnd = c; }}>
@@ -346,7 +350,7 @@ class YourComponent extends Component {
   ...
 }
 ```
-  
+
 #### `updatePosition({ x: number, x: number })`
 
 Update component size.
@@ -358,11 +362,11 @@ Update component size.
 class YourComponent extends Component {
 
   ...
-  
+
   update() {
     this.rnd.updatePosition({ x: 200, y: 300 });
   }
-  
+
   render() {
     return (
       <Rnd ref={c => { this.rnd = c; }}>
@@ -385,11 +389,11 @@ Update component z-index.
 class YourComponent extends Component {
 
   ...
-  
+
   update() {
     this.rnd.updateZIndex(200);
   }
-  
+
   render() {
     return (
       <Rnd ref={c => { this.rnd = c; }}>
@@ -401,8 +405,8 @@ class YourComponent extends Component {
   ...
 }
 ```
-  
-  
+
+
 ## Test
 
 ``` sh

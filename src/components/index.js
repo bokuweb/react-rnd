@@ -100,6 +100,7 @@ type Props = {
   minWidth?: number;
   dragAxis?: 'x' | 'y' | 'both' | 'none';
   dragHandlerClassName?: string;
+  disableDragging?: boolean;
 }
 
 export type Position = {
@@ -324,6 +325,13 @@ export default class Rnd extends Component {
   }
 
   render() {
+    const cursorStyle = this.props.disableDragging ? { cursor: 'normal' } : {};
+    const innerStyle = {
+      ...boxStyle,
+      zIndex: this.state.z,
+      ...cursorStyle,
+    };
+
     return (
       <Draggable
         ref={(c: Draggable) => { this.draggable = c; }}
@@ -333,12 +341,13 @@ export default class Rnd extends Component {
         onDrag={this.onDrag}
         onStop={this.onDragStop}
         axis={this.props.dragAxis}
+        disabled={this.props.disableDragging}
         grid={this.props.dragGrid}
         bounds={this.props.bounds ? this.state.bounds : undefined}
       >
         <div
           className={this.props.className}
-          style={{ ...boxStyle, zIndex: this.state.z }}
+          style={innerStyle}
           ref={(c: HTMLElement) => { this.wrapper = c; }}
         >
           <Resizable
