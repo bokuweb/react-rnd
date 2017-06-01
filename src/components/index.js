@@ -325,10 +325,11 @@ export default class Rnd extends Component {
   }
 
   render() {
+    const cursorStyle = this.props.disableDragging ? { cursor: 'normal' } : {};
     const innerStyle = {
       ...boxStyle,
       zIndex: this.state.z,
-      ...this.props.disableDragging && { cursor: 'normal' },
+      ...cursorStyle,
     };
 
     return (
