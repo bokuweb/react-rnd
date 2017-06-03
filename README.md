@@ -415,6 +415,10 @@ npm t
 
 ## Changelog
 
+#### v5.0.7
+
+- Add `disableDragging` props.
+
 #### v5.0.6
 
 - Fix flow error.
