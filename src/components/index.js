@@ -349,6 +349,7 @@ export default class Rnd extends Component {
           className={this.props.className}
           style={innerStyle}
           ref={(c: HTMLElement) => { this.wrapper = c; }}
+          {...this.props.extendsProps}
         >
           <Resizable
             ref={(c: Resizable) => { this.resizable = c; }}
