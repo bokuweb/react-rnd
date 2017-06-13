@@ -415,6 +415,10 @@ npm t
 
 ## Changelog
 
+#### v5.0.8
+
+- Add `extendsProps`. #129
+
 #### v5.0.7
 
 - Add `disableDragging` props.
