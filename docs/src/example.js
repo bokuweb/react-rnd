@@ -1,8 +1,6 @@
 import React from 'react';
 import Rnd from '../../src/components';
 
-let rnd;
-
 const Box = () => (
   <div
     className="box"
@@ -11,7 +9,7 @@ const Box = () => (
     <article className="media">
       <div className="media-left">
         <figure className="image is-64x64">
-          <img src="https://avatars1.githubusercontent.com/u/10220449?v=3&s=460" draggable="false" alt="Image" />
+          <img src="https://avatars1.githubusercontent.com/u/10220449?v=3&s=460" draggable="false" alt="github avatar" />
         </figure>
       </div>
       <div className="media-content">
@@ -19,19 +17,21 @@ const Box = () => (
           <p>
             <strong>bokuweb</strong> <small>@bokuweb17</small> <small>31m</small>
             <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-        </p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Aenean efficitur sit amet massa fringilla egestas.
+            Nullam condimentum luctus turpis.
+          </p>
         </div>
         <nav className="level is-mobile">
           <div className="level-left">
             <a className="level-item">
-              <span className="icon is-small"><i className="fa fa-reply"></i></span>
+              <span className="icon is-small"><i className="fa fa-reply" /></span>
             </a>
             <a className="level-item">
-              <span className="icon is-small"><i className="fa fa-retweet"></i></span>
+              <span className="icon is-small"><i className="fa fa-retweet" /></span>
             </a>
             <a className="level-item">
-              <span className="icon is-small"><i className="fa fa-heart"></i></span>
+              <span className="icon is-small"><i className="fa fa-heart" /></span>
             </a>
           </div>
         </nav>
@@ -47,9 +47,8 @@ export default () => (
       width: '800px',
       height: '600px',
     }}
-  > 
+  >
     <Rnd
-      ref={c => { rnd = c; }}
       default={{
         x: 150,
         y: 205,
