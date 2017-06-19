@@ -64,7 +64,7 @@
     "react-styleguidist": "^5.1.1",
     "react-test-renderer": "^15.5.4",
     "sinon": "^2.1.0",
-    "webpack": "^2.6.1",
+    "webpack": "^3.0.0",
     "webpack-async-await": "^1.1.0",
     "webpack-dev-server": "^2.4.2"
   },
