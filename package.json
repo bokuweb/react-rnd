@@ -40,7 +40,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^2.8.2",
-    "eslint": "^3.19.0",
+    "eslint": "^4.1.0",
     "eslint-config-airbnb": "^15.0.0",
     "eslint-plugin-flowtype": "^2.30.4",
     "eslint-plugin-import": "^2.2.0",
