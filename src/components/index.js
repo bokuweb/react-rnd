@@ -156,6 +156,13 @@ export default class Rnd extends Component {
     this.onDragStop = this.onDragStop.bind(this);
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props.z === nextProps.z) return;
+    this.setState({
+      z: nextProps.z,
+    });
+  }
+
   onDragStart(e: Event, data: DraggableData) {
     if (this.props.onDragStart) {
       this.props.onDragStart(e, data);
