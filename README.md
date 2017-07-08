@@ -415,6 +415,10 @@ npm t
 
 ## Changelog
 
+#### v5.0.9
+
+- Fix bug new `z` props is not applied to state.
+
 #### v5.0.8
 
 - Add `extendsProps`. #129
