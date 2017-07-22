@@ -53,8 +53,9 @@ yarn add react-rnd
     x: 0,
     y: 0,
     width: 320,
-    height: 200,
+    height: 200,    
   }}
+  prefix="MyRnd"
 >
   Rnd
 </Rnd>
