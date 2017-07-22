@@ -58,6 +58,7 @@ export default () => (
       minWidth={500}
       minHeight={190}
       bounds="parent"
+      prefix={"myrnd"}
     >
       <Box />
     </Rnd>

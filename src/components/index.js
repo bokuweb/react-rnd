@@ -108,13 +108,13 @@ export type Position = {
   y: number;
 }
 
-const boxStyle = {
-  width: 'auto',
-  height: 'auto',
-  cursor: 'move',
-  display: 'inline-block',
-  position: 'absolute',
-};
+const boxStyle = `{
+  width: auto;
+  height: auto;
+  cursor: move;
+  display: inline-block;
+  position: absolute;
+}`;
 
 export default class Rnd extends Component {
 
@@ -148,6 +148,7 @@ export default class Rnd extends Component {
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
     };
+    this.cssClass = `${props.prefix}-rnd`;
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
@@ -161,6 +162,15 @@ export default class Rnd extends Component {
     this.setState({
       z: nextProps.z,
     });
+  }
+  componentDidMount(){
+     if(!document.getElementById(this.cssClass)){
+	let style = document.createElement('style');  
+            style.type = 'text/css';
+            style.innerHTML = `.${this.cssClass} ${boxStyle}`;
+            style.id = this.cssClass;
+            document.getElementsByTagName('head')[0].appendChild(style);
+     }
   }
 
   onDragStart(e: Event, data: DraggableData) {
@@ -334,7 +344,6 @@ export default class Rnd extends Component {
   render() {
     const cursorStyle = this.props.disableDragging ? { cursor: 'normal' } : {};
     const innerStyle = {
-      ...boxStyle,
       zIndex: this.state.z,
       ...cursorStyle,
     };
@@ -353,7 +362,7 @@ export default class Rnd extends Component {
         bounds={this.props.bounds ? this.state.bounds : undefined}
       >
         <div
-          className={this.props.className}
+          className={`${this.cssClass} ${this.props.className}`}
           style={innerStyle}
           ref={(c: HTMLElement) => { this.wrapper = c; }}
           {...this.props.extendsProps}
