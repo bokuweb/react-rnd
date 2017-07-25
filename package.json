@@ -46,7 +46,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-react": "^7.0.0",
-    "flow-bin": "^0.50.0",
+    "flow-bin": "^0.51.0",
     "flow-copy-source": "^1.1.0",
     "flow-runtime": "^0.13.0",
     "http-server": "^0.10.0",
