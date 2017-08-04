@@ -323,7 +323,7 @@ type DraggableEventHandler = (
 ## Method
 
 
-#### `updateSize(size: { x: string | number, y: string | number })`
+#### `updateSize(size: { width: string | number, height: string | number })`
 
 Update component size.
 `grid` ,`max/minWidth`, `max/minHeight` props is ignored, when this method called.
