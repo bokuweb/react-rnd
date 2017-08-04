@@ -1,6 +1,6 @@
 <p align="center"><img src ="https://github.com/bokuweb/react-rnd/blob/master/logo.png?raw=true" /></p>
 
-<p align="center">Resizable component for React.</p>
+<p align="center">Resizable and draggable component for React.</p>
 
 <p align="center"><a href="https://travis-ci.org/bokuweb/react-rnd">
 <img src="https://img.shields.io/travis/bokuweb/react-rnd.svg" alt="Build Status" /></a>
