@@ -1,12 +1,16 @@
-# react-rnd
+<p align="center"><img src ="https://github.com/bokuweb/react-rnd/blob/master/logo.png?raw=true" /></p>
 
-Resizable and draggable component for React.
+<p align="center">Resizable component for React.</p>
 
-[![Build Status](https://img.shields.io/travis/bokuweb/react-rnd.svg?style=flat-square)](https://travis-ci.org/bokuweb/react-rnd)
-[![Version](https://img.shields.io/npm/v/react-rnd.svg?style=flat-square)](https://www.npmjs.com/package/react-rnd)
-[![npm](https://img.shields.io/npm/dm/react-rnd.svg?style=flat-square)]()
-[![License](https://img.shields.io/npm/l/react-rnd.svg?style=flat-square)](https://github.com/bokuweb/react-rnd#license)
-[![Greenkeeper badge](https://badges.greenkeeper.io/bokuweb/react-rnd.svg)](https://greenkeeper.io/)
+<p align="center"><a href="https://travis-ci.org/bokuweb/react-rnd">
+<img src="https://img.shields.io/travis/bokuweb/react-rnd.svg" alt="Build Status" /></a>
+<a href="https://www.npmjs.com/package/react-rnd">
+<img src="https://img.shields.io/npm/v/react-rnd.svg" alt="Build Status" /></a> 
+<a href="https://www.npmjs.com/package/react-rnd">
+<img src="https://img.shields.io/npm/dm/react-rnd.svg" /></a> 
+<a href="https://greenkeeper.io/">
+<img src="https://badges.greenkeeper.io/bokuweb/react-rnd.svg" /></a> 
+</p>
 
 ## Table of Contents
 
