@@ -77,7 +77,7 @@
     ]
   },
   "dependencies": {
-    "react-draggable": "^2.2.3",
+    "react-draggable": "^3.0.0",
     "react-resizable-box": "^2.0.3"
   },
   "files": [
