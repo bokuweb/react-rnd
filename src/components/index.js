@@ -116,11 +116,8 @@ const boxStyle = {
   position: 'absolute',
 };
 
-export default class Rnd extends Component {
-
-  state: State;
+export default class Rnd extends Component<Props, State> {
   resizable: Resizable;
-  state: State;
   draggable: Draggable;
   onResizeStart: ResizeStartHandler;
   onResize: ResizeHandler;
