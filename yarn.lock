@@ -6338,11 +6338,12 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-draggable@^2.2.3:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-2.2.6.tgz#3a806e10f2da6babfea4136be6510e89b0d76901"
+react-draggable@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-3.0.2.tgz#6f1e2f8b2397fbb0ef4653daebc8e2d26f65dc4f"
   dependencies:
     classnames "^2.2.5"
+    prop-types "^15.5.10"
 
 react-hot-loader@next:
   version "3.0.0-beta.7"

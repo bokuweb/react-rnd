@@ -117,6 +117,7 @@ const boxStyle = {
 };
 
 export default class Rnd extends Component<Props, State> {
+  static defaultProps: Props;
   resizable: Resizable;
   draggable: Draggable;
   onResizeStart: ResizeStartHandler;
