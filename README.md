@@ -419,6 +419,10 @@ npm t
 
 ## Changelog
 
+#### v5.1.0
+
+- Update dependencies(`react-draggable v3`, `flow-bin v0.53`, and other...)
+
 #### v5.0.9
 
 - Fix bug new `z` props is not applied to state.
