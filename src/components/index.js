@@ -114,6 +114,8 @@ const boxStyle = {
   cursor: 'move',
   display: 'inline-block',
   position: 'absolute',
+  top: 0,
+  left: 0,
 };
 
 export default class Rnd extends Component<Props, State> {
@@ -159,6 +161,14 @@ export default class Rnd extends Component<Props, State> {
     this.setState({
       z: nextProps.z,
     });
+  }
+
+  componentDidMount() {
+    const parent = this.wrapper.parentNode;
+    if (!parent || typeof window === 'undefined') return;
+    if (!(parent instanceof HTMLElement)) return;
+    if (getComputedStyle(parent).position !== 'static') return;
+    parent.style.position = 'relative';
   }
 
   onDragStart(e: Event, data: DraggableData) {
