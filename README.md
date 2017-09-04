@@ -419,6 +419,15 @@ npm t
 
 ## Changelog
 
+#### v5.1.2
+
+- Add position `relative` when component will update.
+
+#### v5.1.1
+
+- Add `top: 0`, `left: 0`.
+- Add position `relative` when parent position equals `static`.
+
 #### v5.1.0
 
 - Update dependencies(`react-draggable v3`, `flow-bin v0.53`, and other...)
