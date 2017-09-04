@@ -164,6 +164,14 @@ export default class Rnd extends Component<Props, State> {
   }
 
   componentDidMount() {
+    this.setParentPosition();
+  }
+
+  componentWillUpdate() {
+    this.setParentPosition();
+  }
+
+  setParentPosition() {
     const parent = this.wrapper.parentNode;
     if (!parent || typeof window === 'undefined') return;
     if (!(parent instanceof HTMLElement)) return;
