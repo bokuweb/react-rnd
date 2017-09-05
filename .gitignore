@@ -1,4 +1,4 @@
-.idea
 node_modules/
-lib/
 example/dist/
+lib/
+npm-debug.log

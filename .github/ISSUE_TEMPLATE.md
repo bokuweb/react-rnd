@@ -1,4 +1,4 @@
- <!-- PLEASE READ THE FOLLOWING INSTRUCTIONS -->
+<!-- PLEASE READ THE FOLLOWING INSTRUCTIONS -->
 
 <!-- Is it a bug/feature/question or do you need help? -->
 <!-- If it's a bug, is it a browser bug? -->
@@ -7,7 +7,7 @@
 
 <!-- UNCOMMENT THE APPROPRIATE LINES -->
 
-<!-- I'm using react-rnd **version** [x.x.x] -->
+<!-- I'm using react-resizable-box **version** [x.x.x] -->
 <!-- My **browser** is: -->
 <!-- I am sure this issue is **not a duplicate**? -->
 
