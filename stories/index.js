@@ -1,13 +1,12 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+import './styles.css';
 
-import { Button, Welcome } from '@storybook/react/demo';
+import Basic from './basic';
+import Multi from './multiple';
+import BoundsParent from './bounds-parent';
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
-
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
+storiesOf('react-rnd', module)
+  .add('basic', () => <Basic />)
+  .add('bound parent', () => <BoundsParent />)
+  .add('bound multiple', () => <Multi />);

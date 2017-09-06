@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
-import Resizable from '../src';
+import Rnd from '../src';
 
 const style = {
   display: 'flex',
@@ -12,11 +12,15 @@ const style = {
 };
 
 export default () => (
-  <Resizable
+  <Rnd
     style={style}
-    width={200}
-    height={200}
+    default={{
+      width: 200,
+      height: 200,
+      x: 100,
+      y: 100,
+    }}
   >
     001
-  </Resizable>
+  </Rnd>
 );
