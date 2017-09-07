@@ -14,11 +14,9 @@ type Position = {
 
 export type DraggableData = {
   node: HTMLElement;
-  x: number;
-  y: number;
   deltaX: number, deltaY: number;
   lastX: number, lastY: number;
-};
+} & Position;
 
 export type RndDragCallback = (
   e: Event, data: DraggableData,
@@ -45,10 +43,7 @@ export type RndResizeCallback = (
 type State = {
   disableDragging: boolean;
   z?: number;
-  original: {
-    x: number;
-    y: number;
-  };
+  original: Position;
   bounds: {
     top: number;
     right: number;
@@ -81,26 +76,28 @@ export type HandleClasses = {
   topRight?: string
 }
 
+type Style = {
+  [key: string]: string;
+}
+
 export type HandleStyles = {
-  bottom?: any,
-  bottomLeft?: any,
-  bottomRight?: any,
-  left?: any,
-  right?: any,
-  top?: any,
-  topLeft?: any,
-  topRight?: any
+  bottom?: Style,
+  bottomLeft?: Style,
+  bottomRight?: Style,
+  left?: Style,
+  right?: Style,
+  top?: Style,
+  topLeft?: Style,
+  topRight?: Style
 }
 
 type Props = {
   z?: number;
   dragGrid?: Grid;
   default: {
-    x: number;
-    y: number;
     width: number | string;
     height: number | string;
-  };
+  } & Position;
   resizeGrid?: Grid;
   bounds?: string;
   onResizeStart?: RndResizeStartCallback;
@@ -110,8 +107,8 @@ type Props = {
   onDrag?: RndDragCallback;
   onDragStop?: RndDragCallback;
   className?: string;
-  style?: any;
-  children?: any;
+  style?: Style;
+  children?: React.Node;
   enableResizing?: ResizeEnable;
   extendsProps?: any;
   resizeHandlerClasses?: HandleClasses;
