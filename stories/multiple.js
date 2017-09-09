@@ -20,16 +20,14 @@ export default () => (
       height: '100%',
     }}
   >
-    {[...Array(2).keys()].map((_, i) => {
+    {[...Array(3).keys()].map((_, i) => {
       return <Rnd
-        style={style}
         bounds="parent"
-        default={{
-          width: 200,
-          height: 200,
-          x: 100 * i,
-          y: 100 * i,
-        }}
+        style={style}
+        width={200}
+        height={200}
+        x={100 * i}
+        y={100 * i}
       >
         00{i}
       </Rnd>

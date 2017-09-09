@@ -8,6 +8,13 @@ import type { ResizeDirection, ResizeCallback, ResizeStartCallback } from 're-re
 
 export type Grid = [number, number];
 
+export class TouchEvent2 extends TouchEvent {
+  changedTouches: TouchList;
+  targetTouches: TouchList;
+}
+
+export type MouseTouchEvent = MouseEvent & TouchEvent2;
+
 type Position = {
   x: number;
   y: number;
@@ -53,6 +60,7 @@ type State = {
   };
   maxWidth?: number;
   maxHeight?: number;
+  isMounted: boolean;
 }
 
 export type ResizeEnable = {
@@ -95,10 +103,10 @@ export type HandleStyles = {
 type Props = {
   z?: number;
   dragGrid?: Grid;
-  default: {
-    width: number | string;
-    height: number | string;
-  } & Position;
+  width: number | string;
+  height: number | string;
+  x: number;
+  y: number;
   resizeGrid?: Grid;
   bounds?: string;
   onResizeStart?: RndResizeStartCallback;
@@ -162,8 +170,8 @@ export default class Rnd extends React.Component<Props, State> {
       disableDragging: false,
       z: props.z,
       original: {
-        x: props.default.x || 0,
-        y: props.default.y || 0,
+        x: props.x || 0,
+        y: props.y || 0,
       },
       bounds: {
         top: 0,
@@ -173,6 +181,7 @@ export default class Rnd extends React.Component<Props, State> {
       },
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
+      isMounted: false,
     };
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
@@ -189,19 +198,44 @@ export default class Rnd extends React.Component<Props, State> {
     });
   }
 
+  componentWillMount() {
+  }
+
   componentDidMount() {
+    // this.updateSizeAndPosition();
+    this.setParentPosition();
   }
 
   componentWillUpdate() {
-    this.setParentPosition();
+    // this.setParentPosition();
   }
 
   componentWillUnmount() {
   }
 
+  // updateSizeAndPosition() {
+  // if (!this.props.bounds) return;
+  // const parent = this.resizable && this.resizable.parentNode;
+  // const target = this.props.bounds === 'parent'
+  //   ? parent
+  //   : document.querySelector(this.props.bounds);
+  // const self = this.getSelfElement();
+  // if (self instanceof Element && target instanceof HTMLElement && parent instanceof HTMLElement) {
+  //   const selfRect = self.getBoundingClientRect();
+  //   const selfLeft = selfRect.left;
+  //   const selfTop = selfRect.top;
+  //   const targetRect = target.getBoundingClientRect();
+  //   const targetLeft = targetRect.left;
+  //   const targetTop = targetRect.top;
+  //   console.log(selfLeft, targetLeft)
+  //   if (selfLeft < targetLeft) {
+  //   }
+  // }
+  // }
+
   getSelfElement(): null | Element | Text {
-    if (!this.resizable) return null;
-    return findDOMNode(this.resizable);
+    if (!this) return null;
+    return findDOMNode(this);
   }
 
   setParentPosition() {
@@ -210,8 +244,12 @@ export default class Rnd extends React.Component<Props, State> {
       const parent = element.parentNode;
       if (!parent || typeof window === 'undefined') return;
       if (!(parent instanceof HTMLElement)) return;
-      if (getComputedStyle(parent).position !== 'static') return;
+      if (getComputedStyle(parent).position !== 'static') {
+        this.setState({ isMounted: true });
+        return;
+      }
       parent.style.position = 'relative';
+      this.setState({ isMounted: true });
     }
   }
 
@@ -388,12 +426,13 @@ export default class Rnd extends React.Component<Props, State> {
       ...cursorStyle,
       ...this.props.style,
     };
-
+    // HACK: Wait for setting relative to parent element.
+    if (!this.state.isMounted) return <div />;
     return (
       <Draggable
         ref={(c: Draggable) => { this.draggable = c; }}
         handle={this.props.dragHandleClassName}
-        defaultPosition={{ x: this.props.default.x, y: this.props.default.y }}
+        defaultPosition={{ x: this.props.x, y: this.props.y }}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
@@ -412,8 +451,8 @@ export default class Rnd extends React.Component<Props, State> {
           onResize={this.onResize}
           onResizeStop={this.onResizeStop}
           style={innerStyle}
-          width={this.props.default.width}
-          height={this.props.default.height}
+          width={this.props.width}
+          height={this.props.height}
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
           maxWidth={this.state.maxWidth}

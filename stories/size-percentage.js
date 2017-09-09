@@ -23,12 +23,10 @@ export default () => (
     <Rnd
       style={style}
       bounds="parent"
-      default={{
-        width: "30%",
-        height: 200,
-        x: 100,
-        y: 100,
-      }}
+      width="30%"
+      height={200}
+      x={100}
+      y={100}
     >
       001
     </Rnd>
