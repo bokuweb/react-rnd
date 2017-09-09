@@ -111,16 +111,16 @@ type Props = {
   style?: Style;
   children?: React.Node;
   enableResizing?: ResizeEnable;
-  extendsProps?: any;
-  resizeHandlerClasses?: HandleClasses;
-  resizeHandlerStyles?: HandleStyles;
+  extendsProps?: { [key: string]: any };
+  resizeHandleClasses?: HandleClasses;
+  resizeHandleStyles?: HandleStyles;
   lockAspectRatio?: boolean;
   maxHeight?: number;
   maxWidth?: number;
   minHeight?: number;
   minWidth?: number;
   dragAxis?: 'x' | 'y' | 'both' | 'none';
-  dragHandlerClassName?: string;
+  dragHandleClassName?: string;
   disableDragging?: boolean;
 }
 
@@ -392,7 +392,7 @@ export default class Rnd extends React.Component<Props, State> {
     return (
       <Draggable
         ref={(c: Draggable) => { this.draggable = c; }}
-        handle={this.props.dragHandlerClassName}
+        handle={this.props.dragHandleClassName}
         defaultPosition={{ x: this.props.default.x, y: this.props.default.y }}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
@@ -420,8 +420,8 @@ export default class Rnd extends React.Component<Props, State> {
           maxHeight={this.state.maxHeight}
           grid={this.props.resizeGrid}
           lockAspectRatio={this.props.lockAspectRatio}
-          handlerStyles={this.props.resizeHandlerStyles}
-          handlerClasses={this.props.resizeHandlerClasses}
+          handleStyles={this.props.resizeHandleStyles}
+          handleClasses={this.props.resizeHandleClasses}
         >
           {this.props.children}
         </Resizable>
