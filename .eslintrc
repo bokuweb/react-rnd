@@ -6,6 +6,7 @@
   ],
   "rules": {
     "react/prop-types": 0,
+    "react/no-find-dom-node": 0,
     "flowtype/define-flow-type": 1,
     "flowtype/require-parameter-type": 1,
     "no-duplicate-imports": 0,

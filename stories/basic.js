@@ -13,6 +13,7 @@ const style = {
 
 export default () => (
   <Rnd
+    onDoubleClick={() => console.log('ann')}
     style={style}
     default={{
       width: 200,

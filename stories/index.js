@@ -5,8 +5,10 @@ import './styles.css';
 import Basic from './basic';
 import Multi from './multiple';
 import BoundsParent from './bounds-parent';
+import SizePercentage from './size-percentage';
 
 storiesOf('react-rnd', module)
   .add('basic', () => <Basic />)
   .add('bound parent', () => <BoundsParent />)
-  .add('bound multiple', () => <Multi />);
+  .add('bound multiple', () => <Multi />)
+  .add('size percentage', () => <SizePercentage />);
