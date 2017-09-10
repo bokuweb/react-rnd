@@ -28,11 +28,6 @@
 
 ![screenshot](https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif)
 
-See demo: [http://bokuweb.github.io/react-rnd/](http://bokuweb.github.io/react-rnd/)  
-demo Code: [https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js](https://github.com/bokuweb/react-rnd/blob/master/docs/src/example.js)  
-
-background image : <a href="http://www.freepik.com/free-photos-vectors/background">Background vector created by Starline - Freepik.com</a>
-
 ## Install
 
 - use npm
@@ -157,7 +152,7 @@ export type HandleStyles = {
 }
 ```
 
-#### `resizeHandleClasses?: HandleClassName;`
+#### `resizeHandleClasses?: HandleClasses;`
 
 The `resizeHandleClasses` property is used to set the className of one or more resize handles.
 
