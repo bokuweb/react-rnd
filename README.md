@@ -59,6 +59,10 @@ yarn add react-rnd
 </Rnd>
 ```
 
+### Example
+
+You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31OD4) too.
+
 ## Props
 
 #### `x: number;`
@@ -416,6 +420,12 @@ class YourComponent extends Component {
 ``` sh
 npm t
 ```
+
+## Contribute
+
+If you have a feature request, please add it as an issue or make a pull request.
+
+If you have a bug to report, please reproduce the bug in [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31OD4) to help us easily isolate it.
 
 ## Changelog
 
