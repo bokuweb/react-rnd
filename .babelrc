@@ -1,46 +1,54 @@
 {
   "presets": [
     "react",
-    ["env", { "targets": {
-      "Chrome": 56
-    }}]
+    [
+      "env",
+      {
+        "targets": {
+          "Chrome": 56
+        },
+        "modules": false
+      }
+    ]
   ],
   "plugins": [
     "transform-class-properties",
-    "react-hot-loader/babel",
-    "dynamic-import-webpack",
-    "transform-object-rest-spread",
-    ["transform-runtime", {
-      "polyfill": true,
-      "regenerator": true
-    }]
+    "transform-object-rest-spread"
   ],
   "env": {
     "test": {
       "presets": [
         "react",
-        ["env", { "targets": {
-          "node": 6
-        }}]
-      ],
-      "plugins": [
-        "transform-async-to-generator"
-      ],
+        [
+          "env",
+          {
+            "targets": {
+              "node": 6
+            }
+          }
+        ]
+      ]
     },
     "production": {
       "presets": [
         "react",
         "flow",
-        ["env", { "targets": {
-          "browsers": ["last 2 versions", "IE 11"]
-        }}]
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": [
+                "last 2 versions",
+                "IE 11"
+              ]
+            }
+          }
+        ]
       ],
       "plugins": [
         "transform-class-properties",
-        "react-hot-loader/babel",
-        "dynamic-import-webpack",
         "transform-object-rest-spread"
-      ],      
+      ]
     }
   }
 }

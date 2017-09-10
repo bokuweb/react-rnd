@@ -2,16 +2,20 @@
 .*/node_modules/babel-plugin-flow.*
 .*/node_modules/jss.*
 .*/node_modules/findup.*
+.*/node_modules/radium.*
+.*/node_modules/eslint-plugin-jsx-a11y.*
 
 [include]
 
 [libs]
 ./decls
 
+
 [options]
 munge_underscores=true
 module.ignore_non_literal_requires=true
 esproposal.decorators=ignore
+unsafe.enable_getters_and_setters=true
 suppress_comment=\\(.\\|\n\\)*\\s*\\$FlowFixMe.*
 suppress_comment=\\(.\\|\n\\)*\\s*\\$FlowBug.*
 suppress_comment=\\(.\\|\n\\)*\\s*\\$FlowIgnore.*
