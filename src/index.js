@@ -33,7 +33,7 @@ export type RndDragCallback = (
 export type RndResizeStartCallback = (
   e: SyntheticMouseEvent<HTMLDivElement> | SyntheticTouchEvent<HTMLDivElement>,
   dir: ResizeDirection,
-  refToElement: HTMLElement,
+  refToElement: React.ElementRef<'div'>,
 ) => void;
 
 export type ResizableDelta = {
@@ -43,7 +43,7 @@ export type ResizableDelta = {
 export type RndResizeCallback = (
   e: MouseEvent | TouchEvent,
   dir: ResizeDirection,
-  refToElement: HTMLElement,
+  refToElement: React.ElementRef<'div'>,
   delta: ResizableDelta,
   position: Position,
 ) => void;
@@ -192,10 +192,17 @@ export default class Rnd extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (this.props.z === nextProps.z) return;
-    this.setState({
-      z: nextProps.z,
-    });
+    if (this.props.z !== nextProps.z) {
+      this.setState({ z: nextProps.z });
+    }
+    const draggable = this.draggable && this.draggable.state;
+    if (!draggable) return;
+    if (this.props.x !== draggable.x) {
+      this.draggable.setState({ x: this.props.x });
+    }
+    if (this.props.y !== draggable.y) {
+      this.draggable.setState({ y: this.props.y });
+    }
   }
 
   componentWillMount() {
@@ -206,7 +213,7 @@ export default class Rnd extends React.Component<Props, State> {
     this.setParentPosition();
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     // this.setParentPosition();
   }
 
@@ -297,7 +304,7 @@ export default class Rnd extends React.Component<Props, State> {
   onResizeStart(
     e: SyntheticMouseEvent<HTMLDivElement> | SyntheticTouchEvent<HTMLDivElement>,
     dir: ResizeDirection,
-    refToElement: HTMLElement, // React.ElementRef<'div'>,
+    refToElement: React.ElementRef<'div'>,
   ) {
     e.stopPropagation();
     this.setState({
@@ -347,7 +354,7 @@ export default class Rnd extends React.Component<Props, State> {
   onResize(
     e: MouseEvent | TouchEvent,
     direction: ResizeDirection,
-    refToResizableElement: HTMLDivElement,
+    refToResizableElement: React.ElementRef<'div'>,
     delta: { height: number, width: number },
   ) {
     let parentLeft = 0;
