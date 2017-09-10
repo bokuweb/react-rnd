@@ -349,7 +349,7 @@ class YourComponent extends Component {
 
   render() {
     return (
-      <Rnd ref={c => { this.rnd = c; }}>
+      <Rnd ref={c => { this.rnd = c; }} ...rest >
         example
       </Rnd>
     );
@@ -376,7 +376,7 @@ class YourComponent extends Component {
 
   render() {
     return (
-      <Rnd ref={c => { this.rnd = c; }}>
+      <Rnd ref={c => { this.rnd = c; }} ...rest >
         example
       </Rnd>
     );
@@ -403,7 +403,7 @@ class YourComponent extends Component {
 
   render() {
     return (
-      <Rnd ref={c => { this.rnd = c; }}>
+      <Rnd ref={c => { this.rnd = c; }} ...rest>
         example
       </Rnd>
     );
@@ -428,6 +428,7 @@ npm t
 - Support % min/max size.
 - Change props, remove `default` and add `x`, `y`, `width`, `height`.
 - Rename `dragHandlersXXXX` and `resizeHandlersXXXX` props to `dragHandleXXXX` and `resizeHandleXXXX`.
+
 #### v5.1.3
 
 - Fix cursor style, set `normal` to cursor style when `dragHandlerClassName` is not empty.
