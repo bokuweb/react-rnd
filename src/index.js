@@ -135,7 +135,6 @@ type Props = {
 const boxStyle = {
   width: 'auto',
   height: 'auto',
-  cursor: 'move',
   display: 'inline-block',
   position: 'absolute',
   top: 0,
@@ -395,7 +394,9 @@ export default class Rnd extends React.Component<Props, State> {
   }
 
   render(): React.Node {
-    const cursorStyle = this.props.disableDragging ? { cursor: 'normal' } : {};
+    const cursorStyle = this.props.disableDragging || this.props.dragHandleClassName
+      ? { cursor: 'normal' }
+      : { cursor: 'move' };
     const innerStyle = {
       ...boxStyle,
       zIndex: this.state.z,
