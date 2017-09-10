@@ -22,7 +22,6 @@
     "build": "npm-run-all --parallel build:prod:*",
     "dev": "rollup -c config/dev.js -w",
     "browse": "browser-sync start --s --index 'html/index.html' --files 'html/**/*.html, build/**/*.js' --no-notify",
-    "start": "npm-run-all --parallel dev browse storybook",
     "test": "NODE_ENV='test' avaron src/index.test.js --renderer",
     "test:ci": "npm run flow && npm run build",
     "flow-copy": "flow-copy-source -v src lib && cp lib/index.js.flow lib/index.es5.js.flow ",

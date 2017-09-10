@@ -6,11 +6,10 @@ import Basic from './basic';
 import Multi from './multiple';
 import BoundsParent from './bounds-parent';
 import SizePercentage from './size-percentage';
-import Sandbox from './sandbox';
+// import Sandbox from './sandbox';
 
 storiesOf('react-rnd', module)
   .add('basic', () => <Basic />)
-  .add('sandbox', () => <Sandbox />)
   .add('bound parent', () => <BoundsParent />)
   .add('bound multiple', () => <Multi />)
   .add('size percentage', () => <SizePercentage />);

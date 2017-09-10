@@ -53,12 +53,10 @@ yarn add react-rnd
 
 ``` javascript
 <Rnd
-  default={{
-    x: 0,
-    y: 0,
-    width: 320,
-    height: 200,
-  }}
+  width={200}
+  height={200}
+  x={100}
+  y={100}
 >
   Rnd
 </Rnd>
@@ -66,46 +64,53 @@ yarn add react-rnd
 
 ## Props
 
-#### `default: { x: number; y: number;  width: number | string;  height: number | string; };`
+#### `x: number;`
 
-The `width` and `height` property is used to set the default size of a component.   
-The `x` and `y` property is used to set the default position of the component.   
+The `x` property is used to set position of the component.   
 
-#### `className?: string;`
+#### `y: number;`
 
-The `className` property is used to set the custom `className` of a resizable component.
-
-#### `style?: any;`
-
-The `style` property is used to set the custom `style` of a resizable component.
+The `y` property is used to set position of the component.
 
 #### `width?: (number | string);`
 
-The `width` property is used to set the initial width of a resizable component.   
+The `width` property is used to set width of the component.   
 For example, you can set `300`, `'300px'`, `50%`.     
 If omitted, set `'auto'`.    
 
 #### `height?: (number | string);`
 
-The `height` property is used to set the initial height of a resizable component.    
+The `height` property is used to set width of the component.   
 For example, you can set `300`, `'300px'`, `50%`.    
 If omitted, set `'auto'`.    
 
-#### `minWidth?: number;`
+#### `className?: string;`
 
-The `minWidth` property is used to set the minimum width of a resizable component.
+The `className` property is used to set the custom `className` of the component.
 
-#### `minHeight?: number;`
+#### `style?: { [key: string]: string };`
 
-The `minHeight` property is used to set the minimum height of a resizable component.
+The `style` property is used to set the custom `style` of the component.
 
-#### `maxWidth?: number;`
+#### `minWidth?: number | string;`
 
-The `maxWidth` property is used to set the maximum width of a resizable component.
+The `minWidth` property is used to set the minimum width of the component.
+For example, you can set `300`, `'300px'`, `50%`.  
 
-#### `maxHeight?: number`;
+#### `minHeight?: number | string;`
 
-The `maxHeight` property is used to set the maximum height of a resizable component.
+The `minHeight` property is used to set the minimum height of the component.
+For example, you can set `300`, `'300px'`, `50%`.  
+
+#### `maxWidth?: number | string;`
+
+The `maxWidth` property is used to set the maximum width of the component.
+For example, you can set `300`, `'300px'`, `50%`.  
+
+#### `maxHeight?: number | string`;
+
+The `maxHeight` property is used to set the maximum height of the component.
+For example, you can set `300`, `'300px'`, `50%`.  
 
 #### `z?: number;`
 
@@ -124,38 +129,40 @@ The `dragGrid` property is used to specify the increments that moving should sna
 The `lockAspectRatio` property is used to lock aspect ratio.
 If omitted, set `false`.
 
-#### `dragHandlerClassName?: string;`
+#### `dragHandleClassName?: string;`
 
 Specifies a selector to be used as the handle that initiates drag.
 Example: '.handle'.
 
-#### `resizeHandlerStyles?: HandlersStyles;`
+#### `resizeHandleStyles?: HandleStyles;`
 
-The `resizeHandleStyles` property is used to override the style of one or more resize handlers.
-Only the axis you specify will have its handler style replaced.
-If you specify a value for `right` it will completely replace the styles for the `right` resize handler,
-but other handler will still use the default styles.
+The `resizeHandleStyles` property is used to override the style of one or more resize handles.
+Only the axis you specify will have its handle style replaced.
+If you specify a value for `right` it will completely replace the styles for the `right` resize handle,
+but other handle will still use the default styles.
 
 ``` javascript
-export type HandlerStyles = {
-  bottom?: any,
-  bottomLeft?: any,
-  bottomRight?: any,
-  left?: any,
-  right?: any,
-  top?: any,
-  topLeft?: any,
-  topRight?: any
+
+type Style = { [key: string]: string };
+
+export type HandleStyles = {
+  bottom?: Style,
+  bottomLeft?: Style,
+  bottomRight?: Style,
+  left?: Style,
+  right?: Style,
+  top?: Style,
+  topLeft?: Style,
+  topRight?: Style
 }
 ```
 
-#### `resizeHandlerClasses?: HandlersClassName;`
+#### `resizeHandleClasses?: HandleClassName;`
 
-The `resizeHandlerClasses` property is used to set the className of one or more resize handlers.
-
+The `resizeHandleClasses` property is used to set the className of one or more resize handles.
 
 ``` javascript
-type HandlerClasses = {
+type HandleClasses = {
   bottom?: string;
   bottomLeft?: string;
   bottomRight?: string;
@@ -169,7 +176,7 @@ type HandlerClasses = {
 
 #### `enableResizing?: ?Enable;`
 
-The `enableResizing` property is used to set the resizable permission of a resizable component.
+The `enableResizing` property is used to set the resizable permission of the component.
 
 The permission of `top`, `right`, `bottom`, `left`, `topRight`, `bottomRight`, `bottomLeft`, `topLeft` direction resizing.
 If omitted, all resizer are enabled.
@@ -192,7 +199,7 @@ export type Enable = {
 
 The `disableDragging` property disables dragging completely.
 
-#### `extendsProps?: any;`
+#### `extendsProps?: { [key: string]: any };`
 
 This property is used to pass the other props to the component.
 
@@ -220,57 +227,55 @@ Specifies movement boundaries. Accepted values:
 
 ## Callback
 
-#### `onResizeStart?: ResizeStartCallBack;`
+#### `onResizeStart?: RndResizeStartCallback;`
 
-`ResizeStartCallBack` type is below.
-
+`RndResizeStartCallback` type is below.
 
 ``` javascript
-type ResizeStartCallBack = (
-  e: SyntheticMouseEvent | SyntheticTouchEvent,
-  dir: Direction,
-  refToElement: HTMLElement,
+export type RndResizeStartCallback = (
+  e: SyntheticMouseEvent<HTMLDivElement> | SyntheticTouchEvent<HTMLDivElement>,
+  dir: ResizeDirection,
+  refToElement: React.ElementRef<'div'>,
 ) => void;
 ```
 
 Calls when resizable component resize start.
 
-#### `onResize?: Callback;`
+#### `onResize?: RndResizeCallback;`
 
-`Callback` type is below.
-
+`RndResizeCallback` type is below.
 
 ``` javascript
-type Callback = (
-  event: MouseEvent | TouchEvent,
-  direction: Direction,
-  refToElement: HTMLElement,
-  delta: NumberSize,
+export type RndResizeCallback = (
+  e: MouseEvent | TouchEvent,
+  dir: ResizeDirection,
+  refToElement: React.ElementRef<'div'>,
+  delta: ResizableDelta,
+  position: Position,
 ) => void;
 ```
 
 Calls when resizable component resizing.
 
-#### `onResizeStop?: Callback;`
+#### `onResizeStop?: RndResizeCallback;`
 
-`Callback` type is below.
-
+`RndResizeCallback` type is below.
 
 ``` javascript
-type Callback = (
-  event: MouseEvent | TouchEvent,
-  direction: Direction,
-  refToElement: HTMLElement,
-  delta: NumberSize,
+export type RndResizeCallback = (
+  e: MouseEvent | TouchEvent,
+  dir: ResizeDirection,
+  refToElement: React.ElementRef<'div'>,
+  delta: ResizableDelta,
+  position: Position,
 ) => void;
 ```
 
-Calls when resizable component resize startStop.
+Calls when resizable component resize stop.
 
 #### `onDragStart: DraggableEventHandler;`
 
 Callback called on dragging start.
-
 
 ``` javascript
 type DraggableData = {
@@ -323,7 +328,6 @@ type DraggableEventHandler = (
 ) => void | false;
 ```
 
-
 ## Method
 
 
@@ -350,7 +354,6 @@ class YourComponent extends Component {
       </Rnd>
     );
   }
-
   ...
 }
 ```
@@ -418,6 +421,13 @@ npm t
 ```
 
 ## Changelog
+
+#### v6.0.0
+
+- Use rollup.
+- Support % min/max size.
+- Change props, remove `default` and add `x`, `y`, `width`, `height`.
+- Rename `dragHandlersXXXX` and `resizeHandlersXXXX` props to `dragHandleXXXX` and `resizeHandleXXXX`.
 
 #### v5.1.2
 

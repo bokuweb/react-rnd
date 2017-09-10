@@ -18,7 +18,6 @@ export default () => (
     height={200}
     x={100}
     y={100}
-    
   >
     001
   </Rnd>
