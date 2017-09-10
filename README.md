@@ -419,6 +419,10 @@ npm t
 
 ## Changelog
 
+#### v5.1.3
+
+- Fix cursor style, set `normal` to cursor style when `dragHandlerClassName` is not empty.
+
 #### v5.1.2
 
 - Add position `relative` when component will update.
