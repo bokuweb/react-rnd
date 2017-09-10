@@ -205,40 +205,9 @@ export default class Rnd extends React.Component<Props, State> {
     }
   }
 
-  componentWillMount() {
-  }
-
   componentDidMount() {
-    // this.updateSizeAndPosition();
     this.setParentPosition();
   }
-
-  componentDidUpdate() {
-    // this.setParentPosition();
-  }
-
-  componentWillUnmount() {
-  }
-
-  // updateSizeAndPosition() {
-  // if (!this.props.bounds) return;
-  // const parent = this.resizable && this.resizable.parentNode;
-  // const target = this.props.bounds === 'parent'
-  //   ? parent
-  //   : document.querySelector(this.props.bounds);
-  // const self = this.getSelfElement();
-  // if (self instanceof Element && target instanceof HTMLElement && parent instanceof HTMLElement) {
-  //   const selfRect = self.getBoundingClientRect();
-  //   const selfLeft = selfRect.left;
-  //   const selfTop = selfRect.top;
-  //   const targetRect = target.getBoundingClientRect();
-  //   const targetLeft = targetRect.left;
-  //   const targetTop = targetRect.top;
-  //   console.log(selfLeft, targetLeft)
-  //   if (selfLeft < targetLeft) {
-  //   }
-  // }
-  // }
 
   getSelfElement(): null | Element | Text {
     if (!this) return null;
