@@ -33,7 +33,7 @@ jobs:
           command: yarn
       - add-ssh-keys:
           fingerprints:
-            - "45:1a:73:5c:53:97:cc:7d:ef:b0:75:48:93:9f:08:31"          
+            - "9e:ff:cc:c5:e1:e4:6a:e9:c2:bb:65:d9:f3:b5:4d:be"
       - run:
           name: Setup git
           command: |
@@ -50,7 +50,7 @@ jobs:
     steps:
       - add-ssh-keys:
           fingerprints:
-            - "45:1a:73:5c:53:97:cc:7d:ef:b0:75:48:93:9f:08:31"
+            - "9e:ff:cc:c5:e1:e4:6a:e9:c2:bb:65:d9:f3:b5:4d:be"          
       - checkout
       - run:
           name: Install dependencies
@@ -77,7 +77,7 @@ jobs:
     steps:
       - add-ssh-keys:
           fingerprints:
-            - "45:1a:73:5c:53:97:cc:7d:ef:b0:75:48:93:9f:08:31"
+            - "9e:ff:cc:c5:e1:e4:6a:e9:c2:bb:65:d9:f3:b5:4d:be"
       - checkout
       - run:
           name: Install dependencies
