@@ -429,6 +429,10 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v6.0.1
+
+- Remove unnecessary types.
+
 #### v6.0.0
 
 - Use rollup.
