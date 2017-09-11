@@ -8,14 +8,7 @@ import type { ResizeDirection, ResizeCallback, ResizeStartCallback } from 're-re
 
 export type Grid = [number, number];
 
-export class TouchEvent2 extends TouchEvent {
-  changedTouches: TouchList;
-  targetTouches: TouchList;
-}
-
-export type MouseTouchEvent = MouseEvent & TouchEvent2;
-
-type Position = {
+export type Position = {
   x: number;
   y: number;
 }
