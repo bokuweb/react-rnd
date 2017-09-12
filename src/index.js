@@ -51,6 +51,8 @@ type State = {
     bottom: number;
     left: number;
   };
+  width?: number | string;
+  height?: number | string;
   maxWidth?: number;
   maxHeight?: number;
   isMounted: boolean;
@@ -96,10 +98,12 @@ export type HandleStyles = {
 type Props = {
   z?: number;
   dragGrid?: Grid;
-  width: number | string;
-  height: number | string;
-  x: number;
-  y: number;
+  default: {
+    x: number;
+    y: number;
+    width?: number | string;
+    height?: number | string;
+  };
   resizeGrid?: Grid;
   bounds?: string;
   onResizeStart?: RndResizeStartCallback;
@@ -115,6 +119,8 @@ type Props = {
   extendsProps?: { [key: string]: any };
   resizeHandleClasses?: HandleClasses;
   resizeHandleStyles?: HandleStyles;
+  resizeHandleWrapperClass?: string;
+  resizeHandleWrapperStyle?: Style;
   lockAspectRatio?: boolean;
   maxHeight?: number;
   maxWidth?: number;
@@ -162,8 +168,8 @@ export default class Rnd extends React.Component<Props, State> {
       disableDragging: false,
       z: props.z,
       original: {
-        x: props.x || 0,
-        y: props.y || 0,
+        x: props.default.x || 0,
+        y: props.default.y || 0,
       },
       bounds: {
         top: 0,
@@ -171,6 +177,8 @@ export default class Rnd extends React.Component<Props, State> {
         bottom: 0,
         left: 0,
       },
+      width: props.default.width,
+      height: props.default.height,
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
       isMounted: false,
@@ -187,14 +195,14 @@ export default class Rnd extends React.Component<Props, State> {
     if (this.props.z !== nextProps.z) {
       this.setState({ z: nextProps.z });
     }
-    const draggable = this.draggable && this.draggable.state;
-    if (!draggable) return;
-    if (this.props.x !== draggable.x) {
-      this.draggable.setState({ x: this.props.x });
-    }
-    if (this.props.y !== draggable.y) {
-      this.draggable.setState({ y: this.props.y });
-    }
+    // const draggable = this.draggable && this.draggable.state;
+    // if (!draggable) return;
+    // if (this.props.x !== draggable.x) {
+    //   this.draggable.setState({ x: this.props.default.x });
+    // }
+    // if (this.props.y !== draggable.y) {
+    //   this.draggable.setState({ y: this.props.y });
+    // }
   }
 
   componentDidMount() {
@@ -373,9 +381,8 @@ export default class Rnd extends React.Component<Props, State> {
     }
   }
 
-  updateSize(size: { width: number, height: number }) {
-    if (!this.resizable) return;
-    this.resizable.updateSize({ width: size.width, height: size.height });
+  updateSize(size: { width: number | string, height: number | string }) {
+    this.setState({ width: size.width, height: size.height });
   }
 
   updatePosition(position: Position) {
@@ -402,7 +409,7 @@ export default class Rnd extends React.Component<Props, State> {
       <Draggable
         ref={(c: Draggable) => { this.draggable = c; }}
         handle={this.props.dragHandleClassName}
-        defaultPosition={{ x: this.props.x, y: this.props.y }}
+        defaultPosition={{ x: this.props.default.x, y: this.props.default.y }}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
@@ -421,13 +428,15 @@ export default class Rnd extends React.Component<Props, State> {
           onResize={this.onResize}
           onResizeStop={this.onResizeStop}
           style={innerStyle}
-          width={this.props.width}
-          height={this.props.height}
+          width={this.state.width}
+          height={this.state.height}
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
           maxWidth={this.state.maxWidth}
           maxHeight={this.state.maxHeight}
           grid={this.props.resizeGrid}
+          handleWrapperClass={this.props.resizeHandleWrapperClass}
+          handleWrapperStyle={this.props.resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
           handleStyles={this.props.resizeHandleStyles}
           handleClasses={this.props.resizeHandleClasses}

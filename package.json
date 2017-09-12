@@ -26,7 +26,7 @@
     "test:ci": "npm run flow && npm run build",
     "flow-copy": "flow-copy-source -v src lib && cp lib/index.js.flow lib/index.es5.js.flow ",
     "prepublish": "npm run build && npm run flow-copy",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6016",
     "build-storybook": "build-storybook",
     "deploy": "npm run build-storybook && gh-pages -d storybook-static"
   },
