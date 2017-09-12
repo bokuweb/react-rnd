@@ -119,6 +119,8 @@ type Props = {
   extendsProps?: { [key: string]: any };
   resizeHandleClasses?: HandleClasses;
   resizeHandleStyles?: HandleStyles;
+  resizeHandleWrapperClass?: string;
+  resizeHandleWrapperStyle?: Style;
   lockAspectRatio?: boolean;
   maxHeight?: number;
   maxWidth?: number;
@@ -433,6 +435,8 @@ export default class Rnd extends React.Component<Props, State> {
           maxWidth={this.state.maxWidth}
           maxHeight={this.state.maxHeight}
           grid={this.props.resizeGrid}
+          handleWrapperClass={this.props.resizeHandleWrapperClass}
+          handleWrapperStyle={this.props.resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
           handleStyles={this.props.resizeHandleStyles}
           handleClasses={this.props.resizeHandleClasses}

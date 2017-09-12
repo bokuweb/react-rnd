@@ -419,6 +419,11 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.0.0
+
+- Add `default` instead of `x`, `y`, `width`, `height`.
+- Add `resizeHandleWrapperClass` and `resizeHandleWrapperStyle`.
+
 #### v6.0.1
 
 - Remove unnecessary types.
