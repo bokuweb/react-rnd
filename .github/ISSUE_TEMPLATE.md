@@ -6,8 +6,10 @@
 ### Overview of the problem
 
 <!-- UNCOMMENT THE APPROPRIATE LINES -->
-I'm using react-resizable-box **version** [x.x.x]
-My **browser** is:
+I'm using react-resizable-box **version** [x.x.x]   
+   
+My **browser** is:   
+   
 I am sure this issue is **not a duplicate**?
 
 ### Description
