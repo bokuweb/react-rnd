@@ -361,7 +361,7 @@ class YourComponent extends Component {
 
 #### `updatePosition({ x: number, y: number })`
 
-Update component size.
+Update component position.
 `grid` `bounds` props is ignored, when this method called.
 
 - for example
