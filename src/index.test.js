@@ -30,7 +30,7 @@ test.beforeEach(async t => {
 
 test('should mount without error', async t => {
   const rnd = mount(
-    <Rnd x={100} y={100} width={100} height={100} />,
+    <Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />,
   );
   t.truthy(!!rnd);
 });
@@ -39,7 +39,7 @@ test('Should custom class name be applied to box', async t => {
   const rnd = mount(
     <Rnd
       className="custom-class-name"
-      x={100} y={100} width={100} height={100} 
+      default={{ x: 100, y: 100, width: 100, height: 100 }} 
     />,
   );
   t.truthy(rnd.getDOMNode().classList.contains('custom-class-name'));
@@ -48,7 +48,7 @@ test('Should custom class name be applied to box', async t => {
 test('Should set handler className', async t => {
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100} 
+      default={{ x: 100, y: 100, width: 100, height: 100 }} 
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -68,7 +68,7 @@ test('Should set handler className', async t => {
 test('Should not render resizer when enable props all false', async t => {
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100} 
+      default={{ x: 100, y: 100, width: 100, height: 100 }} 
       enableResizing={{
         top: false,
         right: false,
@@ -99,7 +99,7 @@ test('should call onDragStart when start dragging', async t => {
   const onDragStart = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       onDragStart={onDragStart}
     />,
   );
@@ -114,7 +114,7 @@ test('should call onDrag when dragging', async t => {
   const onDrag = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}    
+      default={{ x: 100, y: 100, width: 100, height: 100 }}    
       onDrag={onDrag}
     />,
   );
@@ -130,7 +130,7 @@ test('should call onDragStop when drag stop', async t => {
   const onDragStop = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       onDragStop={onDragStop}
     />,
   );
@@ -148,7 +148,7 @@ test('should dragging disabled when axis equals none', async t => {
     <Rnd
       onDrag={onDrag}
       dragAxis="none"
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
     { attachTo: document.querySelector('div') },
   );
@@ -164,7 +164,7 @@ test('should enable dragging only x when axis equals x', async t => {
     <Rnd
       onDrag={onDrag}
       dragAxis="x"
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
     { attachTo: document.querySelector('div') },
   );
@@ -180,7 +180,7 @@ test('should enable dragging only y when axis equals y', async t => {
     <Rnd
       onDrag={onDrag}
       dragAxis="y"
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
     { attachTo: document.querySelector('div') },
   );
@@ -196,7 +196,7 @@ test('should enable dragging both x & y when axis equals both', async t => {
     <Rnd
       onDrag={onDrag}
       dragAxis="both"
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
     { attachTo: document.querySelector('div') },
   );
@@ -210,7 +210,7 @@ test('should snap when dragging smaller than threshold', async t => {
   const rnd = mount(
     <Rnd
       dragGrid={[30, 100]}
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
     { attachTo: document.querySelector('div') },
   );
@@ -223,7 +223,7 @@ test('should snap when dragging larger than threshold', async t => {
   const rnd = mount(
     <Rnd
       dragGrid={[30, 100]}
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
     { attachTo: document.querySelector('div') },
   );
@@ -237,7 +237,7 @@ test('should limit position by parent bounds', async t => {
     <div style={{ width: '800px', height: '600px' }}>
       <Rnd
         bounds="parent"
-        x={0} y={0} width={100} height={100}
+        default={{ x: 0, y: 0, width: 100, height: 100 }}
       />
     </div>,
     { attachTo: document.querySelector('div') },
@@ -253,7 +253,7 @@ test('should limit position by selector bounds', async t => {
       <div style={{ width: '800px', height: '600px' }}>
         <Rnd
           bounds=".target"
-          x={0} y={0} width={100} height={100}
+          default={{ x: 0, y: 0, width: 100, height: 100 }}
         />
       </div>
     </div>,
@@ -269,7 +269,7 @@ test('should limit position by selector bounds', async t => {
 test('Should box width and height equal 100px', async t => {
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -291,7 +291,7 @@ test('Should call onResizeStart when mousedown', async t => {
   const onResizeStart = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -326,7 +326,7 @@ test('should call onResize with expected args when resize direction right', asyn
   const onResizeStart = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -367,7 +367,7 @@ test('should call onResizeStop with expected args when resize direction right', 
   const onResizeStop = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -409,7 +409,7 @@ test('should move x when resizing left', async t => {
   const onResizeStart = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -450,7 +450,7 @@ test('should move y when resizing top', async t => {
   const onResizeStart = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -490,7 +490,7 @@ test('should snapped by original grid when x axis resizing smaller then threshol
   const onResize = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -525,7 +525,7 @@ test('should snapped by original grid when x axis resizing larger then threshold
   const onResize = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -560,7 +560,7 @@ test('should snapped by original grid when y axis resizing smaller then threshol
   const onResize = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -595,7 +595,7 @@ test('should snapped by original grid when y axis resizing larger then threshold
   const onResize = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -630,7 +630,7 @@ test('should snapped by original grid when y axis resizing larger then threshold
   const onResize = spy();
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       resizeHandleClasses={{
         top: 'handler',
         right: 'handler',
@@ -667,7 +667,7 @@ test('should clamped by parent size', async t => {
   const rnd = mount(
     <div style={{ width: '800px', height: '600px' }}>
       <Rnd
-        x={0} y={0} width={100} height={100}
+        default={{ x: 0, y: 0, width: 100, height: 100 }}
         resizeHandleClasses={{
           top: 'handler',
           right: 'handler',
@@ -704,7 +704,7 @@ test('should clamped by selector size', async t => {
     <div className="target" style={{ width: '1000px', height: '800px' }}>
       <div style={{ width: '800px', height: '600px' }}>
         <Rnd
-          x={0} y={0} width={100} height={100}
+          default={{ x: 0, y: 0, width: 100, height: 100 }}
           resizeHandleClasses={{
             top: 'handler',
             right: 'handler',
@@ -740,7 +740,7 @@ test('should clamped by selector size', async t => {
 test('should get rnd updated when updatePosition invoked', async t => {
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
   );
   rnd.instance().updatePosition({ x: 200, y: 300 });
@@ -750,7 +750,7 @@ test('should get rnd updated when updatePosition invoked', async t => {
 test('should get rnd updated when updateSize invoked', async t => {
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
     />,
   );
   rnd.instance().updateSize({ width: 200, height: 300 });
@@ -761,7 +761,7 @@ test('should get rnd updated when updateSize invoked', async t => {
 test('should get rnd updated when updateZIndex invoked', async t => {
   const rnd = mount(
     <Rnd
-      x={100} y={100} width={100} height={100}
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
       z={200}
     />,
   );

@@ -24,10 +24,12 @@ export default () => (
       style={style}
       bounds="parent"
       style={style}
-      width={200}
-      height={200}
-      x={100}
-      y={100}
+      default={{
+        width: 200,
+        height: 200,
+        x: 100,
+        y: 100,
+      }}
     >
       001
     </Rnd>

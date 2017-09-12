@@ -50,10 +50,12 @@ yarn add react-rnd
 
 ``` javascript
 <Rnd
-  width={200}
-  height={200}
-  x={100}
-  y={100}
+  default={{
+    x: 0,
+    y: 0,
+    width: 320,
+    height: 200,
+  }}
 >
   Rnd
 </Rnd>
@@ -65,25 +67,13 @@ You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31
 
 ## Props
 
-#### `x: number;`
+#### `default: { x: number; y: number;  width?: number | string;  height?: number | string; };`
 
-The `x` property is used to set position of the component.   
-
-#### `y: number;`
-
-The `y` property is used to set position of the component.
-
-#### `width?: (number | string);`
-
-The `width` property is used to set width of the component.   
+The `width` and `height` property is used to set the default size of a component.
 For example, you can set `300`, `'300px'`, `50%`.     
-If omitted, set `'auto'`.    
+If omitted, set `'auto'`.
 
-#### `height?: (number | string);`
-
-The `height` property is used to set width of the component.   
-For example, you can set `300`, `'300px'`, `50%`.    
-If omitted, set `'auto'`.    
+The `x` and `y` property is used to set the default position of the component.   
 
 #### `className?: string;`
 
