@@ -82,7 +82,7 @@ yarn add react-rnd
 
 ### Example
 
-You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31OD4) too.
+You can try it on [WebpackBin](https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu) too.
 
 ## Props
 
@@ -465,7 +465,7 @@ npm t
 
 If you have a feature request, please add it as an issue or make a pull request.
 
-If you have a bug to report, please reproduce the bug in [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31OD4) to help us easily isolate it.
+If you have a bug to report, please reproduce the bug in [WebpackBin](https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu) to help us easily isolate it.
 
 ## Changelog
 
