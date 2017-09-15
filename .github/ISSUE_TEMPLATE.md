@@ -6,8 +6,10 @@
 ### Overview of the problem
 
 <!-- UNCOMMENT THE APPROPRIATE LINES -->
-I'm using react-resizable-box **version** [x.x.x]   
+I'm using react-rnd **version** [x.x.x]   
    
+<!-- Could you please provide reproduced project on webpackbin with latest version rnd? https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu -->
+
 My **browser** is:   
    
 I am sure this issue is **not a duplicate**?
@@ -29,3 +31,5 @@ I am sure this issue is **not a duplicate**?
 ### Actual behavior
 
 <!-- What actually happened -->
+
+
