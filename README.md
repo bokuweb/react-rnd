@@ -184,7 +184,7 @@ but other handle will still use the default styles.
 
 ``` javascript
 
-type Style = { [key: string]: string };
+type Style = { [key: string]: string | number };
 
 export type HandleStyles = {
   bottom?: Style,
@@ -214,6 +214,14 @@ type HandleClasses = {
   topRight?: string;
 }
 ```
+
+#### `resizeHandleWrapperClass?: string;`
+
+The `resizeHandleWrapperClass` property is used to set css class name of resize handle wrapper(`span`) element.
+
+#### `resizeHandleWrapperStyle?: Style;`
+
+The `resizeHandleWrapperStyle` property is used to set css class name of resize handle wrapper(`span`) element.
 
 #### `enableResizing?: ?Enable;`
 
