@@ -90,7 +90,7 @@
     "fixture": "./fixture.html"
   },
   "dependencies": {
-    "re-resizable": "^4.0.0-beta.0",
+    "re-resizable": "^4.0.0",
     "react-draggable": "^3.0.3"
   }
 }
