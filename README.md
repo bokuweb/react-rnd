@@ -94,14 +94,14 @@ If omitted, set `'auto'`.
 
 The `x` and `y` property is used to set the default position of the component.   
 
-### `size?: { width: (number | string), height: (number | string) };`
+#### `size?: { width: (number | string), height: (number | string) };`
 
 The `size` property is used to set size of the component.
 For example, you can set 300, '300px', 50%.
 
 Use `size` if you need to control size state by yourself.
 
-### `position?: { x: number, y: number };`
+#### `position?: { x: number, y: number };`
 
 The `position` property is used to set position of the component.
 Use `position` if you need to control size state by yourself.
