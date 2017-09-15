@@ -46,7 +46,7 @@ yarn add react-rnd
 
 ## Usage
 
-### Minimum example
+### Example with `default`
 
 ``` javascript
 <Rnd
@@ -61,6 +61,25 @@ yarn add react-rnd
 </Rnd>
 ```
 
+### Example with `position` and `size`
+
+``` javascript
+<Rnd
+  size={{ width: this.state.width,  height: this.state.height }}
+  position={{ x: this.state.x, y: this.state.y }}
+  onDragStop={(e, d) => { this.setState({ x: d.x, y: d.y }) }}
+  onResize={(e, direction, ref, delta, position) => {
+    this.setState({
+      width: ref.offsetWidth,
+      height: ref.offsetHeight,
+      ...position,
+    });
+  }}
+>
+  001
+</Rnd>
+```
+
 ### Example
 
 You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31OD4) too.
@@ -69,11 +88,42 @@ You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31
 
 #### `default: { x: number; y: number;  width?: number | string;  height?: number | string; };`
 
-The `width` and `height` property is used to set the default size of a component.
+The `width` and `height` property is used to set the default size of the component.
 For example, you can set `300`, `'300px'`, `50%`.     
 If omitted, set `'auto'`.
 
 The `x` and `y` property is used to set the default position of the component.   
+
+### `size?: { width: (number | string), height: (number | string) };`
+
+The `size` property is used to set size of the component.
+For example, you can set 300, '300px', 50%.
+
+Use `size` if you need to control size state by yourself.
+
+### `position?: { x: number, y: number };`
+
+The `position` property is used to set position of the component.
+Use `position` if you need to control size state by yourself.
+
+see, following example.    
+    
+``` javascript
+<Rnd
+  size={{ width: this.state.width,  height: this.state.height }}
+  position={{ x: this.state.x, y: this.state.y }}
+  onDragStop={(e, d) => { this.setState({ x: d.x, y: d.y }) }}
+  onResize={(e, direction, ref, delta, position) => {
+    this.setState({
+      width: ref.offsetWidth,
+      height: ref.offsetHeight,
+      ...position,
+    });
+  }}
+>
+  001
+</Rnd>
+```
 
 #### `className?: string;`
 
@@ -418,6 +468,11 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [WebpackBin](https://www.webpackbin.com/bins/-KtgCwfKgnXqQpQ31OD4) to help us easily isolate it.
 
 ## Changelog
+
+#### v7.1.0
+
+- Add `size`.
+- Add `position`.
 
 #### v7.0.0
 
