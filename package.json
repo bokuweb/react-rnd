@@ -20,8 +20,6 @@
     "build:prod:es5": "rollup -c scripts/prod.es5.js",
     "build:prod:umd": "rollup -c scripts/prod.umd.js",
     "build": "npm-run-all --parallel build:prod:*",
-    "dev": "rollup -c config/dev.js -w",
-    "browse": "browser-sync start --s --index 'html/index.html' --files 'html/**/*.html, build/**/*.js' --no-notify",
     "test": "NODE_ENV='test' avaron src/index.test.js --renderer",
     "test:ci": "npm run flow && npm run build",
     "flow-copy": "flow-copy-source -v src lib && cp lib/index.js.flow lib/index.es5.js.flow ",
@@ -92,7 +90,7 @@
     "fixture": "./fixture.html"
   },
   "dependencies": {
-    "re-resizable": "^3.0.0",
+    "re-resizable": "^4.0.0",
     "react-draggable": "^3.0.3"
   }
 }

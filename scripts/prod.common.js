@@ -12,10 +12,11 @@ export default {
   sourcemap: true,
   exports: 'named',
   name: 'react-rnd',
-  external: ['react', 're-resizable', 'react-draggable'],
+  external: ['react', 're-resizable', 'react-draggable', 'react-dom'],
   globals: {
     react: 'React',
     're-resizable': 'Resizable',
     'react-draggable': 'Draggable',
+    'react-dom': 'ReactDOM',
   },
 };
