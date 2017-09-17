@@ -477,6 +477,10 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.1.1
+
+- Add internal props.
+
 #### v7.1.0
 
 - Add `size`.
