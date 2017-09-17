@@ -477,7 +477,7 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
-#### v7.1.1
+#### v7.1.1 / v7.1.2
 
 - Add internal props.
 
