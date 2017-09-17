@@ -251,7 +251,7 @@ export default class Rnd extends React.Component<Props, State> {
         top,
         right: left + (target.offsetWidth - this.resizable.size.width),
         bottom: this.props._freeBottomBounds // eslint-disable-line
-          ? Number.MAX_SAFE_INTEGER
+          ? 2147483647
           : top + (target.offsetHeight - this.resizable.size.height),
         left,
       },
@@ -413,6 +413,7 @@ export default class Rnd extends React.Component<Props, State> {
     };
     // HACK: Wait for setting relative to parent element.
     if (!this.state.isMounted) return <div />;
+    const maxHeight = this.props._freeBottomBounds ? 2147483647 : this.state.maxHeight; // eslint-disable-line
     return (
       <Draggable
         ref={(c: Draggable) => { this.draggable = c; }}
@@ -442,7 +443,7 @@ export default class Rnd extends React.Component<Props, State> {
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
           maxWidth={this.state.maxWidth}
-          maxHeight={this.state.maxHeight}
+          maxHeight={maxHeight}
           grid={this.props.resizeGrid}
           handleWrapperClass={this.props.resizeHandleWrapperClass}
           handleWrapperStyle={this.props.resizeHandleWrapperStyle}
