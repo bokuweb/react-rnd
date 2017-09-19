@@ -348,15 +348,11 @@ export default class Rnd extends React.Component<Props, State> {
       }
     }
     if (/left/i.test(direction)) {
-      x = selfLeft >= parentLeft
-        ? (this.state.original.x - delta.width)
-        : (parentLeft - selfLeft);
+      x = this.state.original.x - delta.width
       this.draggable.setState({ x });
     }
     if (/top/i.test(direction)) {
-      y = selfTop >= parentTop
-        ? (this.state.original.y - delta.height)
-        : (parentTop - selfTop);
+      y = this.state.original.y - delta.height
       this.draggable.setState({ y });
     }
     if (this.props.onResize) {
@@ -429,6 +425,7 @@ export default class Rnd extends React.Component<Props, State> {
         position={this.props.position}
       >
         <Resizable
+          {...this.props.extendsProps}
           className={this.props.className}
           ref={(c: (React$ElementRef<typeof Resizable> | null)) => {
             this.resizable = c;
