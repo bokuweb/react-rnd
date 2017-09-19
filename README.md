@@ -477,6 +477,11 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.1.3
+
+Fixed a bug, `extendProps` is not passed correctly.
+Fixed a bug, `bounds` is not work correctly. (#162)
+
 #### v7.1.1 / v7.1.2
 
 - Add internal props.
