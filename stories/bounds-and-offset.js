@@ -40,12 +40,12 @@ const handleResizeStop = (_, __, ele, ___, pos) => {
 }
 
 export default () => (
-  <div style={{ width: '100%', height:'100%' }}>
+  <div style={{ width: '100%', height: '100%' }}>
     <div className="bounds" style={{ border: '1px solid red', width: '500px', height: '500px', position: 'absolute' }}>
       <div className="offsetParent" style={{ border: '1px dotted green', width: '200px', height: '200px', position: 'absolute', left: '150px', top: '150px' }}>
         <Rnd
           extendsProps={{ onClick: handleClick }}
-          style={{ background: '#ddd' }}
+          style={style}
           default={{ x: -50, y: 0, width: 100, height: 100 }}
           bounds=".bounds"
           onResizeStart={handleResizeStart}
@@ -55,7 +55,7 @@ export default () => (
           onDrag={handleDrag}
           onDragStop={handleDragStop}
         >
-          Hello from React
+          001
         </Rnd>
       </div>
     </div>

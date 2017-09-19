@@ -326,33 +326,14 @@ export default class Rnd extends React.Component<Props, State> {
     refToResizableElement: React.ElementRef<'div'>,
     delta: { height: number, width: number },
   ) {
-    let parentLeft = 0;
-    let selfLeft = 0;
-    let parentTop = 0;
-    let selfTop = 0;
     let x;
     let y;
-    if (this.props.bounds) {
-      const parent = this.resizable && this.resizable.parentNode;
-      const target = this.props.bounds === 'parent'
-        ? parent
-        : document.querySelector(this.props.bounds);
-      const self = this.getSelfElement();
-      if (self instanceof Element && target instanceof HTMLElement && parent instanceof HTMLElement) {
-        const selfRect = self.getBoundingClientRect();
-        const parentRect = parent.getBoundingClientRect();
-        selfLeft = selfRect.left;
-        selfTop = selfRect.top;
-        parentLeft = parentRect.left;
-        parentTop = parentRect.top;
-      }
-    }
     if (/left/i.test(direction)) {
-      x = this.state.original.x - delta.width
+      x = this.state.original.x - delta.width;
       this.draggable.setState({ x });
     }
     if (/top/i.test(direction)) {
-      y = this.state.original.y - delta.height
+      y = this.state.original.y - delta.height;
       this.draggable.setState({ y });
     }
     if (this.props.onResize) {
