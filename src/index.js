@@ -194,6 +194,7 @@ export default class Rnd extends React.Component<Props, State> {
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onDragStop = this.onDragStop.bind(this);
+    this.getMaxSizesFromProps = this.getMaxSizesFromProps.bind(this);
   }
 
 
@@ -205,6 +206,12 @@ export default class Rnd extends React.Component<Props, State> {
 
   componentDidMount() {
     this.setParentPosition();
+  }
+
+  getMaxSizesFromProps() {
+    const maxWidth = typeof this.props.maxWidth === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxWidth;
+    const maxHeight = typeof this.props.maxHeight === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxHeight;
+    return { maxWidth, maxHeight };
   }
 
   getSelfElement(): null | Element | Text {
@@ -287,8 +294,7 @@ export default class Rnd extends React.Component<Props, State> {
         : document.querySelector(this.props.bounds);
       const self = this.getSelfElement();
       if (self instanceof Element && target instanceof HTMLElement && parent instanceof HTMLElement) {
-        const maxWidth = typeof this.props.maxWidth === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxWidth;
-        const maxHeight = typeof this.props.maxHeight === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxHeight;
+        const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
         const selfRect = self.getBoundingClientRect();
         const selfLeft = selfRect.left;
         const selfTop = selfRect.top;
@@ -355,7 +361,8 @@ export default class Rnd extends React.Component<Props, State> {
     refToResizableElement: HTMLDivElement,
     delta: { height: number, width: number },
   ) {
-    this.setState({ disableDragging: false });
+    const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
+    this.setState({ disableDragging: false, maxWidth, maxHeight });
     if (this.props.onResizeStop) {
       const position: Position = {
         x: this.draggable.state.x,
