@@ -67,7 +67,7 @@
     "gh-pages": "^1.0.0",
     "npm-run-all": "^4.1.1",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.0",
     "react-test-renderer": "^15.6.1",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "3.0.2",
