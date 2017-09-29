@@ -14,7 +14,7 @@ before_install:
 install:
   - yarn install
 
-test:
+script:
   - yarn run flow
   - yarn run lint
   - yarn run test
