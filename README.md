@@ -478,6 +478,10 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.1.4
+
+Fixed a issue #199 Add enableUserSelectHack props to react-draggable
+
 #### v7.1.3
 
 Fixed a bug, `extendProps` is not passed correctly.
