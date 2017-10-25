@@ -478,9 +478,13 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
-#### v7.1.4
+#### v7.1.5
 
 Fixed a issue #199 Add enableUserSelectHack props to react-draggable
+
+#### v7.1.4
+
+Fixed a issue #188 maxWidth and maxHeight props don't respect after resize
 
 #### v7.1.3
 
