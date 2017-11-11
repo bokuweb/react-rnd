@@ -83,7 +83,7 @@ yarn add react-rnd
 
 ### Example
 
-You can try it on [WebpackBin](https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu) too.
+You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KyeXupuBJyBPaIN0F_i) too.
 
 ## Props
 
