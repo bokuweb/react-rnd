@@ -18,4 +18,4 @@ storiesOf('react-rnd', module)
   .add('bound multiple', () => <Multi />)
   .add('size percentage', () => <SizePercentage />)
   .add('max size with percent', () => <MaxSizeWithPercent />)
-  .add('use size and position instaead of default', () => <SizeAndPosition />);
+  .add('use size and position instead of default', () => <SizeAndPosition />);
