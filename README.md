@@ -5,11 +5,11 @@
 <p align="center"><a href="https://circleci.com/gh/bokuweb/react-rnd/tree/master">
 <img src="https://circleci.com/gh/bokuweb/react-rnd/tree/master.svg?style=svg" alt="Build Status" /></a>
 <a href="https://www.npmjs.com/package/react-rnd">
-<img src="https://img.shields.io/npm/v/react-rnd.svg" alt="Build Status" /></a> 
+<img src="https://img.shields.io/npm/v/react-rnd.svg" alt="Build Status" /></a>
 <a href="https://www.npmjs.com/package/react-rnd">
-<img src="https://img.shields.io/npm/dm/react-rnd.svg" /></a> 
+<img src="https://img.shields.io/npm/dm/react-rnd.svg" /></a>
 <a href="https://greenkeeper.io/">
-<img src="https://badges.greenkeeper.io/bokuweb/react-rnd.svg" /></a> 
+<img src="https://badges.greenkeeper.io/bokuweb/react-rnd.svg" /></a>
 </p>
 
 ## Table of Contents
@@ -90,10 +90,10 @@ You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KyeXupuBJyBPaIN0
 #### `default: { x: number; y: number;  width?: number | string;  height?: number | string; };`
 
 The `width` and `height` property is used to set the default size of the component.
-For example, you can set `300`, `'300px'`, `50%`.     
+For example, you can set `300`, `'300px'`, `50%`.
 If omitted, set `'auto'`.
 
-The `x` and `y` property is used to set the default position of the component.   
+The `x` and `y` property is used to set the default position of the component.
 
 #### `size?: { width: (number | string), height: (number | string) };`
 
@@ -107,8 +107,8 @@ Use `size` if you need to control size state by yourself.
 The `position` property is used to set position of the component.
 Use `position` if you need to control size state by yourself.
 
-see, following example.    
-    
+see, following example.
+
 ``` javascript
 <Rnd
   size={{ width: this.state.width,  height: this.state.height }}
@@ -137,22 +137,22 @@ The `style` property is used to set the custom `style` of the component.
 #### `minWidth?: number | string;`
 
 The `minWidth` property is used to set the minimum width of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `minHeight?: number | string;`
 
 The `minHeight` property is used to set the minimum height of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `maxWidth?: number | string;`
 
 The `maxWidth` property is used to set the maximum width of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `maxHeight?: number | string`;
 
 The `maxHeight` property is used to set the maximum height of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `z?: number;`
 
@@ -248,6 +248,10 @@ export type Enable = {
 #### `disableDragging?: boolean;`
 
 The `disableDragging` property disables dragging completely.
+
+#### `cancel?: string;`
+
+The `cancel` property disables specifies a selector to be used to prevent drag initialization (e.g. `.body`).
 
 #### `extendsProps?: { [key: string]: any };`
 
@@ -384,7 +388,7 @@ type DraggableEventHandler = (
 #### `updateSize(size: { width: string | number, height: string | number })`
 
 Update component size.
-For example, you can set `300`, `'300px'`, `50%`.    
+For example, you can set `300`, `'300px'`, `50%`.
 
 - for example
 
@@ -434,7 +438,7 @@ class YourComponent extends Component {
 
   ...
 }
-```  
+```
 
 #### `updateZIndex(z: number)`
 
