@@ -482,6 +482,10 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.2.0
+
+Support for cancel feature of react-draggable #206
+
 #### v7.1.5
 
 Fixed a issue #199 Add enableUserSelectHack props to react-draggable
