@@ -127,7 +127,9 @@ type Props = {
   resizeHandleStyles?: HandleStyles;
   resizeHandleWrapperClass?: string;
   resizeHandleWrapperStyle?: Style;
-  lockAspectRatio?: boolean;
+  lockAspectRatio?: boolean | number;
+  lockAspectRatioExtraWidth?: number;
+  lockAspectRatioExtraHeight?: number;
   maxHeight?: number | string;
   maxWidth?: number | string;
   minHeight?: number | string;
@@ -461,6 +463,8 @@ export default class Rnd extends React.Component<Props, State> {
           handleWrapperClass={this.props.resizeHandleWrapperClass}
           handleWrapperStyle={this.props.resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
+          lockAspectRatioExtraWidth={this.props.lockAspectRatioExtraWidth}
+          lockAspectRatioExtraHeight={this.props.lockAspectRatioExtraHeight}
           handleStyles={this.props.resizeHandleStyles}
           handleClasses={this.props.resizeHandleClasses}
         >

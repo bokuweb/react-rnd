@@ -166,10 +166,25 @@ The `resizeGrid` property is used to specify the increments that resizing should
 
 The `dragGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
 
-#### `lockAspectRatio?: boolean;`
+#### `lockAspectRatio?: boolean | number;`
 
 The `lockAspectRatio` property is used to lock aspect ratio.
+Set to `true` to lock the aspect ratio based on the initial size.
+Set to a numeric value to lock a specific aspect ratio (such as `16/9`).
+If set to numeric, make sure to set initial height/width to values with correct aspect ratio.
 If omitted, set `false`.
+
+#### `lockAspectRatioExtraWidth?: number;`
+
+The `lockAspectRatioExtraWidth` property enables a resizable component to maintain an aspect ratio plus extra width.
+For instance, a video could be displayed 16:9 with a 50px side bar.
+If omitted, set `0`.
+
+#### `lockAspectRatioExtraHeight?: number;`
+
+The `lockAspectRatioExtraHeight` property enables a resizable component to maintain an aspect ratio plus extra height.
+For instance, a video could be displayed 16:9 with a 50px header bar.
+If omitted, set `0`.
 
 #### `dragHandleClassName?: string;`
 
