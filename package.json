@@ -73,7 +73,7 @@
     "rollup-plugin-babel": "3.0.3",
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-node-globals": "1.1.0",
-    "rollup-plugin-node-resolve": "3.0.1",
+    "rollup-plugin-node-resolve": "3.0.3",
     "rollup-plugin-replace": "^2.0.0",
     "rollup-watch": "4.3.1",
     "sinon": "^3.2.1"
