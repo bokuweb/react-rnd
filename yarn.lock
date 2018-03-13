@@ -6484,9 +6484,9 @@ rollup-plugin-node-globals@1.1.0:
     process-es6 "^0.11.3"
     rollup-pluginutils "^1.5.2"
 
-rollup-plugin-node-resolve@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-3.1.0.tgz#3073a28525a67e6890d029eea8b4c563d355beca"
+rollup-plugin-node-resolve@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-3.2.0.tgz#31534952f3ab21f9473c1d092be7ed43937ea4d4"
   dependencies:
     builtin-modules "^2.0.0"
     is-module "^1.0.0"
