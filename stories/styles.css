@@ -4,3 +4,7 @@ html, body, #root, #root > div {
     padding: 10px;
     box-sizing: border-box;
   }
+
+#root > div {
+    padding: 0px;
+}  

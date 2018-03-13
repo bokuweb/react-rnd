@@ -5,11 +5,11 @@
 <p align="center"><a href="https://circleci.com/gh/bokuweb/react-rnd/tree/master">
 <img src="https://circleci.com/gh/bokuweb/react-rnd/tree/master.svg?style=svg" alt="Build Status" /></a>
 <a href="https://www.npmjs.com/package/react-rnd">
-<img src="https://img.shields.io/npm/v/react-rnd.svg" alt="Build Status" /></a> 
+<img src="https://img.shields.io/npm/v/react-rnd.svg" alt="Build Status" /></a>
 <a href="https://www.npmjs.com/package/react-rnd">
-<img src="https://img.shields.io/npm/dm/react-rnd.svg" /></a> 
+<img src="https://img.shields.io/npm/dm/react-rnd.svg" /></a>
 <a href="https://greenkeeper.io/">
-<img src="https://badges.greenkeeper.io/bokuweb/react-rnd.svg" /></a> 
+<img src="https://badges.greenkeeper.io/bokuweb/react-rnd.svg" /></a>
 </p>
 
 ## Table of Contents
@@ -25,6 +25,7 @@
 - [License](#license)
 
 ## Demo
+
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif" />
@@ -82,17 +83,17 @@ yarn add react-rnd
 
 ### Example
 
-You can try it on [WebpackBin](https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu) too.
+You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KyeXupuBJyBPaIN0F_i) too.
 
 ## Props
 
 #### `default: { x: number; y: number;  width?: number | string;  height?: number | string; };`
 
 The `width` and `height` property is used to set the default size of the component.
-For example, you can set `300`, `'300px'`, `50%`.     
+For example, you can set `300`, `'300px'`, `50%`.
 If omitted, set `'auto'`.
 
-The `x` and `y` property is used to set the default position of the component.   
+The `x` and `y` property is used to set the default position of the component.
 
 #### `size?: { width: (number | string), height: (number | string) };`
 
@@ -106,8 +107,8 @@ Use `size` if you need to control size state by yourself.
 The `position` property is used to set position of the component.
 Use `position` if you need to control size state by yourself.
 
-see, following example.    
-    
+see, following example.
+
 ``` javascript
 <Rnd
   size={{ width: this.state.width,  height: this.state.height }}
@@ -136,22 +137,22 @@ The `style` property is used to set the custom `style` of the component.
 #### `minWidth?: number | string;`
 
 The `minWidth` property is used to set the minimum width of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `minHeight?: number | string;`
 
 The `minHeight` property is used to set the minimum height of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `maxWidth?: number | string;`
 
 The `maxWidth` property is used to set the maximum width of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `maxHeight?: number | string`;
 
 The `maxHeight` property is used to set the maximum height of the component.
-For example, you can set `300`, `'300px'`, `50%`.  
+For example, you can set `300`, `'300px'`, `50%`.
 
 #### `z?: number;`
 
@@ -165,10 +166,25 @@ The `resizeGrid` property is used to specify the increments that resizing should
 
 The `dragGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
 
-#### `lockAspectRatio?: boolean;`
+#### `lockAspectRatio?: boolean | number;`
 
 The `lockAspectRatio` property is used to lock aspect ratio.
+Set to `true` to lock the aspect ratio based on the initial size.
+Set to a numeric value to lock a specific aspect ratio (such as `16/9`).
+If set to numeric, make sure to set initial height/width to values with correct aspect ratio.
 If omitted, set `false`.
+
+#### `lockAspectRatioExtraWidth?: number;`
+
+The `lockAspectRatioExtraWidth` property enables a resizable component to maintain an aspect ratio plus extra width.
+For instance, a video could be displayed 16:9 with a 50px side bar.
+If omitted, set `0`.
+
+#### `lockAspectRatioExtraHeight?: number;`
+
+The `lockAspectRatioExtraHeight` property enables a resizable component to maintain an aspect ratio plus extra height.
+For instance, a video could be displayed 16:9 with a 50px header bar.
+If omitted, set `0`.
 
 #### `dragHandleClassName?: string;`
 
@@ -247,6 +263,10 @@ export type Enable = {
 #### `disableDragging?: boolean;`
 
 The `disableDragging` property disables dragging completely.
+
+#### `cancel?: string;`
+
+The `cancel` property disables specifies a selector to be used to prevent drag initialization (e.g. `.body`).
 
 #### `extendsProps?: { [key: string]: any };`
 
@@ -383,7 +403,7 @@ type DraggableEventHandler = (
 #### `updateSize(size: { width: string | number, height: string | number })`
 
 Update component size.
-For example, you can set `300`, `'300px'`, `50%`.    
+For example, you can set `300`, `'300px'`, `50%`.
 
 - for example
 
@@ -433,7 +453,7 @@ class YourComponent extends Component {
 
   ...
 }
-```  
+```
 
 #### `updateZIndex(z: number)`
 
@@ -476,6 +496,18 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [WebpackBin](https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu) to help us easily isolate it.
 
 ## Changelog
+
+#### v7.2.0
+
+Support for cancel feature of react-draggable #206
+
+#### v7.1.5
+
+Fixed a issue #199 Add enableUserSelectHack props to react-draggable
+
+#### v7.1.4
+
+Fixed a issue #188 maxWidth and maxHeight props don't respect after resize
 
 #### v7.1.3
 

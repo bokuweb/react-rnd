@@ -56,8 +56,8 @@ type State = {
     bottom: number;
     left: number;
   };
-  maxWidth?: number;
-  maxHeight?: number;
+  maxWidth?: number | string;
+  maxHeight?: number | string;
   isMounted: boolean;
 }
 
@@ -127,14 +127,17 @@ type Props = {
   resizeHandleStyles?: HandleStyles;
   resizeHandleWrapperClass?: string;
   resizeHandleWrapperStyle?: Style;
-  lockAspectRatio?: boolean;
-  maxHeight?: number;
-  maxWidth?: number;
-  minHeight?: number;
-  minWidth?: number;
+  lockAspectRatio?: boolean | number;
+  lockAspectRatioExtraWidth?: number;
+  lockAspectRatioExtraHeight?: number;
+  maxHeight?: number | string;
+  maxWidth?: number | string;
+  minHeight?: number | string;
+  minWidth?: number | string;
   dragAxis?: 'x' | 'y' | 'both' | 'none';
   dragHandleClassName?: string;
   disableDragging?: boolean;
+  cancel?: boolean;
   _freeBottomBounds?: boolean; // Back door for react-elastic-grid.
 }
 
@@ -166,6 +169,10 @@ export default class Rnd extends React.Component<Props, State> {
   onDragStart: RndDragCallback;
   onDrag: RndDragCallback;
   onDragStop: RndDragCallback;
+  getMaxSizesFromProps: () => ({
+    maxWidth: number | string;
+    maxHeight: number | string;
+  });
   wrapper: HTMLElement;
   parentId: string;
 
@@ -194,6 +201,7 @@ export default class Rnd extends React.Component<Props, State> {
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onDragStop = this.onDragStop.bind(this);
+    this.getMaxSizesFromProps = this.getMaxSizesFromProps.bind(this);
   }
 
 
@@ -205,6 +213,16 @@ export default class Rnd extends React.Component<Props, State> {
 
   componentDidMount() {
     this.setParentPosition();
+  }
+
+  getParentSize(): { width: number, height: number } {
+    return (this.resizable: any).getParentSize();
+  }
+
+  getMaxSizesFromProps(): { maxWidth: number | string; maxHeight: number | string } {
+    const maxWidth = typeof this.props.maxWidth === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxWidth;
+    const maxHeight = typeof this.props.maxHeight === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxHeight;
+    return { maxWidth, maxHeight };
   }
 
   getSelfElement(): null | Element | Text {
@@ -287,8 +305,24 @@ export default class Rnd extends React.Component<Props, State> {
         : document.querySelector(this.props.bounds);
       const self = this.getSelfElement();
       if (self instanceof Element && target instanceof HTMLElement && parent instanceof HTMLElement) {
-        const maxWidth = typeof this.props.maxWidth === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxWidth;
-        const maxHeight = typeof this.props.maxHeight === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxHeight;
+        let { maxWidth, maxHeight } = this.getMaxSizesFromProps();
+        const parentSize = this.getParentSize();
+        if (maxWidth && typeof maxWidth === 'string') {
+          if (maxWidth.endsWith('%')) {
+            const ratio = Number(maxWidth.replace('%', '')) / 100;
+            maxWidth = parentSize.width * ratio;
+          } else if (maxWidth.endsWith('px')) {
+            maxWidth = Number(maxWidth.replace('px', ''));
+          }
+        }
+        if (maxHeight && typeof maxHeight === 'string') {
+          if (maxHeight.endsWith('%')) {
+            const ratio = Number(maxHeight.replace('%', '')) / 100;
+            maxHeight = parentSize.width * ratio;
+          } else if (maxHeight.endsWith('px')) {
+            maxHeight = Number(maxHeight.replace('px', ''));
+          }
+        }
         const selfRect = self.getBoundingClientRect();
         const selfLeft = selfRect.left;
         const selfTop = selfRect.top;
@@ -297,19 +331,19 @@ export default class Rnd extends React.Component<Props, State> {
         const targetTop = targetRect.top;
         if (/left/i.test(dir) && this.resizable) {
           const max = (selfLeft - targetLeft) + this.resizable.size.width;
-          this.setState({ maxWidth: max > maxWidth ? maxWidth : max });
+          this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         if (/right/i.test(dir)) {
           const max = target.offsetWidth + (targetLeft - selfLeft);
-          this.setState({ maxWidth: max > maxWidth ? maxWidth : max });
+          this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         if (/top/i.test(dir) && this.resizable) {
           const max = (selfTop - targetTop) + this.resizable.size.height;
-          this.setState({ maxHeight: max > maxHeight ? maxHeight : max });
+          this.setState({ maxHeight: max > Number(maxHeight) ? maxHeight : max });
         }
         if (/bottom/i.test(dir)) {
           const max = target.offsetHeight + (targetTop - selfTop);
-          this.setState({ maxHeight: max > maxHeight ? maxHeight : max });
+          this.setState({ maxHeight: max > Number(maxHeight) ? maxHeight : max });
         }
       }
     } else {
@@ -355,7 +389,8 @@ export default class Rnd extends React.Component<Props, State> {
     refToResizableElement: HTMLDivElement,
     delta: { height: number, width: number },
   ) {
-    this.setState({ disableDragging: false });
+    const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
+    this.setState({ disableDragging: false, maxWidth, maxHeight });
     if (this.props.onResizeStop) {
       const position: Position = {
         x: this.draggable.state.x,
@@ -404,6 +439,8 @@ export default class Rnd extends React.Component<Props, State> {
         grid={this.props.dragGrid}
         bounds={this.props.bounds ? this.state.bounds : undefined}
         position={this.props.position}
+        enableUserSelectHack={false}
+        cancel={this.props.cancel}
       >
         <Resizable
           {...this.props.extendsProps}
@@ -426,6 +463,8 @@ export default class Rnd extends React.Component<Props, State> {
           handleWrapperClass={this.props.resizeHandleWrapperClass}
           handleWrapperStyle={this.props.resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
+          lockAspectRatioExtraWidth={this.props.lockAspectRatioExtraWidth}
+          lockAspectRatioExtraHeight={this.props.lockAspectRatioExtraHeight}
           handleStyles={this.props.resizeHandleStyles}
           handleClasses={this.props.resizeHandleClasses}
         >
