@@ -3319,9 +3319,9 @@ eslint-plugin-flowtype@2.46.1:
   dependencies:
     lodash "^4.15.0"
 
-eslint-plugin-import@2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.7.0.tgz#21de33380b9efb55f5ef6d2e210ec0e07e7fa69f"
+eslint-plugin-import@2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.9.0.tgz#26002efbfca5989b7288ac047508bd24f217b169"
   dependencies:
     builtin-modules "^1.1.1"
     contains-path "^0.1.0"
@@ -3330,7 +3330,7 @@ eslint-plugin-import@2.7.0:
     eslint-import-resolver-node "^0.3.1"
     eslint-module-utils "^2.1.1"
     has "^1.0.1"
-    lodash.cond "^4.3.0"
+    lodash "^4.17.4"
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
@@ -5091,10 +5091,6 @@ lodash.clonedeep@^4.5.0:
 lodash.clonedeepwith@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeepwith/-/lodash.clonedeepwith-4.5.0.tgz#6ee30573a03a1a60d670a62ef33c10cf1afdbdd4"
-
-lodash.cond@^4.3.0:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
 lodash.debounce@^4.0.3, lodash.debounce@^4.0.8:
   version "4.0.8"
