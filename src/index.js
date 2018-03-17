@@ -47,7 +47,6 @@ type Size = {
 }
 
 type State = {
-  disableDragging: boolean;
   z?: number;
   original: Position;
   bounds: {
@@ -179,7 +178,6 @@ export default class Rnd extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      disableDragging: false,
       z: props.z,
       original: {
         x: 0,
@@ -295,7 +293,6 @@ export default class Rnd extends React.Component<Props, State> {
   ) {
     e.stopPropagation();
     this.setState({
-      disableDragging: true,
       original: { x: this.draggable.state.x, y: this.draggable.state.y },
     });
     if (this.props.bounds) {
@@ -379,7 +376,8 @@ export default class Rnd extends React.Component<Props, State> {
         {
           x: x || this.draggable.state.x,
           y: y || this.draggable.state.y,
-        });
+        },
+      );
     }
   }
 
@@ -390,7 +388,7 @@ export default class Rnd extends React.Component<Props, State> {
     delta: { height: number, width: number },
   ) {
     const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
-    this.setState({ disableDragging: false, maxWidth, maxHeight });
+    this.setState({ maxWidth, maxHeight });
     if (this.props.onResizeStop) {
       const position: Position = {
         x: this.draggable.state.x,
