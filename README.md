@@ -10,26 +10,38 @@
 <img src="https://img.shields.io/npm/dm/react-rnd.svg" /></a>
 <a href="https://greenkeeper.io/">
 <img src="https://badges.greenkeeper.io/bokuweb/react-rnd.svg" /></a>
+<a href="https://github.com/prettier/prettier">
+<img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" /></a>
 </p>
 
 ## Table of Contents
 
-- [Demo](#Demo)
-- [Install](#install)
-- [Usage](#usage)
-- [Props](#props)
-- [Callback](#callback)
-- [Method](#method)
-- [Test](#test)
-- [Changelog](#changelog)
-- [License](#license)
+* [Screenshot](#Screenshot)
+* [Live Demo](#live-demo)
+  * [Storybook](#storybook)
+  * [CodeSandbox](#codesandbox)
+* [Install](#install)
+* [Usage](#usage)
+* [Props](#props)
+* [Instance API](#instance-api)
+  * [updateSize(size: { width: number | string, height: number | string }): void](#updateSize-void)
+  * [updatePosition({ x: number, y: number }): void](#updatePosition-void)
+  * [updateZIndex(z: number): void](#upgradeZIndex-void)
+* [Test](#test)
+* [Related](#related)
+* [Changelog](#changelog)
+* [License](#license)
 
-## Demo
 
+## Screnshot
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif" />
 </p>
+
+## Live Demo
+
+TODO: 
 
 ## Install
 
@@ -80,10 +92,6 @@ yarn add react-rnd
   001
 </Rnd>
 ```
-
-### Example
-
-You can try it on [WebpackBin](https://www.webpackbin.com/bins/-KyeXupuBJyBPaIN0F_i) too.
 
 ## Props
 
@@ -397,7 +405,7 @@ type DraggableEventHandler = (
 ) => void | false;
 ```
 
-## Method
+## Instance API
 
 
 #### `updateSize(size: { width: string | number, height: string | number })`
@@ -427,7 +435,7 @@ class YourComponent extends Component {
 }
 ```
 
-#### `updatePosition({ x: number, y: number })`
+#### `updatePosition({ x: number, y: number }): void`
 
 Update component position.
 `grid` `bounds` props is ignored, when this method called.
@@ -455,7 +463,7 @@ class YourComponent extends Component {
 }
 ```
 
-#### `updateZIndex(z: number)`
+#### `updateZIndex(z: number): void`
 
 Update component z-index.
 

@@ -24,6 +24,7 @@
     "test:ci": "npm run flow && npm run build",
     "flow-copy": "flow-copy-source -v src lib && cp lib/index.js.flow lib/index.es5.js.flow ",
     "prepublish": "npm run build && npm run flow-copy",
+    "format": "prettier-eslint --write --single-quote --semi=true \"src/**/*.js\" ",
     "storybook": "start-storybook -p 6016",
     "build-storybook": "build-storybook",
     "deploy": "npm run build-storybook && gh-pages -d storybook-static"
@@ -54,9 +55,10 @@
     "babel-preset-flow": "6.23.0",
     "babel-preset-react": "6.24.1",
     "babel-register": "6.26.0",
-    "enzyme": "2.9.1",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "4.19.0",
-    "eslint-config-airbnb": "15.1.0",
+    "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-flowtype": "2.46.1",
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
@@ -66,8 +68,11 @@
     "flow-typed": "2.4.0",
     "gh-pages": "1.1.0",
     "npm-run-all": "4.1.2",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
+    "prettier": "^1.11.1",
+    "prettier-eslint": "^8.8.1",
+    "prettier-eslint-cli": "^4.7.1",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
     "react-test-renderer": "16.2.0",
     "rollup": "0.57.1",
     "rollup-plugin-babel": "3.0.3",
@@ -91,6 +96,6 @@
   },
   "dependencies": {
     "re-resizable": "^4.4.5",
-    "react-draggable": "^3.0.3"
+    "react-draggable": "^3.0.5"
   }
 }

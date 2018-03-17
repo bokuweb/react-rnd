@@ -10,6 +10,7 @@
     "flowtype/define-flow-type": 1,
     "flowtype/require-parameter-type": 1,
     "no-duplicate-imports": 0,
+    "no-mixed-operators": 0,
     "flowtype/require-return-type": [
       1,
       "always",
