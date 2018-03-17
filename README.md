@@ -1,6 +1,6 @@
 <p align="center"><img src ="https://github.com/bokuweb/react-rnd/blob/master/logo.png?raw=true" /></p>
 
-<p align="center">Resizable and draggable component for React.</p>
+<p align="center">A resizable and draggable component for React.</p>
 
 <p align="center"><a href="https://circleci.com/gh/bokuweb/react-rnd/tree/master">
 <img src="https://circleci.com/gh/bokuweb/react-rnd/tree/master.svg?style=svg" alt="Build Status" /></a>
