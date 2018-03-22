@@ -47,8 +47,8 @@ TODO:
 
 ### CodeSandbox
 
-[CodeSandbox(with default)](https://codesandbox.io/s/y3997qply9)
-[CodeSandbox(with size and position)](https://codesandbox.io/s/my4kjly94x)
+[CodeSandbox(with default)](https://codesandbox.io/s/y3997qply9)    
+[CodeSandbox(with size and position)](https://codesandbox.io/s/my4kjly94x)    
 
 
 ## Install
