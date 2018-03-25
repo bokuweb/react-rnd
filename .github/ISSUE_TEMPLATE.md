@@ -8,7 +8,7 @@
 <!-- UNCOMMENT THE APPROPRIATE LINES -->
 I'm using react-rnd **version** [x.x.x]   
    
-<!-- Could you please provide reproduced project on webpackbin with latest version rnd? https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu -->
+<!-- Could you please provide reproduced project on webpackbin with latest version rnd? https://codesandbox.io/s/y3997qply9 -->
 
 My **browser** is:   
    
