@@ -521,6 +521,10 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.4.0
+
+- fix: add `enableUserSelectHack?: boolean;`.
+
 #### v7.3.1
 
 - chore(deps): upgrade deps
