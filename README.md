@@ -310,6 +310,14 @@ Specifies movement boundaries. Accepted values:
     (nearest node with position relative or absolute), or
  - Selector, like `.fooClassName`.
 
+
+#### `enableUserSelectHack?: boolean;`
+
+By default, we add 'user-select:none' attributes to the document body    
+to prevent ugly text selection during drag. If this is causing problems    
+for your app, set this to `false`.    
+
+
 ## Callback
 
 #### `onResizeStart?: RndResizeStartCallback;`
