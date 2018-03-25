@@ -160,7 +160,7 @@ export default class Rnd extends React.Component<Props, State> {
     onResizeStop: () => {},
     onDragStart: () => {},
     onDrag: () => {},
-    onDragStop: () => {},
+    onDragStop: () => {}
   };
   resizable: React$ElementRef<typeof Resizable> | null;
   draggable: Draggable;
@@ -194,6 +194,7 @@ export default class Rnd extends React.Component<Props, State> {
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
       isMounted: false,
+      isAbsolute:props.hasOwnProperty('absolutePos')
     };
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
@@ -424,7 +425,7 @@ export default class Rnd extends React.Component<Props, State> {
       ...this.props.style,
     };
     // HACK: Wait for setting relative to parent element.
-    if (!this.state.isMounted) return <div />;
+    if (!this.state.isMounted && !this.state.isAbsolute) return <div />;
     const maxHeight = this.props._freeBottomBounds ? 2147483647 : this.state.maxHeight; // eslint-disable-line
     return (
       <Draggable
