@@ -140,6 +140,7 @@ type Props = {
   cancel?: boolean,
   enableUserSelectHack?: boolean,
   _freeBottomBounds?: boolean, // Back door for react-elastic-grid.
+  absolutePos: boolean,  // allow initial absolute render for ssr
 };
 
 const resizableStyle = {
