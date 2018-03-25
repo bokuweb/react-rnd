@@ -161,7 +161,7 @@ export default class Rnd extends React.Component<Props, State> {
     onDragStart: () => {},
     onDrag: () => {},
     onDragStop: () => {},
-    absolutePos:false,
+    absolutePos: false,
   };
   resizable: React$ElementRef<typeof Resizable> | null;
   draggable: Draggable;
