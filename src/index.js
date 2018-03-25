@@ -138,6 +138,7 @@ type Props = {
   dragHandleClassName?: string,
   disableDragging?: boolean,
   cancel?: boolean,
+  enableUserSelectHack?: boolean,
   _freeBottomBounds?: boolean, // Back door for react-elastic-grid.
 };
 
@@ -440,7 +441,7 @@ export default class Rnd extends React.Component<Props, State> {
         grid={this.props.dragGrid}
         bounds={this.props.bounds ? this.state.bounds : undefined}
         position={this.props.position}
-        enableUserSelectHack={false}
+        enableUserSelectHack={this.props.enableUserSelectHack}
         cancel={this.props.cancel}
       >
         <Resizable
