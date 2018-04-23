@@ -7977,9 +7977,9 @@ rollup-watch@4.3.1:
     require-relative "0.8.7"
     rollup-pluginutils "^2.0.1"
 
-rollup@0.58.1:
-  version "0.58.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.58.1.tgz#5e2e05ceb103f770868b12c4048c22d3903fa2dd"
+rollup@0.58.2:
+  version "0.58.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.58.2.tgz#2feddea8c0c022f3e74b35c48e3c21b3433803ce"
   dependencies:
     "@types/estree" "0.0.38"
     "@types/node" "*"
