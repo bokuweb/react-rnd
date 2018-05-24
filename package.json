@@ -40,9 +40,9 @@
   },
   "homepage": "https://github.com/bokuweb/react-rnd",
   "devDependencies": {
-    "@storybook/addon-actions": "3.4.4",
-    "@storybook/addon-links": "3.4.4",
-    "@storybook/react": "3.4.4",
+    "@storybook/addon-actions": "3.4.5",
+    "@storybook/addon-links": "3.4.5",
+    "@storybook/react": "3.4.5",
     "avaron": "0.0.14",
     "babel-eslint": "8.2.3",
     "babel-plugin-external-helpers": "6.22.0",
