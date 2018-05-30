@@ -7104,9 +7104,9 @@ prettier-eslint@8.8.1, prettier-eslint@^8.5.0:
     typescript "^2.5.1"
     typescript-eslint-parser "^11.0.0"
 
-prettier@1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.0.tgz#054de8d5fb1a4405c845d16183f58a2c301f6f16"
+prettier@1.13.3:
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.3.tgz#e74c09a7df6519d472ca6febaa37cf7addb48a20"
 
 prettier@^1.7.0:
   version "1.11.1"
