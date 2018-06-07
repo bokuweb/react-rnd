@@ -7401,9 +7401,9 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@^4.4.5:
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.4.5.tgz#27fdc6d3aefe8e4fefb69fc835b94fb21dc7d4ee"
+re-resizable@4.4.10:
+  version "4.4.10"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.4.10.tgz#720be625e1b7b53b15c82f8b3b31c4f0a8822a61"
 
 react-dev-utils@^5.0.0:
   version "5.0.0"
@@ -8059,9 +8059,9 @@ rollup-watch@4.3.1:
     require-relative "0.8.7"
     rollup-pluginutils "^2.0.1"
 
-rollup@0.60.0:
-  version "0.60.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.60.0.tgz#2c4acaaf3d8a858a81ff740d6253e21eeb58ff21"
+rollup@0.60.1:
+  version "0.60.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.60.1.tgz#07cb66153f1541d5f7e82b8393b405c31647dae9"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
