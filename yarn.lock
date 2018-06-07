@@ -4099,9 +4099,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@0.73.0:
-  version "0.73.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.73.0.tgz#da1b90a02b0ef9c439f068c2fc14968db83be425"
+flow-bin@0.74.0:
+  version "0.74.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.74.0.tgz#8017bb00efb37cbe8d81fbb7f464038bde06adc9"
 
 flow-copy-source@1.3.0:
   version "1.3.0"
@@ -7401,9 +7401,9 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@^4.4.5:
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.4.5.tgz#27fdc6d3aefe8e4fefb69fc835b94fb21dc7d4ee"
+re-resizable@4.4.10:
+  version "4.4.10"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.4.10.tgz#720be625e1b7b53b15c82f8b3b31c4f0a8822a61"
 
 react-dev-utils@^5.0.0:
   version "5.0.0"
