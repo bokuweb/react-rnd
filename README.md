@@ -521,6 +521,10 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.4.1
+
+- fix: Fixed Array.from error in IE11
+
 #### v7.4.0
 
 - fix: add `enableUserSelectHack?: boolean;`.
