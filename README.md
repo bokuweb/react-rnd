@@ -39,6 +39,8 @@
   <img src="https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif" />
 </p>
 
+https://codesandbox.io/s/q9onxj77j6
+
 ## Live Demo
 
 ### Storybook
