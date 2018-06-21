@@ -334,9 +334,9 @@
   version "9.4.7"
   resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
 
-"@types/node@^7.0.18":
-  version "7.0.48"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.48.tgz#24bfdc0aa82e8f6dbd017159c58094a2e06d0abb"
+"@types/node@^8.0.24":
+  version "8.10.20"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.20.tgz#fe674ea52e13950ab10954433a7824438aabbcac"
 
 abbrev@1:
   version "1.1.0"
@@ -824,12 +824,12 @@ ava@^0.22.0:
     unique-temp-dir "^1.0.0"
     update-notifier "^2.1.0"
 
-avaron@0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/avaron/-/avaron-0.0.14.tgz#67b94a21da0b033e4cfe5990cc0485ea497be349"
+avaron@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/avaron/-/avaron-0.2.0.tgz#fa079c6bdb845b332270e129e32a86f77a886d78"
   dependencies:
     ava "^0.22.0"
-    electron "1.7.6"
+    electron "2.0.2"
     make-dir "^1.0.0"
 
 aws-sign2@~0.6.0:
@@ -3262,11 +3262,11 @@ electron-to-chromium@^1.3.45:
   version "1.3.45"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.45.tgz#458ac1b1c5c760ce8811a16d2bfbd97ec30bafb8"
 
-electron@1.7.6:
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.7.6.tgz#fb69ea31bd03df0eff247f26f0b538bd29b6ee72"
+electron@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-2.0.2.tgz#b77e05f83419cc5ec921a2d21f35b55e4bfc3d68"
   dependencies:
-    "@types/node" "^7.0.18"
+    "@types/node" "^8.0.24"
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
