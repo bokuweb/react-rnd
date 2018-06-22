@@ -523,6 +523,10 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v7.4.2
+
+fix: `isMounted` and `(!this.state.isMounted) return <div />` line #356
+
 #### v7.4.1
 
 - fix: Fixed Array.from error in IE11
