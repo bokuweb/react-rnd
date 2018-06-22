@@ -4103,12 +4103,12 @@ flow-bin@0.75.0:
   version "0.75.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.75.0.tgz#b96d1ee99d3b446a3226be66b4013224ce9df260"
 
-flow-copy-source@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/flow-copy-source/-/flow-copy-source-1.3.0.tgz#591b153f5c01e8fc566c64a97290ea9103b7f1ea"
+flow-copy-source@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/flow-copy-source/-/flow-copy-source-2.0.0.tgz#e0984a434fefb5995571d7a28cbff8c3cdda63fe"
   dependencies:
     chokidar "^2.0.0"
-    fs-extra "^5.0.0"
+    fs-extra "^6.0.1"
     glob "^7.0.0"
     kefir "^3.7.3"
     yargs "^11.0.0"
@@ -4208,6 +4208,14 @@ fs-extra@^0.30.0:
 fs-extra@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
+fs-extra@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
