@@ -6,6 +6,11 @@ import Draggable from 'react-draggable';
 import Resizable from 're-resizable';
 import type { ResizeDirection, ResizeCallback, ResizeStartCallback } from 're-resizable';
 
+type MaxSize = {
+  maxWidth: number | string,
+  maxHeight: number | string,
+};
+
 export type Grid = [number, number];
 
 export type Position = {
@@ -421,6 +426,8 @@ export default class Rnd extends React.Component<Props, State> {
       ...cursorStyle,
       ...this.props.style,
     };
+    // HACK: Wait for setting relative to parent element.
+    if (!this.state.isMounted) return <div>{this.props.children}</div>;
     const maxHeight = this.props._freeBottomBounds ? 2147483647 : this.state.maxHeight; // eslint-disable-line
     return (
       <Draggable
