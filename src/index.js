@@ -58,7 +58,6 @@ type State = {
   },
   maxWidth?: number | string,
   maxHeight?: number | string,
-  isMounted: boolean,
 };
 
 export type ResizeEnable = {
@@ -193,7 +192,6 @@ export default class Rnd extends React.Component<Props, State> {
       },
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
-      isMounted: false,
     };
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
@@ -221,7 +219,7 @@ export default class Rnd extends React.Component<Props, State> {
   getMaxSizesFromProps(): {
     maxWidth: number | string,
     maxHeight: number | string,
-    } {
+  } {
     const maxWidth = typeof this.props.maxWidth === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxWidth;
     const maxHeight = typeof this.props.maxHeight === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxHeight;
     return { maxWidth, maxHeight };
@@ -239,11 +237,9 @@ export default class Rnd extends React.Component<Props, State> {
       if (!parent || typeof window === 'undefined') return;
       if (!(parent instanceof HTMLElement)) return;
       if (getComputedStyle(parent).position !== 'static') {
-        this.setState({ isMounted: true });
         return;
       }
       parent.style.position = 'relative';
-      this.setState({ isMounted: true });
     }
   }
 
@@ -423,8 +419,6 @@ export default class Rnd extends React.Component<Props, State> {
       ...cursorStyle,
       ...this.props.style,
     };
-    // HACK: Wait for setting relative to parent element.
-    if (!this.state.isMounted) return <div />;
     const maxHeight = this.props._freeBottomBounds ? 2147483647 : this.state.maxHeight; // eslint-disable-line
     return (
       <Draggable
