@@ -58,6 +58,7 @@ type State = {
   },
   maxWidth?: number | string,
   maxHeight?: number | string,
+  isMounted: boolean,
 };
 
 type MaxSize = {
@@ -197,6 +198,7 @@ export default class Rnd extends React.Component<Props, State> {
       },
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
+      isMounted: false,
     };
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
@@ -215,6 +217,7 @@ export default class Rnd extends React.Component<Props, State> {
 
   componentDidMount() {
     this.setParentPosition();
+    this.setState({ isMounted: true });
   }
 
   getParentSize(): { width: number, height: number } {
@@ -421,6 +424,8 @@ export default class Rnd extends React.Component<Props, State> {
       ...cursorStyle,
       ...this.props.style,
     };
+    // HACK: Wait for setting relative to parent element.
+    if (!this.state.isMounted) return <div>{this.props.children}</div>;
     const maxHeight = this.props._freeBottomBounds ? 2147483647 : this.state.maxHeight; // eslint-disable-line
     return (
       <Draggable
