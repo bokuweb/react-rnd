@@ -523,7 +523,11 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
-#### v7.4.2
+#### v7.4.3
+
+fix: Add `props,children` to dummy `<div>` to render children in first.
+
+#### v7.4.2 (unpublished)
 
 fix: `isMounted` and `(!this.state.isMounted) return <div />` line #356
 
