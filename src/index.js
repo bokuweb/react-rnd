@@ -164,7 +164,7 @@ export default class Rnd extends React.Component<Props, State> {
     onDrag: () => {},
     onDragStop: () => {},
   };
-  resizable: React$ElementRef<typeof Resizable> | null;
+  resizable: React$ElementRef<typeof Resizable>;
   draggable: Draggable;
   onResizeStart: ResizeStartCallback;
   onResize: ResizeCallback;
@@ -225,9 +225,9 @@ export default class Rnd extends React.Component<Props, State> {
     return { maxWidth, maxHeight };
   }
 
-  getSelfElement(): null | Element | Text {
-    if (!this) return null;
-    return findDOMNode(this);
+  getSelfElement(): Element {
+    // if (!this) return null;
+    return (findDOMNode(this): any);
   }
 
   onDragStart(e: Event, data: DraggableData) {
@@ -449,7 +449,7 @@ export default class Rnd extends React.Component<Props, State> {
         <Resizable
           {...this.props.extendsProps}
           className={this.props.className}
-          ref={(c: React$ElementRef<typeof Resizable> | null) => {
+          ref={(c: React$ElementRef<typeof Resizable>) => {
             if (c) {
               this.resizable = c;
             }
