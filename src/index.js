@@ -6,11 +6,6 @@ import Draggable from 'react-draggable';
 import Resizable from 're-resizable';
 import type { ResizeDirection, ResizeCallback, ResizeStartCallback } from 're-resizable';
 
-type MaxSize = {
-  maxWidth: number | string,
-  maxHeight: number | string,
-};
-
 export type Grid = [number, number];
 
 export type Position = {
@@ -63,6 +58,7 @@ type State = {
   },
   maxWidth?: number | string,
   maxHeight?: number | string,
+  isMounted: boolean,
 };
 
 type MaxSize = {
@@ -202,6 +198,7 @@ export default class Rnd extends React.Component<Props, State> {
       },
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
+      isMounted: false,
     };
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
@@ -220,6 +217,7 @@ export default class Rnd extends React.Component<Props, State> {
 
   componentDidMount() {
     this.setParentPosition();
+    this.setState({ isMounted: true });
   }
 
   getParentSize(): { width: number, height: number } {
