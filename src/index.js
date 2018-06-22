@@ -60,6 +60,11 @@ type State = {
   maxHeight?: number | string,
 };
 
+type MaxSize = {
+  maxWidth: number | string,
+  maxHeight: number | string,
+};
+
 export type ResizeEnable = {
   bottom?: boolean,
   bottomLeft?: boolean,
@@ -216,10 +221,7 @@ export default class Rnd extends React.Component<Props, State> {
     return (this.resizable: any).getParentSize();
   }
 
-  getMaxSizesFromProps(): {
-    maxWidth: number | string,
-    maxHeight: number | string,
-  } {
+  getMaxSizesFromProps(): MaxSize {
     const maxWidth = typeof this.props.maxWidth === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxWidth;
     const maxHeight = typeof this.props.maxHeight === 'undefined' ? Number.MAX_SAFE_INTEGER : this.props.maxHeight;
     return { maxWidth, maxHeight };
