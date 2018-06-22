@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from 'react';
-import { findDOMNode } from 'react-dom';
 import Draggable from 'react-draggable';
 import Resizable from 're-resizable';
 import type { ResizeDirection, ResizeCallback, ResizeStartCallback } from 're-resizable';
@@ -226,8 +225,7 @@ export default class Rnd extends React.Component<Props, State> {
   }
 
   getSelfElement(): Element {
-    // if (!this) return null;
-    return (findDOMNode(this): any);
+    return this.resizable && this.resizable.resizable;
   }
 
   onDragStart(e: Event, data: DraggableData) {
