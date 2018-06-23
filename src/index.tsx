@@ -176,6 +176,7 @@ export default class Rnd extends React.Component<Props, State> {
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
     };
+    console.log('a')
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
@@ -186,6 +187,7 @@ export default class Rnd extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    console.log('aaaa')
     if (this.props.default) {
       const { left, top } = this.getOffsetFromParent();
       const { x, y } = this.getDraggablePosition();
@@ -198,7 +200,7 @@ export default class Rnd extends React.Component<Props, State> {
 
   // HACK: To get `react-draggable` state x and y.
   getDraggablePosition(): { x: number, y: number } {
-    let i = 0
+    console.log(this.draggable)
     const { x, y } = (this.draggable as any).state;
     return { x, y };
   }
