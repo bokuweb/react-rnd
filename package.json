@@ -24,8 +24,8 @@
     "test:ci": "npm run flow && npm run build",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6016",
-    "build-storybook": "build-storybook",
-    "deploy": "npm run build-storybook && gh-pages -d storybook-static"
+    "build-storybook": "build-storybook -o docs/stories",
+    "deploy": "npm run build-storybook && gh-pages -d docs"
   },
   "repository": {
     "type": "git",
