@@ -6,6 +6,7 @@
   "main": "./lib/index.es5.js",
   "module": "./lib/index.js",
   "jsnext:main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "keywords": [
     "react",
     "resize",
