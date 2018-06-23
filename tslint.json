@@ -19,7 +19,7 @@
     "no-unused-variable": [true],
     "no-reference": true,
     "one-line": [true, "check-whitespace"],
-    "quotemark": [true, "single"],
+    "quotemark": [true, "double"],
     "semicolon": [true, "always"],
     "triple-equals": [true, "allow-null-check"],
     "typedef-whitespace": [

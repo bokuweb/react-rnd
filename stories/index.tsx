@@ -1,21 +1,17 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import './styles.css';
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import "./styles.css";
 
-// import BoundsAndOffset from './bounds-and-offset';
-import BasicUncontrolled from './basic/uncontrolled';
-// import Multi from './multiple';
-// import BoundsParent from './bounds-parent';
-// import SizePercentage from './size-percentage';
-// import SizeAndPosition from './size-and-position';
-// import MaxSizeWithPercent from './max-size-with-percent';
-// import Sandbox from './sandbox';
+import BasicUncontrolled from "./basic/uncontrolled";
+import BasicControlled from "./basic/controlled";
 
-storiesOf('basic', module).add('uncontrolled', () => <BasicUncontrolled />);
-// .add('bounds and offset', () => <BoundsAndOffset />)
-// .add('basic', () => <Basic />)
-// .add('bound parent', () => <BoundsParent />)
-// .add('bound multiple', () => <Multi />)
-// .add('size percentage', () => <SizePercentage />)
-// .add('max size with percent', () => <MaxSizeWithPercent />)
-// .add('use size and position instead of default', () => <SizeAndPosition />);
+import BoundsParentUncontrolled from "./bounds/parent-uncontrolled";
+import BoundsParentControlled from "./bounds/parent-controlled";
+
+storiesOf("basic", module)
+  .add("uncontrolled", () => <BasicUncontrolled />)
+  .add("controlled", () => <BasicControlled />);
+
+storiesOf("bounds", module)
+  .add("uncontrolled", () => <BoundsParentUncontrolled />)
+  .add("controlled", () => <BoundsParentControlled />);

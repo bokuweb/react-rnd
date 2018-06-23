@@ -1,13 +1,6 @@
-import React from 'react';
-import Rnd from '../../src';
-
-const style = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: 'solid 1px #ddd',
-  background: '#f0f0f0',
-};
+import React from "react";
+import Rnd from "../../src";
+import { style } from "../styles";
 
 export default () => (
   <Rnd
@@ -15,8 +8,8 @@ export default () => (
     default={{
       width: 200,
       height: 200,
-      x: 100,
-      y: 100,
+      x: 0,
+      y: 0,
     }}
   >
     001
