@@ -263,10 +263,13 @@ test('should limit position by parent bounds', async t => {
     .find('div')
     .at(0)
     .childAt(0)
-    .simulate('mousedown', { clientX: 0, clientY: 0 });
+    .simulate('mousedown', { clientX: 50, clientY: 50 });
   mouseMove(1000, 1000);
   t.not(
     (rnd
+      .find('div')
+      .at(0)
+      .childAt(0)
       .getDOMNode()
       .getAttribute('style') || '')
       .indexOf('transform: translate(708px, 508px)'),
@@ -283,6 +286,7 @@ test('should limit position by selector bounds', async t => {
     </div>,
     { attachTo: document.querySelector('div') },
   );
+
   rnd
     .find('div')
     .at(0)
@@ -292,6 +296,10 @@ test('should limit position by selector bounds', async t => {
   mouseMove(2000, 2000);
   t.not(
     (rnd
+      .find('div')
+      .at(0)
+      .childAt(0)
+      .childAt(0)
       .getDOMNode()
       .getAttribute('style') || '')
       .indexOf('translate(908px, 708px)'),
