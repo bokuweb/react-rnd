@@ -523,6 +523,15 @@ If you have a bug to report, please reproduce the bug in [WebpackBin](https://ww
 
 ## Changelog
 
+#### v8.0.0-beta.1
+
+fix: Fixed a bug, controlled position does not work correctly.
+feat: Use `typescript` instead of `flowype`.
+
+#### v8.0.0-beta.0
+
+fix: Remove dummy `<div />`, `isMounted` state and `setParentPosition()`.
+
 #### v7.4.3
 
 fix: Add `props,children` to dummy `<div>` to render children in first.
