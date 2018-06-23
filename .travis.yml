@@ -1,8 +1,6 @@
 language: node_js
 node_js:
   - '8'
-  - '7'
-  - '6'
 addons:
   apt:
     packages:
@@ -15,6 +13,6 @@ install:
   - yarn install
 
 script:
-  - yarn run flow
   - yarn run lint
   - yarn run test
+  - yarn run build
