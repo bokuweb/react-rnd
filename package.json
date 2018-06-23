@@ -22,8 +22,7 @@
     "build": "npm-run-all --parallel build:prod:*",
     "test": "NODE_ENV='test' avaron src/index.test.js --renderer",
     "test:ci": "npm run flow && npm run build",
-    "flow-copy": "flow-copy-source -v src lib && cp lib/index.js.flow lib/index.es5.js.flow ",
-    "prepublish": "npm run build && npm run flow-copy",
+    "prepublish": "npm run build",
     "storybook": "start-storybook -p 6016",
     "build-storybook": "build-storybook",
     "deploy": "npm run build-storybook && gh-pages -d storybook-static"
@@ -98,7 +97,7 @@
     "fixture": "./fixture.html"
   },
   "dependencies": {
-    "re-resizable": "4.6.0",
+    "re-resizable": "4.6.1",
     "react-draggable": "^3.0.5",
     "tslib": "^1.9.3"
   }
