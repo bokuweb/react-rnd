@@ -19,7 +19,6 @@
     "tsc": "tsc",
     "build:prod:main": "rollup -c scripts/prod.js",
     "build:prod:es5": "rollup -c scripts/prod.es5.js",
-    "build:prod:umd": "rollup -c scripts/prod.umd.js",
     "build": "npm-run-all --parallel build:prod:*",
     "test": "NODE_ENV='test' avaron src/index.test.js --renderer",
     "test:ci": "npm run flow && npm run build",
