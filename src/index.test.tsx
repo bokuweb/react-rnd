@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import test from 'ava';
 import React from 'react';
 import { spy } from 'sinon';
@@ -9,14 +7,14 @@ import Rnd from './';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const mouseMove = (x, y) => {
+const mouseMove = (x: number, y: number) => {
   const event = document.createEvent('MouseEvents');
   event.initMouseEvent('mousemove', true, true, window, 0, 0, 0, x, y, false, false, false, false, 0, null);
   document.dispatchEvent(event);
   return event;
 };
 
-const mouseUp = (x, y) => {
+const mouseUp = (x: number, y: number) => {
   const event = document.createEvent('MouseEvents');
   event.initMouseEvent('mouseup', true, true, window, 0, 0, 0, x, y, false, false, false, false, 0, null);
   document.dispatchEvent(event);
@@ -116,9 +114,9 @@ test('should call onDrag when dragging', async t => {
   t.is(onDrag.firstCall.args[1].x, 400);
   t.is(onDrag.firstCall.args[1].y, 420);
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(400px, 420px)'),
     -1,
   );
@@ -150,9 +148,9 @@ test('should dragging disabled when axis equals none', async t => {
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(100px, 100px)'),
     -1,
   );
@@ -170,9 +168,9 @@ test('should enable dragging only x when axis equals x', async t => {
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(308px, 100px)'),
     -1,
   );
@@ -190,9 +188,9 @@ test('should enable dragging only y when axis equals y', async t => {
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
   t.not(
-    rnd
+     (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(100px, 328px)'),
     -1,
   );
@@ -210,9 +208,9 @@ test('should enable dragging both x & y when axis equals both', async t => {
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(308px, 328px)'),
     -1,
   );
@@ -228,9 +226,9 @@ test('should snap when dragging smaller than threshold', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(14, 49);
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(108px, 108px)'),
     -1,
   );
@@ -246,9 +244,9 @@ test('should snap when dragging larger than threshold', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(15, 50);
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(138px, 208px)'),
     -1,
   );
@@ -268,10 +266,9 @@ test('should limit position by parent bounds', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(1000, 1000);
   t.not(
-    rnd
-      .childAt(0)
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(708px, 508px)'),
     -1,
   );
@@ -294,11 +291,9 @@ test('should limit position by selector bounds', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(2000, 2000);
   t.not(
-    rnd
-      .childAt(0)
-      .childAt(0)
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('translate(908px, 708px)'),
     -1,
   );
@@ -321,8 +316,8 @@ test('Should box width and height equal 100px', async t => {
     />,
     { attachTo: document.querySelector('div') },
   );
-  t.is(rnd.getDOMNode().style.width, '100px');
-  t.is(rnd.getDOMNode().style.height, '100px');
+  t.is((rnd.getDOMNode() as HTMLElement).style.width, '100px');
+  t.is((rnd.getDOMNode() as HTMLElement).style.height, '100px');
 });
 
 test('Should call onResizeStart when mousedown', async t => {
@@ -493,9 +488,9 @@ test('should move x when resizing left', async t => {
   t.deepEqual(onResize.getCall(0).args[2].clientHeight, 100);
   t.deepEqual(onResize.getCall(0).args[3], { width: 50, height: 0 });
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(58px, 108px)'),
     -1,
   );
@@ -543,9 +538,9 @@ test('should move y when resizing top', async t => {
   t.deepEqual(onResize.getCall(0).args[2].clientHeight, 150);
   t.deepEqual(onResize.getCall(0).args[3], { width: 0, height: 50 });
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(108px, 58px)'),
     -1,
   );
@@ -778,8 +773,8 @@ test('should clamped by parent size', async t => {
     .at(0)
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(1200, 1200);
-  t.is(rnd.childAt(0).getDOMNode().style.width, '800px');
-  t.is(rnd.childAt(0).getDOMNode().style.height, '600px');
+  t.is((rnd.childAt(0).getDOMNode() as HTMLElement).style.width, '800px');
+  t.is((rnd.childAt(0).getDOMNode() as HTMLElement).style.height, '600px');
 });
 
 test('should clamped by selector size', async t => {
@@ -820,36 +815,36 @@ test('should clamped by selector size', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(2000, 2000);
   t.is(
-    rnd
+    (rnd
       .childAt(0)
       .childAt(0)
-      .getDOMNode().style.width,
+      .getDOMNode() as HTMLElement).style.width,
     '1000px',
   );
   t.is(
-    rnd
+    (rnd
       .childAt(0)
       .childAt(0)
-      .getDOMNode().style.height,
+      .getDOMNode() as HTMLElement).style.height,
     '800px',
   );
 });
 
 test('should get rnd updated when updatePosition invoked', async t => {
-  const rnd = mount(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />);
+  const rnd = mount<Rnd>(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />);
   rnd.instance().updatePosition({ x: 200, y: 300 });
   t.not(
-    rnd
+    (rnd
       .getDOMNode()
-      .getAttribute('style')
+      .getAttribute('style') || '')
       .indexOf('transform: translate(200px, 300px)'),
     -1,
   );
 });
 
 test('should get rnd updated when updateSize invoked', async t => {
-  const rnd = mount(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />);
+  const rnd = mount<Rnd>(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />);
   rnd.instance().updateSize({ width: 200, height: 300 });
-  t.is(rnd.getDOMNode().style.width, '200px');
-  t.is(rnd.getDOMNode().style.height, '300px');
+  t.is((rnd.getDOMNode() as HTMLElement).style.width, '200px');
+  t.is((rnd.getDOMNode() as HTMLElement).style.height, '300px');
 });

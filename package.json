@@ -20,7 +20,7 @@
     "build:prod:main": "rollup -c scripts/prod.js",
     "build:prod:es5": "rollup -c scripts/prod.es5.js",
     "build": "npm-run-all --serial build:prod:*",
-    "test": "NODE_ENV='test' avaron src/index.test.js --renderer",
+    "test": "NODE_ENV='test' avaron lib/index.test.js --renderer",
     "test:ci": "npm run flow && npm run build",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6016",
@@ -41,8 +41,11 @@
     "@storybook/addon-actions": "3.4.8",
     "@storybook/addon-links": "3.4.8",
     "@storybook/react": "3.4.8",
+    "@types/enzyme": "^3.1.11",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
+    "@types/sinon": "^5.0.1",
     "@types/storybook__addon-actions": "^3.0.3",
     "@types/storybook__react": "^3.0.7",
     "avaron": "0.2.0",
@@ -85,17 +88,13 @@
     "rollup-plugin-typescript2": "^0.15.0",
     "rollup-watch": "4.3.1",
     "sinon": "6.0.0",
+    "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
   },
   "files": [
     "lib"
   ],
   "avaron": {
-    "babel": "inherit",
-    "require": [
-      "babel-polyfill",
-      "babel-register"
-    ],
     "fixture": "./fixture.html"
   },
   "dependencies": {
