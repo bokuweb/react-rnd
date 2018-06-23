@@ -4,5 +4,5 @@ tabWidth: 2
 singleQuote: true
 trailingComma: "all"
 jsxBracketSameLine: false
-parser: "flow"
+parser: "typescript"
 semi: true

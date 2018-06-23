@@ -5,16 +5,16 @@ import Resizable, { ResizableDirection, ResizeCallback, ResizeStartCallback } fr
 export type Grid = [number, number];
 
 export type Position = {
-  x: number,
-  y: number,
+  x: number;
+  y: number;
 };
 
 export type DraggableData = {
-  node: HTMLElement,
-  deltaX: number,
-  deltaY: number,
-  lastX: number,
-  lastY: number,
+  node: HTMLElement;
+  deltaX: number;
+  deltaY: number;
+  lastX: number;
+  lastY: number;
 } & Position;
 
 export type RndDragCallback = (e: Event, data: DraggableData) => void | false;
@@ -26,8 +26,8 @@ export type RndResizeStartCallback = (
 ) => void;
 
 export type ResizableDelta = {
-  width: number,
-  height: number,
+  width: number;
+  height: number;
 };
 
 export type RndResizeCallback = (
@@ -39,102 +39,102 @@ export type RndResizeCallback = (
 ) => void;
 
 type Size = {
-  width: string | number,
-  height: string | number,
+  width: string | number;
+  height: string | number;
 };
 
 type State = {
-  original: Position,
+  original: Position;
   bounds: {
-    top: number,
-    right: number,
-    bottom: number,
-    left: number,
-  },
-  maxWidth?: number | string,
-  maxHeight?: number | string,
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
+  maxWidth?: number | string;
+  maxHeight?: number | string;
 };
 
 type MaxSize = {
-  maxWidth: number | string,
-  maxHeight: number | string,
+  maxWidth: number | string;
+  maxHeight: number | string;
 };
 
 export type ResizeEnable = {
-  bottom?: boolean,
-  bottomLeft?: boolean,
-  bottomRight?: boolean,
-  left?: boolean,
-  right?: boolean,
-  top?: boolean,
-  topLeft?: boolean,
-  topRight?: boolean,
+  bottom?: boolean;
+  bottomLeft?: boolean;
+  bottomRight?: boolean;
+  left?: boolean;
+  right?: boolean;
+  top?: boolean;
+  topLeft?: boolean;
+  topRight?: boolean;
 };
 
 export type HandleClasses = {
-  bottom?: string,
-  bottomLeft?: string,
-  bottomRight?: string,
-  left?: string,
-  right?: string,
-  top?: string,
-  topLeft?: string,
-  topRight?: string,
+  bottom?: string;
+  bottomLeft?: string;
+  bottomRight?: string;
+  left?: string;
+  right?: string;
+  top?: string;
+  topLeft?: string;
+  topRight?: string;
 };
 
 export type HandleStyles = {
-  bottom?: React.CSSProperties,
-  bottomLeft?: React.CSSProperties,
-  bottomRight?: React.CSSProperties,
-  left?: React.CSSProperties,
-  right?: React.CSSProperties,
-  top?: React.CSSProperties,
-  topLeft?: React.CSSProperties,
-  topRight?: React.CSSProperties,
+  bottom?: React.CSSProperties;
+  bottomLeft?: React.CSSProperties;
+  bottomRight?: React.CSSProperties;
+  left?: React.CSSProperties;
+  right?: React.CSSProperties;
+  top?: React.CSSProperties;
+  topLeft?: React.CSSProperties;
+  topRight?: React.CSSProperties;
 };
 
 export type Props = {
-  dragGrid?: Grid,
+  dragGrid?: Grid;
   default?: {
-    x: number,
-    y: number,
-  } & Size,
+    x: number;
+    y: number;
+  } & Size;
   position?: {
-    x: number,
-    y: number,
-  },
-  size?: Size,
-  resizeGrid?: Grid,
-  bounds?: string,
-  onResizeStart?: RndResizeStartCallback,
-  onResize?: RndResizeCallback,
-  onResizeStop?: RndResizeCallback,
-  onDragStart?: RndDragCallback,
-  onDrag?: RndDragCallback,
-  onDragStop?: RndDragCallback,
-  className?: string,
-  style?: React.CSSProperties,
-  children?: React.ReactNode,
-  enableResizing?: ResizeEnable,
-  resizeHandleClasses?: HandleClasses,
-  resizeHandleStyles?: HandleStyles,
-  resizeHandleWrapperClass?: string,
-  resizeHandleWrapperStyle?: React.CSSProperties,
-  lockAspectRatio?: boolean | number,
-  lockAspectRatioExtraWidth?: number,
-  lockAspectRatioExtraHeight?: number,
-  maxHeight?: number | string,
-  maxWidth?: number | string,
-  minHeight?: number | string,
-  minWidth?: number | string,
-  dragAxis?: 'x' | 'y' | 'both' | 'none',
-  dragHandleClassName?: string,
-  disableDragging?: boolean,
-  cancel?: string,
-  enableUserSelectHack?: boolean,
-  
+    x: number;
+    y: number;
+  };
+  size?: Size;
+  resizeGrid?: Grid;
+  bounds?: string;
+  onResizeStart?: RndResizeStartCallback;
+  onResize?: RndResizeCallback;
+  onResizeStop?: RndResizeCallback;
+  onDragStart?: RndDragCallback;
+  onDrag?: RndDragCallback;
+  onDragStop?: RndDragCallback;
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+  enableResizing?: ResizeEnable;
+  resizeHandleClasses?: HandleClasses;
+  resizeHandleStyles?: HandleStyles;
+  resizeHandleWrapperClass?: string;
+  resizeHandleWrapperStyle?: React.CSSProperties;
+  lockAspectRatio?: boolean | number;
+  lockAspectRatioExtraWidth?: number;
+  lockAspectRatioExtraHeight?: number;
+  maxHeight?: number | string;
+  maxWidth?: number | string;
+  minHeight?: number | string;
+  minWidth?: number | string;
+  dragAxis?: 'x' | 'y' | 'both' | 'none';
+  dragHandleClassName?: string;
+  disableDragging?: boolean;
+  cancel?: string;
+  enableUserSelectHack?: boolean;
+
   // FIXME
-  extendsProps?: { [key: string]: any },
+  extendsProps?: { [key: string]: any };
 };
 
 const resizableStyle = {
@@ -197,16 +197,16 @@ export default class Rnd extends React.Component<Props, State> {
   }
 
   // HACK: To get `react-draggable` state x and y.
-  getDraggablePosition(): { x: number, y: number } {
+  getDraggablePosition(): { x: number; y: number } {
     const { x, y } = (this.draggable as any).state;
     return { x, y };
   }
 
   getParent() {
     return this.resizable && (this.resizable as any).parentNode;
-  }  
+  }
 
-  getParentSize(): { width: number, height: number } {
+  getParentSize(): { width: number; height: number } {
     return (this.resizable as any).getParentSize();
   }
 
@@ -336,7 +336,7 @@ export default class Rnd extends React.Component<Props, State> {
     e: MouseEvent | TouchEvent,
     direction: ResizableDirection,
     elementRef: HTMLDivElement,
-    delta: { height: number, width: number },
+    delta: { height: number; width: number },
   ) {
     let x;
     let y;
@@ -354,7 +354,7 @@ export default class Rnd extends React.Component<Props, State> {
       }
       if (typeof y === 'undefined') {
         y = this.getDraggablePosition().y;
-      }      
+      }
       this.props.onResize(e, direction, elementRef, delta, {
         x,
         y,
@@ -366,7 +366,7 @@ export default class Rnd extends React.Component<Props, State> {
     e: MouseEvent | TouchEvent,
     direction: ResizableDirection,
     elementRef: HTMLDivElement,
-    delta: { height: number, width: number },
+    delta: { height: number; width: number },
   ) {
     const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
     this.setState({ maxWidth, maxHeight });
@@ -376,7 +376,7 @@ export default class Rnd extends React.Component<Props, State> {
     }
   }
 
-  updateSize(size: { width: number | string, height: number | string }) {
+  updateSize(size: { width: number | string; height: number | string }) {
     if (!this.resizable) return;
     this.resizable.updateSize({ width: size.width, height: size.height });
   }
@@ -385,7 +385,7 @@ export default class Rnd extends React.Component<Props, State> {
     this.draggable.setState(position);
   }
 
-  getOffsetFromParent(): { top: number, left: number } {
+  getOffsetFromParent(): { top: number; left: number } {
     const parent = this.getParent();
     if (!parent) {
       return {
@@ -422,7 +422,7 @@ export default class Rnd extends React.Component<Props, State> {
     }
     return (
       <Draggable
-        ref={(c) => {
+        ref={c => {
           if (c) {
             this.draggable = c;
           }
@@ -443,7 +443,7 @@ export default class Rnd extends React.Component<Props, State> {
         <Resizable
           {...this.props.extendsProps}
           className={this.props.className}
-          ref={(c) => {
+          ref={c => {
             if (c) {
               this.resizable = c;
             }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 import test from 'ava';
 import React from 'react';
 import { spy } from 'sinon';
@@ -113,13 +115,7 @@ test('should call onDrag when dragging', async t => {
   t.is(onDrag.callCount, 1);
   t.is(onDrag.firstCall.args[1].x, 400);
   t.is(onDrag.firstCall.args[1].y, 420);
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(400px, 420px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(400px, 420px)'), -1);
 });
 
 test('should call onDragStop when drag stop', async t => {
@@ -147,13 +143,7 @@ test('should dragging disabled when axis equals none', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(100px, 100px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(100px, 100px)'), -1);
 });
 
 test('should enable dragging only x when axis equals x', async t => {
@@ -167,13 +157,7 @@ test('should enable dragging only x when axis equals x', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(308px, 100px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(308px, 100px)'), -1);
 });
 
 test('should enable dragging only y when axis equals y', async t => {
@@ -187,13 +171,7 @@ test('should enable dragging only y when axis equals y', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.not(
-     (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(100px, 328px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(100px, 328px)'), -1);
 });
 
 test('should enable dragging both x & y when axis equals both', async t => {
@@ -207,13 +185,7 @@ test('should enable dragging both x & y when axis equals both', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(308px, 328px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(308px, 328px)'), -1);
 });
 
 test('should snap when dragging smaller than threshold', async t => {
@@ -225,13 +197,7 @@ test('should snap when dragging smaller than threshold', async t => {
     .at(0)
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(14, 49);
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(108px, 108px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(108px, 108px)'), -1);
 });
 
 test('should snap when dragging larger than threshold', async t => {
@@ -243,13 +209,7 @@ test('should snap when dragging larger than threshold', async t => {
     .at(0)
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(15, 50);
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(138px, 208px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(138px, 208px)'), -1);
 });
 
 test('should limit position by parent bounds', async t => {
@@ -266,13 +226,14 @@ test('should limit position by parent bounds', async t => {
     .simulate('mousedown', { clientX: 50, clientY: 50 });
   mouseMove(1000, 1000);
   t.not(
-    (rnd
-      .find('div')
-      .at(0)
-      .childAt(0)
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(708px, 508px)'),
+    (
+      rnd
+        .find('div')
+        .at(0)
+        .childAt(0)
+        .getDOMNode()
+        .getAttribute('style') || ''
+    ).indexOf('transform: translate(708px, 508px)'),
     -1,
   );
 });
@@ -295,14 +256,15 @@ test('should limit position by selector bounds', async t => {
     .simulate('mousedown', { clientX: 0, clientY: 0 });
   mouseMove(2000, 2000);
   t.not(
-    (rnd
-      .find('div')
-      .at(0)
-      .childAt(0)
-      .childAt(0)
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('translate(908px, 708px)'),
+    (
+      rnd
+        .find('div')
+        .at(0)
+        .childAt(0)
+        .childAt(0)
+        .getDOMNode()
+        .getAttribute('style') || ''
+    ).indexOf('translate(908px, 708px)'),
     -1,
   );
 });
@@ -495,13 +457,7 @@ test('should move x when resizing left', async t => {
   t.deepEqual(onResize.getCall(0).args[2].clientWidth, 150);
   t.deepEqual(onResize.getCall(0).args[2].clientHeight, 100);
   t.deepEqual(onResize.getCall(0).args[3], { width: 50, height: 0 });
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(58px, 108px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(58px, 108px)'), -1);
 });
 
 test('should move y when resizing top', async t => {
@@ -545,13 +501,7 @@ test('should move y when resizing top', async t => {
   t.deepEqual(onResize.getCall(0).args[2].clientWidth, 100);
   t.deepEqual(onResize.getCall(0).args[2].clientHeight, 150);
   t.deepEqual(onResize.getCall(0).args[3], { width: 0, height: 50 });
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(108px, 58px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(108px, 58px)'), -1);
 });
 
 test('should snapped by original grid when x axis resizing smaller then threshold', async t => {
@@ -841,13 +791,7 @@ test('should clamped by selector size', async t => {
 test('should get rnd updated when updatePosition invoked', async t => {
   const rnd = mount<Rnd>(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />);
   rnd.instance().updatePosition({ x: 200, y: 300 });
-  t.not(
-    (rnd
-      .getDOMNode()
-      .getAttribute('style') || '')
-      .indexOf('transform: translate(200px, 300px)'),
-    -1,
-  );
+  t.not((rnd.getDOMNode().getAttribute('style') || '').indexOf('transform: translate(200px, 300px)'), -1);
 });
 
 test('should get rnd updated when updateSize invoked', async t => {
