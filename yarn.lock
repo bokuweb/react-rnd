@@ -7401,9 +7401,9 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.5.1.tgz#4688e8311ea4b70d558f7aebb3168a25926e62d9"
+re-resizable@4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.6.0.tgz#54f25ffcd0ca4ad63b9382cdfa078e9aee32a66b"
 
 react-dev-utils@^5.0.0:
   version "5.0.0"
