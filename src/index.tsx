@@ -469,7 +469,7 @@ export default class Rnd extends React.Component<Props, State> {
             this.draggable = c;
           }
         }}
-        handle={`.${this.props.dragHandleClassName}`}
+        handle={this.props.dragHandleClassName ? `.${this.props.dragHandleClassName}` : undefined}
         defaultPosition={this.props.default}
         onMouseDown={this.props.onMouseDown}
         onStart={this.onDragStart}
