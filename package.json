@@ -15,7 +15,7 @@
     "component"
   ],
   "scripts": {
-    "lint": "tslint -c tslint.json 'src/**/*.tsx'",
+    "lint": "tslint -c tslint.json 'src/index.tsx'",
     "flow": "flow",
     "tsc": "tsc",
     "build:prod:main": "rollup -c scripts/prod.js",

@@ -106,7 +106,7 @@ export type Props = {
   size?: Size;
   resizeGrid?: Grid;
   bounds?: string;
-  onMouseDown: (e: MouseEvent) => void;
+  onMouseDown?: (e: MouseEvent) => void;
   onResizeStart?: RndResizeStartCallback;
   onResize?: RndResizeCallback;
   onResizeStop?: RndResizeCallback;

@@ -1,4 +1,5 @@
 /* tslint:disable */
+
 import test from "ava";
 import React from "react";
 import { spy } from "sinon";
@@ -88,6 +89,17 @@ test("Should not render resizer when enable props all false", async t => {
   );
   const handlers = rnd.find(".handler");
   t.is(handlers.length, 0);
+});
+
+test("should call onMouseDown when mouse downed", async t => {
+  const onMouseDown = spy();
+  const rnd = mount(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} onMouseDown={onMouseDown} />);
+  rnd
+    .find("div")
+    .at(0)
+    .simulate("mousedown");
+  t.is(onMouseDown.callCount, 1);
+  t.is(onMouseDown.firstCall.args[0].type, "mousedown");
 });
 
 test("should call onDragStart when start dragging", async t => {
