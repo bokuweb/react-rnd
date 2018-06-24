@@ -811,3 +811,15 @@ test("should get rnd updated when updateSize invoked", async t => {
   t.is((rnd.getDOMNode() as HTMLElement).style.width, "200px");
   t.is((rnd.getDOMNode() as HTMLElement).style.height, "300px");
 });
+
+test("should find drag handle class when dragHandleClassName props passed", async t => {
+  const onDrag = spy();
+  const rnd = mount<Rnd>(
+    <Rnd dragHandleClassName="handle" onDrag={onDrag} default={{ x: 100, y: 100, width: 100, height: 100 }}>
+      <div className="handle">Test</div>
+    </Rnd>,
+  );
+  rnd.find("div.handle").simulate("mousedown", { clientX: 0, clientY: 0 });
+  mouseMove(200, 220);
+  t.is(onDrag.callCount, 1);
+});
