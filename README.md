@@ -472,9 +472,18 @@ npm t
 
 If you have a feature request, please add it as an issue or make a pull request.
 
-If you have a bug to report, please reproduce the bug in [WebpackBin](https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu) to help us easily isolate it.
+If you have a bug to report, please reproduce the bug in [CodeSandbox](https://codesandbox.io/s/y3997qply9) to help us easily isolate it.
 
 ## Changelog
+
+#### v8.0.0
+
+fix: fixed some position and resizing bug. 
+fix: [#209] bounds `window`. you can check [here](http://bokuweb.github.io/react-rnd/stories/?selectedKind=bounds&selectedStory=window%20controlled&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel). 
+fix: [#317] add onMouseDown. i.e) `<Rnd onMouseDown={...} />`
+[BREAKING] fix: [#335] add . to `dragHandleClassName` automatically, Please pass string (i.e `handle`.
+[BREAKING] fix: remove `extendsProps`. Please add extends props directly. i.e) `<Rnd data-foo="42" />`
+
 
 #### v8.0.0-beta.2
 
