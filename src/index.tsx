@@ -176,6 +176,7 @@ export default class Rnd extends React.Component<Props, State> {
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
     };
+
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
@@ -226,7 +227,22 @@ export default class Rnd extends React.Component<Props, State> {
     }
     if (!this.props.bounds) return;
     const parent = this.getParent();
-    const boundary = this.props.bounds === "parent" ? parent : document.querySelector(this.props.bounds);
+    let boundary;
+    if (this.props.bounds === "parent") {
+      boundary = parent;
+    } else if (this.props.bounds === "window") {
+      if (!this.resizable) return;
+      return this.setState({
+        bounds: {
+          top: 0,
+          right: window.innerWidth - this.resizable.size.width,
+          bottom: window.innerHeight - this.resizable.size.height,
+          left: 0,
+        },
+      });
+    } else {
+      boundary = document.querySelector(this.props.bounds);
+    }
     if (!(boundary instanceof HTMLElement) || !(parent instanceof HTMLElement)) {
       return;
     }
@@ -275,9 +291,21 @@ export default class Rnd extends React.Component<Props, State> {
     });
     if (this.props.bounds) {
       const parent = this.getParent();
-      const target = this.props.bounds === "parent" ? parent : document.querySelector(this.props.bounds);
+      let boundary;
+      if (this.props.bounds === "parent") {
+        boundary = parent;
+      } else if (this.props.bounds === "window") {
+        boundary = window;
+      } else {
+        boundary = document.querySelector(this.props.bounds);
+      }
+
       const self = this.getSelfElement();
-      if (self instanceof Element && target instanceof HTMLElement && parent instanceof HTMLElement) {
+      if (
+        self instanceof Element &&
+        (boundary instanceof HTMLElement || boundary === window) &&
+        parent instanceof HTMLElement
+      ) {
         let { maxWidth, maxHeight } = this.getMaxSizesFromProps();
         const parentSize = this.getParentSize();
         if (maxWidth && typeof maxWidth === "string") {
@@ -299,25 +327,27 @@ export default class Rnd extends React.Component<Props, State> {
         const selfRect = self.getBoundingClientRect();
         const selfLeft = selfRect.left;
         const selfTop = selfRect.top;
-        const targetRect = target.getBoundingClientRect();
-        const targetLeft = targetRect.left;
-        const targetTop = targetRect.top;
+        const boundaryRect = this.props.bounds === "window" ? { left: 0, top: 0 } : boundary.getBoundingClientRect();
+        const boundaryLeft = boundaryRect.left;
+        const boundaryTop = boundaryRect.top;
+        const offsetWidth = this.props.bounds === "window" ? window.innerWidth : boundary.offsetWidth;
+        const offsetHeight = this.props.bounds === "window" ? window.innerHeight : boundary.offsetHeight;
         if (/left/i.test(dir) && this.resizable) {
-          const max = selfLeft - targetLeft + this.resizable.size.width;
+          const max = selfLeft - boundaryLeft + this.resizable.size.width;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         if (/right/i.test(dir)) {
-          const max = target.offsetWidth + (targetLeft - selfLeft);
+          const max = offsetWidth + (boundaryLeft - selfLeft);
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         if (/top/i.test(dir) && this.resizable) {
-          const max = selfTop - targetTop + this.resizable.size.height;
+          const max = selfTop - boundaryTop + this.resizable.size.height;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });
         }
         if (/bottom/i.test(dir)) {
-          const max = target.offsetHeight + (targetTop - selfTop);
+          const max = offsetHeight + (boundaryTop - selfTop);
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });

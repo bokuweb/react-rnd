@@ -6,7 +6,10 @@ export default () => (
   <>
     {[0, 1, 2].map(i => (
       <Rnd
-        style={style}
+        style={{
+          ...style,
+          zIndex: i,
+        }}
         key={`rnd${i}`}
         default={{
           width: 200,
@@ -15,7 +18,7 @@ export default () => (
           y: i * 100,
         }}
       >
-        001
+        00{i}
       </Rnd>
     ))}
   </>

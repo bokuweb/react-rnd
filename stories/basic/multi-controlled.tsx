@@ -57,7 +57,7 @@ export default class Example extends React.Component<{}, State> {
               });
             }}
           >
-            001
+            00{i}
           </Rnd>
         ))}
       </>
