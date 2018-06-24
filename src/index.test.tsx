@@ -1,5 +1,4 @@
 /* tslint:disable */
-
 import test from "ava";
 import React from "react";
 import { spy } from "sinon";

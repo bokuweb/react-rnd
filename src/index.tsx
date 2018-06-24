@@ -106,6 +106,7 @@ export type Props = {
   size?: Size;
   resizeGrid?: Grid;
   bounds?: string;
+  onMouseDown: (e: MouseEvent) => void;
   onResizeStart?: RndResizeStartCallback;
   onResize?: RndResizeCallback;
   onResizeStop?: RndResizeCallback;
@@ -470,6 +471,7 @@ export default class Rnd extends React.Component<Props, State> {
         }}
         handle={this.props.dragHandleClassName}
         defaultPosition={this.props.default}
+        onMouseDown={this.props.onMouseDown}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
