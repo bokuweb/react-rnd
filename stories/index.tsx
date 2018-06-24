@@ -16,6 +16,9 @@ import BoundsParentControlled from "./bounds/parent-controlled";
 import BoundsSelectorUncontrolled from "./bounds/selector-uncontrolled";
 import BoundsSelectorControlled from "./bounds/selector-controlled";
 
+import SizePercentUncontrolled from "./size/size-percent-uncontrolled";
+import SizePercentControlled from "./size/size-percent-controlled";
+
 storiesOf("bare", module).add("bare", () => <Bare />);
 
 storiesOf("basic", module)
@@ -29,3 +32,7 @@ storiesOf("bounds", module)
   .add("parent controlled", () => <BoundsParentControlled />)
   .add("selector uncontrolled", () => <BoundsSelectorUncontrolled />)
   .add("selector controlled", () => <BoundsSelectorControlled />);
+
+storiesOf("size", module)
+  .add("percent uncontrolled", () => <SizePercentUncontrolled />)
+  .add("percent controlled", () => <SizePercentControlled />);
