@@ -157,6 +157,7 @@ export default class Rnd extends React.Component<Props, State> {
   };
   resizable!: Resizable;
   draggable!: Draggable;
+  isResizing = false;
 
   constructor(props: Props) {
     super(props);
@@ -284,6 +285,7 @@ export default class Rnd extends React.Component<Props, State> {
     elementRef: HTMLDivElement,
   ) {
     e.stopPropagation();
+    this.isResizing = true;
     this.setState({
       original: this.getDraggablePosition(),
     });
@@ -407,6 +409,7 @@ export default class Rnd extends React.Component<Props, State> {
     elementRef: HTMLDivElement,
     delta: { height: number; width: number },
   ) {
+    this.isResizing = false;
     const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
     this.setState({ maxWidth, maxHeight });
     if (this.props.onResizeStop) {
@@ -523,8 +526,8 @@ export default class Rnd extends React.Component<Props, State> {
           style={innerStyle}
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
-          maxWidth={this.state.maxWidth}
-          maxHeight={this.state.maxHeight}
+          maxWidth={this.isResizing ? this.state.maxWidth : this.props.maxWidth}
+          maxHeight={this.isResizing ? this.state.maxHeight : this.props.maxHeight}
           grid={resizeGrid}
           handleWrapperClass={this.props.resizeHandleWrapperClass}
           handleWrapperStyle={this.props.resizeHandleWrapperStyle}

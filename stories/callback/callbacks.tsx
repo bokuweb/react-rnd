@@ -13,6 +13,14 @@ export default () => (
       y: 0,
     }}
     onMouseDown={action("onMouseDown")}
+    onResizeStart={action("onResizeStart")}
+    onResize={action("onResize")}
+    onResizeStop={action("onResizeStop")}
+    onDragStart={action("onDragStart")}
+    onDrag={action("onDrag")}
+    onDragStop={action("onDragStop")}
+    onClick={action("onClick")}
+    onDoubleClick={action("onDoubleClick")}
   >
     001
   </Rnd>
