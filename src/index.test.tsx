@@ -823,3 +823,8 @@ test("should find drag handle class when dragHandleClassName props passed", asyn
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
 });
+
+test("should pass data- attribute", async t => {
+  const rnd = mount<Rnd>(<Rnd data-foo="42">Test</Rnd>);
+  t.is(!!rnd.find("[data-foo]"), true);
+});

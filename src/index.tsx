@@ -462,6 +462,10 @@ export default class Rnd extends React.Component<Props, State> {
       onDragStart,
       onDrag,
       onDragStop,
+      resizeHandleStyles,
+      resizeHandleClasses,
+      enableResizing,
+      resizeGrid,
       ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
@@ -512,7 +516,7 @@ export default class Rnd extends React.Component<Props, State> {
           }}
           defaultSize={defaultValue}
           size={this.props.size}
-          enable={this.props.enableResizing}
+          enable={enableResizing}
           onResizeStart={this.onResizeStart}
           onResize={this.onResize}
           onResizeStop={this.onResizeStop}
@@ -521,14 +525,14 @@ export default class Rnd extends React.Component<Props, State> {
           minHeight={this.props.minHeight}
           maxWidth={this.state.maxWidth}
           maxHeight={this.state.maxHeight}
-          grid={this.props.resizeGrid}
+          grid={resizeGrid}
           handleWrapperClass={this.props.resizeHandleWrapperClass}
           handleWrapperStyle={this.props.resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
           lockAspectRatioExtraWidth={this.props.lockAspectRatioExtraWidth}
           lockAspectRatioExtraHeight={this.props.lockAspectRatioExtraHeight}
-          handleStyles={this.props.resizeHandleStyles}
-          handleClasses={this.props.resizeHandleClasses}
+          handleStyles={resizeHandleStyles}
+          handleClasses={resizeHandleClasses}
         >
           {children}
         </Resizable>
