@@ -24,8 +24,8 @@
 * [Usage](#usage)
 * [Props](#props)
 * [Instance API](#instance-api)
-  * [updateSize(size: { width: number | string, height: number | string }): void](#updateSize-void)
-  * [updatePosition({ x: number, y: number }): void](#updatePosition-void)
+  * 🚫 Depreacted [updateSize(size: { width: number | string, height: number | string }): void](#updateSize-void)
+  * 🚫 Depreacted [updatePosition({ x: number, y: number }): void](#updatePosition-void)
 * [Test](#test)
 * [Related](#related)
 * [Changelog](#changelog)
@@ -407,7 +407,7 @@ type DraggableEventHandler = (
 ## Instance API
 
 
-#### `updateSize(size: { width: string | number, height: string | number })`
+#### [🚫 Depreacted ] `updateSize(size: { width: string | number, height: string | number })`
 
 Update component size.
 For example, you can set `300`, `'300px'`, `50%`.
@@ -434,7 +434,7 @@ class YourComponent extends Component {
 }
 ```
 
-#### `updatePosition({ x: number, y: number }): void`
+#### [🚫 Depreacted ] `updatePosition({ x: number, y: number }): void`
 
 Update component position.
 `grid` `bounds` props is ignored, when this method called.
