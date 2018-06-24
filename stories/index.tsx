@@ -7,6 +7,9 @@ import Bare from "./bare/bare";
 import BasicUncontrolled from "./basic/uncontrolled";
 import BasicControlled from "./basic/controlled";
 
+import BasicMultiUncontrolled from "./basic/multi-uncontrolled";
+import BasicMultiControlled from "./basic/multi-controlled";
+
 import BoundsParentUncontrolled from "./bounds/parent-uncontrolled";
 import BoundsParentControlled from "./bounds/parent-controlled";
 
@@ -17,7 +20,9 @@ storiesOf("bare", module).add("bare", () => <Bare />);
 
 storiesOf("basic", module)
   .add("uncontrolled", () => <BasicUncontrolled />)
-  .add("controlled", () => <BasicControlled />);
+  .add("controlled", () => <BasicControlled />)
+  .add("multi uncontrolled", () => <BasicMultiUncontrolled />)
+  .add("multi controlled", () => <BasicMultiControlled />);
 
 storiesOf("bounds", module)
   .add("parent uncontrolled", () => <BoundsParentUncontrolled />)
