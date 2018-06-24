@@ -26,7 +26,6 @@
 * [Instance API](#instance-api)
   * [updateSize(size: { width: number | string, height: number | string }): void](#updateSize-void)
   * [updatePosition({ x: number, y: number }): void](#updatePosition-void)
-  * [updateZIndex(z: number): void](#upgradeZIndex-void)
 * [Test](#test)
 * [Related](#related)
 * [Changelog](#changelog)
@@ -476,34 +475,6 @@ class YourComponent extends Component {
   ...
 }
 ```
-
-#### `updateZIndex(z: number): void`
-
-Update component z-index.
-
-- for example
-
-``` js
-class YourComponent extends Component {
-
-  ...
-
-  update() {
-    this.rnd.updateZIndex(200);
-  }
-
-  render() {
-    return (
-      <Rnd ref={c => { this.rnd = c; }} ...rest>
-        example
-      </Rnd>
-    );
-  }
-
-  ...
-}
-```
-
 
 ## Test
 
