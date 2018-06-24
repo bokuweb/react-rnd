@@ -93,8 +93,8 @@ yarn add react-rnd
   onDragStop={(e, d) => { this.setState({ x: d.x, y: d.y }) }}
   onResize={(e, direction, ref, delta, position) => {
     this.setState({
-      width: ref.offsetWidth,
-      height: ref.offsetHeight,
+      width: ref.style.width,
+      height: ref.style.height,
       ...position,
     });
   }}
@@ -171,10 +171,6 @@ For example, you can set `300`, `'300px'`, `50%`.
 
 The `maxHeight` property is used to set the maximum height of the component.
 For example, you can set `300`, `'300px'`, `50%`.
-
-#### `z?: number;`
-
-The `z` property is used to set the zIndex of a component.
 
 #### `resizeGrid?: [number, number];`
 
@@ -522,6 +518,10 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [WebpackBin](https://www.webpackbin.com/bins/-Ku4nRhImIfnt9N08lGu) to help us easily isolate it.
 
 ## Changelog
+
+#### v8.0.0-beta.2
+
+fix: Upgrade `re-resizable` to fix percentage size and bare behavior.
 
 #### v8.0.0-beta.1
 
