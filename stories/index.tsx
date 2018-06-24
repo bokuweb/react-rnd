@@ -19,6 +19,8 @@ import BoundsWindowControlled from "./bounds/window-controlled";
 import SizePercentUncontrolled from "./size/size-percent-uncontrolled";
 import SizePercentControlled from "./size/size-percent-controlled";
 
+import Callbacks from "./callback/callbacks";
+
 storiesOf("bare", module).add("bare", () => <Bare />);
 
 storiesOf("basic", module)
@@ -37,3 +39,5 @@ storiesOf("bounds", module)
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
   .add("percent controlled", () => <SizePercentControlled />);
+
+storiesOf("callbacks", module).add("callback", () => <Callbacks />);

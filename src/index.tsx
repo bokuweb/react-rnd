@@ -106,6 +106,7 @@ export type Props = {
   size?: Size;
   resizeGrid?: Grid;
   bounds?: string;
+  onMouseDown?: (e: MouseEvent) => void;
   onResizeStart?: RndResizeStartCallback;
   onResize?: RndResizeCallback;
   onResizeStop?: RndResizeCallback;
@@ -132,9 +133,6 @@ export type Props = {
   disableDragging?: boolean;
   cancel?: string;
   enableUserSelectHack?: boolean;
-
-  // FIXME
-  extendsProps?: { [key: string]: any };
 };
 
 const resizableStyle = {
@@ -446,19 +444,42 @@ export default class Rnd extends React.Component<Props, State> {
   }
 
   render() {
-    const cursorStyle =
-      this.props.disableDragging || this.props.dragHandleClassName ? { cursor: "normal" } : { cursor: "move" };
+    const {
+      disableDragging,
+      style,
+      dragHandleClassName,
+      position,
+      onMouseDown,
+      dragAxis,
+      dragGrid,
+      bounds,
+      enableUserSelectHack,
+      cancel,
+      children,
+      onResizeStart,
+      onResize,
+      onResizeStop,
+      onDragStart,
+      onDrag,
+      onDragStop,
+      ...resizableProps
+    } = this.props;
+    const defaultValue = this.props.default ? { ...this.props.default } : undefined;
+    // Remove unknown props, see also https://reactjs.org/warnings/unknown-prop.html
+    delete resizableProps.default;
+
+    const cursorStyle = disableDragging || dragHandleClassName ? { cursor: "normal" } : { cursor: "move" };
     const innerStyle = {
       ...resizableStyle,
       ...cursorStyle,
-      ...this.props.style,
+      ...style,
     };
     const { left, top } = this.getOffsetFromParent();
-    let position;
-    if (this.props.position) {
-      position = {
-        x: this.props.position.x - left,
-        y: this.props.position.y - top,
+    let draggablePosition;
+    if (position) {
+      draggablePosition = {
+        x: position.x - left,
+        y: position.y - top,
       };
     }
     return (
@@ -468,28 +489,28 @@ export default class Rnd extends React.Component<Props, State> {
             this.draggable = c;
           }
         }}
-        handle={this.props.dragHandleClassName}
-        defaultPosition={this.props.default}
+        handle={dragHandleClassName ? `.${dragHandleClassName}` : undefined}
+        defaultPosition={defaultValue}
+        onMouseDown={onMouseDown}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
-        axis={this.props.dragAxis}
-        disabled={this.props.disableDragging}
-        grid={this.props.dragGrid}
-        bounds={this.props.bounds ? this.state.bounds : undefined}
-        position={position}
-        enableUserSelectHack={this.props.enableUserSelectHack}
-        cancel={this.props.cancel}
+        axis={dragAxis}
+        disabled={disableDragging}
+        grid={dragGrid}
+        bounds={bounds ? this.state.bounds : undefined}
+        position={draggablePosition}
+        enableUserSelectHack={enableUserSelectHack}
+        cancel={cancel}
       >
         <Resizable
-          {...this.props.extendsProps}
-          className={this.props.className}
+          {...resizableProps}
           ref={c => {
             if (c) {
               this.resizable = c;
             }
           }}
-          defaultSize={this.props.default}
+          defaultSize={defaultValue}
           size={this.props.size}
           enable={this.props.enableResizing}
           onResizeStart={this.onResizeStart}
@@ -509,7 +530,7 @@ export default class Rnd extends React.Component<Props, State> {
           handleStyles={this.props.resizeHandleStyles}
           handleClasses={this.props.resizeHandleClasses}
         >
-          {this.props.children}
+          {children}
         </Resizable>
       </Draggable>
     );

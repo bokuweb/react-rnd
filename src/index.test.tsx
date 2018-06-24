@@ -91,6 +91,17 @@ test("Should not render resizer when enable props all false", async t => {
   t.is(handlers.length, 0);
 });
 
+test("should call onMouseDown when mouse downed", async t => {
+  const onMouseDown = spy();
+  const rnd = mount(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} onMouseDown={onMouseDown} />);
+  rnd
+    .find("div")
+    .at(0)
+    .simulate("mousedown");
+  t.is(onMouseDown.callCount, 1);
+  t.is(onMouseDown.firstCall.args[0].type, "mousedown");
+});
+
 test("should call onDragStart when start dragging", async t => {
   const onDragStart = spy();
   const rnd = mount(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} onDragStart={onDragStart} />);
@@ -799,4 +810,16 @@ test("should get rnd updated when updateSize invoked", async t => {
   rnd.instance().updateSize({ width: 200, height: 300 });
   t.is((rnd.getDOMNode() as HTMLElement).style.width, "200px");
   t.is((rnd.getDOMNode() as HTMLElement).style.height, "300px");
+});
+
+test("should find drag handle class when dragHandleClassName props passed", async t => {
+  const onDrag = spy();
+  const rnd = mount<Rnd>(
+    <Rnd dragHandleClassName="handle" onDrag={onDrag} default={{ x: 100, y: 100, width: 100, height: 100 }}>
+      <div className="handle">Test</div>
+    </Rnd>,
+  );
+  rnd.find("div.handle").simulate("mousedown", { clientX: 0, clientY: 0 });
+  mouseMove(200, 220);
+  t.is(onDrag.callCount, 1);
 });

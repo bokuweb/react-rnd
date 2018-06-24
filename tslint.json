@@ -1,6 +1,7 @@
 
 {
   "extends": ["tslint-eslint-rules"],
+  "linterOptions": { "exclude": ["src/index.test.tsx"] },
   "rules": {
     "class-name": true,
     "comment-format": [true, "check-space"],
