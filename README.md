@@ -478,12 +478,12 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 #### v8.0.0
 
-fix: fixed some position and resizing bug. 
-fix: [#209] bounds `window`. you can check [here](http://bokuweb.github.io/react-rnd/stories/?selectedKind=bounds&selectedStory=window%20controlled&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel). 
-fix: [#317] add onMouseDown. i.e) `<Rnd onMouseDown={...} />`
-[BREAKING] fix: [#335] add . to `dragHandleClassName` automatically, Please pass string (i.e `handle`.
-[BREAKING] fix: remove `extendsProps`. Please add extends props directly. i.e) `<Rnd data-foo="42" />`
-
+fix: fixed some position and resizing bug.       
+fix: [#209] bounds `window`. you can check [here](http://bokuweb.github.io/react-rnd/stories/?selectedKind=bounds&selectedStory=window%20controlled&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).       
+fix: [#317] add onMouseDown. i.e) `<Rnd onMouseDown={...} />`      
+[BREAKING] fix: [#335] add . to `dragHandleClassName` automatically, Please pass string (i.e `handle`.      
+[BREAKING] fix: remove `extendsProps`. Please add extends props directly. i.e) `<Rnd data-foo="42" />`      
+[BREAKING] fix: remove `z` props. Please add `zIndex` via `style` props. i.e) `<Rnd style={{ zIndex: 9 }} />`
 
 #### v8.0.0-beta.2
 
@@ -702,7 +702,7 @@ Fixed a bug, `bounds` is not work correctly. (#162)
 
 The MIT License (MIT)
 
-Copyright (c) 2017 bokuweb
+Copyright (c) 2018 bokuweb
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
