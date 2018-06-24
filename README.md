@@ -202,7 +202,7 @@ If omitted, set `0`.
 #### `dragHandleClassName?: string;`
 
 Specifies a selector to be used as the handle that initiates drag.
-Example: '.handle'.
+Example: `handle`.
 
 #### `resizeHandleStyles?: HandleStyles;`
 
@@ -281,21 +281,6 @@ The `disableDragging` property disables dragging completely.
 
 The `cancel` property disables specifies a selector to be used to prevent drag initialization (e.g. `.body`).
 
-#### `extendsProps?: { [key: string]: any };`
-
-This property is used to pass the other props to the component.
-
-e.g.
-
-``` javascript
-const extendsProps = {
-  data-foo: 'foo',
-  onMouseOver: () => {},
-};
-
-<Rnd extendsProps={extendsProps} />
-```
-
 #### `dragAxis?: 'x' | 'y' | 'both' | 'none'`
 
 The direction of allowed movement (dragging) allowed ('x','y','both','none').
@@ -304,7 +289,8 @@ The direction of allowed movement (dragging) allowed ('x','y','both','none').
 
 Specifies movement boundaries. Accepted values:
  - `parent` restricts movement within the node's offsetParent
-    (nearest node with position relative or absolute), or
+    (nearest node with position relative or absolute)
+ - `window`, or
  - Selector, like `.fooClassName`.
 
 
