@@ -38,7 +38,7 @@
   <img src="https://raw.githubusercontent.com/bokuweb/react-rnd/master/screenshot.gif" />
 </p>
 
-https://codesandbox.io/s/q9onxj77j6
+https://codesandbox.io/s/xpm699v4lp
 
 ## Live Demo
 
