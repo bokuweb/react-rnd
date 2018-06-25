@@ -21,6 +21,8 @@ import SizePercentControlled from "./size/size-percent-controlled";
 
 import Callbacks from "./callback/callbacks";
 
+import Cancel from "./cancel/cancel";
+
 import SandboxBodySizeToMaxWidth from "./sandbox/bodysize-to-maxwidth";
 
 storiesOf("bare", module).add("bare", () => <Bare />);
@@ -43,6 +45,8 @@ storiesOf("size", module)
   .add("percent controlled", () => <SizePercentControlled />);
 
 storiesOf("callbacks", module).add("callback", () => <Callbacks />);
+
+storiesOf("cancel", module).add("cancel", () => <Cancel />);
 
 storiesOf("sandbox", module)
   .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />);
