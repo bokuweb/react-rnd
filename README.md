@@ -476,6 +476,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v8.0.1
+
+fix: [#221] fixed a bug, maxwidth / height not applied.
+
 #### v8.0.0
 
 fix: fixed some position and resizing bug.       
