@@ -24,6 +24,9 @@ import Callbacks from "./callback/callbacks";
 import Cancel from "./cancel/cancel";
 
 import SandboxBodySizeToMaxWidth from "./sandbox/bodysize-to-maxwidth";
+import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-bounds";
+
+import LockAspectRatioBasic from "./lock-aspect-ratio/basic";
 
 storiesOf("bare", module).add("bare", () => <Bare />);
 
@@ -49,4 +52,7 @@ storiesOf("callbacks", module).add("callback", () => <Callbacks />);
 storiesOf("cancel", module).add("cancel", () => <Cancel />);
 
 storiesOf("sandbox", module)
-  .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />);
+  .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />)
+  .add("lock aspect ratio with bounds", () => <SandboxLockAspectRatioWithBounds />);
+
+storiesOf("ratio", module).add("lock aspect ratio", () => <LockAspectRatioBasic />);

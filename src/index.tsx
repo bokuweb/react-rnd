@@ -332,21 +332,27 @@ export default class Rnd extends React.Component<Props, State> {
         const boundaryTop = boundaryRect.top;
         const offsetWidth = this.props.bounds === "window" ? window.innerWidth : boundary.offsetWidth;
         const offsetHeight = this.props.bounds === "window" ? window.innerHeight : boundary.offsetHeight;
-        if (/left/i.test(dir) && this.resizable) {
+        const hasLeft = dir.toLowerCase().endsWith("left");
+        const hasRight = dir.toLowerCase().endsWith("right");
+        const hasTop = dir.startsWith("top");
+        const hasBottom = dir.startsWith("bottom");
+        if (hasLeft && this.resizable) {
           const max = selfLeft - boundaryLeft + this.resizable.size.width;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
-        if (/right/i.test(dir)) {
+// INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.        
+        if (hasRight || (this.props.lockAspectRatio && !hasLeft)) {
           const max = offsetWidth + (boundaryLeft - selfLeft);
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
-        if (/top/i.test(dir) && this.resizable) {
+        if (hasTop && this.resizable) {
           const max = selfTop - boundaryTop + this.resizable.size.height;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });
         }
-        if (/bottom/i.test(dir)) {
+        // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
+        if (hasBottom || (this.props.lockAspectRatio && !hasTop)) {
           const max = offsetHeight + (boundaryTop - selfTop);
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
