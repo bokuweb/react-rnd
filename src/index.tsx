@@ -229,6 +229,8 @@ export default class Rnd extends React.Component<Props, State> {
     let boundary;
     if (this.props.bounds === "parent") {
       boundary = parent;
+    } else if (this.props.bounds === "body") {
+      boundary = document.body;
     } else if (this.props.bounds === "window") {
       if (!this.resizable) return;
       return this.setState({
@@ -294,6 +296,8 @@ export default class Rnd extends React.Component<Props, State> {
       let boundary;
       if (this.props.bounds === "parent") {
         boundary = parent;
+      } else if (this.props.bounds === "body") {
+        boundary = document.body;
       } else if (this.props.bounds === "window") {
         boundary = window;
       } else {
@@ -340,7 +344,7 @@ export default class Rnd extends React.Component<Props, State> {
           const max = selfLeft - boundaryLeft + this.resizable.size.width;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
-// INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.        
+        // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
         if (hasRight || (this.props.lockAspectRatio && !hasLeft)) {
           const max = offsetWidth + (boundaryLeft - selfLeft);
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
