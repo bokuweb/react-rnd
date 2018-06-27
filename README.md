@@ -474,35 +474,40 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v8.0.2
+
+- fix: fixed a bug, `bounds` is ignored when lock aspect ratio set.
+- feat: add `body` to bounds props.
+
 #### v8.0.1
 
-fix: [#221] fixed a bug, maxwidth / height not applied.
+- fix: [#221] fixed a bug, maxwidth / height not applied.
 
 #### v8.0.0
 
-fix: fixed some position and resizing bug.       
-fix: [#209] bounds `window`. you can check [here](http://bokuweb.github.io/react-rnd/stories/?selectedKind=bounds&selectedStory=window%20controlled&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).       
-fix: [#317] add onMouseDown. i.e) `<Rnd onMouseDown={...} />`      
-[BREAKING] fix: [#335] add . to `dragHandleClassName` automatically, Please pass string (i.e `handle`.      
-[BREAKING] fix: remove `extendsProps`. Please add extends props directly. i.e) `<Rnd data-foo="42" />`      
-[BREAKING] fix: remove `z` props. Please add `zIndex` via `style` props. i.e) `<Rnd style={{ zIndex: 9 }} />`
+- fix: fixed some position and resizing bug.       
+- fix: [#209] bounds `window`. you can check [here](http://bokuweb.github.io/react-rnd/stories/?selectedKind=bounds&selectedStory=window%20controlled&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).       
+- fix: [#317] add onMouseDown. i.e) `<Rnd onMouseDown={...} />`      
+- [BREAKING] fix: [#335] add . to `dragHandleClassName` automatically, Please pass string (i.e `handle`.      
+- [BREAKING] fix: remove `extendsProps`. Please add extends props directly. i.e) `<Rnd data-foo="42" />`      
+- [BREAKING] fix: remove `z` props. Please add `zIndex` via `style` props. i.e) `<Rnd style={{ zIndex: 9 }} />`
 
 #### v8.0.0-beta.2
 
-fix: Upgrade `re-resizable` to fix percentage size and bare behavior.
+- fix: Upgrade `re-resizable` to fix percentage size and bare behavior.
 
 #### v8.0.0-beta.1
 
-fix: Fixed a bug, controlled position does not work correctly.
-feat: Use `typescript` instead of `flowype`.
+- fix: Fixed a bug, controlled position does not work correctly.
+- feat: Use `typescript` instead of `flowype`.
 
 #### v8.0.0-beta.0
 
-fix: Remove dummy `<div />`, `isMounted` state and `setParentPosition()`.
+- fix: Remove dummy `<div />`, `isMounted` state and `setParentPosition()`.
 
 #### v7.4.3
 
-fix: Add `props,children` to dummy `<div>` to render children in first.
+- fix: Add `props,children` to dummy `<div>` to render children in first.
 
 #### v7.4.2 (unpublished)
 
@@ -528,20 +533,20 @@ fix: `isMounted` and `(!this.state.isMounted) return <div />` line #356
 
 #### v7.2.0
 
-Support for cancel feature of react-draggable #206
+- Support for cancel feature of react-draggable #206
 
 #### v7.1.5
 
-Fixed a issue #199 Add enableUserSelectHack props to react-draggable
+- Fixed a issue #199 Add enableUserSelectHack props to react-draggable
 
 #### v7.1.4
 
-Fixed a issue #188 maxWidth and maxHeight props don't respect after resize
+- Fixed a issue #188 maxWidth and maxHeight props don't respect after resize
 
 #### v7.1.3
-
-Fixed a bug, `extendProps` is not passed correctly.
-Fixed a bug, `bounds` is not work correctly. (#162)
+ 
+- Fixed a bug, `extendProps` is not passed correctly.
+- Fixed a bug, `bounds` is not work correctly. (#162)
 
 #### v7.1.1 / v7.1.2
 
