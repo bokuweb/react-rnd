@@ -213,17 +213,15 @@ but other handle will still use the default styles.
 
 ``` javascript
 
-type Style = { [key: string]: string | number };
-
 export type HandleStyles = {
-  bottom?: Style,
-  bottomLeft?: Style,
-  bottomRight?: Style,
-  left?: Style,
-  right?: Style,
-  top?: Style,
-  topLeft?: Style,
-  topRight?: Style
+  bottom?: React.CSSProperties,
+  bottomLeft?: React.CSSProperties,
+  bottomRight?: React.CSSProperties,
+  left?: React.CSSProperties,
+  right?: React.CSSProperties,
+  top?: React.CSSProperties,
+  topLeft?: React.CSSProperties,
+  topRight?: React.CSSProperties
 }
 ```
 
@@ -290,7 +288,7 @@ The direction of allowed movement (dragging) allowed ('x','y','both','none').
 Specifies movement boundaries. Accepted values:
  - `parent` restricts movement within the node's offsetParent
     (nearest node with position relative or absolute)
- - `window`, or
+ - `window`, `body`, or
  - Selector, like `.fooClassName`.
 
 
