@@ -15,6 +15,7 @@ import BoundsParentControlled from "./bounds/parent-controlled";
 import BoundsSelectorUncontrolled from "./bounds/selector-uncontrolled";
 import BoundsSelectorControlled from "./bounds/selector-controlled";
 import BoundsWindowControlled from "./bounds/window-controlled";
+import BoundsBodyControlled from "./bounds/body-controlled";
 
 import SizePercentUncontrolled from "./size/size-percent-uncontrolled";
 import SizePercentControlled from "./size/size-percent-controlled";
@@ -24,6 +25,9 @@ import Callbacks from "./callback/callbacks";
 import Cancel from "./cancel/cancel";
 
 import SandboxBodySizeToMaxWidth from "./sandbox/bodysize-to-maxwidth";
+import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-bounds";
+
+import LockAspectRatioBasic from "./lock-aspect-ratio/basic";
 
 storiesOf("bare", module).add("bare", () => <Bare />);
 
@@ -38,7 +42,8 @@ storiesOf("bounds", module)
   .add("parent controlled", () => <BoundsParentControlled />)
   .add("selector uncontrolled", () => <BoundsSelectorUncontrolled />)
   .add("selector controlled", () => <BoundsSelectorControlled />)
-  .add("window controlled", () => <BoundsWindowControlled />);
+  .add("window controlled", () => <BoundsWindowControlled />)
+  .add("body controlled", () => <BoundsBodyControlled />);
 
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
@@ -49,4 +54,7 @@ storiesOf("callbacks", module).add("callback", () => <Callbacks />);
 storiesOf("cancel", module).add("cancel", () => <Cancel />);
 
 storiesOf("sandbox", module)
-  .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />);
+  .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />)
+  .add("lock aspect ratio with bounds", () => <SandboxLockAspectRatioWithBounds />);
+
+storiesOf("ratio", module).add("lock aspect ratio", () => <LockAspectRatioBasic />);
