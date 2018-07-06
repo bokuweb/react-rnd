@@ -311,9 +311,9 @@
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/storybook__addon-actions/-/storybook__addon-actions-3.0.3.tgz#99287c0b9ee6b84ea571ee4cb42d0779c56af208"
 
-"@types/storybook__react@3.0.7":
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/@types/storybook__react/-/storybook__react-3.0.7.tgz#2ca6ab78e5fe777737aa5880b0bb5228f564e137"
+"@types/storybook__react@3.0.8":
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/@types/storybook__react/-/storybook__react-3.0.8.tgz#58deb593361b7d5e6a6eca09bc7889b613980925"
   dependencies:
     "@types/react" "*"
     "@types/webpack-env" "*"
