@@ -1,11 +1,11 @@
 /* tslint:disable */
 
 import test from "ava";
-import React from "react";
+import * as React from "react";
 import { spy } from "sinon";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Rnd from "./";
+import { Rnd } from "./";
 
 Enzyme.configure({ adapter: new Adapter() });
 

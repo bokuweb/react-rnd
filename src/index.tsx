@@ -144,7 +144,7 @@ const resizableStyle = {
   left: 0,
 };
 
-export default class Rnd extends React.Component<Props, State> {
+export class Rnd extends React.Component<Props, State> {
   static defaultProps = {
     maxWidth: Number.MAX_SAFE_INTEGER,
     maxHeight: Number.MAX_SAFE_INTEGER,
