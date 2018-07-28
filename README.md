@@ -50,6 +50,7 @@ https://codesandbox.io/s/xpm699v4lp
 
 [CodeSandbox(with default)](https://codesandbox.io/s/y3997qply9)    
 [CodeSandbox(with size and position)](https://codesandbox.io/s/my4kjly94x)    
+[CodeSandbox(with typescript)](https://codesandbox.io/s/j1vvkpo9wv)
 
 
 ## Install
@@ -473,6 +474,10 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [CodeSandbox](https://codesandbox.io/s/y3997qply9) to help us easily isolate it.
 
 ## Changelog
+
+#### v9.0.1
+
+- fix: Allow additional props in typescript.
 
 #### v9.0.0
 
