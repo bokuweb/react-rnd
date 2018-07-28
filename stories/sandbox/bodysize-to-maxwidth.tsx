@@ -1,13 +1,13 @@
 import React from "react";
-import Rnd from "../../src";
-import { style } from "../styles.ts";
+import { Rnd } from "../../src";
+import { style } from "../styles";
 
 export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      maxWidth: Number.MAX_SAFE_INTEGER,
-    };
+  state = {
+    maxWidth: Number.MAX_SAFE_INTEGER,
+  };
+  constructor(props) {
+    super(props);
   }
   componentDidMount() {
     window.addEventListener("resize", () => {

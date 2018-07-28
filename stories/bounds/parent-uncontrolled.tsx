@@ -1,5 +1,5 @@
 import React from "react";
-import Rnd from "../../";
+import { Rnd } from "../../";
 import { style, parentBoundary } from "../styles";
 
 export default () => (

@@ -93,7 +93,7 @@ export type HandleStyles = {
   topRight?: React.CSSProperties;
 };
 
-export type Props = {
+export interface Props {
   dragGrid?: Grid;
   default?: {
     x: number;
@@ -133,7 +133,8 @@ export type Props = {
   disableDragging?: boolean;
   cancel?: string;
   enableUserSelectHack?: boolean;
-};
+  [key: string]: any;
+}
 
 const resizableStyle = {
   width: "auto" as "auto",

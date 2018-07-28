@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import Rnd from "../../src";
+import { Rnd } from "../../src";
 import { style } from "../styles";
 
 export default () => (
