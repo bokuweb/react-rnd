@@ -474,6 +474,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v9.0.0
+
+- fix: change `default export` to `export` #405
+
 #### v8.0.2
 
 - fix: fixed a bug, `bounds` is ignored when lock aspect ratio set.
