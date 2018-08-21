@@ -48,7 +48,7 @@
     "@types/react": "16.4.1",
     "@types/react-dom": "16.0.7",
     "@types/sinon": "5.0.1",
-    "@types/storybook__addon-actions": "3.0.3",
+    "@types/storybook__addon-actions": "3.4.1",
     "@types/storybook__react": "3.0.9",
     "avaron": "0.2.0",
     "cpy-cli": "2.0.0",
