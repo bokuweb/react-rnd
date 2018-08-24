@@ -71,11 +71,11 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-2.0.0.tgz#9163742ac35c12d3602dece74317643b35db6a80"
 
-"@storybook/addon-actions@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.4.8.tgz#557bae7c7cc60be9d5199ff972b028de8b574f92"
+"@storybook/addon-actions@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.4.10.tgz#b90ca8ccbad925dcbb4af02d2d24cc2c60bcec3f"
   dependencies:
-    "@storybook/components" "3.4.8"
+    "@storybook/components" "3.4.10"
     babel-runtime "^6.26.0"
     deep-equal "^1.0.1"
     glamor "^2.20.40"
@@ -86,52 +86,52 @@
     react-inspector "^2.2.2"
     uuid "^3.2.1"
 
-"@storybook/addon-links@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.4.8.tgz#303e2e37c8abf1861accc95dd9c5f9274bf528ad"
+"@storybook/addon-links@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.4.10.tgz#db53d0a0b354e7f5e55195315f48f7045307a429"
   dependencies:
-    "@storybook/components" "3.4.8"
+    "@storybook/components" "3.4.10"
     babel-runtime "^6.26.0"
     global "^4.3.2"
     prop-types "^15.6.1"
 
-"@storybook/addons@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.4.8.tgz#ff1142d8f0963dd28b7c6f88dc9d3be170ac6600"
+"@storybook/addons@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.4.10.tgz#13298cdcb7ccc396321b1336b9785b69273a022d"
 
-"@storybook/channel-postmessage@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-3.4.8.tgz#4df9b315f6ceff07f33334a633f24c7b81a3ac28"
+"@storybook/channel-postmessage@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-3.4.10.tgz#fa88bdf8530d4499481c9e30c9364545f043b908"
   dependencies:
-    "@storybook/channels" "3.4.8"
+    "@storybook/channels" "3.4.10"
     global "^4.3.2"
     json-stringify-safe "^5.0.1"
 
-"@storybook/channels@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.4.8.tgz#df0aff0d20a9597402e76caa7e5ddb088ede3591"
+"@storybook/channels@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.4.10.tgz#ab023a0d8cbd34a4eb4b8ae5c6f02654fed9190b"
 
-"@storybook/client-logger@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-3.4.8.tgz#82d6e1c2cb3e37184cc597a933f64b38fb61b88b"
+"@storybook/client-logger@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-3.4.10.tgz#510854ee326808a65a20b79e3405763280bc7027"
 
-"@storybook/components@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.4.8.tgz#45934d9a25374e68152826a162e61b9732871eaf"
+"@storybook/components@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.4.10.tgz#9af0bba14234d10f14a37656ac5982ec640cfcc8"
   dependencies:
     glamor "^2.20.40"
     glamorous "^4.12.1"
     prop-types "^15.6.1"
 
-"@storybook/core@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/core/-/core-3.4.8.tgz#a7f077175081b9e957cd3b04442c01606271fd2d"
+"@storybook/core@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/core/-/core-3.4.10.tgz#32bdd071be15ad611e87f55d96e1d80bcc23e636"
   dependencies:
-    "@storybook/addons" "3.4.8"
-    "@storybook/channel-postmessage" "3.4.8"
-    "@storybook/client-logger" "3.4.8"
-    "@storybook/node-logger" "3.4.8"
-    "@storybook/ui" "3.4.8"
+    "@storybook/addons" "3.4.10"
+    "@storybook/channel-postmessage" "3.4.10"
+    "@storybook/client-logger" "3.4.10"
+    "@storybook/node-logger" "3.4.10"
+    "@storybook/ui" "3.4.10"
     autoprefixer "^7.2.6"
     babel-runtime "^6.26.0"
     chalk "^2.3.2"
@@ -163,9 +163,9 @@
     "@storybook/react-simple-di" "^1.2.1"
     babel-runtime "6.x.x"
 
-"@storybook/node-logger@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-3.4.8.tgz#8f8abcd51920545c7458385b0b30199ae48ad78a"
+"@storybook/node-logger@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-3.4.10.tgz#b89b7008a7d98b28530920a178ec77bde2ab97cc"
   dependencies:
     npmlog "^4.1.2"
 
@@ -201,18 +201,18 @@
   dependencies:
     babel-runtime "^6.5.0"
 
-"@storybook/react@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/react/-/react-3.4.8.tgz#857b83778abb0547525637b084d2fe684a53fc81"
+"@storybook/react@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/react/-/react-3.4.10.tgz#3bab6cd5c23c90b3de7b9e5aa58042a28cb0d181"
   dependencies:
-    "@storybook/addon-actions" "3.4.8"
-    "@storybook/addon-links" "3.4.8"
-    "@storybook/addons" "3.4.8"
-    "@storybook/channel-postmessage" "3.4.8"
-    "@storybook/client-logger" "3.4.8"
-    "@storybook/core" "3.4.8"
-    "@storybook/node-logger" "3.4.8"
-    "@storybook/ui" "3.4.8"
+    "@storybook/addon-actions" "3.4.10"
+    "@storybook/addon-links" "3.4.10"
+    "@storybook/addons" "3.4.10"
+    "@storybook/channel-postmessage" "3.4.10"
+    "@storybook/client-logger" "3.4.10"
+    "@storybook/core" "3.4.10"
+    "@storybook/node-logger" "3.4.10"
+    "@storybook/ui" "3.4.10"
     airbnb-js-shims "^1.4.1"
     babel-loader "^7.1.4"
     babel-plugin-macros "^2.2.0"
@@ -245,11 +245,11 @@
     webpack "^3.11.0"
     webpack-hot-middleware "^2.22.1"
 
-"@storybook/ui@3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-3.4.8.tgz#73245f02a714cc3de0bb1b62261ec64b6d0d65ae"
+"@storybook/ui@3.4.10":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-3.4.10.tgz#aeb36f60f4297a7065aa64ba770df681d6aac793"
   dependencies:
-    "@storybook/components" "3.4.8"
+    "@storybook/components" "3.4.10"
     "@storybook/mantra-core" "^1.7.2"
     "@storybook/podda" "^1.2.3"
     "@storybook/react-komposer" "^2.0.3"
