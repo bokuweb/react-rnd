@@ -480,6 +480,8 @@ export class Rnd extends React.Component<Props, State> {
       resizeHandleClasses,
       enableResizing,
       resizeGrid,
+      resizeHandleWrapperClass,
+      resizeHandleWrapperStyle,
       ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
@@ -540,8 +542,8 @@ export class Rnd extends React.Component<Props, State> {
           maxWidth={this.isResizing ? this.state.maxWidth : this.props.maxWidth}
           maxHeight={this.isResizing ? this.state.maxHeight : this.props.maxHeight}
           grid={resizeGrid}
-          handleWrapperClass={this.props.resizeHandleWrapperClass}
-          handleWrapperStyle={this.props.resizeHandleWrapperStyle}
+          handleWrapperClass={resizeHandleWrapperClass}
+          handleWrapperStyle={resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
           lockAspectRatioExtraWidth={this.props.lockAspectRatioExtraWidth}
           lockAspectRatioExtraHeight={this.props.lockAspectRatioExtraHeight}
