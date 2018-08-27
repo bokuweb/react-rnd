@@ -52,7 +52,7 @@
     "@types/storybook__react": "3.0.9",
     "avaron": "0.2.0",
     "cpy-cli": "2.0.0",
-    "enzyme": "3.4.4",
+    "enzyme": "3.5.0",
     "enzyme-adapter-react-16": "1.2.0",
     "gh-pages": "1.2.0",
     "light-ts-loader": "1.1.2",
