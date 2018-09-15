@@ -12,6 +12,8 @@
 <img src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg" /></a>
 <a href="https://github.com/prettier/prettier">
 <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" /></a>
+<a href="https://bokuweb.github.io/react-rnd/stories">
+<img src="https://github.com/storybooks/press/blob/master/badges/storybook.svg" /></a>
 </p>
 
 ## Table of Contents
