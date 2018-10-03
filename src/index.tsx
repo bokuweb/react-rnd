@@ -497,10 +497,32 @@ export class Rnd extends React.Component<Props, State> {
     const { left, top } = this.getOffsetFromParent();
     let draggablePosition;
     if (position) {
-      draggablePosition = {
-        x: position.x - left,
-        y: position.y - top,
-      };
+      switch (dragAxis) {
+        case "x":
+          draggablePosition = {
+            x: position.x - left,
+            y: position.y,
+          };
+          break;
+        case "y":
+          draggablePosition = {
+            x: position.x,
+            y: position.y - top,
+          };
+          break;
+        case "none":
+          draggablePosition = {
+            x: position.x,
+            y: position.y,
+          };
+          break;
+        default:
+          draggablePosition = {
+            x: position.x - left,
+            y: position.y - top,
+          };
+          break;
+      }
     }
     return (
       <Draggable
