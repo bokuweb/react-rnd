@@ -490,11 +490,6 @@ export class Rnd extends React.Component<Props, State> {
       top: selfRect.top - parentTop - position.y,
     };
   }
-  snapToGrid(grid: [number, number], pendingX: number, pendingY: number): [number, number] {
-    const x = Math.round(pendingX / grid[0]) * grid[0];
-    const y = Math.round(pendingY / grid[1]) * grid[1];
-    return [x, y];
-  }
 
   render() {
     const {
@@ -553,7 +548,7 @@ export class Rnd extends React.Component<Props, State> {
         onStop={this.onDragStop}
         axis={dragAxis}
         disabled={disableDragging}
-        grid={snapOnDragStop ? undefined : dragGrid}
+        grid={dragGrid}
         bounds={bounds ? this.state.bounds : undefined}
         position={draggablePosition}
         enableUserSelectHack={enableUserSelectHack}
@@ -577,7 +572,7 @@ export class Rnd extends React.Component<Props, State> {
           minHeight={this.props.minHeight}
           maxWidth={this.isResizing ? this.state.maxWidth : this.props.maxWidth}
           maxHeight={this.isResizing ? this.state.maxHeight : this.props.maxHeight}
-          grid={snapOnResizeStop ? undefined : resizeGrid}
+          grid={resizeGrid}
           handleWrapperClass={resizeHandleWrapperClass}
           handleWrapperStyle={resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
