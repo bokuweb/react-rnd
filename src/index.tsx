@@ -203,6 +203,40 @@ export class Rnd extends React.Component<Props, State> {
     return { x, y };
   }
 
+  getPosition(position: any, dragAxis: any) {
+    const { left, top } = this.getOffsetFromParent();
+    let draggablePosition;
+    if (position) {
+      switch (dragAxis) {
+        case "x":
+          draggablePosition = {
+            x: position.x - left,
+            y: position.y,
+          };
+          break;
+        case "y":
+          draggablePosition = {
+            x: position.x,
+            y: position.y - top,
+          };
+          break;
+        case "none":
+          draggablePosition = {
+            x: position.x,
+            y: position.y,
+          };
+          break;
+        default:
+          draggablePosition = {
+            x: position.x - left,
+            y: position.y - top,
+          };
+          break;
+      }
+    }
+    return draggablePosition;
+  }
+
   getParent() {
     return this.resizable && (this.resizable as any).parentNode;
   }
@@ -456,6 +490,11 @@ export class Rnd extends React.Component<Props, State> {
       top: selfRect.top - parentTop - position.y,
     };
   }
+  snapToGrid(grid: [number, number], pendingX: number, pendingY: number): [number, number] {
+    const x = Math.round(pendingX / grid[0]) * grid[0];
+    const y = Math.round(pendingY / grid[1]) * grid[1];
+    return [x, y];
+  }
 
   render() {
     const {
@@ -473,9 +512,11 @@ export class Rnd extends React.Component<Props, State> {
       onResizeStart,
       onResize,
       onResizeStop,
+      snapOnResizeStop,
       onDragStart,
       onDrag,
       onDragStop,
+      snapOnDragStop,
       resizeHandleStyles,
       resizeHandleClasses,
       enableResizing,
@@ -494,36 +535,9 @@ export class Rnd extends React.Component<Props, State> {
       ...cursorStyle,
       ...style,
     };
-    const { left, top } = this.getOffsetFromParent();
-    let draggablePosition;
-    if (position) {
-      switch (dragAxis) {
-        case "x":
-          draggablePosition = {
-            x: position.x - left,
-            y: position.y,
-          };
-          break;
-        case "y":
-          draggablePosition = {
-            x: position.x,
-            y: position.y - top,
-          };
-          break;
-        case "none":
-          draggablePosition = {
-            x: position.x,
-            y: position.y,
-          };
-          break;
-        default:
-          draggablePosition = {
-            x: position.x - left,
-            y: position.y - top,
-          };
-          break;
-      }
-    }
+
+    const draggablePosition = this.getPosition(position, dragAxis);
+
     return (
       <Draggable
         ref={c => {
@@ -539,7 +553,7 @@ export class Rnd extends React.Component<Props, State> {
         onStop={this.onDragStop}
         axis={dragAxis}
         disabled={disableDragging}
-        grid={dragGrid}
+        grid={snapOnDragStop ? undefined : dragGrid}
         bounds={bounds ? this.state.bounds : undefined}
         position={draggablePosition}
         enableUserSelectHack={enableUserSelectHack}
@@ -563,7 +577,7 @@ export class Rnd extends React.Component<Props, State> {
           minHeight={this.props.minHeight}
           maxWidth={this.isResizing ? this.state.maxWidth : this.props.maxWidth}
           maxHeight={this.isResizing ? this.state.maxHeight : this.props.maxHeight}
-          grid={resizeGrid}
+          grid={snapOnResizeStop ? undefined : resizeGrid}
           handleWrapperClass={resizeHandleWrapperClass}
           handleWrapperStyle={resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}
