@@ -203,40 +203,6 @@ export class Rnd extends React.Component<Props, State> {
     return { x, y };
   }
 
-  getPosition(position: any, dragAxis: any) {
-    const { left, top } = this.getOffsetFromParent();
-    let draggablePosition;
-    if (position) {
-      switch (dragAxis) {
-        case "x":
-          draggablePosition = {
-            x: position.x - left,
-            y: position.y,
-          };
-          break;
-        case "y":
-          draggablePosition = {
-            x: position.x,
-            y: position.y - top,
-          };
-          break;
-        case "none":
-          draggablePosition = {
-            x: position.x,
-            y: position.y,
-          };
-          break;
-        default:
-          draggablePosition = {
-            x: position.x - left,
-            y: position.y - top,
-          };
-          break;
-      }
-    }
-    return draggablePosition;
-  }
-
   getParent() {
     return this.resizable && (this.resizable as any).parentNode;
   }
@@ -310,9 +276,15 @@ export class Rnd extends React.Component<Props, State> {
   }
 
   onDragStop(e: Event, data: DraggableData) {
+    const { left, top } = this.getOffsetFromParent();
+
+    let draggablePosition = {
+      x: data.x + left,
+      y: data.y + top,
+    };
+
     if (this.props.onDragStop) {
-      const { left, top } = this.getOffsetFromParent();
-      this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
+      this.props.onDragStop(e, { ...data, ...draggablePosition });
     }
   }
 
@@ -473,6 +445,7 @@ export class Rnd extends React.Component<Props, State> {
   }
 
   getOffsetFromParent(): { top: number; left: number } {
+    const { dragAxis } = this.props;
     const parent = this.getParent();
     if (!parent) {
       return {
@@ -485,10 +458,47 @@ export class Rnd extends React.Component<Props, State> {
     const parentTop = parentRect.top;
     const selfRect = this.getSelfElement().getBoundingClientRect();
     const position = this.getDraggablePosition();
-    return {
+    const rawPosition = {
       left: selfRect.left - parentLeft - position.x,
       top: selfRect.top - parentTop - position.y,
     };
+    let adjustedPosition = rawPosition;
+
+    switch (dragAxis) {
+      case "x":
+        adjustedPosition = {
+          ...rawPosition,
+          top: 0,
+        };
+        break;
+      case "y":
+        adjustedPosition = {
+          ...rawPosition,
+          left: 0,
+        };
+        break;
+      case "both":
+        adjustedPosition = {
+          ...rawPosition,
+        };
+        break;
+      case "none":
+        adjustedPosition = {
+          ...rawPosition,
+          left: 0,
+          top: 0,
+        };
+        break;
+      default:
+        adjustedPosition = {
+          ...rawPosition,
+          left: 0,
+          top: 0,
+        };
+        break;
+    }
+
+    return adjustedPosition;
   }
 
   render() {
@@ -531,7 +541,16 @@ export class Rnd extends React.Component<Props, State> {
       ...style,
     };
 
-    const draggablePosition = this.getPosition(position, dragAxis);
+    const { left, top } = this.getOffsetFromParent();
+    let draggablePosition;
+    console.log("LEFT", left);
+    console.log("TOP", top);
+    if (position) {
+      draggablePosition = {
+        x: position.x - left,
+        y: position.y - top,
+      };
+    }
 
     return (
       <Draggable
