@@ -447,6 +447,7 @@ export class Rnd extends React.Component<Props, State> {
   getOffsetFromParent(): { top: number; left: number } {
     const { dragAxis } = this.props;
     const parent = this.getParent();
+
     if (!parent) {
       return {
         top: 0,
@@ -492,12 +493,10 @@ export class Rnd extends React.Component<Props, State> {
       default:
         adjustedPosition = {
           ...rawPosition,
-          left: 0,
-          top: 0,
         };
         break;
     }
-
+    console.log("POSITION", adjustedPosition);
     return adjustedPosition;
   }
 
@@ -543,8 +542,7 @@ export class Rnd extends React.Component<Props, State> {
 
     const { left, top } = this.getOffsetFromParent();
     let draggablePosition;
-    console.log("LEFT", left);
-    console.log("TOP", top);
+
     if (position) {
       draggablePosition = {
         x: position.x - left,
