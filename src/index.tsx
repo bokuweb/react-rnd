@@ -496,7 +496,7 @@ export class Rnd extends React.Component<Props, State> {
         };
         break;
     }
-    console.log("POSITION", adjustedPosition);
+
     return adjustedPosition;
   }
 
