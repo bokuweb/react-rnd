@@ -478,6 +478,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v9.0.2
+
+- update dependency re-resizable to v4.9.3 #444
+
 #### v9.0.1
 
 - fix: Allow additional props in typescript.
