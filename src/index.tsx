@@ -488,7 +488,7 @@ export class Rnd extends React.Component<Props, State> {
     // Remove unknown props, see also https://reactjs.org/warnings/unknown-prop.html
     delete resizableProps.default;
 
-    const cursorStyle = disableDragging || dragHandleClassName ? { cursor: "normal" } : { cursor: "move" };
+    const cursorStyle = disableDragging || dragHandleClassName ? { cursor: "auto" } : { cursor: "move" };
     const innerStyle = {
       ...resizableStyle,
       ...cursorStyle,
