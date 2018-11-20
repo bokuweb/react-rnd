@@ -326,9 +326,9 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/sinon@5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-5.0.1.tgz#a15b36ec42f1f53166617491feabd1734cb03e21"
+"@types/sinon@5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-5.0.7.tgz#0d9f89dd0c9988c4f1505a92a3a324ee7bdb18a6"
 
 "@types/storybook__addon-actions@3.4.1":
   version "3.4.1"
