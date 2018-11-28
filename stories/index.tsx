@@ -29,6 +29,8 @@ import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-b
 
 import LockAspectRatioBasic from "./lock-aspect-ratio/basic";
 
+import RestrictDrag from "./restrict-axis/restrict-drag";
+
 storiesOf("bare", module).add("bare", () => <Bare />);
 
 storiesOf("basic", module)
@@ -58,3 +60,4 @@ storiesOf("sandbox", module)
   .add("lock aspect ratio with bounds", () => <SandboxLockAspectRatioWithBounds />);
 
 storiesOf("ratio", module).add("lock aspect ratio", () => <LockAspectRatioBasic />);
+storiesOf("restrict axis", module).add("restrict drag axis", () => <RestrictDrag />);

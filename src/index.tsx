@@ -276,9 +276,15 @@ export class Rnd extends React.Component<Props, State> {
   }
 
   onDragStop(e: Event, data: DraggableData) {
+    const { left, top } = this.getOffsetFromParent();
+
+    let draggablePosition = {
+      x: data.x + left,
+      y: data.y + top,
+    };
+
     if (this.props.onDragStop) {
-      const { left, top } = this.getOffsetFromParent();
-      this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
+      this.props.onDragStop(e, { ...data, ...draggablePosition });
     }
   }
 
@@ -439,7 +445,9 @@ export class Rnd extends React.Component<Props, State> {
   }
 
   getOffsetFromParent(): { top: number; left: number } {
+    const { dragAxis } = this.props;
     const parent = this.getParent();
+
     if (!parent) {
       return {
         top: 0,
@@ -451,10 +459,45 @@ export class Rnd extends React.Component<Props, State> {
     const parentTop = parentRect.top;
     const selfRect = this.getSelfElement().getBoundingClientRect();
     const position = this.getDraggablePosition();
-    return {
+    const rawPosition = {
       left: selfRect.left - parentLeft - position.x,
       top: selfRect.top - parentTop - position.y,
     };
+    let adjustedPosition = rawPosition;
+
+    switch (dragAxis) {
+      case "x":
+        adjustedPosition = {
+          ...rawPosition,
+          top: 0,
+        };
+        break;
+      case "y":
+        adjustedPosition = {
+          ...rawPosition,
+          left: 0,
+        };
+        break;
+      case "both":
+        adjustedPosition = {
+          ...rawPosition,
+        };
+        break;
+      case "none":
+        adjustedPosition = {
+          ...rawPosition,
+          left: 0,
+          top: 0,
+        };
+        break;
+      default:
+        adjustedPosition = {
+          ...rawPosition,
+        };
+        break;
+    }
+
+    return adjustedPosition;
   }
 
   render() {
@@ -473,9 +516,11 @@ export class Rnd extends React.Component<Props, State> {
       onResizeStart,
       onResize,
       onResizeStop,
+      snapOnResizeStop,
       onDragStart,
       onDrag,
       onDragStop,
+      snapOnDragStop,
       resizeHandleStyles,
       resizeHandleClasses,
       enableResizing,
@@ -494,14 +539,17 @@ export class Rnd extends React.Component<Props, State> {
       ...cursorStyle,
       ...style,
     };
+
     const { left, top } = this.getOffsetFromParent();
     let draggablePosition;
+
     if (position) {
       draggablePosition = {
         x: position.x - left,
         y: position.y - top,
       };
     }
+
     return (
       <Draggable
         ref={c => {
