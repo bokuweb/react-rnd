@@ -7979,9 +7979,9 @@ tslint-react@3.6.0:
   dependencies:
     tsutils "^2.13.1"
 
-tslint@5.11.0:
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.11.0.tgz#98f30c02eae3cde7006201e4c33cb08b48581eed"
+tslint@5.12.1:
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.12.1.tgz#8cec9d454cf8a1de9b0a26d7bdbad6de362e52c1"
   dependencies:
     babel-code-frame "^6.22.0"
     builtin-modules "^1.1.1"
