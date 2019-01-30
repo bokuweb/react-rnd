@@ -302,6 +302,12 @@ By default, we add 'user-select:none' attributes to the document body
 to prevent ugly text selection during drag. If this is causing problems    
 for your app, set this to `false`.    
 
+#### `scale?: number;`
+
+Specifies the scale of the canvas your are resizing and dragging this element on. This allows
+you to, for example, get the correct resize and drag deltas while you are zoomed in or out via
+a transform or matrix in the parent of this element.
+If omitted, set `1`.
 
 ## Callback
 
@@ -477,6 +483,11 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [CodeSandbox](https://codesandbox.io/s/y3997qply9) to help us easily isolate it.
 
 ## Changelog
+
+#### v9.1.0
+
+- Feat: Add `scale` props. #482
+- Feat: Upgrade deps.
 
 #### v9.0.4
 
