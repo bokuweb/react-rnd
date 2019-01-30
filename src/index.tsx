@@ -2,7 +2,6 @@ import * as React from "react";
 import { DraggableEventHandler } from "react-draggable";
 import Resizable, { ResizableDirection } from "re-resizable";
 
-
 // FIXME: https://github.com/mzabriskie/react-draggable/issues/381
 //         I can not find `scale` too...
 type $TODO = any;
@@ -271,14 +270,13 @@ export class Rnd extends React.Component<Props, State> {
       boundary = document.body;
     } else if (this.props.bounds === "window") {
       if (!this.resizable) return;
-      const scale = typeof this.props.scale === "undefined" ? 1 : this.props.scale;
       const parentRect = parent.getBoundingClientRect();
       const parentLeft = parentRect.left;
       const parentTop = parentRect.top;
-      const left = -(parentLeft - parent.offsetLeft * scale) / scale;
-      const top = -(parentTop - parent.offsetTop * scale) / scale;
-      const right = (window.innerWidth - this.resizable.size.width * scale) / scale + left;
-      const bottom = (window.innerHeight - this.resizable.size.height * scale) / scale + top;
+      const left = -(parentLeft - parent.offsetLeft * this.props.scale) / this.props.scale;
+      const top = -(parentTop - parent.offsetTop * this.props.scale) / this.props.scale;
+      const right = (window.innerWidth - this.resizable.size.width * this.props.scale) / this.props.scale + left;
+      const bottom = (window.innerHeight - this.resizable.size.height * this.props.scale) / this.props.scale + top;
       return this.setState({ bounds: { top, right, bottom, left } });
     } else {
       boundary = document.querySelector(this.props.bounds);
@@ -292,7 +290,7 @@ export class Rnd extends React.Component<Props, State> {
     const parentRect = parent.getBoundingClientRect();
     const parentLeft = parentRect.left;
     const parentTop = parentRect.top;
-    const left = boundaryLeft - parentLeft;
+    const left = (boundaryLeft - parentLeft) / this.props.scale;
     const top = boundaryTop - parentTop;
     if (!this.resizable) return;
     const offset = this.getOffsetFromParent();
@@ -309,7 +307,6 @@ export class Rnd extends React.Component<Props, State> {
   onDrag(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDrag) {
       const offset = this.getOffsetFromParent();
-      console.log(data.x);
       this.props.onDrag(e, { ...data, x: data.x - offset.left, y: data.y - offset.top });
     }
   }
@@ -491,8 +488,8 @@ export class Rnd extends React.Component<Props, State> {
     const selfRect = this.getSelfElement().getBoundingClientRect();
     const position = this.getDraggablePosition();
     return {
-      left: selfRect.left - parentLeft - position.x,
-      top: selfRect.top - parentTop - position.y,
+      left: selfRect.left - parentLeft - position.x * this.props.scale,
+      top: selfRect.top - parentTop - position.y * this.props.scale,
     };
   }
 
