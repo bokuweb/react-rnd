@@ -7,6 +7,12 @@ import Bare from "./bare/bare";
 import BasicUncontrolled from "./basic/uncontrolled";
 import BasicControlled from "./basic/controlled";
 
+import ScaleParentUnControlled from "./scale/parent-uncontrolled";
+import ScaleWindowUnControlled from "./scale/window-uncontrolled";
+import ScaleBodyX05UnControlled from "./scale/body-uncontrolled-x0-5";
+import ScaleBodyX15UnControlled from "./scale/body-uncontrolled-x1-5";
+import ScaleSelectorUnControlled from "./scale/selector-uncontrolled";
+
 import BasicMultiUncontrolled from "./basic/multi-uncontrolled";
 import BasicMultiControlled from "./basic/multi-controlled";
 
@@ -23,6 +29,10 @@ import SizePercentControlled from "./size/size-percent-controlled";
 import Callbacks from "./callback/callbacks";
 
 import Cancel from "./cancel/cancel";
+
+import GridResize from "./grid/resize";
+import GridDrag from "./grid/drag";
+import GridBoth from "./grid/both";
 
 import SandboxBodySizeToMaxWidth from "./sandbox/bodysize-to-maxwidth";
 import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-bounds";
@@ -45,6 +55,13 @@ storiesOf("bounds", module)
   .add("window controlled", () => <BoundsWindowControlled />)
   .add("body controlled", () => <BoundsBodyControlled />);
 
+storiesOf("scale", module)
+  .add("with parent boundary", () => <ScaleParentUnControlled />)
+  .add("x0.5 with body boundary", () => <ScaleBodyX05UnControlled />)
+  .add("x1.5 with body boundary", () => <ScaleBodyX15UnControlled />)
+  .add("with window boundary", () => <ScaleWindowUnControlled />)
+  .add("with selector boundary", () => <ScaleSelectorUnControlled />);
+
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
   .add("percent controlled", () => <SizePercentControlled />);
@@ -52,6 +69,11 @@ storiesOf("size", module)
 storiesOf("callbacks", module).add("callback", () => <Callbacks />);
 
 storiesOf("cancel", module).add("cancel", () => <Cancel />);
+
+storiesOf("grid", module)
+  .add("resize", () => <GridResize />)
+  .add("drag", () => <GridDrag />)
+  .add("both", () => <GridBoth />);
 
 storiesOf("sandbox", module)
   .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />)

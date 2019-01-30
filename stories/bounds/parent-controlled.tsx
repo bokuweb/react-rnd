@@ -34,7 +34,7 @@ export default class Example extends React.Component<{}, State> {
             x: this.state.x,
             y: this.state.y,
           }}
-          onDragStop={(e, d) => {
+          onDragStop={(e: any, d: any) => {
             this.setState({ x: d.x, y: d.y });
           }}
           onResize={(e, direction, ref, delta, position) => {
