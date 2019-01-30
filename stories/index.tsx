@@ -10,6 +10,7 @@ import BasicControlled from "./basic/controlled";
 import ScaleParentUnControlled from "./scale/parent-uncontrolled";
 import ScaleWindowUnControlled from "./scale/window-uncontrolled";
 import ScaleBodyUnControlled from "./scale/body-uncontrolled";
+import ScaleSelectorUnControlled from "./scale/selector-uncontrolled";
 
 import BasicMultiUncontrolled from "./basic/multi-uncontrolled";
 import BasicMultiControlled from "./basic/multi-controlled";
@@ -52,7 +53,8 @@ storiesOf("bounds", module)
 storiesOf("scale", module)
   .add("with parent boundary", () => <ScaleParentUnControlled />)
   .add("with body boundary", () => <ScaleBodyUnControlled />)
-  .add("with window boundary", () => <ScaleWindowUnControlled />);
+  .add("with window boundary", () => <ScaleWindowUnControlled />)
+  .add("with selector boundary", () => <ScaleSelectorUnControlled />);
 
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)

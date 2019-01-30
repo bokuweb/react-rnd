@@ -144,7 +144,7 @@ export interface Props {
   disableDragging?: boolean;
   cancel?: string;
   enableUserSelectHack?: boolean;
-  scale: number;
+  scale?: number;
   [key: string]: any;
 }
 
@@ -157,8 +157,20 @@ const resizableStyle = {
   left: 0,
 };
 
-export class Rnd extends React.Component<Props, State> {
-  static defaultProps = {
+interface DefaultProps {
+  maxWidth: number;
+  maxHeight: number;
+  onResizeStart: () => void;
+  onResize: () => void;
+  onResizeStop: () => void;
+  onDragStart: () => void;
+  onDrag: () => void;
+  onDragStop: () => void;
+  scale: number;
+}
+
+export class Rnd extends React.Component<Props & DefaultProps, State> {
+  public static defaultProps: DefaultProps = {
     maxWidth: Number.MAX_SAFE_INTEGER,
     maxHeight: Number.MAX_SAFE_INTEGER,
     scale: 1,
@@ -170,10 +182,10 @@ export class Rnd extends React.Component<Props, State> {
     onDragStop: () => {},
   };
   resizable!: Resizable;
-  draggable!: any; // Draggable;
+  draggable!: $TODO; // Draggable;
   isResizing = false;
 
-  constructor(props: Props) {
+  constructor(props: Props & DefaultProps) {
     super(props);
     this.state = {
       original: {
@@ -262,12 +274,22 @@ export class Rnd extends React.Component<Props, State> {
     }
     if (!this.props.bounds) return;
     const parent = this.getParent();
-    console.log(parent.getBoundingClientRect());
+
     let boundary;
     if (this.props.bounds === "parent") {
       boundary = parent;
     } else if (this.props.bounds === "body") {
-      boundary = document.body;
+      const parentRect = parent.getBoundingClientRect();
+      const parentLeft = parentRect.left;
+      const parentTop = parentRect.top;
+      const bodyRect = document.body.getBoundingClientRect();
+      const left = -(parentLeft - parent.offsetLeft * this.props.scale - bodyRect.left) / this.props.scale;
+      const top = -(parentTop - parent.offsetTop * this.props.scale - bodyRect.top) / this.props.scale;
+      const right =
+        (document.body.offsetWidth - this.resizable.size.width * this.props.scale) / this.props.scale + left;
+      const bottom =
+        (document.body.offsetHeight - this.resizable.size.height * this.props.scale) / this.props.scale + top;
+      return this.setState({ bounds: { top, right, bottom, left } });
     } else if (this.props.bounds === "window") {
       if (!this.resizable) return;
       const parentRect = parent.getBoundingClientRect();

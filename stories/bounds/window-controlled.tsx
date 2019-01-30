@@ -22,7 +22,7 @@ export default class Example extends React.Component<{}, State> {
 
   render() {
     return (
-      <div >
+      <div>
         <div style={{ marginLeft: "30px" }}>
           <Rnd
             style={style}
