@@ -62,7 +62,9 @@ storiesOf("scale", module)
   .add("x1.5 with body boundary", () => <ScaleBodyX15UnControlled />)
   .add("with window boundary", () => <ScaleWindowUnControlled />)
   .add("with selector boundary uncontrolled", () => <ScaleSelectorUnControlled />)
-  .add("with selector boundary controlled", () => <ScaleSelectorControlled />);
+  .add("with selector boundary controlled", () => <ScaleSelectorControlled />)
+  .add("with selector boundary", () => <ScaleSelectorUnControlled />);
+
 
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
