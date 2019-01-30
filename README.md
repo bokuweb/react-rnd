@@ -197,6 +197,13 @@ The `lockAspectRatioExtraWidth` property enables a resizable component to mainta
 For instance, a video could be displayed 16:9 with a 50px side bar.
 If omitted, set `0`.
 
+#### `scale?: number;`
+
+Specifies the scale of the canvas your are dragging or resizing this element on. This allows
+you to, for example, get the correct drag / resize deltas while you are zoomed in or out via
+a transform or matrix in the parent of this element.
+If omitted, set `1`.
+
 #### `lockAspectRatioExtraHeight?: number;`
 
 The `lockAspectRatioExtraHeight` property enables a resizable component to maintain an aspect ratio plus extra height.

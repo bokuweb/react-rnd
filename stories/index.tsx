@@ -12,6 +12,7 @@ import ScaleWindowUnControlled from "./scale/window-uncontrolled";
 import ScaleBodyX05UnControlled from "./scale/body-uncontrolled-x0-5";
 import ScaleBodyX15UnControlled from "./scale/body-uncontrolled-x1-5";
 import ScaleSelectorUnControlled from "./scale/selector-uncontrolled";
+import ScaleSelectorControlled from "./scale/selector-controlled";
 
 import BasicMultiUncontrolled from "./basic/multi-uncontrolled";
 import BasicMultiControlled from "./basic/multi-controlled";
@@ -60,7 +61,10 @@ storiesOf("scale", module)
   .add("x0.5 with body boundary", () => <ScaleBodyX05UnControlled />)
   .add("x1.5 with body boundary", () => <ScaleBodyX15UnControlled />)
   .add("with window boundary", () => <ScaleWindowUnControlled />)
+  .add("with selector boundary uncontrolled", () => <ScaleSelectorUnControlled />)
+  .add("with selector boundary controlled", () => <ScaleSelectorControlled />)
   .add("with selector boundary", () => <ScaleSelectorUnControlled />);
+
 
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)

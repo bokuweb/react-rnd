@@ -133,6 +133,7 @@ export type Props = {
   disableDragging?: boolean,
   cancel?: boolean,
   enableUserSelectHack?: boolean,
+  scale?: number,
 };
 
 export class Rnd extends React.Component<Props, State> {
@@ -145,6 +146,7 @@ export class Rnd extends React.Component<Props, State> {
     onDragStart: () => {},
     onDrag: () => {},
     onDragStop: () => {},
+    scale: 1,
   };
 
   updateSize(size: { width: number | string, height: number | string }) {
