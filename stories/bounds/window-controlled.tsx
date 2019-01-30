@@ -1,6 +1,6 @@
 import React from "react";
 import { Rnd } from "../../src";
-import { style, parentBoundary } from "../styles";
+import { style } from "../styles";
 
 type State = {
   x: number;

@@ -160,16 +160,16 @@ const resizableStyle = {
 interface DefaultProps {
   maxWidth: number;
   maxHeight: number;
-  onResizeStart: () => void;
-  onResize: () => void;
-  onResizeStop: () => void;
-  onDragStart: () => void;
-  onDrag: () => void;
-  onDragStop: () => void;
+  onResizeStart: RndResizeStartCallback;
+  onResize: RndResizeCallback;
+  onResizeStop: RndResizeCallback;
+  onDragStart: RndDragCallback;
+  onDrag: RndDragCallback;
+  onDragStop: RndDragCallback;
   scale: number;
 }
 
-export class Rnd extends React.Component<Props & DefaultProps, State> {
+export class Rnd extends React.Component<Props, State> {
   public static defaultProps: DefaultProps = {
     maxWidth: Number.MAX_SAFE_INTEGER,
     maxHeight: Number.MAX_SAFE_INTEGER,
@@ -185,7 +185,7 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
   draggable!: $TODO; // Draggable;
   isResizing = false;
 
-  constructor(props: Props & DefaultProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       original: {
@@ -247,22 +247,24 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
   }
 
   getOffsetHeight(boundary: HTMLElement) {
+    const scale = this.props.scale as number;
     switch (this.props.bounds) {
       case "window":
-        return window.innerHeight / this.props.scale;
+        return window.innerHeight / scale;
       case "body":
-        return document.body.offsetHeight / this.props.scale;
+        return document.body.offsetHeight / scale;
       default:
         return boundary.offsetHeight;
     }
   }
 
   getOffsetWidth(boundary: HTMLElement) {
+    const scale = this.props.scale as number;
     switch (this.props.bounds) {
       case "window":
-        return window.innerWidth / this.props.scale;
+        return window.innerWidth / scale;
       case "body":
-        return document.body.offsetWidth / this.props.scale;
+        return document.body.offsetWidth / scale;
       default:
         return boundary.offsetWidth;
     }
@@ -274,7 +276,7 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
     }
     if (!this.props.bounds) return;
     const parent = this.getParent();
-
+    const scale = this.props.scale as number;
     let boundary;
     if (this.props.bounds === "parent") {
       boundary = parent;
@@ -283,22 +285,20 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
       const parentLeft = parentRect.left;
       const parentTop = parentRect.top;
       const bodyRect = document.body.getBoundingClientRect();
-      const left = -(parentLeft - parent.offsetLeft * this.props.scale - bodyRect.left) / this.props.scale;
-      const top = -(parentTop - parent.offsetTop * this.props.scale - bodyRect.top) / this.props.scale;
-      const right =
-        (document.body.offsetWidth - this.resizable.size.width * this.props.scale) / this.props.scale + left;
-      const bottom =
-        (document.body.offsetHeight - this.resizable.size.height * this.props.scale) / this.props.scale + top;
+      const left = -(parentLeft - parent.offsetLeft * scale - bodyRect.left) / scale;
+      const top = -(parentTop - parent.offsetTop * scale - bodyRect.top) / scale;
+      const right = (document.body.offsetWidth - this.resizable.size.width * scale) / scale + left;
+      const bottom = (document.body.offsetHeight - this.resizable.size.height * scale) / scale + top;
       return this.setState({ bounds: { top, right, bottom, left } });
     } else if (this.props.bounds === "window") {
       if (!this.resizable) return;
       const parentRect = parent.getBoundingClientRect();
       const parentLeft = parentRect.left;
       const parentTop = parentRect.top;
-      const left = -(parentLeft - parent.offsetLeft * this.props.scale) / this.props.scale;
-      const top = -(parentTop - parent.offsetTop * this.props.scale) / this.props.scale;
-      const right = (window.innerWidth - this.resizable.size.width * this.props.scale) / this.props.scale + left;
-      const bottom = (window.innerHeight - this.resizable.size.height * this.props.scale) / this.props.scale + top;
+      const left = -(parentLeft - parent.offsetLeft * scale) / scale;
+      const top = -(parentTop - parent.offsetTop * scale) / scale;
+      const right = (window.innerWidth - this.resizable.size.width * scale) / scale + left;
+      const bottom = (window.innerHeight - this.resizable.size.height * scale) / scale + top;
       return this.setState({ bounds: { top, right, bottom, left } });
     } else {
       boundary = document.querySelector(this.props.bounds);
@@ -312,16 +312,16 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
     const parentRect = parent.getBoundingClientRect();
     const parentLeft = parentRect.left;
     const parentTop = parentRect.top;
-    const left = (boundaryLeft - parentLeft) / this.props.scale;
+    const left = (boundaryLeft - parentLeft) / scale;
     const top = boundaryTop - parentTop;
     if (!this.resizable) return;
     const offset = this.getOffsetFromParent();
     this.setState({
       bounds: {
         top: top - offset.top,
-        right: left + (boundary.offsetWidth - this.resizable.size.width) - offset.left,
+        right: left + (boundary.offsetWidth - this.resizable.size.width) - offset.left / scale,
         bottom: top + (boundary.offsetHeight - this.resizable.size.height) - offset.top,
-        left: left - offset.left,
+        left: left - offset.left / scale,
       },
     });
   }
@@ -347,6 +347,7 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
   ) {
     e.stopPropagation();
     this.isResizing = true;
+    const scale = this.props.scale as number;
     this.setState({
       original: this.getDraggablePosition(),
     });
@@ -400,23 +401,23 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
         const hasTop = dir.startsWith("top");
         const hasBottom = dir.startsWith("bottom");
         if (hasLeft && this.resizable) {
-          const max = (selfLeft - boundaryLeft) / this.props.scale + this.resizable.size.width;
+          const max = (selfLeft - boundaryLeft) / scale + this.resizable.size.width;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
         if (hasRight || (this.props.lockAspectRatio && !hasLeft)) {
-          const max = offsetWidth + (boundaryLeft - selfLeft) / this.props.scale;
+          const max = offsetWidth + (boundaryLeft - selfLeft) / scale;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         if (hasTop && this.resizable) {
-          const max = (selfTop - boundaryTop) / this.props.scale + this.resizable.size.height;
+          const max = (selfTop - boundaryTop) / scale + this.resizable.size.height;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });
         }
         // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
         if (hasBottom || (this.props.lockAspectRatio && !hasTop)) {
-          const max = offsetHeight + (boundaryTop - selfTop) / this.props.scale;
+          const max = offsetHeight + (boundaryTop - selfTop) / scale;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });
@@ -497,6 +498,7 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
   }
 
   getOffsetFromParent(): { top: number; left: number } {
+    const scale = this.props.scale as number;
     const parent = this.getParent();
     if (!parent) {
       return {
@@ -510,8 +512,8 @@ export class Rnd extends React.Component<Props & DefaultProps, State> {
     const selfRect = this.getSelfElement().getBoundingClientRect();
     const position = this.getDraggablePosition();
     return {
-      left: selfRect.left - parentLeft - position.x * this.props.scale,
-      top: selfRect.top - parentTop - position.y * this.props.scale,
+      left: selfRect.left - parentLeft - position.x * scale,
+      top: selfRect.top - parentTop - position.y * scale,
     };
   }
 
