@@ -1,6 +1,12 @@
 import * as React from "react";
-import Draggable from "react-draggable";
+import { DraggableEventHandler } from "react-draggable";
 import Resizable, { ResizableDirection } from "re-resizable";
+
+
+// FIXME: https://github.com/mzabriskie/react-draggable/issues/381
+//         I can not find `scale` too...
+type $TODO = any;
+const Draggable = require("react-draggable");
 
 export type Grid = [number, number];
 
@@ -17,7 +23,13 @@ export type DraggableData = {
   lastY: number;
 } & Position;
 
-export type RndDragCallback = (e: Event, data: DraggableData) => void | false;
+export type RndDragCallback = DraggableEventHandler;
+
+export type RndDragEvent =
+  | React.MouseEvent<HTMLElement | SVGElement>
+  | React.TouchEvent<HTMLElement | SVGElement>
+  | MouseEvent
+  | TouchEvent;
 
 export type RndResizeStartCallback = (
   e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
@@ -159,7 +171,7 @@ export class Rnd extends React.Component<Props, State> {
     onDragStop: () => {},
   };
   resizable!: Resizable;
-  draggable!: Draggable;
+  draggable!: any; // Draggable;
   isResizing = false;
 
   constructor(props: Props) {
@@ -223,7 +235,29 @@ export class Rnd extends React.Component<Props, State> {
     return this.resizable && this.resizable.resizable;
   }
 
-  onDragStart(e: Event, data: DraggableData) {
+  getOffsetHeight(boundary: HTMLElement) {
+    switch (this.props.bounds) {
+      case "window":
+        return window.innerHeight / this.props.scale;
+      case "body":
+        return document.body.offsetHeight / this.props.scale;
+      default:
+        return boundary.offsetHeight;
+    }
+  }
+
+  getOffsetWidth(boundary: HTMLElement) {
+    switch (this.props.bounds) {
+      case "window":
+        return window.innerWidth / this.props.scale;
+      case "body":
+        return document.body.offsetWidth / this.props.scale;
+      default:
+        return boundary.offsetWidth;
+    }
+  }
+
+  onDragStart(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDragStart) {
       this.props.onDragStart(e, data);
     }
@@ -272,7 +306,7 @@ export class Rnd extends React.Component<Props, State> {
     });
   }
 
-  onDrag(e: Event, data: DraggableData) {
+  onDrag(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDrag) {
       const offset = this.getOffsetFromParent();
       console.log(data.x);
@@ -280,7 +314,7 @@ export class Rnd extends React.Component<Props, State> {
     }
   }
 
-  onDragStop(e: Event, data: DraggableData) {
+  onDragStop(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDragStop) {
       const { left, top } = this.getOffsetFromParent();
       this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
@@ -340,30 +374,30 @@ export class Rnd extends React.Component<Props, State> {
         const boundaryRect = this.props.bounds === "window" ? { left: 0, top: 0 } : boundary.getBoundingClientRect();
         const boundaryLeft = boundaryRect.left;
         const boundaryTop = boundaryRect.top;
-        const offsetWidth = this.props.bounds === "window" ? window.innerWidth : boundary.offsetWidth;
-        const offsetHeight = this.props.bounds === "window" ? window.innerHeight : boundary.offsetHeight;
+        const offsetWidth = this.getOffsetWidth(boundary);
+        const offsetHeight = this.getOffsetHeight(boundary);
         const hasLeft = dir.toLowerCase().endsWith("left");
         const hasRight = dir.toLowerCase().endsWith("right");
         const hasTop = dir.startsWith("top");
         const hasBottom = dir.startsWith("bottom");
         if (hasLeft && this.resizable) {
-          const max = selfLeft / this.props.scale - boundaryLeft / this.props.scale + this.resizable.size.width;
+          const max = (selfLeft - boundaryLeft) / this.props.scale + this.resizable.size.width;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
         if (hasRight || (this.props.lockAspectRatio && !hasLeft)) {
-          const max = offsetWidth + (boundaryLeft - selfLeft);
+          const max = offsetWidth + (boundaryLeft - selfLeft) / this.props.scale;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         if (hasTop && this.resizable) {
-          const max = selfTop - boundaryTop + this.resizable.size.height;
+          const max = (selfTop - boundaryTop) / this.props.scale + this.resizable.size.height;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });
         }
         // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
         if (hasBottom || (this.props.lockAspectRatio && !hasTop)) {
-          const max = offsetHeight + (boundaryTop - selfTop);
+          const max = offsetHeight + (boundaryTop - selfTop) / this.props.scale;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });
@@ -510,7 +544,7 @@ export class Rnd extends React.Component<Props, State> {
     }
     return (
       <Draggable
-        ref={c => {
+        ref={(c: $TODO) => {
           if (!c) return;
           this.draggable = c;
         }}

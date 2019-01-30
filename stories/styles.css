@@ -5,6 +5,11 @@ html, body, #root, #root > div {
     box-sizing: border-box;
 }
 
+body {
+    background: #fffefe;
+    border: solid 1px #f0f0f0;
+}
+
 html {
     overflow: hidden;
 }
