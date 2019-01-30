@@ -30,6 +30,10 @@ import Callbacks from "./callback/callbacks";
 
 import Cancel from "./cancel/cancel";
 
+import GridResize from "./grid/resize";
+import GridDrag from "./grid/drag";
+import GridBoth from "./grid/both";
+
 import SandboxBodySizeToMaxWidth from "./sandbox/bodysize-to-maxwidth";
 import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-bounds";
 
@@ -65,6 +69,11 @@ storiesOf("size", module)
 storiesOf("callbacks", module).add("callback", () => <Callbacks />);
 
 storiesOf("cancel", module).add("cancel", () => <Cancel />);
+
+storiesOf("grid", module)
+  .add("resize", () => <GridResize />)
+  .add("drag", () => <GridDrag />)
+  .add("both", () => <GridBoth />);
 
 storiesOf("sandbox", module)
   .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />)
