@@ -3,7 +3,11 @@ html, body, #root, #root > div {
     margin: 0;
     padding: 10px;
     box-sizing: border-box;
-  }
+}
+
+html {
+    overflow: hidden;
+}
 
 #root > div {
     padding: 0px;

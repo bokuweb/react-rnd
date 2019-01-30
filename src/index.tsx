@@ -133,6 +133,7 @@ export interface Props {
   disableDragging?: boolean;
   cancel?: string;
   enableUserSelectHack?: boolean;
+  scale: number;
   [key: string]: any;
 }
 
@@ -149,6 +150,7 @@ export class Rnd extends React.Component<Props, State> {
   static defaultProps = {
     maxWidth: Number.MAX_SAFE_INTEGER,
     maxHeight: Number.MAX_SAFE_INTEGER,
+    scale: 1,
     onResizeStart: () => {},
     onResize: () => {},
     onResizeStop: () => {},
@@ -227,6 +229,7 @@ export class Rnd extends React.Component<Props, State> {
     }
     if (!this.props.bounds) return;
     const parent = this.getParent();
+    console.log(parent.getBoundingClientRect());
     let boundary;
     if (this.props.bounds === "parent") {
       boundary = parent;
@@ -234,14 +237,15 @@ export class Rnd extends React.Component<Props, State> {
       boundary = document.body;
     } else if (this.props.bounds === "window") {
       if (!this.resizable) return;
-      return this.setState({
-        bounds: {
-          top: 0,
-          right: window.innerWidth - this.resizable.size.width,
-          bottom: window.innerHeight - this.resizable.size.height,
-          left: 0,
-        },
-      });
+      const scale = typeof this.props.scale === "undefined" ? 1 : this.props.scale;
+      const parentRect = parent.getBoundingClientRect();
+      const parentLeft = parentRect.left;
+      const parentTop = parentRect.top;
+      const left = -(parentLeft - parent.offsetLeft * scale) / scale;
+      const top = -(parentTop - parent.offsetTop * scale) / scale;
+      const right = (window.innerWidth - this.resizable.size.width * scale) / scale + left;
+      const bottom = (window.innerHeight - this.resizable.size.height * scale) / scale + top;
+      return this.setState({ bounds: { top, right, bottom, left } });
     } else {
       boundary = document.querySelector(this.props.bounds);
     }
@@ -271,6 +275,7 @@ export class Rnd extends React.Component<Props, State> {
   onDrag(e: Event, data: DraggableData) {
     if (this.props.onDrag) {
       const offset = this.getOffsetFromParent();
+      console.log(data.x);
       this.props.onDrag(e, { ...data, x: data.x - offset.left, y: data.y - offset.top });
     }
   }
@@ -342,7 +347,7 @@ export class Rnd extends React.Component<Props, State> {
         const hasTop = dir.startsWith("top");
         const hasBottom = dir.startsWith("bottom");
         if (hasLeft && this.resizable) {
-          const max = selfLeft - boundaryLeft + this.resizable.size.width;
+          const max = selfLeft / this.props.scale - boundaryLeft / this.props.scale + this.resizable.size.width;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
@@ -482,6 +487,7 @@ export class Rnd extends React.Component<Props, State> {
       resizeGrid,
       resizeHandleWrapperClass,
       resizeHandleWrapperStyle,
+      scale,
       ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
@@ -505,9 +511,8 @@ export class Rnd extends React.Component<Props, State> {
     return (
       <Draggable
         ref={c => {
-          if (c) {
-            this.draggable = c;
-          }
+          if (!c) return;
+          this.draggable = c;
         }}
         handle={dragHandleClassName ? `.${dragHandleClassName}` : undefined}
         defaultPosition={defaultValue}
@@ -522,6 +527,7 @@ export class Rnd extends React.Component<Props, State> {
         position={draggablePosition}
         enableUserSelectHack={enableUserSelectHack}
         cancel={cancel}
+        scale={scale}
       >
         <Resizable
           {...resizableProps}
@@ -549,6 +555,7 @@ export class Rnd extends React.Component<Props, State> {
           lockAspectRatioExtraHeight={this.props.lockAspectRatioExtraHeight}
           handleStyles={resizeHandleStyles}
           handleClasses={resizeHandleClasses}
+          scale={this.props.scale}
         >
           {children}
         </Resizable>

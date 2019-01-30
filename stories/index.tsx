@@ -7,6 +7,10 @@ import Bare from "./bare/bare";
 import BasicUncontrolled from "./basic/uncontrolled";
 import BasicControlled from "./basic/controlled";
 
+import ScaleParentUnControlled from "./scale/parent-uncontrolled";
+import ScaleWindowUnControlled from "./scale/window-uncontrolled";
+import ScaleBodyUnControlled from "./scale/body-uncontrolled";
+
 import BasicMultiUncontrolled from "./basic/multi-uncontrolled";
 import BasicMultiControlled from "./basic/multi-controlled";
 
@@ -44,6 +48,11 @@ storiesOf("bounds", module)
   .add("selector controlled", () => <BoundsSelectorControlled />)
   .add("window controlled", () => <BoundsWindowControlled />)
   .add("body controlled", () => <BoundsBodyControlled />);
+
+storiesOf("scale", module)
+  .add("with parent boundary", () => <ScaleParentUnControlled />)
+  .add("with body boundary", () => <ScaleBodyUnControlled />)
+  .add("with window boundary", () => <ScaleWindowUnControlled />);
 
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
