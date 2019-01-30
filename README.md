@@ -493,6 +493,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 #### v9.1.0
 
+- Fix: Add `scale` props to index.js.flow.
+
+#### v9.1.0
+
 - Feat: Add `scale` props. #482
 - Feat: Upgrade deps.
 
