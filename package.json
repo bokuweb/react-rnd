@@ -50,7 +50,7 @@
     "@types/react-dom": "16.0.11",
     "@types/sinon": "7.0.5",
     "@types/storybook__addon-actions": "3.4.1",
-    "@types/storybook__react": "4.0.0",
+    "@types/storybook__react": "4.0.1",
     "avaron": "0.2.0",
     "cpy-cli": "2.0.0",
     "enzyme": "3.8.0",
