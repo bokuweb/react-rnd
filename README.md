@@ -491,6 +491,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v9.1.2
+
+- Fix: Fixes memory leak #499
+
 #### v9.1.1
 
 - Fix: Add `scale` props to index.js.flow.
