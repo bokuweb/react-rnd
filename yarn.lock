@@ -333,10 +333,10 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/sinon@7.0.5":
-  version "7.0.5"
-  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-7.0.5.tgz#f7dea19400c193a3b36a804a7f1f4b26dacf452b"
-  integrity sha512-4DShbH857bZVOY4tPi1RQJNrLcf89hEtU0klZ9aYTMbtt95Ok4XdPqqcbtGOHIbAHMLSzQP8Uw/6qtBBqyloww==
+"@types/sinon@7.0.6":
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-7.0.6.tgz#dbe6c059dd4e2fd2b8e8fc3ed051d4706c84c63e"
+  integrity sha512-ldQl2p7kyCXHhr//5sQCu9jWgSiDbYuCD5dUp53r/z8T8jmgKpANpy4vqjbdho9P2ldFaQC/gpW31hch+oQ0IQ==
 
 "@types/storybook__addon-actions@3.4.1":
   version "3.4.1"
