@@ -336,7 +336,7 @@ export class Rnd extends React.Component<Props, State> {
   onDragStop(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDragStop) {
       const { left, top } = this.getOffsetFromParent();
-      this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
+      return this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
     }
   }
 
