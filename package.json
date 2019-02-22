@@ -75,7 +75,7 @@
     "tslint-eslint-rules": "5.4.0",
     "tslint-plugin-prettier": "2.0.1",
     "tslint-react": "3.6.0",
-    "typescript": "3.3.3"
+    "typescript": "3.3.3333"
   },
   "files": [
     "lib"
