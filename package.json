@@ -40,9 +40,9 @@
   },
   "homepage": "https://github.com/bokuweb/react-rnd",
   "devDependencies": {
-    "@storybook/addon-actions": "3.4.11",
-    "@storybook/addon-links": "3.4.11",
-    "@storybook/react": "3.4.11",
+    "@storybook/addon-actions": "3.4.12",
+    "@storybook/addon-links": "3.4.12",
+    "@storybook/react": "3.4.12",
     "@types/enzyme": "3.1.16",
     "@types/enzyme-adapter-react-16": "1.0.4",
     "@types/react": "16.4.1",
