@@ -491,6 +491,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v9.2.0
+
+- Chore: Use `re-resizablev5` 
+
 #### v9.1.2
 
 - Fix: Fixes memory leak #499
