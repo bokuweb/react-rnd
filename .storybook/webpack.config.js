@@ -1,15 +1,12 @@
-const genDefaultConfig = require('@storybook/react/dist/server/config/defaults/webpack.config.js');
+const path = require('path');
 
-module.exports = function(baseConfig, env) {
-  const config = genDefaultConfig(baseConfig, env);
-
-  config.resolve.extensions.push('.ts', '.tsx');
-
+module.exports = async ({ config, mode }) => {
   config.module.rules.push({
-    test: /\.(ts|tsx)$/,
-    include: [/stories/, /src/],
-    loader: require.resolve('light-ts-loader'),
+    test: /.*\.(ts|tsx|js|jsx)$/,
+    loader: require.resolve('babel-loader'),
   });
+
+  config.resolve.extensions.push('.ts', '.tsx', '.js', '.jsx');
 
   return config;
 };
