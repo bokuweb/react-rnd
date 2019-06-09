@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DraggableEventHandler } from "react-draggable";
-import Resizable, { ResizableDirection } from "re-resizable";
+import { Resizable, ResizeDirection } from "re-resizable";
 
 // FIXME: https://github.com/mzabriskie/react-draggable/issues/381
 //         I can not find `scale` too...
@@ -32,7 +32,7 @@ export type RndDragEvent =
 
 export type RndResizeStartCallback = (
   e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
-  dir: ResizableDirection,
+  dir: ResizeDirection,
   elementRef: HTMLDivElement,
 ) => void;
 
@@ -43,7 +43,7 @@ export type ResizableDelta = {
 
 export type RndResizeCallback = (
   e: MouseEvent | TouchEvent,
-  dir: ResizableDirection,
+  dir: ResizeDirection,
   elementRef: HTMLDivElement,
   delta: ResizableDelta,
   position: Position,
@@ -242,7 +242,7 @@ export class Rnd extends React.Component<Props, State> {
     return { maxWidth, maxHeight };
   }
 
-  getSelfElement(): Element {
+  getSelfElement(): HTMLDivElement | null {
     return this.resizable && this.resizable.resizable;
   }
 
@@ -342,7 +342,7 @@ export class Rnd extends React.Component<Props, State> {
 
   onResizeStart(
     e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
-    dir: ResizableDirection,
+    dir: ResizeDirection,
     elementRef: HTMLDivElement,
   ) {
     e.stopPropagation();
@@ -436,7 +436,7 @@ export class Rnd extends React.Component<Props, State> {
 
   onResize(
     e: MouseEvent | TouchEvent,
-    direction: ResizableDirection,
+    direction: ResizeDirection,
     elementRef: HTMLDivElement,
     delta: { height: number; width: number },
   ) {
@@ -475,7 +475,7 @@ export class Rnd extends React.Component<Props, State> {
 
   onResizeStop(
     e: MouseEvent | TouchEvent,
-    direction: ResizableDirection,
+    direction: ResizeDirection,
     elementRef: HTMLDivElement,
     delta: { height: number; width: number },
   ) {
@@ -500,7 +500,8 @@ export class Rnd extends React.Component<Props, State> {
   getOffsetFromParent(): { top: number; left: number } {
     const scale = this.props.scale as number;
     const parent = this.getParent();
-    if (!parent) {
+    const self = this.getSelfElement();
+    if (!parent || self === null) {
       return {
         top: 0,
         left: 0,
@@ -509,7 +510,7 @@ export class Rnd extends React.Component<Props, State> {
     const parentRect = parent.getBoundingClientRect();
     const parentLeft = parentRect.left;
     const parentTop = parentRect.top;
-    const selfRect = this.getSelfElement().getBoundingClientRect();
+    const selfRect = self.getBoundingClientRect();
     const position = this.getDraggablePosition();
     return {
       left: selfRect.left - parentLeft - position.x * scale,
