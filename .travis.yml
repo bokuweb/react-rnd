@@ -10,9 +10,9 @@ before_install:
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
 install:
-  - yarn install
+  - yarn install --pure-lockfile
 
 script:
+  - yarn run tsc
   - yarn run lint
   - yarn run test
-  - yarn run build
