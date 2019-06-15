@@ -9122,10 +9122,10 @@ rollup-plugin-node-globals@1.4.0:
     process-es6 "^0.11.6"
     rollup-pluginutils "^2.3.1"
 
-rollup-plugin-node-resolve@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-5.0.1.tgz#4619eafdf2ecb4e8ed24177ba47d7f11f027d38b"
-  integrity sha512-9s3dTu44SKQZM/Pwll42GpqXgT+WdvO0Ga01lF8cwZqJGqRUATtD+GrP3uIzZdpnbPonEJbVasfFt80VGPQqKw==
+rollup-plugin-node-resolve@5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-5.0.2.tgz#6475dc689934a2f85bb5c5867d03d8bd1bf859c1"
+  integrity sha512-/KMxyYDSMoeE+06CwbbPD8gwYcU9uwyOgMjfw2MJPDmwzEw24HIur9TR80SMsUjP2QCLSZ9othB65xNHN3e0gw==
   dependencies:
     "@types/resolve" "0.0.8"
     builtin-modules "^3.1.0"
