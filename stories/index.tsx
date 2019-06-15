@@ -6,6 +6,7 @@ import Bare from "./bare/bare";
 
 import BasicUncontrolled from "./basic/uncontrolled";
 import BasicControlled from "./basic/controlled";
+import BasicControlledOnStop from "./basic/controlledOnStop";
 
 import ScaleParentUnControlled from "./scale/parent-uncontrolled";
 import ScaleWindowUnControlled from "./scale/window-uncontrolled";
@@ -45,6 +46,7 @@ storiesOf("bare", module).add("bare", () => <Bare />);
 storiesOf("basic", module)
   .add("uncontrolled", () => <BasicUncontrolled />)
   .add("controlled", () => <BasicControlled />)
+  .add("controlled on stop", () => <BasicControlledOnStop />)
   .add("multi uncontrolled", () => <BasicMultiUncontrolled />)
   .add("multi controlled", () => <BasicMultiControlled />);
 
@@ -64,7 +66,6 @@ storiesOf("scale", module)
   .add("with selector boundary uncontrolled", () => <ScaleSelectorUnControlled />)
   .add("with selector boundary controlled", () => <ScaleSelectorControlled />)
   .add("with selector boundary", () => <ScaleSelectorUnControlled />);
-
 
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
