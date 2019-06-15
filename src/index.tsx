@@ -443,11 +443,18 @@ export class Rnd extends React.Component<Props, State> {
     let x;
     let y;
     const offset = this.getOffsetFromParent();
+    const isOnResizeCallbackDefined = this.props.onResize !== Rnd.defaultProps.onResize;
+    const width = this.resizable.state.original.width + delta.width;
+    const height = this.resizable.state.original.height + delta.height;
     if (/left/i.test(direction)) {
       x = this.state.original.x - delta.width;
       // INFO: If uncontrolled component, apply x position by resize to draggable.
       if (!this.props.position) {
         this.draggable.setState({ x });
+      }
+      if (!isOnResizeCallbackDefined) {
+        this.draggable.setState({ x });
+        this.resizable.updateSize({ width, height });
       }
       x += offset.left;
     }
@@ -456,6 +463,10 @@ export class Rnd extends React.Component<Props, State> {
       // INFO: If uncontrolled component, apply y position by resize to draggable.
       if (!this.props.position) {
         this.draggable.setState({ y });
+      }
+      if (!isOnResizeCallbackDefined) {
+        this.draggable.setState({ y });
+        this.resizable.updateSize({ width, height });
       }
       y += offset.top;
     }
@@ -558,7 +569,8 @@ export class Rnd extends React.Component<Props, State> {
     };
     const { left, top } = this.getOffsetFromParent();
     let draggablePosition;
-    if (position) {
+    const isOnResizeCallbackDefined = this.props.onResize !== Rnd.defaultProps.onResize;
+    if (position && isOnResizeCallbackDefined) {
       draggablePosition = {
         x: position.x - left,
         y: position.y - top,
