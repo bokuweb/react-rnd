@@ -59,7 +59,7 @@
     "@types/react": "16.4.1",
     "@types/node": "^10.12.19",
     "@types/react-dom": "16.0.11",
-    "@types/sinon": "7.0.12",
+    "@types/sinon": "7.0.13",
     "@types/storybook__addon-actions": "3.4.3",
     "@types/storybook__react": "4.0.2",
     "avaron": "0.2.0",
