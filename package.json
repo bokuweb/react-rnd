@@ -64,7 +64,7 @@
     "@types/storybook__react": "4.0.2",
     "avaron": "0.2.0",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.0.1",
+    "babel-eslint": "10.0.2",
     "babel-loader": "8.0.6",
     "cpy-cli": "2.0.0",
     "enzyme": "3.8.0",
