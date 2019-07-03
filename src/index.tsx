@@ -170,7 +170,7 @@ interface DefaultProps {
   scale: number;
 }
 
-export class Rnd extends React.Component<Props, State> {
+export class Rnd extends React.PureComponent<Props, State> {
   public static defaultProps: DefaultProps = {
     maxWidth: Number.MAX_SAFE_INTEGER,
     maxHeight: Number.MAX_SAFE_INTEGER,
