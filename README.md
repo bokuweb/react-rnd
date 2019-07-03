@@ -94,7 +94,7 @@ yarn add react-rnd
   size={{ width: this.state.width,  height: this.state.height }}
   position={{ x: this.state.x, y: this.state.y }}
   onDragStop={(e, d) => { this.setState({ x: d.x, y: d.y }) }}
-  onResize={(e, direction, ref, delta, position) => {
+  onResizeStop={(e, direction, ref, delta, position) => {
     this.setState({
       width: ref.style.width,
       height: ref.style.height,
@@ -490,6 +490,13 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [CodeSandbox](https://codesandbox.io/s/y3997qply9) to help us easily isolate it.
 
 ## Changelog
+
+
+#### v10.0.0
+
+- Fix: Fix #526
+- Feat: Add `onMouseUp` callback. 
+- Feat: Use `React.pureComponent`
 
 #### v9.2.0
 
