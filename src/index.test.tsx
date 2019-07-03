@@ -168,10 +168,10 @@ test("should enable dragging only x when axis equals x", async t => {
     .simulate("mousedown", { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(308px, 100px)"), -1);
+  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(300px, 100px)"), -1);
 });
 
-test("should enable dragging only y when axis equals y", async t => {
+test("xdragging only y when axis equals y", async t => {
   const onDrag = spy();
   const rnd = mount(<Rnd onDrag={onDrag} dragAxis="y" default={{ x: 100, y: 100, width: 100, height: 100 }} />, {
     attachTo: document.querySelector("div"),
@@ -182,7 +182,7 @@ test("should enable dragging only y when axis equals y", async t => {
     .simulate("mousedown", { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(100px, 328px)"), -1);
+  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(100px, 320px)"), -1);
 });
 
 test("should enable dragging both x & y when axis equals both", async t => {
@@ -196,7 +196,7 @@ test("should enable dragging both x & y when axis equals both", async t => {
     .simulate("mousedown", { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(308px, 328px)"), -1);
+  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(300px, 320px)"), -1);
 });
 
 test("should snap when dragging smaller than threshold", async t => {
@@ -208,7 +208,7 @@ test("should snap when dragging smaller than threshold", async t => {
     .at(0)
     .simulate("mousedown", { clientX: 0, clientY: 0 });
   mouseMove(14, 49);
-  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(108px, 108px)"), -1);
+  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(100px, 100px)"), -1);
 });
 
 test("should snap when dragging larger than threshold", async t => {
@@ -220,7 +220,7 @@ test("should snap when dragging larger than threshold", async t => {
     .at(0)
     .simulate("mousedown", { clientX: 0, clientY: 0 });
   mouseMove(15, 50);
-  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(138px, 208px)"), -1);
+  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(130px, 200px)"), -1);
 });
 
 test("should limit position by parent bounds", async t => {
@@ -244,7 +244,7 @@ test("should limit position by parent bounds", async t => {
         .childAt(0)
         .getDOMNode()
         .getAttribute("style") || ""
-    ).indexOf("transform: translate(708px, 508px)"),
+    ).indexOf("transform: translate(700px, 500px)"),
     -1,
   );
 });
@@ -275,7 +275,7 @@ test("should limit position by selector bounds", async t => {
         .childAt(0)
         .getDOMNode()
         .getAttribute("style") || ""
-    ).indexOf("translate(908px, 708px)"),
+    ).indexOf("translate(900px, 700px)"),
     -1,
   );
 });
@@ -468,7 +468,7 @@ test("should move x when resizing left", async t => {
   t.deepEqual(onResize.getCall(0).args[2].clientWidth, 150);
   t.deepEqual(onResize.getCall(0).args[2].clientHeight, 100);
   t.deepEqual(onResize.getCall(0).args[3], { width: 50, height: 0 });
-  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(58px, 108px)"), -1);
+  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(50px, 100px)"), -1);
 });
 
 test("should move y when resizing top", async t => {
@@ -512,7 +512,7 @@ test("should move y when resizing top", async t => {
   t.deepEqual(onResize.getCall(0).args[2].clientWidth, 100);
   t.deepEqual(onResize.getCall(0).args[2].clientHeight, 150);
   t.deepEqual(onResize.getCall(0).args[3], { width: 0, height: 50 });
-  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(108px, 58px)"), -1);
+  t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(100px, 50px)"), -1);
 });
 
 test("should snapped by original grid when x axis resizing smaller then threshold", async t => {

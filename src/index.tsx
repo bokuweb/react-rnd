@@ -118,6 +118,7 @@ export interface Props {
   resizeGrid?: Grid;
   bounds?: string;
   onMouseDown?: (e: MouseEvent) => void;
+  onMouseUp?: (e: MouseEvent) => void;
   onResizeStart?: RndResizeStartCallback;
   onResize?: RndResizeCallback;
   onResizeStop?: RndResizeCallback;
@@ -169,7 +170,7 @@ interface DefaultProps {
   scale: number;
 }
 
-export class Rnd extends React.Component<Props, State> {
+export class Rnd extends React.PureComponent<Props, State> {
   public static defaultProps: DefaultProps = {
     maxWidth: Number.MAX_SAFE_INTEGER,
     maxHeight: Number.MAX_SAFE_INTEGER,
@@ -183,7 +184,8 @@ export class Rnd extends React.Component<Props, State> {
   };
   resizable!: Resizable;
   draggable!: $TODO; // Draggable;
-  isResizing = false;
+  resizing = false;
+  resizingPosition = { x: 0, y: 0 };
 
   constructor(props: Props) {
     super(props);
@@ -346,7 +348,8 @@ export class Rnd extends React.Component<Props, State> {
     elementRef: HTMLDivElement,
   ) {
     e.stopPropagation();
-    this.isResizing = true;
+    this.resizing = true;
+
     const scale = this.props.scale as number;
     this.setState({
       original: this.getDraggablePosition(),
@@ -445,32 +448,28 @@ export class Rnd extends React.Component<Props, State> {
     const offset = this.getOffsetFromParent();
     if (/left/i.test(direction)) {
       x = this.state.original.x - delta.width;
-      // INFO: If uncontrolled component, apply x position by resize to draggable.
-      if (!this.props.position) {
-        this.draggable.setState({ x });
-      }
+      // INFO: Apply x position by resize to draggable.
+      this.draggable.setState({ x });
       x += offset.left;
     }
     if (/top/i.test(direction)) {
       y = this.state.original.y - delta.height;
-      // INFO: If uncontrolled component, apply y position by resize to draggable.
-      if (!this.props.position) {
-        this.draggable.setState({ y });
-      }
+      // INFO: Apply x position by resize to draggable.
+      this.draggable.setState({ y });
       y += offset.top;
     }
-    if (this.props.onResize) {
-      if (typeof x === "undefined") {
-        x = this.getDraggablePosition().x + offset.left;
-      }
-      if (typeof y === "undefined") {
-        y = this.getDraggablePosition().y + offset.top;
-      }
-      this.props.onResize(e, direction, elementRef, delta, {
-        x,
-        y,
-      });
+    if (typeof x === "undefined") {
+      x = this.getDraggablePosition().x + offset.left;
     }
+    if (typeof y === "undefined") {
+      y = this.getDraggablePosition().y + offset.top;
+    }
+    this.resizingPosition = { x, y };
+    if (!this.props.onResize) return;
+    this.props.onResize(e, direction, elementRef, delta, {
+      x,
+      y,
+    });
   }
 
   onResizeStop(
@@ -479,12 +478,11 @@ export class Rnd extends React.Component<Props, State> {
     elementRef: HTMLDivElement,
     delta: { height: number; width: number },
   ) {
-    this.isResizing = false;
+    this.resizing = false;
     const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
     this.setState({ maxWidth, maxHeight });
     if (this.props.onResizeStop) {
-      const position: Position = this.getDraggablePosition();
-      this.props.onResizeStop(e, direction, elementRef, delta, position);
+      this.props.onResizeStop(e, direction, elementRef, delta, this.resizingPosition);
     }
   }
 
@@ -518,6 +516,16 @@ export class Rnd extends React.Component<Props, State> {
     };
   }
 
+  refDraggable = (c: $TODO) => {
+    if (!c) return;
+    this.draggable = c;
+  };
+
+  refResizable = (c: Resizable | null) => {
+    if (!c) return;
+    this.resizable = c;
+  };
+
   render() {
     const {
       disableDragging,
@@ -525,6 +533,7 @@ export class Rnd extends React.Component<Props, State> {
       dragHandleClassName,
       position,
       onMouseDown,
+      onMouseUp,
       dragAxis,
       dragGrid,
       bounds,
@@ -564,15 +573,15 @@ export class Rnd extends React.Component<Props, State> {
         y: position.y - top,
       };
     }
+    // INFO: Make uncontorolled component when resizing to control position by setPostion.
+    const pos = this.resizing ? undefined : draggablePosition
     return (
       <Draggable
-        ref={(c: $TODO) => {
-          if (!c) return;
-          this.draggable = c;
-        }}
+        ref={this.refDraggable}
         handle={dragHandleClassName ? `.${dragHandleClassName}` : undefined}
         defaultPosition={defaultValue}
         onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
@@ -580,18 +589,14 @@ export class Rnd extends React.Component<Props, State> {
         disabled={disableDragging}
         grid={dragGrid}
         bounds={bounds ? this.state.bounds : undefined}
-        position={draggablePosition}
+        position={pos}
         enableUserSelectHack={enableUserSelectHack}
         cancel={cancel}
         scale={scale}
       >
         <Resizable
           {...resizableProps}
-          ref={c => {
-            if (c) {
-              this.resizable = c;
-            }
-          }}
+          ref={this.refResizable}
           defaultSize={defaultValue}
           size={this.props.size}
           enable={enableResizing}
@@ -601,8 +606,8 @@ export class Rnd extends React.Component<Props, State> {
           style={innerStyle}
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
-          maxWidth={this.isResizing ? this.state.maxWidth : this.props.maxWidth}
-          maxHeight={this.isResizing ? this.state.maxHeight : this.props.maxHeight}
+          maxWidth={this.resizing ? this.state.maxWidth : this.props.maxWidth}
+          maxHeight={this.resizing ? this.state.maxHeight : this.props.maxHeight}
           grid={resizeGrid}
           handleWrapperClass={resizeHandleWrapperClass}
           handleWrapperStyle={resizeHandleWrapperStyle}
