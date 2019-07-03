@@ -21,7 +21,7 @@
     "no-reference": true,
     "one-line": [true, "check-whitespace"],
     "quotemark": [true, "double"],
-    "semicolon": [true, "always"],
+    "semicolon": [false, "always"],
     "triple-equals": [true, "allow-null-check"],
     "typedef-whitespace": [
       true,

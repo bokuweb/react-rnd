@@ -35,7 +35,7 @@ export default class Example extends React.Component<{}, State> {
         onDragStop={(e, d) => {
           this.setState({ x: d.x, y: d.y });
         }}
-        onResize={(e, direction, ref, delta, position) => {
+        onResizeStop={(e, direction, ref, delta, position) => {
           this.setState({
             width: ref.offsetWidth,
             height: ref.offsetHeight,
