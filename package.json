@@ -82,7 +82,7 @@
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-replace": "2.2.0",
-    "rollup-plugin-typescript2": "0.21.2",
+    "rollup-plugin-typescript2": "0.22.0",
     "rollup-watch": "4.3.1",
     "sinon": "7.3.2",
     "tslint": "5.18.0",
