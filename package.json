@@ -41,7 +41,7 @@
   "homepage": "https://github.com/bokuweb/react-rnd",
   "devDependencies": {
     "@babel/cli": "7.5.0",
-    "@babel/core": "7.5.0",
+    "@babel/core": "7.5.4",
     "@babel/plugin-proposal-class-properties": "7.5.0",
     "@babel/plugin-transform-modules-commonjs": "7.5.0",
     "@babel/preset-react": "7.0.0",
