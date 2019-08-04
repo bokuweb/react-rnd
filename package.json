@@ -84,7 +84,7 @@
     "rollup-plugin-replace": "2.2.0",
     "rollup-plugin-typescript2": "0.22.0",
     "rollup-watch": "4.3.1",
-    "sinon": "7.3.2",
+    "sinon": "7.4.0",
     "tslint": "5.18.0",
     "tslint-eslint-rules": "5.4.0",
     "tslint-plugin-prettier": "2.0.1",
