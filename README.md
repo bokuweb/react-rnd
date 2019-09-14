@@ -253,6 +253,23 @@ type HandleClasses = {
 }
 ```
 
+#### `resizeHandleComponent?`: HandleCompoent;`
+
+The `resizeHandleComponent` allows you to pass a custom React component as the resize handle.
+
+``` javascript
+type HandleComponent = {
+  top?: React.ReactElement<any>;
+  right?: React.ReactElement<any>;
+  bottom?: React.ReactElement<any>;
+  left?: React.ReactElement<any>;
+  topRight?: React.ReactElement<any>;
+  bottomRight?: React.ReactElement<any>;
+  bottomLeft?: React.ReactElement<any>;
+  topLeft?: React.ReactElement<any>;
+}
+```
+
 #### `resizeHandleWrapperClass?: string;`
 
 The `resizeHandleWrapperClass` property is used to set css class name of resize handle wrapper(`span`) element.

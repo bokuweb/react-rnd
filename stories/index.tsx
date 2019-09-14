@@ -31,6 +31,8 @@ import Callbacks from "./callback/callbacks";
 
 import Cancel from "./cancel/cancel";
 
+import ResizeHandleComponent from "./customization/resizeHandleComponent";
+
 import GridResize from "./grid/resize";
 import GridDrag from "./grid/drag";
 import GridBoth from "./grid/both";
@@ -65,7 +67,6 @@ storiesOf("scale", module)
   .add("with selector boundary controlled", () => <ScaleSelectorControlled />)
   .add("with selector boundary", () => <ScaleSelectorUnControlled />);
 
-
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
   .add("percent controlled", () => <SizePercentControlled />);
@@ -73,6 +74,8 @@ storiesOf("size", module)
 storiesOf("callbacks", module).add("callback", () => <Callbacks />);
 
 storiesOf("cancel", module).add("cancel", () => <Cancel />);
+
+storiesOf("customization", module).add("resizeHandleComponent", () => <ResizeHandleComponent />);
 
 storiesOf("grid", module)
   .add("resize", () => <GridResize />)

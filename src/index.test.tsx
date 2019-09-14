@@ -38,6 +38,28 @@ test("Should custom class name be applied to box", async t => {
   t.truthy(rnd.getDOMNode().classList.contains("custom-class-name"));
 });
 
+test("Should render custom components", async t => {
+  const CustomComponent = () => <div className="custom-component"></div>;
+
+  const rnd = mount(
+    <Rnd
+      default={{ x: 100, y: 100, width: 100, height: 100 }}
+      resizeHandleComponent={{
+        top: <CustomComponent />,
+        right: <CustomComponent />,
+        bottom: <CustomComponent />,
+        left: <CustomComponent />,
+        topRight: <CustomComponent />,
+        bottomRight: <CustomComponent />,
+        bottomLeft: <CustomComponent />,
+        topLeft: <CustomComponent />,
+      }}
+    />,
+  );
+  const customComponents = rnd.find(".custom-component");
+  t.is(customComponents.length, 8);
+});
+
 test("Should set handler className", async t => {
   const rnd = mount(
     <Rnd
