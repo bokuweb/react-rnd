@@ -508,6 +508,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.1.0
+
+- Implement resizeHandleComponent #591
+- Update dependency react-draggable to v4
 
 #### v10.0.0
 
