@@ -104,6 +104,17 @@ export type HandleStyles = {
   topRight?: React.CSSProperties;
 };
 
+export type HandleComponent = {
+  top?: React.ReactElement<any>;
+  right?: React.ReactElement<any>;
+  bottom?: React.ReactElement<any>;
+  left?: React.ReactElement<any>;
+  topRight?: React.ReactElement<any>;
+  bottomRight?: React.ReactElement<any>;
+  bottomLeft?: React.ReactElement<any>;
+  topLeft?: React.ReactElement<any>;
+}
+
 export interface Props {
   dragGrid?: Grid;
   default?: {
@@ -133,6 +144,7 @@ export interface Props {
   resizeHandleStyles?: HandleStyles;
   resizeHandleWrapperClass?: string;
   resizeHandleWrapperStyle?: React.CSSProperties;
+  resizeHandleComponent?: HandleComponent;
   lockAspectRatio?: boolean | number;
   lockAspectRatioExtraWidth?: number;
   lockAspectRatioExtraHeight?: number;
@@ -548,6 +560,7 @@ export class Rnd extends React.PureComponent<Props, State> {
       onDragStop,
       resizeHandleStyles,
       resizeHandleClasses,
+      resizeHandleComponent,
       enableResizing,
       resizeGrid,
       resizeHandleWrapperClass,
@@ -616,6 +629,7 @@ export class Rnd extends React.PureComponent<Props, State> {
           lockAspectRatioExtraHeight={this.props.lockAspectRatioExtraHeight}
           handleStyles={resizeHandleStyles}
           handleClasses={resizeHandleClasses}
+          handleComponent={resizeHandleComponent}
           scale={this.props.scale}
         >
           {children}

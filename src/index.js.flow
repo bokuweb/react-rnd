@@ -93,6 +93,17 @@ export type HandleStyles = {
   topRight?: Style,
 };
 
+export type HandleComponent = {
+  top?: React.ReactElement<any>;
+  right?: React.ReactElement<any>;
+  bottom?: React.ReactElement<any>;
+  left?: React.ReactElement<any>;
+  topRight?: React.ReactElement<any>;
+  bottomRight?: React.ReactElement<any>;
+  bottomLeft?: React.ReactElement<any>;
+  topLeft?: React.ReactElement<any>;
+}
+
 export type Props = {
   dragGrid?: Grid,
   default?: {
@@ -119,6 +130,7 @@ export type Props = {
   extendsProps?: { [key: string]: any },
   resizeHandleClasses?: HandleClasses,
   resizeHandleStyles?: HandleStyles,
+  resizeHandleComponent?: HandleComponent,
   resizeHandleWrapperClass?: string,
   resizeHandleWrapperStyle?: Style,
   lockAspectRatio?: boolean | number,
