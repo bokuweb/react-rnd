@@ -100,7 +100,7 @@
   },
   "dependencies": {
     "re-resizable": "6.1.0",
-    "react-draggable": "4.0.3",
+    "react-draggable": "4.1.0",
     "tslib": "1.10.0"
   }
 }
