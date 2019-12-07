@@ -508,6 +508,11 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.1.2
+
+- Upgrade re-resizable to 6.1.1
+- Upgrade react-draggable to 4.1.0
+
 #### v10.1.1
 
 - Upgrade re-resizable to 6.1.0
