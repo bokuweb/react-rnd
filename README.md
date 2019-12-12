@@ -508,6 +508,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.1.3
+
+- Fixed a bug, position is wrong when onResize #618
+
 #### v10.1.2
 
 - Upgrade re-resizable to 6.1.1
