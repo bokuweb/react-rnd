@@ -113,7 +113,7 @@ export type HandleComponent = {
   bottomRight?: React.ReactElement<any>;
   bottomLeft?: React.ReactElement<any>;
   topLeft?: React.ReactElement<any>;
-}
+};
 
 export interface Props {
   dragGrid?: Grid;
@@ -363,8 +363,11 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.resizing = true;
 
     const scale = this.props.scale as number;
+    const offset = this.getOffsetFromParent();
+    const pos = this.getDraggablePosition();
+    this.resizingPosition = { x: pos.x + offset.left, y: pos.y + offset.top };
     this.setState({
-      original: this.getDraggablePosition(),
+      original: pos,
     });
     if (this.props.bounds) {
       const parent = this.getParent();
@@ -587,7 +590,7 @@ export class Rnd extends React.PureComponent<Props, State> {
       };
     }
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
-    const pos = this.resizing ? undefined : draggablePosition
+    const pos = this.resizing ? undefined : draggablePosition;
     return (
       <Draggable
         ref={this.refDraggable}
