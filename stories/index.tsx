@@ -41,6 +41,7 @@ import SandboxBodySizeToMaxWidth from "./sandbox/bodysize-to-maxwidth";
 import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-bounds";
 
 import LockAspectRatioBasic from "./lock-aspect-ratio/basic";
+import Issue622 from "./sandbox/issue-#622";
 
 storiesOf("bare", module).add("bare", () => <Bare />);
 
@@ -84,6 +85,7 @@ storiesOf("grid", module)
 
 storiesOf("sandbox", module)
   .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />)
-  .add("lock aspect ratio with bounds", () => <SandboxLockAspectRatioWithBounds />);
+  .add("lock aspect ratio with bounds", () => <SandboxLockAspectRatioWithBounds />)
+  .add("issue622", () => <Issue622 />);
 
 storiesOf("ratio", module).add("lock aspect ratio", () => <LockAspectRatioBasic />);
