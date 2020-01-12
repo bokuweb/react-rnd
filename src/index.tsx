@@ -198,6 +198,7 @@ export class Rnd extends React.PureComponent<Props, State> {
   draggable!: $TODO; // Draggable;
   resizing = false;
   resizingPosition = { x: 0, y: 0 };
+  offsetFromParent = { left: 0, top: 0 };
 
   constructor(props: Props) {
     super(props);
@@ -226,7 +227,8 @@ export class Rnd extends React.PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    const { left, top } = this.getOffsetFromParent();
+    this.updateOffsetFromParent();
+    const { left, top } = this.offsetFromParent;
     const { x, y } = this.getDraggablePosition();
     this.draggable.setState({
       x: x - left,
@@ -329,7 +331,8 @@ export class Rnd extends React.PureComponent<Props, State> {
     const left = (boundaryLeft - parentLeft) / scale;
     const top = boundaryTop - parentTop;
     if (!this.resizable) return;
-    const offset = this.getOffsetFromParent();
+    this.updateOffsetFromParent();
+    const offset = this.offsetFromParent;
     this.setState({
       bounds: {
         top: top - offset.top,
@@ -342,14 +345,14 @@ export class Rnd extends React.PureComponent<Props, State> {
 
   onDrag(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDrag) {
-      const offset = this.getOffsetFromParent();
+      const offset = this.offsetFromParent;
       this.props.onDrag(e, { ...data, x: data.x - offset.left, y: data.y - offset.top });
     }
   }
 
   onDragStop(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDragStop) {
-      const { left, top } = this.getOffsetFromParent();
+      const { left, top } = this.offsetFromParent;
       return this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
     }
   }
@@ -363,7 +366,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.resizing = true;
 
     const scale = this.props.scale as number;
-    const offset = this.getOffsetFromParent();
+    const offset = this.offsetFromParent;
     const pos = this.getDraggablePosition();
     this.resizingPosition = { x: pos.x + offset.left, y: pos.y + offset.top };
     this.setState({
@@ -458,27 +461,22 @@ export class Rnd extends React.PureComponent<Props, State> {
     elementRef: HTMLDivElement,
     delta: { height: number; width: number },
   ) {
-    let x;
-    let y;
-    const offset = this.getOffsetFromParent();
     if (/left/i.test(direction)) {
-      x = this.state.original.x - delta.width;
+      const x = this.state.original.x - delta.width;
       // INFO: Apply x position by resize to draggable.
       this.draggable.setState({ x });
-      x += offset.left;
     }
     if (/top/i.test(direction)) {
-      y = this.state.original.y - delta.height;
+      const y = this.state.original.y - delta.height;
       // INFO: Apply x position by resize to draggable.
       this.draggable.setState({ y });
-      y += offset.top;
     }
-    if (typeof x === "undefined") {
-      x = this.getDraggablePosition().x + offset.left;
-    }
-    if (typeof y === "undefined") {
-      y = this.getDraggablePosition().y + offset.top;
-    }
+
+    this.updateOffsetFromParent();
+    const offset = this.offsetFromParent;
+    const x = this.getDraggablePosition().x + offset.left;
+    const y = this.getDraggablePosition().y + offset.top;
+
     this.resizingPosition = { x, y };
     if (!this.props.onResize) return;
     this.props.onResize(e, direction, elementRef, delta, {
@@ -510,7 +508,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.draggable.setState(position);
   }
 
-  getOffsetFromParent(): { top: number; left: number } {
+  updateOffsetFromParent() {
     const scale = this.props.scale as number;
     const parent = this.getParent();
     const self = this.getSelfElement();
@@ -525,7 +523,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     const parentTop = parentRect.top;
     const selfRect = self.getBoundingClientRect();
     const position = this.getDraggablePosition();
-    return {
+    this.offsetFromParent = {
       left: selfRect.left - parentLeft - position.x * scale,
       top: selfRect.top - parentTop - position.y * scale,
     };
@@ -581,7 +579,7 @@ export class Rnd extends React.PureComponent<Props, State> {
       ...cursorStyle,
       ...style,
     };
-    const { left, top } = this.getOffsetFromParent();
+    const { left, top } = this.offsetFromParent;
     let draggablePosition;
     if (position) {
       draggablePosition = {

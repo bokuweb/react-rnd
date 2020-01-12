@@ -146,8 +146,8 @@ test("should call onDrag when dragging", async t => {
     .simulate("mousedown", { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
   t.is(onDrag.callCount, 1);
-  t.is(onDrag.firstCall.args[1].x, 600);
-  t.is(onDrag.firstCall.args[1].y, 620);
+  t.is(onDrag.firstCall.args[1].x, 500);
+  t.is(onDrag.firstCall.args[1].y, 520);
   t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(400px, 420px)"), -1);
 });
 
@@ -161,8 +161,8 @@ test("should call onDragStop when drag stop", async t => {
   mouseMove(200, 220);
   mouseUp(100, 120);
   t.is(onDragStop.callCount, 1);
-  t.is(onDragStop.firstCall.args[1].x, -100);
-  t.is(onDragStop.firstCall.args[1].y, -100);
+  t.is(onDragStop.firstCall.args[1].x, -200);
+  t.is(onDragStop.firstCall.args[1].y, -200);
 });
 
 test("should dragging disabled when axis equals none", async t => {
