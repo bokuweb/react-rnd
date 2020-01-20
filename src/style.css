@@ -1,0 +1,110 @@
+/* Copyright 2018 Google LLC.
+SPDX-License-Identifier: Apache-2.0 */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  text-align: center;
+  background-color: #0F2027;
+  height: 100%;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: bold;
+  color: pink;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  letter-spacing: 2px;
+  margin-bottom: 0;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#kitties {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 4;
+  padding: 0;
+}
+
+#kitties li {
+  list-style-type: none;
+}
+
+#kitties .score {
+  color: pink;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 0;
+}
+
+img {
+  cursor: pointer;
+  border: 4px pink solid;
+  border-radius: 5px;
+  -webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+  height: 250px;
+}
+
+img:hover {
+  -webkit-transform: scale( 1.08 ); 
+  transform: scale( 1.08 );
+}
+
+img:active {
+  -webkit-transform: scale( 1.0 ); 
+  transform: scale( 1.0 );
+}
+
+.extra {
+  display: flex;
+}
+
+.details .name {
+  color: pink;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.details .age {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+@media (max-width: 1200px) { 
+  #kitties {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  #kitties li {
+    margin-top: 70px;
+  }
+  
+  img {
+    height: 200px;
+  }
+  
+  h1 {
+    font-size: 50px;
+  }
+}
