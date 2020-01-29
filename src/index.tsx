@@ -1,11 +1,11 @@
 import * as React from "react";
-import { DraggableEventHandler } from "react-draggable";
+import { DraggableEventHandler, default as DraggableRoot } from "react-draggable";
 import { Resizable, ResizeDirection } from "re-resizable";
 
 // FIXME: https://github.com/mzabriskie/react-draggable/issues/381
 //         I can not find `scale` too...
 type $TODO = any;
-const Draggable = require("react-draggable");
+const Draggable: any = DraggableRoot;
 
 export type Grid = [number, number];
 
@@ -589,6 +589,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     }
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.resizing ? undefined : draggablePosition;
+
     return (
       <Draggable
         ref={this.refDraggable}
