@@ -508,6 +508,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.1.5
+
+- Fixed a bug, react-draggable not bundling with rollup #641
+
 #### v10.1.4
 
 - Fixed a bug, box moves when resized  #622
