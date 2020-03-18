@@ -346,7 +346,7 @@ export class Rnd extends React.PureComponent<Props, State> {
   onDrag(e: RndDragEvent, data: DraggableData) {
     if (this.props.onDrag) {
       const offset = this.offsetFromParent;
-      this.props.onDrag(e, { ...data, x: data.x - offset.left, y: data.y - offset.top });
+      return this.props.onDrag(e, { ...data, x: data.x - offset.left, y: data.y - offset.top });
     }
   }
 
