@@ -508,6 +508,18 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.1.8
+
+- Update `re-resizable` to v6.3.2
+
+#### v10.1.7
+
+- A minor fix for a bug with forwarding of cancelling indication of an onDrag event. (#667)
+
+#### v10.1.6
+
+- Fixes #641 without causing other issues with typing.
+
 #### v10.1.5
 
 - Fixed a bug, react-draggable not bundling with rollup #641
