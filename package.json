@@ -46,8 +46,8 @@
     "@babel/plugin-transform-modules-commonjs": "7.9.0",
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
-    "@babel/traverse": "7.9.0",
-    "@babel/types": "7.9.0",
+    "@babel/traverse": "7.9.5",
+    "@babel/types": "7.9.5",
     "@emotion/core": "10.0.28",
     "@storybook/addon-actions": "5.3.18",
     "@storybook/addon-info": "5.3.18",
@@ -55,7 +55,7 @@
     "@storybook/addon-options": "5.3.18",
     "@storybook/react": "5.3.18",
     "@types/enzyme": "3.1.16",
-    "@types/enzyme-adapter-react-16": "1.0.5",
+    "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/node": "^12.0.10",
     "@types/react": "16.4.1",
     "@types/react-dom": "16.0.11",
@@ -73,7 +73,7 @@
     "gh-pages": "2.2.0",
     "light-ts-loader": "1.1.2",
     "npm-run-all": "4.1.5",
-    "prettier": "2.0.2",
+    "prettier": "2.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-test-renderer": "16.13.1",
@@ -100,7 +100,7 @@
   },
   "dependencies": {
     "re-resizable": "6.3.2",
-    "react-draggable": "4.2.0",
+    "react-draggable": "4.3.1",
     "tslib": "1.11.1"
   }
 }
