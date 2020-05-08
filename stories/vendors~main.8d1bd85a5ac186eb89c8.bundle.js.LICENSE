@@ -61,4 +61,8 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/*! For license information please see react-draggable.min.js.LICENSE.txt */
+/*!
+      Copyright (c) 2017 Jed Watson.
+      Licensed under the MIT License (MIT), see
+      http://jedwatson.github.io/classnames
+    */
