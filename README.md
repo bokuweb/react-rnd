@@ -508,6 +508,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.1.10
+
+- Downgrade `react-draggable` to v4.2.0 #690
+
 #### v10.1.9
 
 - Update `react-draggable` to v4.3.1
