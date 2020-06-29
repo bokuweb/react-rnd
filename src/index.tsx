@@ -567,7 +567,8 @@ export class Rnd extends React.PureComponent<Props, State> {
       resizeHandleWrapperClass,
       resizeHandleWrapperStyle,
       scale,
-      ...resizableProps
+      ...resizableProps,
+      draggableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
     // Remove unknown props, see also https://reactjs.org/warnings/unknown-prop.html
@@ -608,6 +609,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         enableUserSelectHack={enableUserSelectHack}
         cancel={cancel}
         scale={scale}
+        {...draggableProps}
       >
         <Resizable
           {...resizableProps}
