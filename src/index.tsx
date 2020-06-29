@@ -567,8 +567,8 @@ export class Rnd extends React.PureComponent<Props, State> {
       resizeHandleWrapperClass,
       resizeHandleWrapperStyle,
       scale,
-      ...resizableProps,
-      draggableProps
+      draggableProps,
+      ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
     // Remove unknown props, see also https://reactjs.org/warnings/unknown-prop.html
