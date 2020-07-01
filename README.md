@@ -333,6 +333,24 @@ you to, for example, get the correct resize and drag deltas while you are zoomed
 a transform or matrix in the parent of this element.
 If omitted, set `1`.
 
+#### `draggableProps?: {};`
+
+Allows you to add options props from the [react-draggable](https://github.com/STRML/react-draggable) 
+
+see, following example.
+
+```js
+<Rnd
+    style={style}
+    handle="handle"
+    bounds="parent"
+    default={{x: 0, y: 0, width: 200, height: 150}}
+    draggableProps={{ allowAnyClick: true }}
+>
+    Rnd
+</Rnd>
+```
+
 ## Callback
 
 #### `onResizeStart?: RndResizeStartCallback;`
