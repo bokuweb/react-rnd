@@ -80,7 +80,7 @@ export type ResizeEnable = {
   top?: boolean;
   topLeft?: boolean;
   topRight?: boolean;
-};
+} | false;
 
 export type HandleClasses = {
   bottom?: string;
@@ -589,6 +589,16 @@ export class Rnd extends React.PureComponent<Props, State> {
     }
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.resizing ? undefined : draggablePosition;
+    const resizable = enableResizing === false ? {
+      bottom: false,
+      bottomLeft: false,
+      bottomRight: false,
+      left: false,
+      right: false,
+      top: false,
+      topLeft: false,
+      topRight: false,
+    } : enableResizing;
 
     return (
       <Draggable
@@ -614,7 +624,7 @@ export class Rnd extends React.PureComponent<Props, State> {
           ref={this.refResizable}
           defaultSize={defaultValue}
           size={this.props.size}
-          enable={enableResizing}
+          enable={resizable}
           onResizeStart={this.onResizeStart}
           onResize={this.onResize}
           onResizeStop={this.onResizeStop}
