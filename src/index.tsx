@@ -1,11 +1,21 @@
 import * as React from "react";
 import { DraggableEventHandler, default as DraggableRoot } from "react-draggable";
-import { Resizable, ResizeDirection } from "re-resizable";
+import { Enable, Resizable, ResizeDirection } from "re-resizable";
 
 // FIXME: https://github.com/mzabriskie/react-draggable/issues/381
 //         I can not find `scale` too...
 type $TODO = any;
 const Draggable: any = DraggableRoot;
+const DisabledResizing: Enable = {
+  bottom: false,
+  bottomLeft: false,
+  bottomRight: false,
+  left: false,
+  right: false,
+  top: false,
+  topLeft: false,
+  topRight: false,
+};
 
 export type Grid = [number, number];
 
@@ -589,16 +599,6 @@ export class Rnd extends React.PureComponent<Props, State> {
     }
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.resizing ? undefined : draggablePosition;
-    const resizable = enableResizing === false ? {
-      bottom: false,
-      bottomLeft: false,
-      bottomRight: false,
-      left: false,
-      right: false,
-      top: false,
-      topLeft: false,
-      topRight: false,
-    } : enableResizing;
 
     return (
       <Draggable
@@ -624,7 +624,7 @@ export class Rnd extends React.PureComponent<Props, State> {
           ref={this.refResizable}
           defaultSize={defaultValue}
           size={this.props.size}
-          enable={resizable}
+          enable={enableResizing === false ? DisabledResizing : enableResizing}
           onResizeStart={this.onResizeStart}
           onResize={this.onResize}
           onResizeStop={this.onResizeStop}
