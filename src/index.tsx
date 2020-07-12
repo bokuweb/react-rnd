@@ -6,16 +6,6 @@ import { Enable, Resizable, ResizeDirection } from "re-resizable";
 //         I can not find `scale` too...
 type $TODO = any;
 const Draggable: any = DraggableRoot;
-const DisabledResizing: Enable = {
-  bottom: false,
-  bottomLeft: false,
-  bottomRight: false,
-  left: false,
-  right: false,
-  top: false,
-  topLeft: false,
-  topRight: false,
-};
 
 export type Grid = [number, number];
 
@@ -90,7 +80,7 @@ export type ResizeEnable = {
   top?: boolean;
   topLeft?: boolean;
   topRight?: boolean;
-} | false;
+} | boolean;
 
 export type HandleClasses = {
   bottom?: string;
@@ -179,6 +169,17 @@ const resizableStyle = {
   top: 0,
   left: 0,
 };
+
+const getEnableResizingByFlag = (flag: boolean): Enable => ({
+  bottom: flag,
+  bottomLeft: flag,
+  bottomRight: flag,
+  left: flag,
+  right: flag,
+  top: flag,
+  topLeft: flag,
+  topRight: flag,
+});
 
 interface DefaultProps {
   maxWidth: number;
@@ -624,7 +625,7 @@ export class Rnd extends React.PureComponent<Props, State> {
           ref={this.refResizable}
           defaultSize={defaultValue}
           size={this.props.size}
-          enable={enableResizing === false ? DisabledResizing : enableResizing}
+          enable={typeof enableResizing === "boolean" ? getEnableResizingByFlag(enableResizing) : enableResizing}
           onResizeStart={this.onResizeStart}
           onResize={this.onResize}
           onResizeStop={this.onResizeStop}

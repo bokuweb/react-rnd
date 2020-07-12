@@ -296,7 +296,7 @@ export type Enable = {
   top?: boolean;
   topLeft?: boolean;
   topRight?: boolean;
-} | false
+} | boolean
 ```
 
 #### `disableDragging?: boolean;`
