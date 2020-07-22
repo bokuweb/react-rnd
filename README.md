@@ -494,6 +494,30 @@ class YourComponent extends Component {
 }
 ```
 
+#### `allowAnyClick?: boolean`
+
+If set to `true`, will allow dragging on non left-button clicks.
+
+#### `nodeRef?: React.Ref<typeof React.Component>`
+
+please see, https://github.com/STRML/react-draggable
+```
+If running in React Strict mode, ReactDOM.findDOMNode() is deprecated.
+Unfortunately, in order for <Draggable> to work properly, we need raw access
+to the underlying DOM node. If you want to avoid the warning, pass a `nodeRef`
+as in this example:
+
+function MyComponent() {
+   const nodeRef = React.useRef(null);
+   return (
+     <Rnd nodeRef={nodeRef}>
+       <div ref={nodeRef}>Example Target</div>
+     </Rnd>
+   );
+}
+
+```
+
 ## Test
 
 ``` sh
@@ -507,6 +531,12 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [CodeSandbox](https://codesandbox.io/s/y3997qply9) to help us easily isolate it.
 
 ## Changelog
+
+#### v10.2.0
+
+- Upgrade `react-draggable` to v4.4.3
+- Add `allowAnyClick` props.
+- Add `nodeRef` props.
 
 #### v10.1.10
 
