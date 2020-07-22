@@ -71,16 +71,18 @@ type MaxSize = {
   maxHeight: number | string;
 };
 
-export type ResizeEnable = {
-  bottom?: boolean;
-  bottomLeft?: boolean;
-  bottomRight?: boolean;
-  left?: boolean;
-  right?: boolean;
-  top?: boolean;
-  topLeft?: boolean;
-  topRight?: boolean;
-} | boolean;
+export type ResizeEnable =
+  | {
+      bottom?: boolean;
+      bottomLeft?: boolean;
+      bottomRight?: boolean;
+      left?: boolean;
+      right?: boolean;
+      top?: boolean;
+      topLeft?: boolean;
+      topRight?: boolean;
+    }
+  | boolean;
 
 export type HandleClasses = {
   bottom?: string;
@@ -157,6 +159,8 @@ export interface Props {
   disableDragging?: boolean;
   cancel?: string;
   enableUserSelectHack?: boolean;
+  allowAnyClick?: boolean;
+  nodeRef?: React.Ref<typeof React.Component>;
   scale?: number;
   [key: string]: any;
 }
@@ -578,6 +582,8 @@ export class Rnd extends React.PureComponent<Props, State> {
       resizeHandleWrapperClass,
       resizeHandleWrapperStyle,
       scale,
+      allowAnyClick,
+      nodeRef,
       ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
@@ -619,6 +625,8 @@ export class Rnd extends React.PureComponent<Props, State> {
         enableUserSelectHack={enableUserSelectHack}
         cancel={cancel}
         scale={scale}
+        allowAnyClick={allowAnyClick}
+        nodeRef={nodeRef}
       >
         <Resizable
           {...resizableProps}
