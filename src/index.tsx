@@ -626,7 +626,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         cancel={cancel}
         scale={scale}
         allowAnyClick={allowAnyClick}
-        nodeRef={nodeRef}
+        nodeRef={{ current: this.getSelfElement() }}
       >
         <Resizable
           {...resizableProps}
