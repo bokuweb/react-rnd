@@ -101,6 +101,6 @@
   "dependencies": {
     "re-resizable": "6.3.2",
     "react-draggable": "4.4.3",
-    "tslib": "1.11.1"
+    "tslib": "2.0.0"
   }
 }
