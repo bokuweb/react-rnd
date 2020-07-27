@@ -498,26 +498,6 @@ class YourComponent extends Component {
 
 If set to `true`, will allow dragging on non left-button clicks.
 
-#### `nodeRef?: React.Ref<typeof React.Component>`
-
-please see, https://github.com/STRML/react-draggable
-```
-If running in React Strict mode, ReactDOM.findDOMNode() is deprecated.
-Unfortunately, in order for <Draggable> to work properly, we need raw access
-to the underlying DOM node. If you want to avoid the warning, pass a `nodeRef`
-as in this example:
-
-function MyComponent() {
-   const nodeRef = React.useRef(null);
-   return (
-     <Rnd nodeRef={nodeRef}>
-       <div ref={nodeRef}>Example Target</div>
-     </Rnd>
-   );
-}
-
-```
-
 ## Test
 
 ``` sh
