@@ -482,7 +482,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     const top = -delta.height;
     const directions = ["top", "left", "topLeft", "bottomLeft", "topRight"];
 
-    if (directions.includes(direction)) {
+    if (directions.indexOf(direction) !== -1) {
       if (direction === "bottomLeft") {
         newPos.x += left;
       } else if (direction === "topRight") {
