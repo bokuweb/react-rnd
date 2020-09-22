@@ -10040,10 +10040,10 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@6.3.2:
-  version "6.3.2"
-  resolved "https://registry.npmjs.org/re-resizable/-/re-resizable-6.3.2.tgz#27cc984af6ea5dbafd2b79f64c5224a6e1722fbe"
-  integrity sha512-ngxe4XBSb46vfwXjAwpURacVDig/pPt1kHRhcKlRRIoGICmo4aQHr725jurezepp1pm5jSC6iQhyLYfx3zOC3w==
+re-resizable@6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.6.0.tgz#b2abdaa2325e015b96ef95ea7393ce762500979b"
+  integrity sha512-cBlRjpb/HVuFo9nOTmUBrzbcyHd3XIq0ZW/ZcT6G6sHplVIwmUIh6sm81WSDGMXOI1zTtPbMgfiCLZ8qTR4BJw==
   dependencies:
     fast-memoize "^2.5.1"
 

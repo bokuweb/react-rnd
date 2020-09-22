@@ -31,10 +31,10 @@ export type RndDragEvent =
   | TouchEvent;
 
 export type RndResizeStartCallback = (
-  e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+  e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>,
   dir: ResizeDirection,
-  elementRef: HTMLDivElement,
-) => void;
+  elementRef: HTMLElement,
+) => void | boolean;
 
 export type ResizableDelta = {
   width: number;
@@ -44,7 +44,7 @@ export type ResizableDelta = {
 export type RndResizeCallback = (
   e: MouseEvent | TouchEvent,
   dir: ResizeDirection,
-  elementRef: HTMLDivElement,
+  elementRef: HTMLElement,
   delta: ResizableDelta,
   position: Position,
 ) => void;
@@ -213,7 +213,7 @@ export class Rnd extends React.PureComponent<Props, State> {
   resizing = false;
   resizingPosition = { x: 0, y: 0 };
   offsetFromParent = { left: 0, top: 0 };
-  resizableElement: { current: HTMLDivElement | null } = { current: null };
+  resizableElement: { current: HTMLElement | null } = { current: null };
 
   constructor(props: Props) {
     super(props);
@@ -273,7 +273,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     return { maxWidth, maxHeight };
   }
 
-  getSelfElement(): HTMLDivElement | null {
+  getSelfElement(): HTMLElement | null {
     return this.resizable && this.resizable.resizable;
   }
 
@@ -373,9 +373,9 @@ export class Rnd extends React.PureComponent<Props, State> {
   }
 
   onResizeStart(
-    e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+    e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>,
     dir: ResizeDirection,
-    elementRef: HTMLDivElement,
+    elementRef: HTMLElement,
   ) {
     e.stopPropagation();
     this.resizing = true;
@@ -473,7 +473,7 @@ export class Rnd extends React.PureComponent<Props, State> {
   onResize(
     e: MouseEvent | TouchEvent,
     direction: ResizeDirection,
-    elementRef: HTMLDivElement,
+    elementRef: HTMLElement,
     delta: { height: number; width: number },
   ) {
     // INFO: Apply x and y position adjustments caused by resizing to draggable
@@ -513,7 +513,7 @@ export class Rnd extends React.PureComponent<Props, State> {
   onResizeStop(
     e: MouseEvent | TouchEvent,
     direction: ResizeDirection,
-    elementRef: HTMLDivElement,
+    elementRef: HTMLElement,
     delta: { height: number; width: number },
   ) {
     this.resizing = false;
