@@ -7,6 +7,8 @@ import Bare from "./bare/bare";
 import BasicUncontrolled from "./basic/uncontrolled";
 import BasicControlled from "./basic/controlled";
 
+import MinUncontrolled from "./min/uncontrolled";
+
 import ScaleParentUnControlled from "./scale/parent-uncontrolled";
 import ScaleWindowUnControlled from "./scale/window-uncontrolled";
 import ScaleBodyX05UnControlled from "./scale/body-uncontrolled-x0-5";
@@ -89,3 +91,5 @@ storiesOf("sandbox", module)
   .add("issue622", () => <Issue622 />);
 
 storiesOf("ratio", module).add("lock aspect ratio", () => <LockAspectRatioBasic />);
+
+storiesOf("min", module).add("min uncontrolled", () => <MinUncontrolled />);
