@@ -10040,10 +10040,10 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@6.6.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.6.0.tgz#b2abdaa2325e015b96ef95ea7393ce762500979b"
-  integrity sha512-cBlRjpb/HVuFo9nOTmUBrzbcyHd3XIq0ZW/ZcT6G6sHplVIwmUIh6sm81WSDGMXOI1zTtPbMgfiCLZ8qTR4BJw==
+re-resizable@6.6.1:
+  version "6.6.1"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.6.1.tgz#654a0edc1977e5d025c777a97f5555ef4bccea7f"
+  integrity sha512-ttWVasZ9X7c0ir0+4YK47tkmm9EAFssW07YLkeLzG5HCOuFgFAlSVzMlzAH0h3i6hDShQCHHJecVx5rk+snoFA==
   dependencies:
     fast-memoize "^2.5.1"
 
