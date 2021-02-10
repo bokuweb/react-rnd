@@ -90,7 +90,7 @@
     "tslint-eslint-rules": "5.4.0",
     "tslint-plugin-prettier": "2.3.0",
     "tslint-react": "5.0.0",
-    "typescript": "3.8.3"
+    "typescript": "3.9.9"
   },
   "files": [
     "lib"
