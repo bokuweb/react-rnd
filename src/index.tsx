@@ -616,6 +616,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     }
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.resizing ? undefined : draggablePosition;
+    const dragAxisOrUndefined = this.resizing ? "both" : dragAxis;
 
     return (
       <Draggable
@@ -627,7 +628,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
-        axis={dragAxis}
+        axis={dragAxisOrUndefined}
         disabled={disableDragging}
         grid={dragGrid}
         bounds={bounds ? this.state.bounds : undefined}
