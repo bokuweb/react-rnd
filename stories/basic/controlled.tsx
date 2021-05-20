@@ -39,7 +39,7 @@ export default class Example extends React.Component<{}, State> {
           this.setState({
             width: ref.offsetWidth,
             height: ref.offsetHeight,
-            ...position
+            ...position,
           });
         }}
       >

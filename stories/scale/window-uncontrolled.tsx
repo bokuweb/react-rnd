@@ -4,7 +4,7 @@ import { style } from "../styles";
 
 export default () => (
   <div style={{ transform: "scale(0.7)" }}>
-    <div style={{ marginLeft: "30px"}}>
+    <div style={{ marginLeft: "30px" }}>
       <Rnd
         style={style}
         bounds="window"
