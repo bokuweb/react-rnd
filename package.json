@@ -66,7 +66,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.2",
-    "cpy-cli": "2.0.0",
+    "cpy-cli": "3.1.1",
     "cross-env": "7.0.3",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.9.1",
