@@ -15,7 +15,7 @@ export default class Example extends React.Component<{}, State> {
   constructor(props) {
     super(props);
     this.state = {
-      rnds: [0, 1, 2].map(i => ({
+      rnds: [0, 1, 2].map((i) => ({
         width: 200,
         height: 200,
         x: i * 100,
@@ -27,7 +27,7 @@ export default class Example extends React.Component<{}, State> {
   render() {
     return (
       <>
-        {[0, 1, 2].map(i => (
+        {[0, 1, 2].map((i) => (
           <Rnd
             key={`rnd${i}`}
             style={style}

@@ -8,7 +8,7 @@ const SouthEastArrow = () => (
   </svg>
 );
 
-const CustomHandle = props => (
+const CustomHandle = (props) => (
   <div
     style={{
       background: "#fff",

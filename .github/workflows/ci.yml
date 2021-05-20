@@ -1,0 +1,42 @@
+name: Continuous Integration
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12
+      - name: yarn
+        run: yarn --frozen-lockfile
+      - name: lint
+        run: yarn lint
+
+  tsc:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12
+      - name: yarn
+        run: yarn --frozen-lockfile
+      - name: tsc
+        run: yarn tsc
+
+  test:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12
+      - name: yarn
+        run: yarn --frozen-lockfile
+      - name: test
+        run: |
+          export DISPLAY=:99
+          Xvfb -ac :99 -screen 0 1280x1024x24 >/dev/null 2>&1 &
+          yarn run test

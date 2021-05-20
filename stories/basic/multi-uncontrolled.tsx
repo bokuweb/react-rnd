@@ -4,7 +4,7 @@ import { style } from "../styles";
 
 export default () => (
   <>
-    {[0, 1, 2].map(i => (
+    {[0, 1, 2].map((i) => (
       <Rnd
         style={{
           ...style,
