@@ -12,7 +12,7 @@ jobs:
       - name: yarn
         run: yarn --frozen-lockfile
       - name: lint
-        run: yarn lint && yarn -s format:ci -l
+        run: yarn lint
 
   tsc:
     runs-on: ubuntu-18.04
