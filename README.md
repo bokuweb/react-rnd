@@ -512,6 +512,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.3.0
+
+- Fixed a callback position when dragAxis specified
+
 #### v10.2.5
 
 - Fixed a glitch when dragAxis is enabled and component is being resized #780
