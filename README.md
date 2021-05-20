@@ -512,6 +512,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.2.5
+
+- Fixiexed a glitch when dragAxis is enabled and component is being resized #780
+
 #### v10.2.3
 
 - Fixed a bug, if set minWidth or minHeight with `px`, reize dowes not work. #739
