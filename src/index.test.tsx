@@ -160,7 +160,7 @@ test("should dragging disabled when axis equals none", async (t) => {
   });
   rnd.find("div").at(0).simulate("mousedown", { clientX: 0, clientY: 0 });
   mouseMove(200, 220);
-  t.is(onDrag.callCount, 1);
+  t.is(onDrag.callCount, 0);
   t.not((rnd.getDOMNode().getAttribute("style") || "").indexOf("transform: translate(100px, 100px)"), -1);
 });
 
