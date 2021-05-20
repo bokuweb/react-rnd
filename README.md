@@ -2,8 +2,7 @@
 
 <p align="center">A resizable and draggable component for React.</p>
 
-<p align="center"><a href="https://circleci.com/gh/bokuweb/react-rnd/tree/master">
-<img src="https://circleci.com/gh/bokuweb/react-rnd/tree/master.svg?style=svg" alt="Build Status" /></a>
+<p align="center"><img src="https://github.com/bokuweb/react-rnd/workflows/Continuous%20Integration/badge.svg" alt="Build Status" />
 <a href="https://www.npmjs.com/package/react-rnd">
 <img src="https://img.shields.io/npm/v/react-rnd.svg" alt="Build Status" /></a>
 <a href="https://www.npmjs.com/package/react-rnd">
