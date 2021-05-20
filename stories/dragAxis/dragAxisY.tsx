@@ -9,7 +9,7 @@ type State = {
   height: number | string;
 };
 
-export default class dragAxis extends React.Component<{}, State> {
+export default class dragAxisX extends React.Component<{}, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +26,11 @@ export default class dragAxis extends React.Component<{}, State> {
         style={style}
         size={{ width: this.state.width, height: this.state.height }}
         position={{ x: this.state.x, y: this.state.y }}
+        onDrag={(e, d) => {
+          console.log("onDrag", d);
+        }}
         onDragStop={(e, d) => {
+          console.log(d);
           this.setState({ ...this.state, ...d });
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
@@ -37,7 +41,7 @@ export default class dragAxis extends React.Component<{}, State> {
             ...position,
           });
         }}
-        dragAxis="x"
+        dragAxis="y"
       >
         001
       </Rnd>
