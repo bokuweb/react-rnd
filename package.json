@@ -47,7 +47,7 @@
     "@babel/preset-react": "7.13.13",
     "@babel/preset-typescript": "7.13.0",
     "@babel/traverse": "7.14.2",
-    "@babel/types": "7.14.2",
+    "@babel/types": "7.14.4",
     "@emotion/core": "11.0.0",
     "@storybook/addon-actions": "6.2.9",
     "@storybook/addon-info": "5.3.21",
