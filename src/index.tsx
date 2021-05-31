@@ -55,6 +55,7 @@ type Size = {
 };
 
 type State = {
+  original: Position;
   bounds: {
     top: number;
     right: number;
@@ -218,6 +219,10 @@ export class Rnd extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      original: {
+        x: 0,
+        y: 0,
+      },
       bounds: {
         top: 0,
         right: 0,
@@ -392,7 +397,9 @@ export class Rnd extends React.PureComponent<Props, State> {
     const offset = this.offsetFromParent;
     const pos = this.getDraggablePosition();
     this.resizingPosition = { x: pos.x + offset.left, y: pos.y + offset.top };
-    this.originalPosition = pos;
+    this.setState({
+      original: pos,
+    });
     if (this.props.bounds) {
       const parent = this.getParent();
       let boundary;
@@ -483,7 +490,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     delta: { height: number; width: number },
   ) {
     // INFO: Apply x and y position adjustments caused by resizing to draggable
-    const newPos = { x: this.originalPosition.x, y: this.originalPosition.y };
+    const newPos = { x: this.state.original.x, y: this.state.original.y };
     const left = -delta.width;
     const top = -delta.height;
     const directions = ["top", "left", "topLeft", "bottomLeft", "topRight"];
