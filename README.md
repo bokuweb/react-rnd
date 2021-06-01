@@ -511,7 +511,7 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
-#### v10.3.1
+#### v10.3.1, v10.3.2
 
 - Fixed a bug, top and left resize issue, caused by "position" #792
 
