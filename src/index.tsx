@@ -559,10 +559,13 @@ export class Rnd extends React.PureComponent<Props, State> {
     const parentTop = parentRect.top;
     const selfRect = self.getBoundingClientRect();
     const position = this.getDraggablePosition();
+    const scrollLeft = parent.scrollLeft;
+    const scrollTop = parent.scrollTop;
     this.offsetFromParent = {
-      left: selfRect.left - parentLeft - position.x * scale,
-      top: selfRect.top - parentTop - position.y * scale,
+      left: selfRect.left - parentLeft + scrollLeft - position.x * scale,
+      top: selfRect.top - parentTop + scrollTop - position.y * scale,
     };
+
   }
 
   refDraggable = (c: $TODO) => {
