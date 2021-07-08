@@ -445,12 +445,13 @@ export class Rnd extends React.PureComponent<Props, State> {
         const hasRight = dir.toLowerCase().endsWith("right");
         const hasTop = dir.startsWith("top");
         const hasBottom = dir.startsWith("bottom");
-        if (hasLeft && this.resizable) {
+
+        if ((hasLeft || hasTop) && this.resizable) {
           const max = (selfLeft - boundaryLeft) / scale + this.resizable.size.width;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
         // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
-        if (hasRight || (this.props.lockAspectRatio && !hasLeft)) {
+        if (hasRight || (this.props.lockAspectRatio && !hasLeft && !hasTop)) {
           const max = offsetWidth + (boundaryLeft - selfLeft) / scale;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
