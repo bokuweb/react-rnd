@@ -436,7 +436,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         const selfRect = self.getBoundingClientRect();
         const selfLeft = selfRect.left;
         const selfTop = selfRect.top;
-        const boundaryRect = this.props.bounds === "window" ? { left: 0, top: 0, bottom: 0 } : boundary.getBoundingClientRect();
+        const boundaryRect = this.props.bounds === "window" ? { left: 0, top: 0 } : boundary.getBoundingClientRect();
         const boundaryLeft = boundaryRect.left;
         const boundaryTop = boundaryRect.top;
         const offsetWidth = this.getOffsetWidth(boundary);
