@@ -436,9 +436,10 @@ export class Rnd extends React.PureComponent<Props, State> {
         const selfRect = self.getBoundingClientRect();
         const selfLeft = selfRect.left;
         const selfTop = selfRect.top;
-        const boundaryRect = this.props.bounds === "window" ? { left: 0, top: 0 } : boundary.getBoundingClientRect();
+        const boundaryRect = this.props.bounds === "window" ? { left: 0, top: 0, bottom: 0 } : boundary.getBoundingClientRect();
         const boundaryLeft = boundaryRect.left;
         const boundaryTop = boundaryRect.top;
+        const boundaryBottom = boundaryRect.bottom;
         const offsetWidth = this.getOffsetWidth(boundary);
         const offsetHeight = this.getOffsetHeight(boundary);
         const hasLeft = dir.toLowerCase().endsWith("left");
@@ -455,14 +456,14 @@ export class Rnd extends React.PureComponent<Props, State> {
           const max = offsetWidth + (boundaryLeft - selfLeft) / scale;
           this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
         }
-        if (hasTop && this.resizable) {
+        if ((hasTop || hasLeft) && this.resizable) {
           const max = (selfTop - boundaryTop) / scale + this.resizable.size.height;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
           });
         }
         // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
-        if (hasBottom || (this.props.lockAspectRatio && !hasTop)) {
+        if (hasBottom || (this.props.lockAspectRatio && !hasTop && !hasLeft)) {
           const max = offsetHeight + (boundaryTop - selfTop) / scale;
           this.setState({
             maxHeight: max > Number(maxHeight) ? maxHeight : max,
