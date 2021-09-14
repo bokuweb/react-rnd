@@ -511,6 +511,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.3.5
+
+- Upgrade `re-resizable` to `6.9.1`
+
 #### v10.3.4
 
 - Fixed a bound check with locked aspect ratio (fully fixes #209)
