@@ -198,7 +198,7 @@ If omitted, set `0`.
 
 #### `scale?: number;`
 
-Specifies the scale of the canvas your are dragging or resizing this element on. This allows
+Specifies the scale of the canvas you are dragging or resizing this element on. This allows
 you to, for example, get the correct drag / resize deltas while you are zoomed in or out via
 a transform or matrix in the parent of this element.
 If omitted, set `1`.
