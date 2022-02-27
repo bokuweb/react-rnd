@@ -511,6 +511,11 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.3.6
+
+- Upgrade `re-resizable` to `6.9.2`
+- Upgrade `react-draggable` to v4.4.4
+
 #### v10.3.5
 
 - Upgrade `re-resizable` to `6.9.1`
