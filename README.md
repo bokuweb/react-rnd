@@ -511,6 +511,12 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.3.7
+
+- Upgrade `re-resizable` to `6.9.6`
+- Add peer deps.
+
+
 #### v10.3.6
 
 - Upgrade `re-resizable` to `6.9.2`
