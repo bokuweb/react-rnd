@@ -1,6 +1,6 @@
 {
   "name": "react-rnd",
-  "version": "10.3.6",
+  "version": "10.3.7",
   "description": "",
   "title": "react-rnd",
   "main": "./lib/index.es5.js",
@@ -99,7 +99,7 @@
     "fixture": "./fixture.html"
   },
   "dependencies": {
-    "re-resizable": "6.9.5",
+    "re-resizable": "6.9.6",
     "react-draggable": "4.4.4",
     "tslib": "2.3.1"
   },
