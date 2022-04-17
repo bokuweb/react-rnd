@@ -102,5 +102,9 @@
     "re-resizable": "6.9.5",
     "react-draggable": "4.4.4",
     "tslib": "2.3.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.3.0",
+    "react-dom": ">=16.3.0"
   }
 }
