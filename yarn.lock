@@ -6358,10 +6358,10 @@ cp-file@^9.1.0:
     nested-error-stacks "^2.0.0"
     p-event "^4.1.0"
 
-cpy-cli@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/cpy-cli/-/cpy-cli-4.1.0.tgz#64ce7e23e095a4961539f89da6413f5deb8a62f6"
-  integrity sha512-JA6bth6/mxPCa19SrWkIuPEBrea8vO9g1v0qhmCLnAKOfTcsNk5/X3W1o9aZuOHgugRcxdyR67rO4Gw/DA+4Qg==
+cpy-cli@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/cpy-cli/-/cpy-cli-4.2.0.tgz#d60bf9ac776486af20aac2fa4fb95f8f10b35ce8"
+  integrity sha512-b04b+cbdr29CdpREPKw/itrfjO43Ty0Aj7wRM6M6LoE4GJxZJCk9Xp+Eu1IqztkKh3LxIBt1tDplENsa6KYprg==
   dependencies:
     cpy "^9.0.0"
     meow "^10.1.2"
@@ -11905,6 +11905,15 @@ prop-types@15.7.2, prop-types@^15.0.0, prop-types@^15.6.0, prop-types@^15.6.1, p
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
+prop-types@^15.8.1:
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
+  integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.13.1"
+
 property-information@^5.0.0, property-information@^5.3.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-5.6.0.tgz#61675545fb23002f245c6540ec46077d4da3ed69"
@@ -12216,13 +12225,13 @@ react-dom@^16.8.3:
     prop-types "^15.6.2"
     scheduler "^0.18.0"
 
-react-draggable@4.4.4:
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.4.tgz#5b26d9996be63d32d285a426f41055de87e59b2f"
-  integrity sha512-6e0WdcNLwpBx/YIDpoyd2Xb04PB0elrDrulKUgdrIlwuYvxh5Ok9M+F8cljm8kPXXs43PmMzek9RrB1b7mLMqA==
+react-draggable@4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.5.tgz#9e37fe7ce1a4cf843030f521a0a4cc41886d7e7c"
+  integrity sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g==
   dependencies:
     clsx "^1.1.1"
-    prop-types "^15.6.0"
+    prop-types "^15.8.1"
 
 react-draggable@^4.4.3:
   version "4.4.3"
