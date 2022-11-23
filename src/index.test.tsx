@@ -723,6 +723,44 @@ test("should clamped by selector size", async (t) => {
   t.is((rnd.childAt(0).childAt(0).getDOMNode() as HTMLElement).style.height, "800px");
 });
 
+test("should clamped by boundary element size", async (t) => {
+  const rnd = mount(
+    <div className="target" style={{ width: "800px", height: "600px" }}>
+      <div style={{ width: "800px", height: "600px" }}>
+        <Rnd
+          default={{ x: 0, y: 0, width: 100, height: 100 }}
+          resizeHandleClasses={{
+            top: "handler",
+            right: "handler",
+            bottom: "handler",
+            left: "handler",
+            topRight: "handler",
+            bottomRight: "handler",
+            bottomLeft: "handler",
+            topLeft: "handler",
+          }}
+          bounds={document.querySelector(".target")!}
+          enableResizing={{
+            top: false,
+            right: false,
+            bottom: false,
+            left: false,
+            topRight: false,
+            bottomRight: true,
+            bottomLeft: false,
+            topLeft: false,
+          }}
+        />
+      </div>
+    </div>,
+    { attachTo: document.querySelector("div") },
+  );
+  rnd.find("div.handler").at(0).simulate("mousedown", { clientX: 0, clientY: 0 });
+  mouseMove(1200, 1200);
+  t.is((rnd.childAt(0).getDOMNode() as HTMLElement).style.width, "800px");
+  t.is((rnd.childAt(0).getDOMNode() as HTMLElement).style.height, "600px");
+});
+
 test("should get rnd updated when updatePosition invoked", async (t) => {
   const rnd = mount<Rnd>(<Rnd default={{ x: 100, y: 100, width: 100, height: 100 }} />);
   rnd.instance().updatePosition({ x: 200, y: 300 });

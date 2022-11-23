@@ -129,7 +129,7 @@ export interface Props {
   };
   size?: Size;
   resizeGrid?: Grid;
-  bounds?: string;
+  bounds?: string | Element;
   onMouseDown?: (e: MouseEvent) => void;
   onMouseUp?: (e: MouseEvent) => void;
   onResizeStart?: RndResizeStartCallback;
@@ -330,8 +330,10 @@ export class Rnd extends React.PureComponent<Props, State> {
       const right = (window.innerWidth - this.resizable.size.width * scale) / scale + left;
       const bottom = (window.innerHeight - this.resizable.size.height * scale) / scale + top;
       return this.setState({ bounds: { top, right, bottom, left } });
-    } else {
+    } else if (typeof this.props.bounds === "string") {
       boundary = document.querySelector(this.props.bounds);
+    } else if (this.props.bounds instanceof HTMLElement) {
+      boundary = this.props.bounds;
     }
     if (!(boundary instanceof HTMLElement) || !(parent instanceof HTMLElement)) {
       return;
@@ -405,8 +407,10 @@ export class Rnd extends React.PureComponent<Props, State> {
         boundary = document.body;
       } else if (this.props.bounds === "window") {
         boundary = window;
-      } else {
+      } else if (typeof this.props.bounds === "string") {
         boundary = document.querySelector(this.props.bounds);
+      } else if (this.props.bounds instanceof HTMLElement) {
+        boundary = this.props.bounds;
       }
 
       const self = this.getSelfElement();
@@ -566,7 +570,6 @@ export class Rnd extends React.PureComponent<Props, State> {
       left: selfRect.left - parentLeft + scrollLeft - position.x * scale,
       top: selfRect.top - parentTop + scrollTop - position.y * scale,
     };
-
   }
 
   refDraggable = (c: $TODO) => {
