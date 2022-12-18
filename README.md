@@ -310,13 +310,13 @@ The `cancel` property disables specifies a selector to be used to prevent drag i
 
 The direction of allowed movement (dragging) allowed ('x','y','both','none').
 
-#### `bounds?: string;`
+#### `bounds?: string; | Element`
 
 Specifies movement boundaries. Accepted values:
  - `parent` restricts movement within the node's offsetParent
     (nearest node with position relative or absolute)
- - `window`, `body`, or
- - Selector, like `.fooClassName`.
+ - `window`, `body`, Selector like `.fooClassName` or
+ - `Element`.
 
 
 #### `enableUserSelectHack?: boolean;`
