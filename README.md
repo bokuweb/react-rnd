@@ -511,7 +511,7 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
-#### v10.4.0
+#### v10.4.1
 
 - Support Element for bounds.
 
