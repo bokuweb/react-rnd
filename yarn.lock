@@ -8097,11 +8097,6 @@ fast-levenshtein@~2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
 
-fast-memoize@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/fast-memoize/-/fast-memoize-2.5.1.tgz#c3519241e80552ce395e1a32dcdde8d1fd680f5d"
-  integrity sha512-xdmw296PCL01tMOXx9mdJSmWY29jQgxyuZdq0rEHMu+Tpe1eOEtCycoG6chzlcrWsNgpZP7oL8RiQr7+G6Bl6g==
-
 fastq@^1.6.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.11.0.tgz#bb9fb955a07130a918eb63c1f5161cc32a5d0858"
@@ -12705,12 +12700,10 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@6.9.6:
-  version "6.9.6"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.6.tgz#b95d37e3821481b56ddfb1e12862940a791e827d"
-  integrity sha512-0xYKS5+Z0zk+vICQlcZW+g54CcJTTmHluA7JUUgvERDxnKAnytylcyPsA+BSFi759s5hPlHmBRegFrwXs2FuBQ==
-  dependencies:
-    fast-memoize "^2.5.1"
+re-resizable@6.9.11:
+  version "6.9.11"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.11.tgz#f356e27877f12d926d076ab9ad9ff0b95912b475"
+  integrity sha512-a3hiLWck/NkmyLvGWUuvkAmN1VhwAz4yOhS6FdMTaxCUVN9joIWkT11wsO68coG/iEYuwn+p/7qAmfQzRhiPLQ==
 
 react-addons-create-fragment@^15.6.2:
   version "15.6.2"
