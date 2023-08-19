@@ -323,14 +323,8 @@ Specifies movement boundaries. Accepted values:
 
 By default, we add 'user-select:none' attributes to the document body    
 to prevent ugly text selection during drag. If this is causing problems    
-for your app, set this to `false`.    
+for your app, set this to `false`.
 
-#### `scale?: number;`
-
-Specifies the scale of the canvas your are resizing and dragging this element on. This allows
-you to, for example, get the correct resize and drag deltas while you are zoomed in or out via
-a transform or matrix in the parent of this element.
-If omitted, set `1`.
 
 ## Callback
 
