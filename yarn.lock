@@ -3847,13 +3847,13 @@
     "@types/cheerio" "*"
     "@types/react" "*"
 
-"@types/enzyme@3.1.16":
-  version "3.1.16"
-  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.1.16.tgz#b29e1d7148e4e15a773a9b9f2149ea4c42d3a91d"
-  integrity sha512-j4IAiHw+g97PWbvFv+yk601zsHf2pCYe61JZi7XW38eiRM1Lgc2LwgB7Bjssd5xi7+JMqshNfKKUP6QjMiCJ0g==
+"@types/enzyme@3.10.18":
+  version "3.10.18"
+  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.18.tgz#86010e7cb56cf1450dd391b8cc3a788f6a6fadef"
+  integrity sha512-RaO/TyyHZvXkpzinbMTZmd/S5biU4zxkvDsn22ujC29t9FMSzq8tnn8f2MxQ2P8GVhFRG5jTAL05DXKyTtpEQQ==
   dependencies:
     "@types/cheerio" "*"
-    "@types/react" "*"
+    "@types/react" "^16"
 
 "@types/eslint-scope@^3.7.3":
   version "3.7.4"
@@ -4090,6 +4090,15 @@
   version "17.0.43"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.43.tgz#4adc142887dd4a2601ce730bc56c3436fdb07a55"
   integrity sha512-8Q+LNpdxf057brvPu1lMtC5Vn7J119xrP1aq4qiaefNioQUYANF/CYeK4NsKorSZyUGJ66g0IM+4bbjwx45o2A==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16":
+  version "16.14.52"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.52.tgz#d6c31c3f69cf6ae10718d0a07a2ef6f2ebafc490"
+  integrity sha512-4+ZN73hgRW3Gang3QMqWjrqPPkf+lWZYiyG4uXtUbpd+7eiBDw6Gemila6rXDd8DorADupTiIERL6Mb5BQTF2w==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
