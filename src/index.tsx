@@ -130,6 +130,7 @@ export interface Props {
   size?: Size;
   resizeGrid?: Grid;
   bounds?: string | Element;
+  resizeBounds?: string | Element;
   onMouseDown?: (e: MouseEvent) => void;
   onMouseUp?: (e: MouseEvent) => void;
   onResizeStart?: RndResizeStartCallback;
@@ -398,19 +399,19 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.resizingPosition = { x: pos.x + offset.left, y: pos.y + offset.top };
     this.originalPosition = pos;
 
-    if (this.props.bounds) {
+    if ((this.props.resizeBounds || this.props.bounds)) {
       const parent = this.getParent();
       let boundary;
-      if (this.props.bounds === "parent") {
+      if ((this.props.resizeBounds || this.props.bounds) === "parent") {
         boundary = parent;
-      } else if (this.props.bounds === "body") {
+      } else if ((this.props.resizeBounds || this.props.bounds) === "body") {
         boundary = document.body;
-      } else if (this.props.bounds === "window") {
+      } else if ((this.props.resizeBounds || this.props.bounds) === "window") {
         boundary = window;
-      } else if (typeof this.props.bounds === "string") {
-        boundary = document.querySelector(this.props.bounds);
-      } else if (this.props.bounds instanceof HTMLElement) {
-        boundary = this.props.bounds;
+      } else if (typeof (this.props.resizeBounds || this.props.bounds) === "string") {
+        boundary = document.querySelector((this.props.resizeBounds || this.props.bounds));
+      } else if ((this.props.resizeBounds || this.props.bounds) instanceof HTMLElement) {
+        boundary = (this.props.resizeBounds || this.props.bounds);
       }
 
       const self = this.getSelfElement();
@@ -440,7 +441,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         const selfRect = self.getBoundingClientRect();
         const selfLeft = selfRect.left;
         const selfTop = selfRect.top;
-        const boundaryRect = this.props.bounds === "window" ? { left: 0, top: 0 } : boundary.getBoundingClientRect();
+        const boundaryRect = (this.props.resizeBounds || this.props.bounds) === "window" ? { left: 0, top: 0 } : boundary.getBoundingClientRect();
         const boundaryLeft = boundaryRect.left;
         const boundaryTop = boundaryRect.top;
         const offsetWidth = this.getOffsetWidth(boundary);
@@ -617,6 +618,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
     // Remove unknown props, see also https://reactjs.org/warnings/unknown-prop.html
     delete resizableProps.default;
+    delete resizableProps.resizeBounds;
 
     const cursorStyle = disableDragging || dragHandleClassName ? { cursor: "auto" } : { cursor: "move" };
     const innerStyle = {
