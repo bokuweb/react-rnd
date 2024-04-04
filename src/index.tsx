@@ -1,6 +1,6 @@
+import { Enable, Resizable, ResizeDirection } from "re-resizable";
 import * as React from "react";
 import { DraggableEventHandler, default as DraggableRoot } from "react-draggable";
-import { Enable, Resizable, ResizeDirection } from "re-resizable";
 
 // FIXME: https://github.com/mzabriskie/react-draggable/issues/381
 //         I can not find `scale` too...
@@ -402,16 +402,17 @@ export class Rnd extends React.PureComponent<Props, State> {
     if ((this.props.resizeBounds || this.props.bounds)) {
       const parent = this.getParent();
       let boundary;
-      if ((this.props.resizeBounds || this.props.bounds) === "parent") {
+      const boundaryBeingUsed = this.props.resizeBounds || this.props.bounds;
+      if (boundaryBeingUsed === "parent") {
         boundary = parent;
-      } else if ((this.props.resizeBounds || this.props.bounds) === "body") {
+      } else if (boundaryBeingUsed === "body") {
         boundary = document.body;
-      } else if ((this.props.resizeBounds || this.props.bounds) === "window") {
+      } else if (boundaryBeingUsed === "window") {
         boundary = window;
-      } else if (typeof (this.props.resizeBounds || this.props.bounds) === "string") {
-        boundary = document.querySelector((this.props.resizeBounds || this.props.bounds));
-      } else if ((this.props.resizeBounds || this.props.bounds) instanceof HTMLElement) {
-        boundary = (this.props.resizeBounds || this.props.bounds);
+      } else if (typeof boundaryBeingUsed === "string") {
+        boundary = document.querySelector(boundaryBeingUsed);
+      } else if (boundaryBeingUsed instanceof HTMLElement) {
+        boundary = boundaryBeingUsed;
       }
 
       const self = this.getSelfElement();
