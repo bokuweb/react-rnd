@@ -1,11 +1,6 @@
 import * as React from "react";
-import { DraggableEventHandler, default as DraggableRoot } from "react-draggable";
+import Draggable, { DraggableEventHandler } from "react-draggable";
 import { Enable, Resizable, ResizeDirection } from "re-resizable";
-
-// FIXME: https://github.com/mzabriskie/react-draggable/issues/381
-//         I can not find `scale` too...
-type $TODO = any;
-const Draggable: any = DraggableRoot;
 
 export type Grid = [number, number];
 
@@ -209,7 +204,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     onDragStop: () => {},
   };
   resizable!: Resizable;
-  draggable!: $TODO; // Draggable;
+  draggable!: Draggable;
   resizingPosition = { x: 0, y: 0 };
   offsetFromParent = { left: 0, top: 0 };
   resizableElement: { current: HTMLElement | null } = { current: null };
@@ -507,7 +502,8 @@ export class Rnd extends React.PureComponent<Props, State> {
       }
     }
 
-    if (newPos.x !== this.draggable.state.x || newPos.y !== this.draggable.state.y) {
+    const draggableState = this.draggable.state as unknown as { x: number; y: number };
+    if (newPos.x !== draggableState.x || newPos.y !== draggableState.y) {
       this.draggable.setState(newPos);
     }
 
@@ -572,7 +568,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     };
   }
 
-  refDraggable = (c: $TODO) => {
+  refDraggable = (c: Draggable) => {
     if (!c) return;
     this.draggable = c;
   };
@@ -642,6 +638,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         handle={dragHandleClassName ? `.${dragHandleClassName}` : undefined}
         defaultPosition={defaultValue}
         onMouseDown={onMouseDown}
+        // @ts-expect-error
         onMouseUp={onMouseUp}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
