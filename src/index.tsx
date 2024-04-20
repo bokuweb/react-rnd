@@ -662,8 +662,6 @@ export class Rnd extends React.PureComponent<Props, State> {
     const pos = this.state.resizing ? undefined : draggablePosition;
     const dragAxisOrUndefined = this.state.resizing ? "both" : dragAxis;
 
-    console.log(defaultValue, pos);
-
     return (
       <Draggable
         ref={this.refDraggable}
