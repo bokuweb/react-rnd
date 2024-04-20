@@ -489,9 +489,9 @@ export class Rnd extends React.PureComponent<Props, State> {
     const newPos = { x: this.originalPosition.x, y: this.originalPosition.y };
     const left = -delta.width;
     const top = -delta.height;
-    const directions = ["top", "left", "topLeft", "bottomLeft", "topRight"];
+    const directions: ResizeDirection[] = ["top", "left", "topLeft", "bottomLeft", "topRight"];
 
-    if (directions.indexOf(direction) !== -1) {
+    if (directions.includes(direction)) {
       if (direction === "bottomLeft") {
         newPos.x += left;
       } else if (direction === "topRight") {

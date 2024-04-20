@@ -1,7 +1,7 @@
 {
   "name": "react-rnd",
-  "version": "10.4.2",
-  "description": "",
+  "version": "10.4.4",
+  "description": "A draggable and resizable React Component",
   "title": "react-rnd",
   "main": "./lib/index.es5.js",
   "module": "./lib/index.js",
