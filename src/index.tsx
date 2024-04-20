@@ -363,7 +363,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     if (!this.props.onDrag) return;
     const { left, top } = this.offsetFromParent;
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
-      return this.props.onDrag(e, { ...data, x: data.x - left, y: data.y - top });
+      return this.props.onDrag(e, { ...data, x: data.x + left, y: data.y + top });
     } else if (this.props.dragAxis === "x") {
       return this.props.onDrag(e, { ...data, x: data.x + left, y: this.originalPosition.y + top, deltaY: 0 });
     } else if (this.props.dragAxis === "y") {
