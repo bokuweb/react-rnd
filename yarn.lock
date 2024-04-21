@@ -11338,10 +11338,10 @@ rc@^1.1.7, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@6.9.11:
-  version "6.9.11"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.11.tgz#f356e27877f12d926d076ab9ad9ff0b95912b475"
-  integrity sha512-a3hiLWck/NkmyLvGWUuvkAmN1VhwAz4yOhS6FdMTaxCUVN9joIWkT11wsO68coG/iEYuwn+p/7qAmfQzRhiPLQ==
+re-resizable@6.9.12:
+  version "6.9.12"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.12.tgz#d64bb1e08acb8da5fadba20435c4c9f6b3fa2328"
+  integrity sha512-wAf0MxHRDJXWmgNVvju2Fk2UtOqxpwXrBxAEuPFSvc058JHZFS4V6FEg1+8BZv4obXXHmifEZzvlw89TDZprZA==
 
 react-addons-create-fragment@^15.6.2:
   version "15.6.2"
