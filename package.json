@@ -80,7 +80,7 @@
     "@rollup/plugin-babel": "5.0.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-globals": "1.4.0",
-    "rollup-plugin-node-resolve": "5.2.0",
+    "@rollup/plugin-node-resolve": "6.0.0",
     "rollup-plugin-replace": "2.2.0",
     "rollup-plugin-typescript2": "0.22.0",
     "rollup-watch": "4.3.1",
