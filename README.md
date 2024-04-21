@@ -50,7 +50,7 @@ https://codesandbox.io/s/xpm699v4lp
 [![Edit y3997qply9](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/y3997qply9)   
 [CodeSandbox(with default)](https://codesandbox.io/s/y3997qply9)    
 [CodeSandbox(with size and position)](https://codesandbox.io/s/my4kjly94x)    
-[CodeSandbox(with typescript)](https://codesandbox.io/s/j1vvkpo9wv)
+[CodeSandbox(with typescript)](https://codesandbox.io/s/j1vvkpo9wv)   
 [CodeSandbox(with hooks)](https://codesandbox.io/p/sandbox/pensive-babycat-8kxhnr)
 
 
