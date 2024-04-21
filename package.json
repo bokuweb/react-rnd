@@ -1,6 +1,6 @@
 {
   "name": "react-rnd",
-  "version": "10.4.7",
+  "version": "10.4.9",
   "description": "A draggable and resizable React Component",
   "title": "react-rnd",
   "main": "./lib/index.es5.js",
@@ -98,7 +98,7 @@
     "fixture": "./fixture.html"
   },
   "dependencies": {
-    "re-resizable": "6.9.11",
+    "re-resizable": "6.9.13",
     "react-draggable": "4.4.6",
     "tslib": "2.6.2"
   },
