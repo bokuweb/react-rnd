@@ -510,6 +510,10 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.4.7
+
+- Fixed a bug, `maxHeight` does not work with `%` #914
+
 #### v10.4.6
 
 - Upgrade `re-resizable` to `6.9.11`
