@@ -9,10 +9,13 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 20
-      - name: yarn
-        run: yarn --frozen-lockfile
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
       - name: lint
-        run: yarn lint
+        run: pnpm lint
 
   tsc:
     runs-on: ubuntu-latest
@@ -21,10 +24,13 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 20
-      - name: yarn
-        run: yarn --frozen-lockfile
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
       - name: tsc
-        run: yarn tsc
+        run: pnpm tsc
 
   # test:
   #   runs-on: ubuntu-latest
