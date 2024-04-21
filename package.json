@@ -1,6 +1,6 @@
 {
   "name": "react-rnd",
-  "version": "10.4.6",
+  "version": "10.4.7",
   "description": "A draggable and resizable React Component",
   "title": "react-rnd",
   "main": "./lib/index.es5.js",
@@ -24,7 +24,7 @@
     "test": "cross-env NODE_ENV='test' npm run tsc && avaron lib/index.test.js --renderer",
     "copy:flow": "cpy src/index.js.flow lib && cpy src/index.js.flow lib --rename index.es5.js.flow",
     "test:ci": "npm run flow && npm run build",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "storybook": "start-storybook -p 6016",
     "build-storybook": "build-storybook -o docs/stories",
     "deploy": "npm run build-storybook && gh-pages -d docs"
