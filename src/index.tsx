@@ -427,7 +427,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         if (maxHeight && typeof maxHeight === "string") {
           if (maxHeight.endsWith("%")) {
             const ratio = Number(maxHeight.replace("%", "")) / 100;
-            maxHeight = parentSize.width * ratio;
+            maxHeight = parentSize.height * ratio;
           } else if (maxHeight.endsWith("px")) {
             maxHeight = Number(maxHeight.replace("px", ""));
           }
