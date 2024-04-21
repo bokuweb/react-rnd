@@ -68,8 +68,8 @@ devDependencies:
     specifier: 3.1.16
     version: 3.1.16
   '@types/enzyme-adapter-react-16':
-    specifier: 1.0.6
-    version: 1.0.6
+    specifier: 1.0.9
+    version: 1.0.9
   '@types/node':
     specifier: 16.18.96
     version: 16.18.96
@@ -107,8 +107,8 @@ devDependencies:
     specifier: 3.11.0
     version: 3.11.0
   enzyme-adapter-react-16:
-    specifier: 1.9.1
-    version: 1.9.1(enzyme@3.11.0)(react-dom@16.14.0)(react@16.14.0)
+    specifier: 1.15.8
+    version: 1.15.8(enzyme@3.11.0)(react-dom@16.14.0)(react@16.14.0)
   gh-pages:
     specifier: 3.2.3
     version: 3.2.3
@@ -3354,8 +3354,8 @@ packages:
       '@types/node': 16.18.96
     dev: true
 
-  /@types/enzyme-adapter-react-16@1.0.6:
-    resolution: {integrity: sha512-VonDkZ15jzqDWL8mPFIQnnLtjwebuL9YnDkqeCDYnB4IVgwUm0mwKkqhrxLL6mb05xm7qqa3IE95m8CZE9imCg==}
+  /@types/enzyme-adapter-react-16@1.0.9:
+    resolution: {integrity: sha512-z24MMxGtUL8HhXdye3tWzjp+19QTsABqLaX2oOZpxMPHRJgLfahQmOeTTrEBQd9ogW20+UmPBXD9j+XOasFHvw==}
     dependencies:
       '@types/enzyme': 3.1.16
     dev: true
@@ -6090,8 +6090,8 @@ packages:
     engines: {node: '>=0.12'}
     dev: true
 
-  /enzyme-adapter-react-16@1.9.1(enzyme@3.11.0)(react-dom@16.14.0)(react@16.14.0):
-    resolution: {integrity: sha512-Egzogv1y77DUxdnq/CyHxLHaNxmSSKDDSDNNB/EiAXCZVFXdFibaNy2uUuRQ1n24T2m6KH/1Rw16XDRq+1yVEg==}
+  /enzyme-adapter-react-16@1.15.8(enzyme@3.11.0)(react-dom@16.14.0)(react@16.14.0):
+    resolution: {integrity: sha512-uYGC31eGZBp5nGsr4nKhZKvxGQjyHGjS06BJsUlWgE29/hvnpgCsT1BJvnnyny7N3GIIVyxZ4O9GChr6hy2WQA==}
     peerDependencies:
       enzyme: ^3.0.0
       react: ^16.0.0-0
@@ -6099,7 +6099,8 @@ packages:
     dependencies:
       enzyme: 3.11.0
       enzyme-adapter-utils: 1.14.2(react@16.14.0)
-      function.prototype.name: 1.1.6
+      enzyme-shallow-equal: 1.0.7
+      hasown: 2.0.2
       object.assign: 4.1.5
       object.values: 1.2.0
       prop-types: 15.8.1
@@ -6107,6 +6108,7 @@ packages:
       react-dom: 16.14.0(react@16.14.0)
       react-is: 16.13.1
       react-test-renderer: 16.14.0(react@16.14.0)
+      semver: 5.7.2
     dev: true
 
   /enzyme-adapter-utils@1.14.2(react@16.14.0):
@@ -9721,6 +9723,7 @@ packages:
 
   /path-dirname@1.0.2:
     resolution: {integrity: sha512-ALzNPpyNq9AqXMBjeymIjFDAkAFH06mHJH/cSBHAgU0s4vfpBn6b2nf8tiRLvagKD8RbTpq2FKTBg7cl9l3c7Q==}
+    requiresBuild: true
     dev: true
 
   /path-exists@2.1.0:
