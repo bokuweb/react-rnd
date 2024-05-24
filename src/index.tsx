@@ -568,17 +568,6 @@ export class Rnd extends React.PureComponent<Props, State> {
     };
   }
 
-  refDraggable = (c: Draggable) => {
-    if (!c) return;
-    this.draggable = c;
-  };
-
-  refResizable = (c: Resizable | null) => {
-    if (!c) return;
-    this.resizable = c;
-    this.resizableElement.current = c.resizable;
-  };
-
   render() {
     const {
       disableDragging,
@@ -634,7 +623,10 @@ export class Rnd extends React.PureComponent<Props, State> {
 
     return (
       <Draggable
-        ref={this.refDraggable}
+        ref={(c: Draggable) => {
+          if (!c) return;
+          this.draggable = c;
+        }}
         handle={dragHandleClassName ? `.${dragHandleClassName}` : undefined}
         defaultPosition={defaultValue}
         onMouseDown={onMouseDown}
@@ -656,7 +648,11 @@ export class Rnd extends React.PureComponent<Props, State> {
       >
         <Resizable
           {...resizableProps}
-          ref={this.refResizable}
+          ref={(c: Resizable | null) => {
+            if (!c) return;
+            this.resizable = c;
+            this.resizableElement.current = c.resizable;
+          }}
           defaultSize={defaultValue}
           size={this.props.size}
           enable={typeof enableResizing === "boolean" ? getEnableResizingByFlag(enableResizing) : enableResizing}
