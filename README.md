@@ -510,6 +510,11 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.4.11
+
+- Upgrade `re-resizable` to `6.9.17`
+- Fixes #942, define callback refs inline to work with latest versions of Next.js / React.
+
 #### v10.4.10
 
 - Upgrade `re-resizable` to `6.9.14`
