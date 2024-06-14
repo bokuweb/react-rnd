@@ -80,8 +80,8 @@ devDependencies:
     specifier: 17.0.25
     version: 17.0.25
   '@types/sinon':
-    specifier: 10.0.11
-    version: 10.0.11
+    specifier: 10.0.20
+    version: 10.0.20
   '@types/storybook__addon-actions':
     specifier: 5.2.1
     version: 5.2.1(react-dom@16.14.0)(react@16.14.0)
@@ -3530,8 +3530,8 @@ packages:
     resolution: {integrity: sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A==}
     dev: true
 
-  /@types/sinon@10.0.11:
-    resolution: {integrity: sha512-dmZsHlBsKUtBpHriNjlK0ndlvEh8dcb9uV9Afsbt89QIyydpC7NcR+nWlAhASfy3GHnxTl4FX/aKE7XZUt/B4g==}
+  /@types/sinon@10.0.20:
+    resolution: {integrity: sha512-2APKKruFNCAZgx3daAyACGzWuJ028VVCUDk6o2rw/Z4PXT0ogwdV4KUegW0MwVs0Zu59auPXbbuBJHF12Sx1Eg==}
     dependencies:
       '@types/sinonjs__fake-timers': 8.1.5
     dev: true
