@@ -1,6 +1,7 @@
 import * as React from "react";
 import Draggable, { DraggableEventHandler } from "react-draggable";
 import { Enable, Resizable, ResizeDirection } from "re-resizable";
+import { flushSync } from "react-dom";
 
 export type Grid = [number, number];
 
@@ -504,7 +505,9 @@ export class Rnd extends React.PureComponent<Props, State> {
 
     const draggableState = this.draggable.state as unknown as { x: number; y: number };
     if (newPos.x !== draggableState.x || newPos.y !== draggableState.y) {
-      this.draggable.setState(newPos);
+      flushSync(() => {
+        this.draggable.setState(newPos);
+      });
     }
 
     this.updateOffsetFromParent();
