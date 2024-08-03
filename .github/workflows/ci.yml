@@ -11,7 +11,7 @@ jobs:
           node-version: 20
       - uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
       - name: Install dependencies
         run: pnpm i --frozen-lockfile
       - name: lint
@@ -26,7 +26,7 @@ jobs:
           node-version: 20
       - uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
       - name: Install dependencies
         run: pnpm i --frozen-lockfile
       - name: tsc
