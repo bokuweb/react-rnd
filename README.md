@@ -510,7 +510,13 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
-#### v10.4.11
+#### v10.4.13
+
+- Upgrade `re-resizable` to `6.10.0`
+
+#### v10.4.12
+
+- Fixes $945, When using vite and resizing from other than right and bottom - the element is shaking weirdly.
 
 - Upgrade `re-resizable` to `6.9.17`
 - Fixes #942, define callback refs inline to work with latest versions of Next.js / React.
