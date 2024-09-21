@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       re-resizable:
-        specifier: 6.9.17
-        version: 6.9.17(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
+        specifier: 6.10.0
+        version: 6.10.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       react-draggable:
         specifier: 4.4.6
         version: 4.4.6(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
@@ -5006,8 +5006,8 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
 
-  re-resizable@6.9.17:
-    resolution: {integrity: sha512-OBqd1BwVXpEJJn/yYROG+CbeqIDBWIp6wathlpB0kzZWWZIY1gPTsgK2yJEui5hOvkCdC2mcexF2V3DZVfLq2g==}
+  re-resizable@6.10.0:
+    resolution: {integrity: sha512-hysSK0xmA5nz24HBVztlk4yCqCLCvS32E6ZpWxVKop9x3tqCa4yAj1++facrmkOf62JsJHjmjABdKxXofYioCw==}
     peerDependencies:
       react: ^16.13.1 || ^17.0.0 || ^18.0.0
       react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
@@ -7777,7 +7777,7 @@ snapshots:
       style-loader: 1.3.0(webpack@4.47.0)
       terser-webpack-plugin: 4.2.3(webpack@4.47.0)
       ts-dedent: 2.2.0
-      url-loader: 4.1.1(file-loader@6.2.0(webpack@4.47.0))(webpack@4.47.0)
+      url-loader: 4.1.1(file-loader@6.2.0(webpack@5.91.0))(webpack@4.47.0)
       util-deprecate: 1.0.2
       webpack: 4.47.0
       webpack-dev-middleware: 3.7.3(webpack@4.47.0)
@@ -8181,7 +8181,7 @@ snapshots:
       telejson: 6.0.8
       terser-webpack-plugin: 4.2.3(webpack@4.47.0)
       ts-dedent: 2.2.0
-      url-loader: 4.1.1(file-loader@6.2.0(webpack@4.47.0))(webpack@4.47.0)
+      url-loader: 4.1.1(file-loader@6.2.0(webpack@5.91.0))(webpack@4.47.0)
       util-deprecate: 1.0.2
       webpack: 4.47.0
       webpack-dev-middleware: 3.7.3(webpack@4.47.0)
@@ -12736,7 +12736,7 @@ snapshots:
       schema-utils: 3.3.0
       webpack: 4.47.0
 
-  re-resizable@6.9.17(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
+  re-resizable@6.10.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
     dependencies:
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
@@ -14019,7 +14019,7 @@ snapshots:
 
   urix@0.1.0: {}
 
-  url-loader@4.1.1(file-loader@6.2.0(webpack@4.47.0))(webpack@4.47.0):
+  url-loader@4.1.1(file-loader@6.2.0(webpack@5.91.0))(webpack@4.47.0):
     dependencies:
       loader-utils: 2.0.4
       mime-types: 2.1.35
