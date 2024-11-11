@@ -157,6 +157,7 @@ export interface Props {
   enableUserSelectHack?: boolean;
   allowAnyClick?: boolean;
   scale?: number;
+  resizeSymmetry?: "none" | "horizontal" | "vertical" | "central"
   [key: string]: any;
 }
 
@@ -488,21 +489,64 @@ export class Rnd extends React.PureComponent<Props, State> {
   ) {
     // INFO: Apply x and y position adjustments caused by resizing to draggable
     const newPos = { x: this.originalPosition.x, y: this.originalPosition.y };
-    const left = -delta.width;
-    const top = -delta.height;
-    const directions: ResizeDirection[] = ["top", "left", "topLeft", "bottomLeft", "topRight"];
-
-    if (directions.includes(direction)) {
-      if (direction === "bottomLeft") {
-        newPos.x += left;
-      } else if (direction === "topRight") {
-        newPos.y += top;
-      } else {
+    if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "none")
+    {
+      const left = -delta.width;
+      const top = -delta.height;
+      const directions: ResizeDirection[] = ["top", "left", "topLeft", "bottomLeft", "topRight"];
+      if (directions.includes(direction)) {
+        if (direction === "bottomLeft") {
+          newPos.x += left;
+        } else if (direction === "topRight") {
+          newPos.y += top;
+        } else {
+          newPos.x += left;
+          newPos.y += top;
+        }
+      }
+    }
+    else if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "vertical")
+    {
+      const left = -delta.width / 2;
+      const top = -delta.height;
+      const directions: ResizeDirection[] = ["top", "left", "right", "topLeft", "bottomLeft", "topRight", "bottomRight"];
+      if (directions.includes(direction)) {
+        if (direction === "bottomLeft" || direction === "bottomRight") {
+          newPos.x += left;
+        } else if (direction === "right") {
+          newPos.x -= -left;
+          newPos.y += top;
+        } else {
+          newPos.x += left;
+          newPos.y += top;
+        }
+      }
+    }
+    else if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "horizontal")
+    {
+      const left = -delta.width;
+      const top = -delta.height / 2;
+      const directions: ResizeDirection[] = ["left", "bottom", "top", "bottomLeft", "bottomRight", "topLeft",  "topRight", "bottomLeft"];
+      if (directions.includes(direction)) {
+        if (direction === "bottomRight" || direction === "topRight") {
+          newPos.y += top;
+        } else {
+          newPos.x += left;
+          newPos.y += top;
+        }
+      }
+    }
+    else if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "central")
+    {
+      const left = -delta.width / 2;
+      const top = -delta.height / 2;
+      const directions: ResizeDirection[] = ["top", "left", "right", "bottom", "topLeft", "bottomLeft", "topRight", "bottomRight"];
+      if (directions.includes(direction)) {
         newPos.x += left;
         newPos.y += top;
       }
     }
-
+    
     const draggableState = this.draggable.state as unknown as { x: number; y: number };
     if (newPos.x !== draggableState.x || newPos.y !== draggableState.y) {
       flushSync(() => {
@@ -623,6 +667,13 @@ export class Rnd extends React.PureComponent<Props, State> {
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.state.resizing ? undefined : draggablePosition;
     const dragAxisOrUndefined = this.state.resizing ? "both" : dragAxis;
+    let resizeRatio:number | [number, number] | undefined = [1, 1];
+    if (this.props.resizeSymmetry == "vertical")
+      resizeRatio = [2, 1];
+    else if (this.props.resizeSymmetry == "horizontal")
+      resizeRatio = [1, 2];
+    else if (this.props.resizeSymmetry == "central")
+      resizeRatio = [2, 2];
 
     return (
       <Draggable
@@ -677,6 +728,7 @@ export class Rnd extends React.PureComponent<Props, State> {
           handleClasses={resizeHandleClasses}
           handleComponent={resizeHandleComponent}
           scale={this.props.scale}
+          resizeRatio={resizeRatio}
         >
           {children}
         </Resizable>

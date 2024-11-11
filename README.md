@@ -331,6 +331,11 @@ you to, for example, get the correct resize and drag deltas while you are zoomed
 a transform or matrix in the parent of this element.
 If omitted, set `1`.
 
+#### `resizeSymmetry?: 'none' | 'vertical' | 'horizontal' | 'central'`
+
+Allows resize so what `vertical` or `horizontal` axes or `central` point stands still while resizing. 
+Also useful with `lockAspectRatio` option.
+
 ## Callback
 
 #### `onResizeStart?: RndResizeStartCallback;`

@@ -51,6 +51,10 @@ import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-b
 import LockAspectRatioBasic from "./lock-aspect-ratio/basic";
 import Issue622 from "./sandbox/issue-#622";
 
+import ResizeSymmetryVertical from "./resizeSymmetry/vertical"
+import ResizeSymmetryHorizontal from "./resizeSymmetry/horizontal"
+import ResizeSymmetryCentral from "./resizeSymmetry/central"
+
 storiesOf("bare", module).add("bare", () => <Bare />);
 
 storiesOf("basic", module)
@@ -106,3 +110,8 @@ storiesOf("sandbox", module)
 storiesOf("ratio", module).add("lock aspect ratio", () => <LockAspectRatioBasic />);
 
 storiesOf("min", module).add("min uncontrolled", () => <MinUncontrolled />);
+
+storiesOf("resize symmetry", module).add("vertical", () => <ResizeSymmetryVertical />);
+storiesOf("resize symmetry", module).add("horizontal", () => <ResizeSymmetryHorizontal />);
+storiesOf("resize symmetry", module).add("central", () => <ResizeSymmetryCentral />);
+
