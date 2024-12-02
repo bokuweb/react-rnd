@@ -447,28 +447,56 @@ export class Rnd extends React.PureComponent<Props, State> {
         const hasTop = dir.startsWith("top");
         const hasBottom = dir.startsWith("bottom");
 
-        if ((hasLeft || hasTop) && this.resizable) {
-          const max = (selfLeft - boundaryLeft) / scale + this.resizable.size.width;
-          this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
+        if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "none")
+        {
+          if ((hasLeft || hasTop) && this.resizable) {
+            const max = (selfLeft - boundaryLeft) / scale + this.resizable.size.width;
+            this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
+          }
+          // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
+          if (hasRight || (this.props.lockAspectRatio && !hasLeft && !hasTop)) {
+            const max = offsetWidth  + (boundaryLeft - selfLeft) / scale;
+            this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
+          }
+          if ((hasTop || hasLeft) && this.resizable) {
+            const max = (selfTop - boundaryTop) / scale + this.resizable.size.height;
+            this.setState({
+              maxHeight: max > Number(maxHeight) ? maxHeight : max,
+            });
+          }
+          // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
+          if (hasBottom || (this.props.lockAspectRatio && !hasTop && !hasLeft)) {
+            const max = offsetHeight + (boundaryTop - selfTop) / scale;
+            this.setState({
+              maxHeight: max > Number(maxHeight) ? maxHeight : max,
+            });
+          }
         }
-        // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
-        if (hasRight || (this.props.lockAspectRatio && !hasLeft && !hasTop)) {
-          const max = offsetWidth + (boundaryLeft - selfLeft) / scale;
-          this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
-        }
-        if ((hasTop || hasLeft) && this.resizable) {
-          const max = (selfTop - boundaryTop) / scale + this.resizable.size.height;
-          this.setState({
-            maxHeight: max > Number(maxHeight) ? maxHeight : max,
-          });
-        }
-        // INFO: To set bounds in `lock aspect ratio with bounds` case. See also that story.
-        if (hasBottom || (this.props.lockAspectRatio && !hasTop && !hasLeft)) {
-          const max = offsetHeight + (boundaryTop - selfTop) / scale;
-          this.setState({
-            maxHeight: max > Number(maxHeight) ? maxHeight : max,
-          });
-        }
+        else
+        {
+          if ((hasLeft || hasTop || hasRight || (this.props.lockAspectRatio && !hasLeft && !hasTop)) && this.resizable) {
+            if (this.props.resizeSymmetry == "vertical" || this.props.resizeSymmetry == "central")
+            {
+              const spaceLeft = (selfLeft - boundaryLeft) / scale;
+              const spaceRight = offsetWidth - spaceLeft - this.resizable.size.width;
+              const max = spaceRight > spaceLeft ? (this.resizable.size.width + 2 * spaceLeft) : (this.resizable.size.width + 2 * spaceRight);
+              this.setState({ maxWidth: max > Number(maxWidth) ? maxWidth : max });
+            }                          
+          }
+
+          if ((hasTop || hasLeft || hasBottom || (this.props.lockAspectRatio && !hasTop && !hasLeft)) && this.resizable) {            
+            if (this.props.resizeSymmetry == "horizontal" || this.props.resizeSymmetry == "central")
+            {
+              const spaceTop = (selfTop - boundaryTop) / scale;
+              const spaceBottom = offsetHeight - spaceTop - this.resizable.size.height;
+              const max = spaceBottom > spaceTop ? (this.resizable.size.height + 2 * spaceTop) : (this.resizable.size.height + 2 * spaceBottom);
+
+              this.setState({
+                maxHeight: max > Number(maxHeight) ? maxHeight : max,
+              });
+            }
+          }
+        }        
       }
     } else {
       this.setState({
@@ -505,7 +533,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         }
       }
     }
-    else if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "vertical")
+    else if (this.props.resizeSymmetry == "vertical")
     {
       const left = -delta.width / 2;
       const top = -delta.height;
@@ -522,7 +550,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         }
       }
     }
-    else if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "horizontal")
+    else if (this.props.resizeSymmetry == "horizontal")
     {
       const left = -delta.width;
       const top = -delta.height / 2;
@@ -536,7 +564,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         }
       }
     }
-    else if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "central")
+    else if (this.props.resizeSymmetry == "central")
     {
       const left = -delta.width / 2;
       const top = -delta.height / 2;

@@ -54,6 +54,7 @@ import Issue622 from "./sandbox/issue-#622";
 import ResizeSymmetryVertical from "./resizeSymmetry/vertical"
 import ResizeSymmetryHorizontal from "./resizeSymmetry/horizontal"
 import ResizeSymmetryCentral from "./resizeSymmetry/central"
+import ResizeSymmetryBounds from "./resizeSymmetry/bounds"
 
 storiesOf("bare", module).add("bare", () => <Bare />);
 
@@ -114,4 +115,5 @@ storiesOf("min", module).add("min uncontrolled", () => <MinUncontrolled />);
 storiesOf("resize symmetry", module).add("vertical", () => <ResizeSymmetryVertical />);
 storiesOf("resize symmetry", module).add("horizontal", () => <ResizeSymmetryHorizontal />);
 storiesOf("resize symmetry", module).add("central", () => <ResizeSymmetryCentral />);
+storiesOf("resize symmetry", module).add("bounds", () => <ResizeSymmetryBounds />);
 
