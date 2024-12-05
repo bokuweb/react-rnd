@@ -507,33 +507,6 @@ export class Rnd extends React.PureComponent<Props, State> {
               maxHeight: max > Number(maxHeight) ? maxHeight : max,
             });
           }
-        }
-
-        if (!this.props.resizeSymmetry || this.props.resizeSymmetry == "none")
-        {
-          
-        }
-        else
-        {
-          if ((hasLeft || hasTop || hasRight || (this.props.lockAspectRatio && !hasLeft && !hasTop)) && this.resizable) {
-            if (this.props.resizeSymmetry  == "vertical" || this.props.resizeSymmetry == "central")
-            {
-              
-            }                          
-          }
-
-          if ((hasTop || hasLeft || hasBottom || (this.props.lockAspectRatio && !hasTop && !hasLeft)) && this.resizable) {            
-            if (this.props.resizeSymmetry == "horizontal" || this.props.resizeSymmetry == "central")
-            {
-              const spaceTop = (selfTop - boundaryTop) / scale;
-              const spaceBottom = offsetHeight - spaceTop - this.resizable.size.height;
-              const max = spaceBottom > spaceTop ? (this.resizable.size.height + 2 * spaceTop) : (this.resizable.size.height + 2 * spaceBottom);
-
-              this.setState({
-                maxHeight: max > Number(maxHeight) ? maxHeight : max,
-              });
-            }
-          }
         }        
       }
     } else {
