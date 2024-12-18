@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       re-resizable:
-        specifier: 6.10.0
-        version: 6.10.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
+        specifier: 6.10.3
+        version: 6.10.3(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       react-draggable:
         specifier: 4.4.6
         version: 4.4.6(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
@@ -5006,11 +5006,11 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
 
-  re-resizable@6.10.0:
-    resolution: {integrity: sha512-hysSK0xmA5nz24HBVztlk4yCqCLCvS32E6ZpWxVKop9x3tqCa4yAj1++facrmkOf62JsJHjmjABdKxXofYioCw==}
+  re-resizable@6.10.3:
+    resolution: {integrity: sha512-zvWb7X3RJMA4cuSrqoxgs3KR+D+pEXnGrD2FAD6BMYAULnZsSF4b7AOVyG6pC3VVNVOtlagGDCDmZSwWLjjBBw==}
     peerDependencies:
-      react: ^16.13.1 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
+      react: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react-addons-create-fragment@15.6.2:
     resolution: {integrity: sha512-O9+cXwMGcMF7WfpZHw+Lt8+jkRhyQBgihOVz9xfGMRORMdMf40HLeQQbdwPUQB7G73+/Zc+hB77A/UyE58n9Og==}
@@ -12736,7 +12736,7 @@ snapshots:
       schema-utils: 3.3.0
       webpack: 4.47.0
 
-  re-resizable@6.10.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
+  re-resizable@6.10.3(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
     dependencies:
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
