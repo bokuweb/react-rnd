@@ -510,6 +510,11 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.5.1
+
+- Upgrade `re-resizable` to `6.11.0`
+- Add missing position offset prop
+
 #### v10.4.14
 
 - Upgrade `re-resizable` to `6.10.3`
