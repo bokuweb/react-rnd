@@ -1,5 +1,5 @@
 import * as React from "react";
-import Draggable, { DraggableEventHandler } from "react-draggable";
+import Draggable, { DraggableEventHandler, DraggableProps } from "react-draggable";
 import { Enable, Resizable, ResizeDirection } from "re-resizable";
 import { flushSync } from "react-dom";
 
@@ -155,6 +155,7 @@ export interface Props {
   disableDragging?: boolean;
   cancel?: string;
   enableUserSelectHack?: boolean;
+  dragPositionOffset?: DraggableProps["positionOffset"];
   allowAnyClick?: boolean;
   scale?: number;
   [key: string]: any;
@@ -600,6 +601,7 @@ export class Rnd extends React.PureComponent<Props, State> {
       resizeHandleWrapperStyle,
       scale,
       allowAnyClick,
+      dragPositionOffset,
       ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
@@ -648,6 +650,7 @@ export class Rnd extends React.PureComponent<Props, State> {
         scale={scale}
         allowAnyClick={allowAnyClick}
         nodeRef={this.resizableElement}
+        positionOffset={dragPositionOffset}
       >
         <Resizable
           {...resizableProps}
