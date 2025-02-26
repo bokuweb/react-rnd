@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       re-resizable:
-        specifier: 6.11.0
-        version: 6.11.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
+        specifier: 6.11.2
+        version: 6.11.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       react-draggable:
         specifier: 4.4.6
         version: 4.4.6(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
@@ -5006,8 +5006,8 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
 
-  re-resizable@6.11.0:
-    resolution: {integrity: sha512-XwaQX5Yk+JEvyGwX1nlLWaZUDr+8gz+Joys5lF4i+7Jy33wShJ0VYQUoFceiSKqUnjVEEz+zf3YkCTyT04R3AA==}
+  re-resizable@6.11.2:
+    resolution: {integrity: sha512-2xI2P3OHs5qw7K0Ud1aLILK6MQxW50TcO+DetD9eIV58j84TqYeHoZcL9H4GXFXXIh7afhH8mv5iUCXII7OW7A==}
     peerDependencies:
       react: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -12736,7 +12736,7 @@ snapshots:
       schema-utils: 3.3.0
       webpack: 4.47.0
 
-  re-resizable@6.11.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
+  re-resizable@6.11.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
     dependencies:
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
