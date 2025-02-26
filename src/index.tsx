@@ -342,15 +342,15 @@ export class Rnd extends React.PureComponent<Props, State> {
     const parentLeft = parentRect.left;
     const parentTop = parentRect.top;
     const left = (boundaryLeft - parentLeft) / scale;
-    const top = boundaryTop - parentTop;
+    const top = boundaryTop - parentTop / scale;
     if (!this.resizable) return;
     this.updateOffsetFromParent();
     const offset = this.offsetFromParent;
     this.setState({
       bounds: {
-        top: top - offset.top,
+        top: top - offset.top / scale,
         right: left + (boundary.offsetWidth - this.resizable.size.width) - offset.left / scale,
-        bottom: top + (boundary.offsetHeight - this.resizable.size.height) - offset.top,
+        bottom: top + (boundary.offsetHeight - this.resizable.size.height) - offset.top / scale,
         left: left - offset.left / scale,
       },
     });
