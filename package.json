@@ -98,8 +98,8 @@
     "fixture": "./fixture.html"
   },
   "dependencies": {
-    "re-resizable": "6.11.2",
-    "react-draggable": "4.4.6",
+    "re-resizable": "^6.11.2",
+    "react-draggable": "^4.5.0",
     "tslib": "2.6.2"
   },
   "peerDependencies": {
