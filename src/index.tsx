@@ -296,8 +296,8 @@ export class Rnd extends React.PureComponent<Props, State> {
   }
 
   onDragStart(e: RndDragEvent, data: DraggableData) {
-    if (this.props.onDragStart) {
-      this.props.onDragStart(e, data);
+    if (this.props.onDragStart && this.props.onDragStart(e, data) === false) {
+      return false;
     }
     const pos = this.getDraggablePosition();
     this.originalPosition = pos;
@@ -385,6 +385,9 @@ export class Rnd extends React.PureComponent<Props, State> {
     dir: ResizeDirection,
     elementRef: HTMLElement,
   ) {
+    if (this.props.onResizeStart && this.props.onResizeStart(e, dir, elementRef) === false) {
+      return false;
+    }
     e.stopPropagation();
     this.setState({
       resizing: true,
@@ -475,9 +478,6 @@ export class Rnd extends React.PureComponent<Props, State> {
         maxWidth: this.props.maxWidth,
         maxHeight: this.props.maxHeight,
       });
-    }
-    if (this.props.onResizeStart) {
-      this.props.onResizeStart(e, dir, elementRef);
     }
   }
 
