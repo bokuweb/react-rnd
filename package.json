@@ -59,7 +59,7 @@
     "@types/node": "16.18.96",
     "@types/react": "17.0.80",
     "@types/react-dom": "17.0.25",
-    "@types/sinon": "10.0.11",
+    "@types/sinon": "10.0.20",
     "@types/storybook__addon-actions": "5.2.1",
     "@types/storybook__react": "5.2.1",
     "babel-core": "7.0.0-bridge.0",
