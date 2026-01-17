@@ -164,7 +164,6 @@ export interface Props {
 const resizableStyle = {
   width: "auto" as "auto",
   height: "auto" as "auto",
-  display: "inline-block" as "inline-block",
   position: "absolute" as "absolute",
   top: 0,
   left: 0,
