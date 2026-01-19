@@ -72,7 +72,7 @@
     "gh-pages": "3.2.3",
     "light-ts-loader": "1.1.2",
     "npm-run-all2": "5.0.2",
-    "prettier": "2.6.2",
+    "prettier": "2.8.8",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-test-renderer": "16.14.0",
