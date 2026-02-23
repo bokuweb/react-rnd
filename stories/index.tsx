@@ -48,6 +48,7 @@ import GridResize from "./grid/resize";
 import GridDrag from "./grid/drag";
 import GridBoth from "./grid/both";
 import GridPercentWithVisualGrid from "./grid/percent-with-visual-grid";
+import GridUnitsControlled from "./grid/grid-units-controlled";
 
 import SandboxBodySizeToMaxWidth from "./sandbox/bodysize-to-maxwidth";
 import SandboxLockAspectRatioWithBounds from "./sandbox/lock-aspect-ratio-with-bounds";
@@ -105,7 +106,8 @@ storiesOf("grid", module)
   .add("resize", () => <GridResize />)
   .add("drag", () => <GridDrag />)
   .add("both", () => <GridBoth />)
-  .add("percent with visual grid", () => <GridPercentWithVisualGrid />);
+  .add("percent with visual grid", () => <GridPercentWithVisualGrid />)
+  .add("grid units controlled", () => <GridUnitsControlled />);
 
 storiesOf("sandbox", module)
   .add("body size apply to maxwidth", () => <SandboxBodySizeToMaxWidth />)

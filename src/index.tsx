@@ -42,7 +42,8 @@ export type RndResizeCallback = (
   dir: ResizeDirection,
   elementRef: HTMLElement,
   delta: ResizableDelta,
-  position: Position,
+  position: Position | GridPosition,
+  gridPlacement?: GridPlacement,
 ) => void;
 
 type Size = {
@@ -50,7 +51,35 @@ type Size = {
   height: string | number;
 };
 
-export type PositionUnit = "px" | "%";
+export type PositionUnit = "px" | "%" | "grid";
+
+export type SizeUnit = "px" | "%" | "grid";
+
+/** Grid layout: columns count and row height in px. Column width = containerWidth / columns. */
+export type GridConfig = {
+  columns: number;
+  rowHeight: number;
+};
+
+/** Grid placement in 0-based line indices (columnEnd/rowEnd exclusive). */
+export type GridPlacement = {
+  columnStart: number;
+  rowStart: number;
+  columnEnd: number;
+  rowEnd: number;
+};
+
+/** Grid position (start cell). */
+export type GridPosition = {
+  columnStart: number;
+  rowStart: number;
+};
+
+/** Grid size in spans. */
+export type GridSize = {
+  columnSpan: number;
+  rowSpan: number;
+};
 
 type State = {
   resizing: boolean;
@@ -116,18 +145,26 @@ export type HandleComponent = {
   topLeft?: React.ReactElement<any>;
 };
 
+/** Default / position / size when positionUnit or sizeUnit is "grid" use grid fields. */
+export type RndDefaultGrid = GridPosition & GridSize;
+
 export interface Props {
   dragGrid?: Grid;
-  default?: {
-    x: number;
-    y: number;
-  } & Size;
-  position?: {
-    x: number;
-    y: number;
-  };
-  size?: Size;
+  /** Required when positionUnit or sizeUnit is "grid". */
+  gridConfig?: GridConfig;
+  default?: (
+    | ({ x: number; y: number } & Size)
+    | RndDefaultGrid
+  );
+  position?: Position | GridPosition;
+  size?: Size | GridSize;
   resizeGrid?: Grid;
+  /** When 'grid', position is GridPosition and gridConfig is required; callbacks receive grid placement. */
+  positionUnit?: PositionUnit;
+  /** When 'grid', size is GridSize and gridConfig is required; callbacks receive grid placement. Default 'px'. */
+  sizeUnit?: SizeUnit;
+  /** When 'grid', the wrapper uses grid-column/grid-row instead of position/left/top (parent must be display:grid). */
+  layoutMode?: "absolute" | "grid";
   bounds?: string | Element;
   onMouseDown?: (e: MouseEvent) => void;
   onMouseUp?: (e: MouseEvent) => void;
@@ -161,8 +198,6 @@ export interface Props {
   dragPositionOffset?: DraggableProps["positionOffset"];
   allowAnyClick?: boolean;
   scale?: number;
-  /** When '%', position and default x/y are in 0–100; callbacks and updatePosition use the same unit. Default 'px'. */
-  positionUnit?: PositionUnit;
   [key: string]: any;
 }
 
@@ -204,6 +239,73 @@ function positionPxToPercent(
   return {
     x: width <= 0 ? 0 : (px.x / width) * 100,
     y: height <= 0 ? 0 : (px.y / height) * 100,
+  };
+}
+
+export type GridCellDimensions = { columnWidth: number; rowHeight: number };
+
+export function getGridCellDimensions(
+  parentSize: { width: number; height: number },
+  gridConfig: GridConfig,
+): GridCellDimensions {
+  return {
+    columnWidth: parentSize.width / gridConfig.columns,
+    rowHeight: gridConfig.rowHeight,
+  };
+}
+
+export function gridPositionToPx(
+  gridPos: GridPosition,
+  cell: GridCellDimensions,
+): Position {
+  return {
+    x: gridPos.columnStart * cell.columnWidth,
+    y: gridPos.rowStart * cell.rowHeight,
+  };
+}
+
+export function gridSizeToPx(
+  gridSize: GridSize,
+  cell: GridCellDimensions,
+): { width: number; height: number } {
+  return {
+    width: gridSize.columnSpan * cell.columnWidth,
+    height: gridSize.rowSpan * cell.rowHeight,
+  };
+}
+
+export function pxToGridPosition(
+  px: Position,
+  cell: GridCellDimensions,
+): GridPosition {
+  return {
+    columnStart: Math.round(px.x / cell.columnWidth),
+    rowStart: Math.round(px.y / cell.rowHeight),
+  };
+}
+
+export function pxToGridSize(
+  size: { width: number; height: number },
+  cell: GridCellDimensions,
+): GridSize {
+  return {
+    columnSpan: Math.max(1, Math.round(size.width / cell.columnWidth)),
+    rowSpan: Math.max(1, Math.round(size.height / cell.rowHeight)),
+  };
+}
+
+export function pxToGridPlacement(
+  position: Position,
+  size: { width: number; height: number },
+  cell: GridCellDimensions,
+): GridPlacement {
+  const start = pxToGridPosition(position, cell);
+  const span = pxToGridSize(size, cell);
+  return {
+    columnStart: start.columnStart,
+    rowStart: start.rowStart,
+    columnEnd: start.columnStart + span.columnSpan,
+    rowEnd: start.rowStart + span.rowSpan,
   };
 }
 
@@ -277,10 +379,20 @@ export class Rnd extends React.PureComponent<Props, State> {
       }
     }
 
-    if (positionUnit === "%" && defaultValue && parentSize) {
+    if (positionUnit === "%" && defaultValue && parentSize && "x" in defaultValue) {
       const px = positionPercentToPx(
         { x: defaultValue.x, y: defaultValue.y },
         parentSize,
+      );
+      this.draggable.setState({
+        x: px.x - left,
+        y: px.y - top,
+      });
+    } else if (positionUnit === "grid" && defaultValue && parentSize && "columnStart" in defaultValue && this.props.gridConfig) {
+      const cell = getGridCellDimensions(parentSize, this.props.gridConfig);
+      const px = gridPositionToPx(
+        { columnStart: defaultValue.columnStart, rowStart: defaultValue.rowStart },
+        cell,
       );
       this.draggable.setState({
         x: px.x - left,
@@ -424,7 +536,18 @@ export class Rnd extends React.PureComponent<Props, State> {
     });
   }
 
-  getPositionForCallback(px: Position): Position {
+  getGridCellDimensions(): GridCellDimensions | null {
+    const { gridConfig } = this.props;
+    if (!gridConfig) return null;
+    try {
+      const parentSize = this.getParentSize();
+      return getGridCellDimensions(parentSize, gridConfig);
+    } catch {
+      return null;
+    }
+  }
+
+  getPositionForCallback(px: Position): Position | GridPosition {
     const positionUnit = this.props.positionUnit ?? "px";
     if (positionUnit === "%") {
       try {
@@ -434,7 +557,17 @@ export class Rnd extends React.PureComponent<Props, State> {
         return px;
       }
     }
+    if (positionUnit === "grid") {
+      const cell = this.getGridCellDimensions();
+      if (cell) return pxToGridPosition(px, cell);
+    }
     return px;
+  }
+
+  getGridPlacementForCallback(position: Position, width: number, height: number): GridPlacement | null {
+    const cell = this.getGridCellDimensions();
+    if (!cell) return null;
+    return pxToGridPlacement(position, { width, height }, cell);
   }
 
   onDrag(e: RndDragEvent, data: DraggableData) {
@@ -470,12 +603,19 @@ export class Rnd extends React.PureComponent<Props, State> {
       pos = { x: this.originalPosition.x + left, y: data.y + top };
     }
     const position = this.getPositionForCallback(pos);
+    const payload = { ...data, ...position };
+    if (this.props.positionUnit === "grid" && this.resizable) {
+      const w = this.resizable.size.width as number;
+      const h = this.resizable.size.height as number;
+      const gridPlacement = this.getGridPlacementForCallback(pos, w, h);
+      if (gridPlacement) (payload as any).gridPlacement = gridPlacement;
+    }
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
-      return this.props.onDragStop(e, { ...data, ...position });
+      return this.props.onDragStop(e, payload);
     } else if (this.props.dragAxis === "x") {
-      return this.props.onDragStop(e, { ...data, ...position, deltaY: 0 });
+      return this.props.onDragStop(e, { ...payload, deltaY: 0 });
     } else if (this.props.dragAxis === "y") {
-      return this.props.onDragStop(e, { ...data, ...position, deltaX: 0 });
+      return this.props.onDragStop(e, { ...payload, deltaX: 0 });
     }
   }
 
@@ -634,28 +774,57 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.setState({ maxWidth, maxHeight });
     if (this.props.onResizeStop) {
       const position = this.getPositionForCallback(this.resizingPosition);
-      this.props.onResizeStop(e, direction, elementRef, delta, position);
+      const gridPlacement =
+        this.props.positionUnit === "grid" || this.props.sizeUnit === "grid"
+          ? this.getGridPlacementForCallback(
+              this.resizingPosition,
+              elementRef.offsetWidth,
+              elementRef.offsetHeight,
+            )
+          : undefined;
+      this.props.onResizeStop(e, direction, elementRef, delta, position, gridPlacement ?? undefined);
     }
   }
 
-  updateSize(size: { width: number | string; height: number | string }) {
+  updateSize(size: { width: number | string; height: number | string } | GridSize) {
     if (!this.resizable) return;
-    this.resizable.updateSize({ width: size.width, height: size.height });
+    if ("columnSpan" in size && "rowSpan" in size && this.props.sizeUnit === "grid" && this.props.gridConfig) {
+      try {
+        const parentSize = this.getParentSize();
+        const cell = getGridCellDimensions(parentSize, this.props.gridConfig);
+        const px = gridSizeToPx(size, cell);
+        this.resizable.updateSize({ width: px.width, height: px.height });
+      } catch {
+        // fallback no-op if refs not ready
+      }
+    } else {
+      this.resizable.updateSize({ width: (size as any).width, height: (size as any).height });
+    }
   }
 
-  updatePosition(position: Position) {
+  updatePosition(position: Position | GridPosition) {
     const positionUnit = this.props.positionUnit ?? "px";
-    if (positionUnit === "%") {
+    if (positionUnit === "%" && "x" in position && "y" in position) {
       try {
         const parentSize = this.getParentSize();
         const px = positionPercentToPx(position, parentSize);
         const { left, top } = this.offsetFromParent;
         this.draggable.setState({ x: px.x - left, y: px.y - top });
       } catch {
-        this.draggable.setState(position);
+        this.draggable.setState(position as Position);
       }
-    } else {
-      this.draggable.setState(position);
+    } else if (positionUnit === "grid" && "columnStart" in position && this.props.gridConfig) {
+      try {
+        const parentSize = this.getParentSize();
+        const cell = getGridCellDimensions(parentSize, this.props.gridConfig);
+        const px = gridPositionToPx(position, cell);
+        const { left, top } = this.offsetFromParent;
+        this.draggable.setState({ x: px.x - left, y: px.y - top });
+      } catch {
+        // fallback no-op if refs not ready
+      }
+    } else if ("x" in position && "y" in position) {
+      this.draggable.setState(position as Position);
     }
   }
 
@@ -713,26 +882,66 @@ export class Rnd extends React.PureComponent<Props, State> {
       allowAnyClick,
       dragPositionOffset,
       positionUnit = "px",
+      sizeUnit = "px",
+      gridConfig,
+      layoutMode = "absolute",
+      size: sizeProp,
       ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
     // Remove unknown props, see also https://reactjs.org/warnings/unknown-prop.html
     delete resizableProps.default;
 
+    const { left, top } = this.offsetFromParent;
+    const parentSize = this.state.parentSize;
+    const gridCell: GridCellDimensions | null =
+      gridConfig && parentSize ? getGridCellDimensions(parentSize, gridConfig) : null;
+
     const cursorStyle = disableDragging || dragHandleClassName ? { cursor: "auto" } : { cursor: "move" };
-    const innerStyle = {
+    const innerStyle: React.CSSProperties = {
       ...resizableStyle,
       ...cursorStyle,
       ...style,
     };
-    const { left, top } = this.offsetFromParent;
+    if (layoutMode === "grid" && gridCell != null) {
+      let placement: GridPlacement;
+      if (position && "columnStart" in position && sizeProp && "columnSpan" in sizeProp) {
+        placement = {
+          columnStart: (position as GridPosition).columnStart,
+          rowStart: (position as GridPosition).rowStart,
+          columnEnd: (position as GridPosition).columnStart + (sizeProp as GridSize).columnSpan,
+          rowEnd: (position as GridPosition).rowStart + (sizeProp as GridSize).rowSpan,
+        };
+      } else if (this.resizable && typeof this.resizable.size?.width === "number" && typeof this.resizable.size?.height === "number") {
+        const pos = this.getDraggablePosition();
+        placement = pxToGridPlacement(
+          { x: pos.x + left, y: pos.y + top },
+          { width: this.resizable.size.width as number, height: this.resizable.size.height as number },
+          gridCell,
+        );
+      } else {
+        placement = { columnStart: 0, rowStart: 0, columnEnd: 1, rowEnd: 1 };
+      }
+      Object.assign(innerStyle, {
+        position: "relative" as const,
+        gridColumn: `${placement.columnStart + 1} / ${placement.columnEnd + 1}`,
+        gridRow: `${placement.rowStart + 1} / ${placement.rowEnd + 1}`,
+        left: undefined,
+        top: undefined,
+      });
+    }
+
     let draggablePosition: { x: number; y: number } | undefined;
     if (position) {
       let positionPx: Position;
-      if (positionUnit === "%" && this.state.parentSize) {
-        positionPx = positionPercentToPx(position, this.state.parentSize);
+      if (positionUnit === "%" && parentSize && "x" in position) {
+        positionPx = positionPercentToPx(position as Position, parentSize);
+      } else if (positionUnit === "grid" && gridCell && "columnStart" in position) {
+        positionPx = gridPositionToPx(position as GridPosition, gridCell);
+      } else if ("x" in position && "y" in position) {
+        positionPx = position as Position;
       } else {
-        positionPx = position;
+        positionPx = { x: 0, y: 0 };
       }
       draggablePosition = {
         x: positionPx.x - left,
@@ -740,11 +949,45 @@ export class Rnd extends React.PureComponent<Props, State> {
       };
     }
 
-    // In % mode, default x/y are applied in componentDidMount; pass 0,0 so Draggable gets numeric values
-    const defaultPositionForDraggable =
-      defaultValue && positionUnit === "%" && typeof defaultValue.x === "number" && typeof defaultValue.y === "number"
-        ? { ...defaultValue, x: 0, y: 0 }
-        : defaultValue;
+    // Effective drag/resize grid: when in grid mode, snap to grid cell size
+    const effectiveDragGrid: Grid | undefined =
+      gridCell && positionUnit === "grid" ? [gridCell.columnWidth, gridCell.rowHeight] : dragGrid;
+    const effectiveResizeGrid: Grid | undefined =
+      gridCell && (positionUnit === "grid" || sizeUnit === "grid") ? [gridCell.columnWidth, gridCell.rowHeight] : resizeGrid;
+
+    // Size for Resizable: convert grid to px when sizeUnit is "grid"
+    let sizeForResizable: Size | undefined;
+    if (sizeProp !== undefined) {
+      if (sizeUnit === "grid" && gridCell && "columnSpan" in sizeProp) {
+        const px = gridSizeToPx(sizeProp as GridSize, gridCell);
+        sizeForResizable = { width: px.width, height: px.height };
+      } else {
+        sizeForResizable = sizeProp as Size;
+      }
+    }
+
+    // Default size for Resizable: when default is grid shape, convert to px
+    let defaultSizeForResizable: { x?: number; y?: number; width: number; height: number } | undefined = defaultValue as any;
+    if (defaultValue && "columnSpan" in defaultValue && gridCell) {
+      const px = gridSizeToPx(
+        { columnSpan: defaultValue.columnSpan, rowSpan: defaultValue.rowSpan },
+        gridCell,
+      );
+      defaultSizeForResizable = {
+        width: px.width,
+        height: px.height,
+      };
+    }
+
+    // In % or grid mode, default position is applied in componentDidMount; pass 0,0 so Draggable gets numeric values
+    const defaultPositionForDraggable: { x: number; y: number } | undefined =
+      defaultValue && positionUnit === "%" && "x" in defaultValue && typeof defaultValue.x === "number" && typeof defaultValue.y === "number"
+        ? { x: 0, y: 0 }
+        : defaultValue && positionUnit === "grid" && "columnStart" in defaultValue
+          ? { x: 0, y: 0 }
+          : defaultValue && "x" in defaultValue && "y" in defaultValue
+            ? { x: (defaultValue as any).x, y: (defaultValue as any).y }
+            : undefined;
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.state.resizing ? undefined : draggablePosition;
     const dragAxisOrUndefined = this.state.resizing ? "both" : dragAxis;
@@ -758,14 +1001,14 @@ export class Rnd extends React.PureComponent<Props, State> {
         handle={dragHandleClassName ? `.${dragHandleClassName}` : undefined}
         defaultPosition={defaultPositionForDraggable}
         onMouseDown={onMouseDown}
-        // @ts-expect-error
+        // @ts-expect-error react-draggable accepts onMouseUp at runtime
         onMouseUp={onMouseUp}
         onStart={this.onDragStart}
         onDrag={this.onDrag}
         onStop={this.onDragStop}
         axis={dragAxisOrUndefined}
         disabled={disableDragging}
-        grid={dragGrid}
+        grid={effectiveDragGrid}
         bounds={bounds ? this.state.bounds : undefined}
         position={pos}
         enableUserSelectHack={enableUserSelectHack}
@@ -782,8 +1025,8 @@ export class Rnd extends React.PureComponent<Props, State> {
             this.resizable = c;
             this.resizableElement.current = c.resizable;
           }}
-          defaultSize={defaultValue}
-          size={this.props.size}
+          defaultSize={defaultSizeForResizable}
+          size={sizeForResizable}
           enable={typeof enableResizing === "boolean" ? getEnableResizingByFlag(enableResizing) : enableResizing}
           onResizeStart={this.onResizeStart}
           onResize={this.onResize}
@@ -793,7 +1036,7 @@ export class Rnd extends React.PureComponent<Props, State> {
           minHeight={this.props.minHeight}
           maxWidth={this.state.resizing ? this.state.maxWidth : this.props.maxWidth}
           maxHeight={this.state.resizing ? this.state.maxHeight : this.props.maxHeight}
-          grid={resizeGrid}
+          grid={effectiveResizeGrid}
           handleWrapperClass={resizeHandleWrapperClass}
           handleWrapperStyle={resizeHandleWrapperStyle}
           lockAspectRatio={this.props.lockAspectRatio}

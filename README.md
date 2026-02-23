@@ -22,6 +22,7 @@
 * [Install](#install)
 * [Usage](#usage)
 * [Props](#props)
+* [Grid system](#grid-system)
 * [Instance API](#instance-api)
   * [updateSize(size: { width: number | string, height: number | string }): void](#updateSize-void)
   * [updatePosition({ x: number, y: number }): void](#updatePosition-void)
@@ -106,7 +107,7 @@ yarn add react-rnd
 
 ## Props
 
-#### `default: { x: number; y: number;  width?: number | string;  height?: number | string; };`
+#### `default: { x: number; y: number; width?: number | string; height?: number | string; } | RndDefaultGrid;`
 
 The `width` and `height` property is used to set the default size of the component.
 For example, you can set `300`, `'300px'`, `50%`.
@@ -114,26 +115,31 @@ If omitted, set `'auto'`.
 
 The `x` and `y` property is used to set the default position of the component.
 
-#### `size?: { width: (number | string), height: (number | string) };`
+When using grid units (`positionUnit="grid"` / `sizeUnit="grid"`), use `RndDefaultGrid`: `{ columnStart, rowStart, columnSpan, rowSpan }`. Requires `gridConfig`.
+
+#### `size?: { width: (number | string), height: (number | string) } | GridSize;`
 
 The `size` property is used to set size of the component.
 For example, you can set 300, '300px', 50%.
+When `sizeUnit` is `'grid'`, use `GridSize`: `{ columnSpan: number, rowSpan: number }`.
 
-Use `size` if you need to control size state by yourself.
+Use `size` if you need to control size state yourself.
 
-#### `position?: { x: number, y: number };`
+#### `position?: { x: number, y: number } | GridPosition;`
 
 The `position` property is used to set position of the component.
-Use `position` if you need to control size state by yourself.
+Use `position` if you need to control position state yourself.
 When `positionUnit` is `'%'`, `x` and `y` are in 0–100 (percentage of parent size).
+When `positionUnit` is `'grid'`, use `GridPosition`: `{ columnStart: number, rowStart: number }`.
 
-#### `positionUnit?: 'px' | '%';`
+#### `positionUnit?: 'px' | '%' | 'grid';`
 
 When `'%'`, positioning uses percentages of the parent size instead of pixels:
 - `position` and `default` `x`/`y` are in 0–100.
 - `onDrag`, `onDragStop`, `onResize`, and `onResizeStop` receive position as 0–100.
 - `updatePosition()` expects `{ x, y }` in 0–100.
-Default is `'px'`.
+
+When `'grid'`, position and size use **grid units** (see [Grid system](#grid-system)). You must set `gridConfig`. Position is `{ columnStart, rowStart }`; callbacks receive `gridPlacement` and optionally grid position. Default is `'px'`.
 
 see, following example.
 
@@ -182,13 +188,25 @@ For example, you can set `300`, `'300px'`, `50%`.
 The `maxHeight` property is used to set the maximum height of the component.
 For example, you can set `300`, `'300px'`, `50%`.
 
+#### `gridConfig?: { columns: number; rowHeight: number };`
+
+Required when using `positionUnit="grid"` or `sizeUnit="grid"`. Defines the grid: `columns` is the number of columns; `rowHeight` is the height of each row in pixels. Column width is derived from the parent width (`parentWidth / columns`). Drag and resize automatically snap to grid lines when in grid mode.
+
+#### `sizeUnit?: 'px' | '%' | 'grid';`
+
+When `'grid'`, `size` is in grid spans: `{ columnSpan, rowSpan }`. Requires `gridConfig`. Default is `'px'`. See [Grid system](#grid-system).
+
+#### `layoutMode?: 'absolute' | 'grid';`
+
+When `'grid'`, the Rnd wrapper uses CSS `grid-column` and `grid-row` instead of `position`/`left`/`top`, so the component participates in a CSS Grid parent. The parent must use `display: grid` with matching column/row setup. Default is `'absolute'`.
+
 #### `resizeGrid?: [number, number];`
 
-The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`.
+The `resizeGrid` property is used to specify the increments that resizing should snap to. Defaults to `[1, 1]`. When `sizeUnit="grid"` (or `positionUnit="grid"`), this is set automatically from `gridConfig`.
 
 #### `dragGrid?: [number, number];`
 
-The `dragGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`.
+The `dragGrid` property is used to specify the increments that moving should snap to. Defaults to `[1, 1]`. When `positionUnit="grid"`, this is set automatically from `gridConfig`.
 
 #### `lockAspectRatio?: boolean | number;`
 
@@ -329,16 +347,95 @@ Specifies movement boundaries. Accepted values:
 
 #### `enableUserSelectHack?: boolean;`
 
-By default, we add 'user-select:none' attributes to the document body    
-to prevent ugly text selection during drag. If this is causing problems    
-for your app, set this to `false`.    
+By default, we add 'user-select:none' attributes to the document body to prevent ugly text selection during drag. If this is causing problems for your app, set this to `false`.
 
 #### `scale?: number;`
 
-Specifies the scale of the canvas your are resizing and dragging this element on. This allows
-you to, for example, get the correct resize and drag deltas while you are zoomed in or out via
-a transform or matrix in the parent of this element.
-If omitted, set `1`.
+Specifies the scale of the canvas you are resizing and dragging this element on. This allows you to, for example, get the correct resize and drag deltas while you are zoomed in or out via a transform or matrix in the parent of this element. If omitted, set `1`.
+
+## Grid system
+
+Rnd can use **grid units** for position and size so you can persist and control layout by column/row indices (e.g. for page builders or Fluid-style editors). No manual conversion between pixels and grid is needed.
+
+### Setup
+
+1. Set **`gridConfig`**: `{ columns: number, rowHeight: number }`. For example, 24 columns and 8px row height.
+2. Set **`positionUnit="grid"`** and/or **`sizeUnit="grid"`**.
+3. Use **`position`** as `{ columnStart, rowStart }` and **`size`** as `{ columnSpan, rowSpan }` (0-based indices).
+
+Column width is computed from the parent width (`parentWidth / columns`). Row height is fixed (e.g. `grid-auto-rows: 8px` on the container). Drag and resize snap to grid lines automatically.
+
+### Types
+
+```javascript
+// Grid configuration (required when using grid units)
+type GridConfig = { columns: number; rowHeight: number };
+
+// Position in grid: start cell
+type GridPosition = { columnStart: number; rowStart: number };
+
+// Size in grid: number of cells
+type GridSize = { columnSpan: number; rowSpan: number };
+
+// Full placement (0-based line indices; columnEnd/rowEnd are exclusive)
+type GridPlacement = {
+  columnStart: number;
+  rowStart: number;
+  columnEnd: number;
+  rowEnd: number;
+};
+```
+
+### Example: controlled grid
+
+```javascript
+<Rnd
+  gridConfig={{ columns: 24, rowHeight: 8 }}
+  positionUnit="grid"
+  sizeUnit="grid"
+  position={{ columnStart: 2, rowStart: 3 }}
+  size={{ columnSpan: 6, rowSpan: 4 }}
+  onDragStop={(e, d) => {
+    if (d.gridPlacement) {
+      setPosition({ columnStart: d.columnStart, rowStart: d.rowStart });
+    }
+  }}
+  onResizeStop={(e, dir, ref, delta, position, gridPlacement) => {
+    if (gridPlacement) {
+      setPosition({ columnStart: gridPlacement.columnStart, rowStart: gridPlacement.rowStart });
+      setSize({
+        columnSpan: gridPlacement.columnEnd - gridPlacement.columnStart,
+        rowSpan: gridPlacement.rowEnd - gridPlacement.rowStart,
+      });
+    }
+  }}
+/>
+```
+
+### Callbacks in grid mode
+
+- **`onDragStop`**: The second argument includes **`gridPlacement`** when `positionUnit="grid"`: `{ columnStart, rowStart, columnEnd, rowEnd }`. Position is also provided as `{ columnStart, rowStart }`.
+- **`onResizeStop`**: The sixth argument is **`gridPlacement`** when using grid units, so you can persist the new grid placement directly.
+
+### Acting as a grid child
+
+Set **`layoutMode="grid"`** so the Rnd wrapper uses `grid-column` and `grid-row` instead of `position`/`left`/`top`. The parent must be `display: grid` with the same grid (e.g. same column count and row height). Useful when the DOM should be pure CSS Grid for layout.
+
+### Instance API in grid mode
+
+- **`updatePosition(position)`** accepts **`GridPosition`** when `positionUnit="grid"`: `{ columnStart, rowStart }`.
+- **`updateSize(size)`** accepts **`GridSize`** when `sizeUnit="grid"`: `{ columnSpan, rowSpan }`.
+
+### Exported helpers
+
+You can use these for custom logic or persistence:
+
+- `getGridCellDimensions(parentSize, gridConfig)` → `{ columnWidth, rowHeight }`
+- `gridPositionToPx(gridPosition, cellDimensions)`
+- `gridSizeToPx(gridSize, cellDimensions)`
+- `pxToGridPosition(pxPosition, cellDimensions)`
+- `pxToGridSize(pxSize, cellDimensions)`
+- `pxToGridPlacement(position, size, cellDimensions)` → `GridPlacement`
 
 ## Callback
 
@@ -374,7 +471,7 @@ Calls when resizable component resizing.
 
 #### `onResizeStop?: RndResizeCallback;`
 
-`RndResizeCallback` type is below.
+`RndResizeCallback` type is below. When using [grid units](#grid-system), a sixth argument `gridPlacement?: GridPlacement` is passed.
 
 ``` javascript
 export type RndResizeCallback = (
@@ -382,7 +479,8 @@ export type RndResizeCallback = (
   dir: ResizeDirection,
   refToElement: React.ElementRef<'div'>,
   delta: ResizableDelta,
-  position: Position,
+  position: Position | GridPosition,
+  gridPlacement?: GridPlacement,
 ) => void;
 ```
 
@@ -426,8 +524,7 @@ type DraggableEventHandler = (
 
 #### `onDragStop: DraggableEventHandler;`
 
-`onDragStop` called on dragging stop.
-
+`onDragStop` called on dragging stop. When `positionUnit="grid"`, the data object includes **`gridPlacement`**: `{ columnStart, rowStart, columnEnd, rowEnd }` (see [Grid system](#grid-system)).
 
 ``` javascript
 type DraggableData = {
@@ -446,10 +543,9 @@ type DraggableEventHandler = (
 ## Instance API
 
 
-#### `updateSize(size: { width: string | number, height: string | number })`
+#### `updateSize(size: { width: string | number, height: string | number } | GridSize)`
 
-Update component size.
-For example, you can set `300`, `'300px'`, `50%`.
+Update component size. For example, you can set `300`, `'300px'`, `50%`. When `sizeUnit="grid"`, pass **`GridSize`**: `{ columnSpan, rowSpan }`.
 
 - for example
 
@@ -473,10 +569,9 @@ class YourComponent extends Component {
 }
 ```
 
-#### `updatePosition({ x: number, y: number }): void`
+#### `updatePosition({ x: number, y: number } | GridPosition): void`
 
-Update component position.
-`grid` `bounds` props is ignored, when this method called.
+Update component position. When `positionUnit="grid"`, pass **`GridPosition`**: `{ columnStart, rowStart }`. When using px or %, pass `{ x, y }`. `grid` and `bounds` props are ignored when this method is called.
 
 - for example
 
@@ -518,6 +613,10 @@ If you have a feature request, please add it as an issue or make a pull request.
 If you have a bug to report, please reproduce the bug in [CodeSandbox](https://codesandbox.io/s/y3997qply9) to help us easily isolate it.
 
 ## Changelog
+
+#### v10.5.3
+
+- Add grid system: `positionUnit="grid"`, `sizeUnit="grid"`, `gridConfig`, and `layoutMode="grid"`. Callbacks report `gridPlacement`; `updatePosition`/`updateSize` accept grid types.
 
 #### v10.5.1
 
