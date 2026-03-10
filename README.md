@@ -510,6 +510,15 @@ If you have a bug to report, please reproduce the bug in [CodeSandbox](https://c
 
 ## Changelog
 
+#### v10.5.3
+
+- Upgrade `react-draggable` to `4.5.0`
+- prevent default behavior in drag and resize events #973
+
+#### v10.5.2
+
+- Upgrade `re-resizable` to `6.11.2`
+
 #### v10.5.1
 
 - Upgrade `re-resizable` to `6.11.0`
