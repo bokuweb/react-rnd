@@ -1,6 +1,6 @@
 {
   "name": "react-rnd",
-  "version": "10.5.2",
+  "version": "10.5.3",
   "description": "A draggable and resizable React Component",
   "title": "react-rnd",
   "main": "./lib/index.es5.js",
@@ -105,5 +105,6 @@
   "peerDependencies": {
     "react": ">=16.3.0",
     "react-dom": ">=16.3.0"
-  }
+  },
+  "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6"
 }
