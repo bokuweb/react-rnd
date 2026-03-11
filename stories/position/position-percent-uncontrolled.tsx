@@ -15,10 +15,9 @@ export default function Example() {
     <div style={containerStyle}>
       <Rnd
         style={style}
-        positionUnit="%"
         default={{
-          x: 25,
-          y: 30,
+          x: "25%",
+          y: "30%",
           width: 150,
           height: 100,
         }}

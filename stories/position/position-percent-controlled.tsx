@@ -3,8 +3,8 @@ import { Rnd } from "../../src";
 import { style } from "../styles";
 
 type State = {
-  x: number;
-  y: number;
+  x: number; // percentage of container width
+  y: number; // percentage of container height
   width: number;
   height: number;
 };
@@ -33,23 +33,31 @@ export default class Example extends React.Component<{}, State> {
       <div style={containerStyle}>
         <Rnd
           style={style}
-          positionUnit="%"
           size={{
             width: this.state.width,
             height: this.state.height,
           }}
           position={{
-            x: this.state.x,
-            y: this.state.y,
+            x: `${this.state.x}%`,
+            y: `${this.state.y}%`,
           }}
           onDragStop={(e, d) => {
-            this.setState({ x: d.x, y: d.y });
+            const containerWidth = containerStyle.width as number;
+            const containerHeight = containerStyle.height as number;
+            const x = (d.x / containerWidth) * 100;
+            const y = (d.y / containerHeight) * 100;
+            this.setState({ x, y });
           }}
           onResizeStop={(e, direction, ref, delta, position) => {
+            const containerWidth = containerStyle.width as number;
+            const containerHeight = containerStyle.height as number;
+            const x = (position.x / containerWidth) * 100;
+            const y = (position.y / containerHeight) * 100;
             this.setState({
               width: ref.offsetWidth,
               height: ref.offsetHeight,
-              ...position,
+              x,
+              y,
             });
           }}
         >

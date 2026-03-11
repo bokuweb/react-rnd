@@ -106,7 +106,7 @@ yarn add react-rnd
 
 ## Props
 
-#### `default: { x: number; y: number;  width?: number | string;  height?: number | string; };`
+#### `default: { x: number | string; y: number | string;  width?: number | string;  height?: number | string; };`
 
 The `width` and `height` property is used to set the default size of the component.
 For example, you can set `300`, `'300px'`, `50%`.
@@ -121,19 +121,14 @@ For example, you can set 300, '300px', 50%.
 
 Use `size` if you need to control size state by yourself.
 
-#### `position?: { x: number, y: number };`
+#### `position?: { x: (number | string), y: (number | string) };`
 
 The `position` property is used to set position of the component.
-Use `position` if you need to control size state by yourself.
-When `positionUnit` is `'%'`, `x` and `y` are in 0–100 (percentage of parent size).
-
-#### `positionUnit?: 'px' | '%';`
-
-When `'%'`, positioning uses percentages of the parent size instead of pixels:
-- `position` and `default` `x`/`y` are in 0–100.
-- `onDrag`, `onDragStop`, `onResize`, and `onResizeStop` receive position as 0–100.
-- `updatePosition()` expects `{ x, y }` in 0–100.
-Default is `'px'`.
+Use `position` if you need to control position state by yourself.
+You can pass:
+- numbers (treated as pixels), e.g. `x: 100`
+- strings with `'px'`, e.g. `'300px'`
+- strings with `'%'`, e.g. `'50%'` (percentage of the parent size)
 
 see, following example.
 
@@ -473,7 +468,7 @@ class YourComponent extends Component {
 }
 ```
 
-#### `updatePosition({ x: number, y: number }): void`
+#### `updatePosition({ x: number | string, y: number | string }): void`
 
 Update component position.
 `grid` `bounds` props is ignored, when this method called.

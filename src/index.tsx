@@ -50,8 +50,6 @@ type Size = {
   height: string | number;
 };
 
-export type PositionUnit = "px" | "%";
-
 type State = {
   resizing: boolean;
   bounds: {
@@ -119,12 +117,12 @@ export type HandleComponent = {
 export interface Props {
   dragGrid?: Grid;
   default?: {
-    x: number;
-    y: number;
+    x: number | string;
+    y: number | string;
   } & Size;
   position?: {
-    x: number;
-    y: number;
+    x: number | string;
+    y: number | string;
   };
   size?: Size;
   resizeGrid?: Grid;
@@ -161,8 +159,6 @@ export interface Props {
   dragPositionOffset?: DraggableProps["positionOffset"];
   allowAnyClick?: boolean;
   scale?: number;
-  /** When '%', position and default x/y are in 0–100; callbacks and updatePosition use the same unit. Default 'px'. */
-  positionUnit?: PositionUnit;
   [key: string]: any;
 }
 
@@ -186,25 +182,28 @@ const getEnableResizingByFlag = (flag: boolean): Enable => ({
   topRight: flag,
 });
 
-function positionPercentToPx(
-  percent: Position,
-  parentSize: { width: number; height: number },
-): Position {
-  return {
-    x: (percent.x / 100) * parentSize.width,
-    y: (percent.y / 100) * parentSize.height,
-  };
-}
-
-function positionPxToPercent(
-  px: Position,
-  parentSize: { width: number; height: number },
-): Position {
-  const { width, height } = parentSize;
-  return {
-    x: width <= 0 ? 0 : (px.x / width) * 100,
-    y: height <= 0 ? 0 : (px.y / height) * 100,
-  };
+function parsePositionValue(
+  value: number | string,
+  axisSize: number | null,
+): number {
+  if (typeof value === "number") {
+    return value;
+  }
+  const str = value.toString().trim();
+  if (str.endsWith("%")) {
+    const n = Number(str.slice(0, -1));
+    if (Number.isNaN(n) || axisSize == null) return 0;
+    return (n / 100) * axisSize;
+  }
+  if (str.endsWith("px")) {
+    const n = Number(str.slice(0, -2));
+    return Number.isNaN(n) ? 0 : n;
+  }
+  const n = Number(str);
+  if (!Number.isNaN(n)) {
+    return n;
+  }
+  return 0;
 }
 
 interface DefaultProps {
@@ -266,7 +265,6 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.updateParentSize();
     this.updateOffsetFromParent();
     const { left, top } = this.offsetFromParent;
-    const positionUnit = this.props.positionUnit ?? "px";
     const defaultValue = this.props.default;
     let parentSize: { width: number; height: number } | null = null;
     if (this.resizable) {
@@ -277,14 +275,12 @@ export class Rnd extends React.PureComponent<Props, State> {
       }
     }
 
-    if (positionUnit === "%" && defaultValue && parentSize) {
-      const px = positionPercentToPx(
-        { x: defaultValue.x, y: defaultValue.y },
-        parentSize,
-      );
+    if (defaultValue && parentSize) {
+      const x = parsePositionValue(defaultValue.x, parentSize.width);
+      const y = parsePositionValue(defaultValue.y, parentSize.height);
       this.draggable.setState({
-        x: px.x - left,
-        y: px.y - top,
+        x: x - left,
+        y: y - top,
       });
     } else {
       const { x, y } = this.getDraggablePosition();
@@ -424,19 +420,6 @@ export class Rnd extends React.PureComponent<Props, State> {
     });
   }
 
-  getPositionForCallback(px: Position): Position {
-    const positionUnit = this.props.positionUnit ?? "px";
-    if (positionUnit === "%") {
-      try {
-        const parentSize = this.getParentSize();
-        return positionPxToPercent(px, parentSize);
-      } catch {
-        return px;
-      }
-    }
-    return px;
-  }
-
   onDrag(e: RndDragEvent, data: DraggableData) {
     if (!this.props.onDrag) return;
     const { left, top } = this.offsetFromParent;
@@ -448,7 +431,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     } else {
       pos = { x: this.originalPosition.x + left, y: data.y + top };
     }
-    const position = this.getPositionForCallback(pos);
+    const position = pos;
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
       return this.props.onDrag(e, { ...data, ...position });
     } else if (this.props.dragAxis === "x") {
@@ -469,7 +452,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     } else {
       pos = { x: this.originalPosition.x + left, y: data.y + top };
     }
-    const position = this.getPositionForCallback(pos);
+    const position = pos;
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
       return this.props.onDragStop(e, { ...data, ...position });
     } else if (this.props.dragAxis === "x") {
@@ -617,7 +600,7 @@ export class Rnd extends React.PureComponent<Props, State> {
 
     this.resizingPosition = { x, y };
     if (!this.props.onResize) return;
-    const position = this.getPositionForCallback({ x, y });
+    const position = { x, y };
     this.props.onResize(e, direction, elementRef, delta, position);
   }
 
@@ -633,7 +616,7 @@ export class Rnd extends React.PureComponent<Props, State> {
     const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
     this.setState({ maxWidth, maxHeight });
     if (this.props.onResizeStop) {
-      const position = this.getPositionForCallback(this.resizingPosition);
+      const position = this.resizingPosition;
       this.props.onResizeStop(e, direction, elementRef, delta, position);
     }
   }
@@ -643,20 +626,19 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.resizable.updateSize({ width: size.width, height: size.height });
   }
 
-  updatePosition(position: Position) {
-    const positionUnit = this.props.positionUnit ?? "px";
-    if (positionUnit === "%") {
-      try {
-        const parentSize = this.getParentSize();
-        const px = positionPercentToPx(position, parentSize);
-        const { left, top } = this.offsetFromParent;
-        this.draggable.setState({ x: px.x - left, y: px.y - top });
-      } catch {
-        this.draggable.setState(position);
-      }
-    } else {
-      this.draggable.setState(position);
+  updatePosition(position: { x: number | string; y: number | string }) {
+    let parentSize: { width: number; height: number } | null = null;
+    try {
+      parentSize = this.getParentSize();
+    } catch {
+      parentSize = null;
     }
+    const axisWidth = parentSize ? parentSize.width : null;
+    const axisHeight = parentSize ? parentSize.height : null;
+    const { left, top } = this.offsetFromParent;
+    const x = parsePositionValue(position.x, axisWidth);
+    const y = parsePositionValue(position.y, axisHeight);
+    this.draggable.setState({ x: x - left, y: y - top });
   }
 
   updateOffsetFromParent() {
@@ -712,7 +694,6 @@ export class Rnd extends React.PureComponent<Props, State> {
       scale,
       allowAnyClick,
       dragPositionOffset,
-      positionUnit = "px",
       ...resizableProps
     } = this.props;
     const defaultValue = this.props.default ? { ...this.props.default } : undefined;
@@ -728,23 +709,21 @@ export class Rnd extends React.PureComponent<Props, State> {
     const { left, top } = this.offsetFromParent;
     let draggablePosition: { x: number; y: number } | undefined;
     if (position) {
-      let positionPx: Position;
-      if (positionUnit === "%" && this.state.parentSize) {
-        positionPx = positionPercentToPx(position, this.state.parentSize);
-      } else {
-        positionPx = position;
-      }
+      const parentSize = this.state.parentSize;
+      const width = parentSize ? parentSize.width : null;
+      const height = parentSize ? parentSize.height : null;
+      const xPx = parsePositionValue(position.x, width);
+      const yPx = parsePositionValue(position.y, height);
       draggablePosition = {
-        x: positionPx.x - left,
-        y: positionPx.y - top,
+        x: xPx - left,
+        y: yPx - top,
       };
     }
 
-    // In % mode, default x/y are applied in componentDidMount; pass 0,0 so Draggable gets numeric values
     const defaultPositionForDraggable =
-      defaultValue && positionUnit === "%" && typeof defaultValue.x === "number" && typeof defaultValue.y === "number"
-        ? { ...defaultValue, x: 0, y: 0 }
-        : defaultValue;
+      defaultValue && typeof defaultValue.x === "number" && typeof defaultValue.y === "number"
+        ? { x: defaultValue.x, y: defaultValue.y }
+        : undefined;
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.state.resizing ? undefined : draggablePosition;
     const dragAxisOrUndefined = this.state.resizing ? "both" : dragAxis;
