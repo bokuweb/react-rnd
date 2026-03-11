@@ -60,6 +60,7 @@ type State = {
   };
   maxWidth?: number | string;
   maxHeight?: number | string;
+  parentSize: { width: number; height: number } | null;
 };
 
 type MaxSize = {
@@ -116,12 +117,12 @@ export type HandleComponent = {
 export interface Props {
   dragGrid?: Grid;
   default?: {
-    x: number;
-    y: number;
+    x: number | string;
+    y: number | string;
   } & Size;
   position?: {
-    x: number;
-    y: number;
+    x: number | string;
+    y: number | string;
   };
   size?: Size;
   resizeGrid?: Grid;
@@ -181,6 +182,30 @@ const getEnableResizingByFlag = (flag: boolean): Enable => ({
   topRight: flag,
 });
 
+function parsePositionValue(
+  value: number | string,
+  axisSize: number | null,
+): number {
+  if (typeof value === "number") {
+    return value;
+  }
+  const str = value.toString().trim();
+  if (str.endsWith("%")) {
+    const n = Number(str.slice(0, -1));
+    if (Number.isNaN(n) || axisSize == null) return 0;
+    return (n / 100) * axisSize;
+  }
+  if (str.endsWith("px")) {
+    const n = Number(str.slice(0, -2));
+    return Number.isNaN(n) ? 0 : n;
+  }
+  const n = Number(str);
+  if (!Number.isNaN(n)) {
+    return n;
+  }
+  return 0;
+}
+
 interface DefaultProps {
   maxWidth: number;
   maxHeight: number;
@@ -224,6 +249,7 @@ export class Rnd extends React.PureComponent<Props, State> {
       },
       maxWidth: props.maxWidth,
       maxHeight: props.maxHeight,
+      parentSize: null,
     };
 
     this.onResizeStart = this.onResizeStart.bind(this);
@@ -236,15 +262,53 @@ export class Rnd extends React.PureComponent<Props, State> {
   }
 
   componentDidMount() {
+    this.updateParentSize();
     this.updateOffsetFromParent();
     const { left, top } = this.offsetFromParent;
-    const { x, y } = this.getDraggablePosition();
-    this.draggable.setState({
-      x: x - left,
-      y: y - top,
-    });
+    const defaultValue = this.props.default;
+    let parentSize: { width: number; height: number } | null = null;
+    if (this.resizable) {
+      try {
+        parentSize = this.getParentSize();
+      } catch {
+        // refs may not be ready
+      }
+    }
+
+    if (defaultValue && parentSize) {
+      const x = parsePositionValue(defaultValue.x, parentSize.width);
+      const y = parsePositionValue(defaultValue.y, parentSize.height);
+      this.draggable.setState({
+        x: x - left,
+        y: y - top,
+      });
+    } else {
+      const { x, y } = this.getDraggablePosition();
+      this.draggable.setState({
+        x: x - left,
+        y: y - top,
+      });
+    }
     // HACK: Apply position adjustment
     this.forceUpdate();
+  }
+
+  componentDidUpdate() {
+    this.updateParentSize();
+  }
+
+  updateParentSize() {
+    const parent = this.getParent();
+    if (!parent || !this.resizable) return;
+    try {
+      const { width, height } = this.getParentSize();
+      const prev = this.state.parentSize;
+      if (!prev || prev.width !== width || prev.height !== height) {
+        this.setState({ parentSize: { width, height } });
+      }
+    } catch {
+      // getParentSize may throw before refs are ready
+    }
   }
 
   // HACK: To get `react-draggable` state x and y.
@@ -359,24 +423,42 @@ export class Rnd extends React.PureComponent<Props, State> {
   onDrag(e: RndDragEvent, data: DraggableData) {
     if (!this.props.onDrag) return;
     const { left, top } = this.offsetFromParent;
+    let pos: Position;
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
-      return this.props.onDrag(e, { ...data, x: data.x + left, y: data.y + top });
+      pos = { x: data.x + left, y: data.y + top };
     } else if (this.props.dragAxis === "x") {
-      return this.props.onDrag(e, { ...data, x: data.x + left, y: this.originalPosition.y + top, deltaY: 0 });
+      pos = { x: data.x + left, y: this.originalPosition.y + top };
+    } else {
+      pos = { x: this.originalPosition.x + left, y: data.y + top };
+    }
+    const position = pos;
+    if (!this.props.dragAxis || this.props.dragAxis === "both") {
+      return this.props.onDrag(e, { ...data, ...position });
+    } else if (this.props.dragAxis === "x") {
+      return this.props.onDrag(e, { ...data, ...position, deltaY: 0 });
     } else if (this.props.dragAxis === "y") {
-      return this.props.onDrag(e, { ...data, x: this.originalPosition.x + left, y: data.y + top, deltaX: 0 });
+      return this.props.onDrag(e, { ...data, ...position, deltaX: 0 });
     }
   }
 
   onDragStop(e: RndDragEvent, data: DraggableData) {
     if (!this.props.onDragStop) return;
     const { left, top } = this.offsetFromParent;
+    let pos: Position;
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
-      return this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
+      pos = { x: data.x + left, y: data.y + top };
     } else if (this.props.dragAxis === "x") {
-      return this.props.onDragStop(e, { ...data, x: data.x + left, y: this.originalPosition.y + top, deltaY: 0 });
+      pos = { x: data.x + left, y: this.originalPosition.y + top };
+    } else {
+      pos = { x: this.originalPosition.x + left, y: data.y + top };
+    }
+    const position = pos;
+    if (!this.props.dragAxis || this.props.dragAxis === "both") {
+      return this.props.onDragStop(e, { ...data, ...position });
+    } else if (this.props.dragAxis === "x") {
+      return this.props.onDragStop(e, { ...data, ...position, deltaY: 0 });
     } else if (this.props.dragAxis === "y") {
-      return this.props.onDragStop(e, { ...data, x: this.originalPosition.x + left, y: data.y + top, deltaX: 0 });
+      return this.props.onDragStop(e, { ...data, ...position, deltaX: 0 });
     }
   }
 
@@ -518,10 +600,8 @@ export class Rnd extends React.PureComponent<Props, State> {
 
     this.resizingPosition = { x, y };
     if (!this.props.onResize) return;
-    this.props.onResize(e, direction, elementRef, delta, {
-      x,
-      y,
-    });
+    const position = { x, y };
+    this.props.onResize(e, direction, elementRef, delta, position);
   }
 
   onResizeStop(
@@ -536,7 +616,8 @@ export class Rnd extends React.PureComponent<Props, State> {
     const { maxWidth, maxHeight } = this.getMaxSizesFromProps();
     this.setState({ maxWidth, maxHeight });
     if (this.props.onResizeStop) {
-      this.props.onResizeStop(e, direction, elementRef, delta, this.resizingPosition);
+      const position = this.resizingPosition;
+      this.props.onResizeStop(e, direction, elementRef, delta, position);
     }
   }
 
@@ -545,8 +626,19 @@ export class Rnd extends React.PureComponent<Props, State> {
     this.resizable.updateSize({ width: size.width, height: size.height });
   }
 
-  updatePosition(position: Position) {
-    this.draggable.setState(position);
+  updatePosition(position: { x: number | string; y: number | string }) {
+    let parentSize: { width: number; height: number } | null = null;
+    try {
+      parentSize = this.getParentSize();
+    } catch {
+      parentSize = null;
+    }
+    const axisWidth = parentSize ? parentSize.width : null;
+    const axisHeight = parentSize ? parentSize.height : null;
+    const { left, top } = this.offsetFromParent;
+    const x = parsePositionValue(position.x, axisWidth);
+    const y = parsePositionValue(position.y, axisHeight);
+    this.draggable.setState({ x: x - left, y: y - top });
   }
 
   updateOffsetFromParent() {
@@ -615,13 +707,23 @@ export class Rnd extends React.PureComponent<Props, State> {
       ...style,
     };
     const { left, top } = this.offsetFromParent;
-    let draggablePosition;
+    let draggablePosition: { x: number; y: number } | undefined;
     if (position) {
+      const parentSize = this.state.parentSize;
+      const width = parentSize ? parentSize.width : null;
+      const height = parentSize ? parentSize.height : null;
+      const xPx = parsePositionValue(position.x, width);
+      const yPx = parsePositionValue(position.y, height);
       draggablePosition = {
-        x: position.x - left,
-        y: position.y - top,
+        x: xPx - left,
+        y: yPx - top,
       };
     }
+
+    const defaultPositionForDraggable =
+      defaultValue && typeof defaultValue.x === "number" && typeof defaultValue.y === "number"
+        ? { x: defaultValue.x, y: defaultValue.y }
+        : undefined;
     // INFO: Make uncontorolled component when resizing to control position by setPostion.
     const pos = this.state.resizing ? undefined : draggablePosition;
     const dragAxisOrUndefined = this.state.resizing ? "both" : dragAxis;
@@ -633,7 +735,7 @@ export class Rnd extends React.PureComponent<Props, State> {
           this.draggable = c;
         }}
         handle={dragHandleClassName ? `.${dragHandleClassName}` : undefined}
-        defaultPosition={defaultValue}
+        defaultPosition={defaultPositionForDraggable}
         onMouseDown={onMouseDown}
         // @ts-expect-error
         onMouseUp={onMouseUp}

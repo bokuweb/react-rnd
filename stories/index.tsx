@@ -31,6 +31,9 @@ import BoundsElementUncontrolled from "./bounds/element-uncontrolled";
 import SizePercentUncontrolled from "./size/size-percent-uncontrolled";
 import SizePercentControlled from "./size/size-percent-controlled";
 
+import PositionPercentUncontrolled from "./position/position-percent-uncontrolled";
+import PositionPercentControlled from "./position/position-percent-controlled";
+
 import Callbacks from "./callback/callbacks";
 
 import Cancel from "./cancel/cancel";
@@ -81,6 +84,10 @@ storiesOf("scale", module)
 storiesOf("size", module)
   .add("percent uncontrolled", () => <SizePercentUncontrolled />)
   .add("percent controlled", () => <SizePercentControlled />);
+
+storiesOf("position", module)
+  .add("percent uncontrolled", () => <PositionPercentUncontrolled />)
+  .add("percent controlled", () => <PositionPercentControlled />);
 
 storiesOf("callbacks", module).add("callback", () => <Callbacks />);
 

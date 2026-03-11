@@ -104,6 +104,8 @@ export type HandleComponent = {
   topLeft?: React.ReactElement<any>;
 }
 
+export type PositionUnit = 'px' | '%';
+
 export type Props = {
   dragGrid?: Grid,
   default?: {
@@ -114,6 +116,7 @@ export type Props = {
     x: number,
     y: number,
   },
+  positionUnit?: PositionUnit,
   size?: Size,
   resizeGrid?: Grid,
   bounds?: string,
