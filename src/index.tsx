@@ -236,12 +236,10 @@ export class Rnd extends React.PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.updateOffsetFromParent();
-    const { left, top } = this.offsetFromParent;
     const { x, y } = this.getDraggablePosition();
     this.draggable.setState({
-      x: x - left,
-      y: y - top,
+      x,
+      y,
     });
     // HACK: Apply position adjustment
     this.forceUpdate();
@@ -362,9 +360,19 @@ export class Rnd extends React.PureComponent<Props, State> {
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
       return this.props.onDrag(e, { ...data, x: data.x + left, y: data.y + top });
     } else if (this.props.dragAxis === "x") {
-      return this.props.onDrag(e, { ...data, x: data.x + left, y: this.originalPosition.y + top, deltaY: 0 });
+      return this.props.onDrag(e, {
+        ...data,
+        x: data.x + left,
+        y: this.originalPosition.y + top,
+        deltaY: 0,
+      });
     } else if (this.props.dragAxis === "y") {
-      return this.props.onDrag(e, { ...data, x: this.originalPosition.x + left, y: data.y + top, deltaX: 0 });
+      return this.props.onDrag(e, {
+        ...data,
+        x: this.originalPosition.x + left,
+        y: data.y + top,
+        deltaX: 0,
+      });
     }
   }
 
@@ -372,11 +380,25 @@ export class Rnd extends React.PureComponent<Props, State> {
     if (!this.props.onDragStop) return;
     const { left, top } = this.offsetFromParent;
     if (!this.props.dragAxis || this.props.dragAxis === "both") {
-      return this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
+      return this.props.onDragStop(e, {
+        ...data,
+        x: data.x + left,
+        y: data.y + top,
+      });
     } else if (this.props.dragAxis === "x") {
-      return this.props.onDragStop(e, { ...data, x: data.x + left, y: this.originalPosition.y + top, deltaY: 0 });
+      return this.props.onDragStop(e, {
+        ...data,
+        x: data.x + left,
+        y: this.originalPosition.y + top,
+        deltaY: 0,
+      });
     } else if (this.props.dragAxis === "y") {
-      return this.props.onDragStop(e, { ...data, x: this.originalPosition.x + left, y: data.y + top, deltaX: 0 });
+      return this.props.onDragStop(e, {
+        ...data,
+        x: this.originalPosition.x + left,
+        y: data.y + top,
+        deltaX: 0,
+      });
     }
   }
 
