@@ -63,7 +63,7 @@
     "@types/storybook__addon-actions": "5.2.1",
     "@types/storybook__react": "5.2.1",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.1.0",
+    "@babel/eslint-parser": "7.11.0",
     "babel-loader": "8.2.3",
     "cpy-cli": "4.2.0",
     "cross-env": "7.0.3",
